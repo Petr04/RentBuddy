@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "w5k7t/lCzy7+PXfcE2iLVIYAiJ2T73AgDEPOO8QW3Pk=",
-  "Source": "RentBackendTest",
-  "BasePath": "_content/RentBackendTest",
+  "Hash": "iG+2+ZJWhkWoDjM0w84MnlSjnboEVCoz1a4sCsdD47c=",
+  "Source": "RentBuddyBackend",
+  "BasePath": "_content/RentBuddyBackend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
