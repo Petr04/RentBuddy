@@ -1,10 +1,10 @@
-<div class="flex flex-col items-center w-fit m-auto mt-5 bg-[#FFFFFF] rounded-2xl mb-5">
-    <img class="w-80 h-48 rounded-t-2xl" src="../assets/room.png">
-    <div class="flex flex-row w-max gap-10 p-2.5">
+<div class="flex flex-col items-center w-full mt-5 bg-[#FFFFFF] rounded-2xl mb-5">
+    <img class="w-full h-48 rounded-t-2xl lg:h-96" src="../assets/room.png">
+    <div class="flex flex-row w-full justify-between p-2.5">
         <div class="flex flex-col">
-            <h3 class="font-semibold">10 000 ₽/мес. с чел.</h3>
-            <h4 class="text-xs">Комната 21 м² в 2-к, 7/10 эт.</h4>
-            <h4 class="text-xs text-[#00000080]">г. Сургут, ул. Ленина, 18</h4>
+            <h3 class="font-semibold">{{dwelling.price}} ₽/мес. с чел.</h3>
+            <h4 class="text-xs">Комната {{dwelling.square}} м² в {{dwelling.apartment.roomsCount}}-к, {{dwelling.apartment.currentFloor}}/{{dwelling.apartment.maxFloor}} эт.</h4>
+            <h4 class="text-xs text-[#00000080]">{{dwelling.address}}</h4>
         </div>
         <div class="text-xs text-[#8567FA] font-semibold mt-2"><h4 class="border-[#8567FA] rounded-3xl border px-2 py-1">до 2-х человек</h4></div>
     </div>

@@ -1,8 +1,8 @@
 <div class="w-full mx-auto flex flex-col h-full bg-[#EBEBEB] overflow-auto">
   <header class="mb-16"><app-sort-bar></app-sort-bar></header>
-  <div>
-    <app-big-card></app-big-card>
-    <app-big-card></app-big-card>
-    <app-big-card></app-big-card>
+  <div class="container mx-auto px-5 md:px-40 xl:px-96">
+    <app-big-card [dwelling]="dwelling[0]" ></app-big-card>
+    <app-big-card [dwelling]="dwelling[1]"></app-big-card>
+    <app-big-card [dwelling]="dwelling[2]"></app-big-card>
   </div>
 </div>
