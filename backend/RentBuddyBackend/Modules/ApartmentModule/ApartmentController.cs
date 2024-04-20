@@ -21,9 +21,9 @@ public class ApartmentController(ApplicationDbContext context) : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<ApartmentEntity>> GetApartment([FromRoute] ApartmentEntity apartment)
+    public async Task<ActionResult<ApartmentEntity>> GetApartment([FromRoute] Guid id)
     {
-        var data = await context.Apartments.FirstOrDefaultAsync(a => a.Id == apartment.Id);
+        var data = await context.Apartments.FirstOrDefaultAsync(a => a.Id == id);
 
         if (data == null)
             return Ok("Current apartment doesn't exist");

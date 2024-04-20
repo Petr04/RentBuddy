@@ -10,9 +10,9 @@ namespace RentBuddyBackend.Modules.RoomModule;
 public class RoomController(ApplicationDbContext context) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ApartmentEntity>>> GetRooms()
+    public async Task<ActionResult<IEnumerable<RoomEntity>>> GetRooms()
     {
-        var data = await context.Apartments.ToListAsync();
+        var data = await context.Rooms.ToListAsync();
 
         if (data.Count == 0)
             return Ok("Room's database is empty");
@@ -21,9 +21,9 @@ public class RoomController(ApplicationDbContext context) : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<RoomEntity>> GetRoom([FromRoute] RoomEntity room)
+    public async Task<ActionResult<RoomEntity>> GetRoom([FromRoute] Guid id)
     {
-        var data = await context.Rooms.FirstOrDefaultAsync(a => a.Id == room.Id);
+        var data = await context.Rooms.FirstOrDefaultAsync(r => r.Id == id);
 
         if (data == null)
             return Ok("Current room doesn't exist");
