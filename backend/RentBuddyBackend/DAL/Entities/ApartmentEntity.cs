@@ -11,6 +11,7 @@ public class ApartmentEntity : IEntity
     public int RoomsCount { get; set; }
     public int CurrentFloor { get; set; }
     public int MaxFloor { get; set; }
+    public string Address { get; set; }
     
     [Ignore, JsonIgnore]
     public virtual List<RoomEntity> Rooms { get; } = new List<RoomEntity>();
