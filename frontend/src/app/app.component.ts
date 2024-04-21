@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SortBarComponent } from './sort-bar/sort-bar.component';
 import { BigCardComponent } from './big-card/big-card.component';
+import { NextBtnComponent } from './next-btn/next-btn.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SortBarComponent,  BigCardComponent],
+  imports: [RouterOutlet, SortBarComponent,  BigCardComponent, NextBtnComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

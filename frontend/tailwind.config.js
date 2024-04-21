@@ -9,6 +9,7 @@ module.exports = {
         84: '21rem',
       }
     },
+
   },
   plugins: [],
 }
