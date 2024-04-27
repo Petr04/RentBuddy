@@ -3,15 +3,19 @@ import { RouterOutlet } from '@angular/router';
 import { SortBarComponent } from './sort-bar/sort-bar.component';
 import { BigCardComponent } from './big-card/big-card.component';
 import { NextBtnComponent } from './next-btn/next-btn.component';
+import { HttpClientModule } from '@angular/common/http';
+import { Room } from './apartment';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SortBarComponent,  BigCardComponent, NextBtnComponent],
+  imports: [RouterOutlet, SortBarComponent,  BigCardComponent, NextBtnComponent, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+
   title = 'rent-buddy';
   public dwelling: Array<Dwelling> = [
     {
