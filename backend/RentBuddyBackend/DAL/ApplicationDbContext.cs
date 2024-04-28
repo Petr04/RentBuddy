@@ -4,11 +4,17 @@ using RentBuddyBackend.Infrastructure;
 
 namespace RentBuddyBackend.DAL;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, Config config)
-    : DbContext(options)
+public class ApplicationDbContext : DbContext
 {
     public DbSet<RoomEntity> Rooms { get; set; }
     public DbSet<ApartmentEntity> Apartments { get; set; }
+    private readonly Config config; 
+    
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, Config config) : base(options)
+    {
+        this.config = config;
+        Database.EnsureCreated();
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
