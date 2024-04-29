@@ -5,12 +5,13 @@ import { BigCardComponent } from './big-card/big-card.component';
 import { NextBtnComponent } from './next-btn/next-btn.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Room } from './apartment';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SortBarComponent,  BigCardComponent, NextBtnComponent, HttpClientModule],
+  imports: [RouterOutlet, SortBarComponent,  BigCardComponent, NextBtnComponent, HttpClientModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -30,7 +31,7 @@ export class AppComponent {
       square: 30,
       inhabitantsCount: 1,
       apartmentId: "09856309856387918563256325632",
-      address: "г. Бахмут ул. Долика Бибера д.228"
+      address: "г.Екатеринбург, Мира 32"
     },
     {
       apartment: {
@@ -44,7 +45,7 @@ export class AppComponent {
       square: 30,
       inhabitantsCount: 1,
       apartmentId: "09856309856387918563256325632",
-      address: "хуй"
+      address: "г.Екатеринбург, Мира 32"
     },
     {
       apartment: {
@@ -58,7 +59,7 @@ export class AppComponent {
       square: 30,
       inhabitantsCount: 1,
       apartmentId: "09856309856387918563256325632",
-      address: "хуйzzzzzzz"
+      address: "г.Екатеринбург, Ленина 11"
     }
   ];
 }

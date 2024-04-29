@@ -23,7 +23,8 @@ export class BigCardComponent implements OnInit{
   constructor(private postService:PostService){}
 
   ngOnInit() {
-      this.Posts$ = this.postService.getPosts()
+      this.Posts$ = this.postService.getPosts() 
+      this.postService.getPosts().subscribe(res =>(console.log(res)))
   }
   @Input()
   public dwelling! : Dwelling;
