@@ -1,13 +1,13 @@
-﻿**/.dockerignore
+**/.classpath
+**/.dockerignore
 **/.env
 **/.git
 **/.gitignore
 **/.project
 **/.settings
 **/.toolstarget
-**/.vs1
+**/.vs
 **/.vscode
-**/.idea
 **/*.*proj.user
 **/*.dbmdl
 **/*.jfm
@@ -23,3 +23,8 @@
 **/values.dev.yaml
 LICENSE
 README.md
+!**/.gitignore
+!.git/HEAD
+!.git/config
+!.git/packed-refs
+!.git/refs/heads/**
