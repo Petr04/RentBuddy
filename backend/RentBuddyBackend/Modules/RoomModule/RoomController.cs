@@ -13,10 +13,7 @@ public class RoomController(ApplicationDbContext context) : ControllerBase
     public async Task<ActionResult<IEnumerable<RoomEntity>>> GetRooms()
     {
         var data = await context.Rooms.ToListAsync();
-
-        if (data.Count == 0)
-            return Ok("Room's database is empty");
-
+        
         return Ok(data);
     }
 
@@ -24,9 +21,6 @@ public class RoomController(ApplicationDbContext context) : ControllerBase
     public async Task<ActionResult<RoomEntity>> GetRoom([FromRoute] Guid id)
     {
         var data = await context.Rooms.FirstOrDefaultAsync(r => r.Id == id);
-
-        if (data == null)
-            return Ok("Current room doesn't exist");
 
         return Ok(data);
     }
@@ -50,7 +44,7 @@ public class RoomController(ApplicationDbContext context) : ControllerBase
         var data = await context.Rooms.FindAsync(id);
 
         if (data == null)
-            return Ok("Current apartment doesn't exist");
+            return Ok("Current room doesn't exist");
 
         context.Rooms.Remove(data);
         await context.SaveChangesAsync();

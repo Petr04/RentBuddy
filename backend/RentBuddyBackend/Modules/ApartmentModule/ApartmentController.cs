@@ -14,9 +14,6 @@ public class ApartmentController(ApplicationDbContext context) : ControllerBase
     {
         var data = await context.Apartments.ToListAsync();
 
-        if (data.Count == 0)
-            return Ok("Apartment's database is empty");
-
         return Ok(data);
     }
 
@@ -24,9 +21,6 @@ public class ApartmentController(ApplicationDbContext context) : ControllerBase
     public async Task<ActionResult<ApartmentEntity>> GetApartment([FromRoute] Guid id)
     {
         var data = await context.Apartments.FirstOrDefaultAsync(a => a.Id == id);
-
-        if (data == null)
-            return Ok("Current apartment doesn't exist");
         
         return Ok(data);
     }
