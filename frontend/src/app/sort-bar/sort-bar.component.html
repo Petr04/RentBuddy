@@ -2,15 +2,17 @@
   <div class="flex flex-row  items-center justify-between w-full ">
     <button class=""><img src="../assets/arrow.png"></button>
     <h2 class="self-center text-xl">Выберите от 4-х комнат</h2>
-    <button class=""><img src="../assets/hamburger.png"></button>
+    <button id="filters" class="" (click)="isOpen=!isOpen"><img src="../assets/hamburger.png"></button>
   </div>
-  <div class="bg-[#9A81FF] rounded-xl w-full px-2.5 ">
-    <ul class="flex  flex-col my-1.5">
-      <li class="flex "><img src="../assets/filter-city.svg" alt=""><input class="bg-[#9A81FF] ml-1.5 placeholder-white h-10 w-full" type="text" placeholder="Город"></li>
-      <li class="flex "><img src="../assets/filter-person.svg" alt=""><input class="bg-[#9A81FF] ml-1.5 placeholder-white h-10 w-full" type="text" placeholder="Кол-во соседей по комнате"></li>
-      <li class="flex "><img src="../assets/filter-square.svg" alt=""><input class="bg-[#9A81FF] ml-1.5 placeholder-white h-10 w-full" type="text" placeholder="Площадь"></li>
-      <li class="flex justify-between"><div class="flex"><img src="../assets/filter-price.svg" alt=""><span class="ml-1.5">Цена</span></div><div><input class="bg-[#8C6FFF] px-2.5 w-24 placeholder-white rounded-xl" type="text" placeholder="от"><input class="bg-[#8C6FFF] px-2.5 ml-1.5 w-24 placeholder-white rounded-xl" type="text" placeholder="до"></div></li>
-    </ul>
-  </div>
-  <button class="bg-[#4F4948] w-full rounded-s-2xl ">Поиск</button>
+  <ng-container *ngIf="isOpen">
+    <div class="bg-[#9A81FF] rounded-xl w-full px-2.5 ">
+      <ul class="flex  flex-col my-1.5">
+        <li class="flex "><img src="../assets/filter-city.svg" alt=""><input class="bg-[#9A81FF] ml-1.5 placeholder-white h-10 w-full" type="text" placeholder="Город"></li>
+        <li class="flex "><img src="../assets/filter-person.svg" alt=""><input class="bg-[#9A81FF] ml-1.5 placeholder-white h-10 w-full" type="text" placeholder="Кол-во соседей по комнате"></li>
+        <li class="flex "><img src="../assets/filter-square.svg" alt=""><input class="bg-[#9A81FF] ml-1.5 placeholder-white h-10 w-full" type="text" placeholder="Площадь"></li>
+        <li class="flex justify-between"><div class="flex"><img src="../assets/filter-price.svg" alt=""><span class="ml-1.5">Цена</span></div><div><input class="bg-[#8C6FFF] px-2.5 w-24 placeholder-white rounded-xl" type="text" placeholder="от"><input class="bg-[#8C6FFF] px-2.5 ml-1.5 w-24 placeholder-white rounded-xl" type="text" placeholder="до"></div></li>
+      </ul>
+    </div>
+    <button class="bg-[#4F4948] w-full rounded-s-2xl ">Поиск</button>
+  </ng-container>
 </div>
