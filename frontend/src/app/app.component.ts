@@ -1,67 +1,23 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SortBarComponent } from './sort-bar/sort-bar.component';
-import { BigCardComponent } from './big-card/big-card.component';
-import { NextBtnComponent } from './next-btn/next-btn.component';
+import { SortBarComponent } from './components/sort-bar/sort-bar.component';
+import { BigCardComponent } from './components/big-card/big-card.component';
+import { NextBtnComponent } from './components/next-btn/next-btn.component';
 import { HttpClientModule } from '@angular/common/http';
-import { Room } from './apartment';
 import { CommonModule } from '@angular/common';
+import { SelectRentComponent } from './select-rent/select-rent.component';
+import { AboutUserComponent } from './about-user/about-user.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SortBarComponent,  BigCardComponent, NextBtnComponent, HttpClientModule, CommonModule],
+  imports: [RouterOutlet, SelectRentComponent, AboutUserComponent ,HttpClientModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
 
-  title = 'rent-buddy';
-  public dwelling: Array<Dwelling> = [
-    {
-      apartment: {
-        id:"8707943542546567809797684",
-        roomsCount: 2,
-        currentFloor: 3,
-        maxFloor: 10
-      },
-      id: "897675431256587680844367587698",
-      price: 52000,
-      square: 30,
-      inhabitantsCount: 1,
-      apartmentId: "09856309856387918563256325632",
-      address: "г.Екатеринбург, Мира 32"
-    },
-    {
-      apartment: {
-        id:"8707943542546567809797684",
-        roomsCount: 2,
-        currentFloor: 3,
-        maxFloor: 10
-      },
-      id: "897675431256587680844367587698",
-      price: 52000,
-      square: 30,
-      inhabitantsCount: 1,
-      apartmentId: "09856309856387918563256325632",
-      address: "г.Екатеринбург, Мира 32"
-    },
-    {
-      apartment: {
-        id:"8707943542546567809797684",
-        roomsCount: 2,
-        currentFloor: 3,
-        maxFloor: 10
-      },
-      id: "897675431256587680844367587698",
-      price: 52000,
-      square: 30,
-      inhabitantsCount: 1,
-      apartmentId: "09856309856387918563256325632",
-      address: "г.Екатеринбург, Ленина 11"
-    }
-  ];
 }
 
 export interface Dwelling {
