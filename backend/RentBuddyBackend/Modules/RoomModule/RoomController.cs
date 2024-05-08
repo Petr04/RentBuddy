@@ -7,7 +7,7 @@ namespace RentBuddyBackend.Modules.RoomModule;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RoomController(ApplicationDbContext context) : ControllerBase
+public class RoomController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<RoomEntity>>> GetRooms()
@@ -44,11 +44,25 @@ public class RoomController(ApplicationDbContext context) : ControllerBase
         var data = await context.Rooms.FindAsync(id);
 
         if (data == null)
-            return Ok("Current room doesn't exist");
+            return NoContent();
 
         context.Rooms.Remove(data);
         await context.SaveChangesAsync();
 
         return NoContent();
+    }
+    
+    [HttpGet("{id:Guid}/image")]
+    public async Task<ActionResult> GetRoomImage([FromRoute] Guid id)
+    {
+        var data = await context.Rooms.FirstOrDefaultAsync(r => r.Id == id);
+        
+        if (data == null)
+            return NoContent();
+        
+        var imagePath = Path.Combine(webHostEnvironment.WebRootPath, "Image", data.ImageLink.TrimStart('/'));
+        
+        var imageData = await System.IO.File.ReadAllBytesAsync(imagePath);
+        return File(imageData, "image/jpeg");
     }
 }

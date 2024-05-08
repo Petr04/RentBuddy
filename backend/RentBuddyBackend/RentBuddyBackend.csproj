@@ -25,9 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+      <Folder Include="wwwroot\Image\" />
     </ItemGroup>
 
 </Project>
