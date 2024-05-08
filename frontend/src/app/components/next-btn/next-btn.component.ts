@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-next-btn',
@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './next-btn.component.css'
 })
 export class NextBtnComponent {
-
+  @Input()
+  buttonText: string = ""
 }
