@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, input } from '@angular/core';
-import { Dwelling } from '../../app.component';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectRentComponent } from '../../select-rent/select-rent.component';
 import { SortBarComponent } from '../sort-bar/sort-bar.component';
