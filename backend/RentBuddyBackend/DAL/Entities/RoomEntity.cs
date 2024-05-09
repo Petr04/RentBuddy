@@ -11,6 +11,7 @@ public class RoomEntity : IEntity
     public int Price { get; set; }
     public int Square { get; set; }
     public int InhabitantsCount { get; set; }
+    public string ImageLink { get; set; } = "Images/1.png";
     
     [Ignore, JsonIgnore]
     public virtual ApartmentEntity? Apartment { get; set; }
