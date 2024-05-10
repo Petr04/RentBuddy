@@ -7,12 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SelectRentComponent } from './select-rent/select-rent.component';
 import { AboutUserComponent } from './about-user/about-user.component';
+import { MatchPageComponent } from './match-page/match-page.component';
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SelectRentComponent, AboutUserComponent ,HttpClientModule, CommonModule],
+  imports: [RouterOutlet, SelectRentComponent, AboutUserComponent, MatchPageComponent ,HttpClientModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
