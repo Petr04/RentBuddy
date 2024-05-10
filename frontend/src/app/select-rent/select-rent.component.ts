@@ -21,7 +21,7 @@ export class SelectRentComponent implements OnInit{
   filter:FilterRent = {
     city: '',
     inhabitantsCount: 0,
-    square: 25
+    square: 0
   }
 
   constructor(private postService:PostService){}

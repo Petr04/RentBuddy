@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SortBarComponent } from './components/sort-bar/sort-bar.component';
-import { BigCardComponent } from './components/big-card/big-card.component';
-import { NextBtnComponent } from './components/next-btn/next-btn.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SelectRentComponent } from './select-rent/select-rent.component';
