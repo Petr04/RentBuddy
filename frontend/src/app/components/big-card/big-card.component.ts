@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectRentComponent } from '../../select-rent/select-rent.component';
-import { FilterRent, SortBarComponent } from '../sort-bar/sort-bar.component';
+import {  SortBarComponent } from '../sort-bar/sort-bar.component';
 import { NextBtnComponent } from '../next-btn/next-btn.component';
-import { Post } from '../../requests/services/post/post.service';
-
+import { FilterRent, Post } from '../../interfaces/interface';
 
 
 
@@ -17,11 +16,7 @@ import { Post } from '../../requests/services/post/post.service';
   styleUrl: './big-card.component.css'
 })
 
-
-
 export class BigCardComponent {
-
-
   @Input() card!: Post
   @Input() filterObj!:FilterRent
 }

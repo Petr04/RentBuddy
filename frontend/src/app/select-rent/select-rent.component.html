@@ -1,5 +1,7 @@
 <div class="w-full   mx-auto flex flex-col h-dvh bg-[#EBEBEB] overflow-auto">
-  <header class="mb-20"><app-sort-bar></app-sort-bar></header>
+  <header class="mb-20">
+    <app-sort-bar (filterChange)="handleFilterChange($event)"></app-sort-bar>
+  </header>
   <div class="container mx-auto px-5 md:px-40 xl:px-96 mb-16">
     @if (Cards$ | async; as cards){
       @for (card of (cards | filterBy:['apartment.address','inhabitantsCount','square']: [ filter.city, filter.inhabitantsCount, filter.square]); track card.id ){
@@ -8,6 +10,6 @@
     }
   </div>
   <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
-    <app-next-btn buttonText="Далее"></app-next-btn>
+    <app-next-btn ></app-next-btn>
   </div>
 </div>

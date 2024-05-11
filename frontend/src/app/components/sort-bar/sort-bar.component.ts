@@ -1,12 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FilterRent } from '../../interfaces/interface';
 
-export interface FilterRent{
-  city:string
-  inhabitantsCount: number,
-  square: number,
-}
+
 
 @Component({
   selector: 'app-sort-bar',
@@ -22,15 +19,18 @@ export class SortBarComponent {
   public isOpen: boolean = false;
 
   filterObj: FilterRent = {
-    city: ' ',
-    inhabitantsCount: 0,
-    square: 0
+    city: 'Екб',
+    inhabitantsCount: 1,
+    square: 2
   }
 
-  checkFilter(){
-    console.log(this.filterObj)
-  }
+  bank: string = 'alpha'
 
+  @Output() filterChange  = new EventEmitter<FilterRent>();
+
+  fitlerEvent(){
+    this.filterChange.emit(this.filterObj)
+  }
 }
 
 

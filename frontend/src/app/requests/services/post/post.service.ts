@@ -2,22 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { cp } from 'fs';
 import { Observable } from 'rxjs';
+import { Post } from '../../../interfaces/interface';
 
 
-export interface Post{
-  apartment: {
-    id: string,
-    roomsCount: number,
-    currentFloor: number,
-    maxFloor: number,
-    address: string
-  },
-  apartmentId: string,
-  id: string,
-  inhabitantsCount: number,
-  price: number,
-  square: number
-}
 
 @Injectable({
   providedIn: 'root'

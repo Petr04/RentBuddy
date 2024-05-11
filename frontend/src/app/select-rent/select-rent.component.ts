@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FilterRent, SortBarComponent } from '../components/sort-bar/sort-bar.component';
+import { SortBarComponent } from '../components/sort-bar/sort-bar.component';
 import { BigCardComponent } from '../components/big-card/big-card.component';
 import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
-import { Post, PostService } from '../requests/services/post/post.service';
+import { PostService } from '../requests/services/post/post.service';
 import { NgArrayPipesModule } from 'ngx-pipes';
+import { FilterRent, Post } from '../interfaces/interface';
 
 
 @Component({
@@ -19,9 +20,13 @@ export class SelectRentComponent implements OnInit{
   public Cards$?: Observable<Post[]>
 
   filter:FilterRent = {
-    city: '',
-    inhabitantsCount: 0,
-    square: 0
+    city: '123',
+    inhabitantsCount: 2,
+    square: 3
+  }
+
+  public handleFilterChange(filterData: FilterRent){
+    return this.filter = filterData
   }
 
   constructor(private postService:PostService){}
