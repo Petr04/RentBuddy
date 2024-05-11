@@ -38,6 +38,8 @@ export class SelectRentComponent implements OnInit{
 
   ngOnInit() {
     this.Cards$ = this.postService.getPosts()
-}
+  }
+  
+  buttonText:string ='Далее'
 }
 
