@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using System.Text.RegularExpressions;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RentBuddyBackend.DAL.Entities;
+using RentBuddyBackend.Infrastructure;
 using RentBuddyBackend.Modules.UserModule.Repository;
 
 namespace RentBuddyBackend.Modules.UserModule.Service
@@ -43,9 +45,8 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         {
             var user = await userRepository.FindAsync(id);
             if (user == null)
-            {
-                return NotFound();
-            }
+                return NoContent();
+            
             return Ok(user);
         }
 
@@ -53,6 +54,15 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         {
             var users = await userRepository.ToListAsync();
             return Ok(users);
+        }
+
+        public async Task<ActionResult<IEnumerable<UserEntity>>> MatchUser(Guid id)
+        {
+            var user = await userRepository.FindAsync(id);
+            var users = await userRepository.ToListAsync();
+            var matches = Matching.Match(user, users);
+            var matchedUsers = matches.Keys.ToList();
+            return Ok(matchedUsers);
         }
     }
 }

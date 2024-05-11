@@ -9,5 +9,6 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         Task<ActionResult<UserEntity>> GetUser(Guid id);
         Task<ActionResult<UserEntity>> CreateOrUpdateUser(UserEntity userEntity);
         Task<ActionResult> DeleteUser(Guid id);
+        Task<ActionResult<IEnumerable<UserEntity>>> MatchUser(Guid id);
     }
 }

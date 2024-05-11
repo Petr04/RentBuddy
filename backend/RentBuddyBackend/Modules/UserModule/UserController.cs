@@ -19,16 +19,20 @@ namespace RentBuddyBackend.Modules.UserModule
         public Task<ActionResult<IEnumerable<UserEntity>>> GetUsers()
             => usersService.GetUsers();
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         public Task<ActionResult<UserEntity>> GetUser([FromRoute] Guid id)
             => usersService.GetUser(id);
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         public Task<ActionResult> DeleteUser([FromRoute] Guid id)
             => usersService.DeleteUser(id);
 
         [HttpPost]
         public Task<ActionResult<UserEntity>> CreateOrUpdateUser([FromBody] UserEntity userEntity)
             => usersService.CreateOrUpdateUser(userEntity);
+        
+        [HttpGet("{id:guid}/matches")]
+        public Task<ActionResult<IEnumerable<UserEntity>>> MatchUser([FromRoute] Guid id)
+            => usersService.MatchUser(id);
     }
 }

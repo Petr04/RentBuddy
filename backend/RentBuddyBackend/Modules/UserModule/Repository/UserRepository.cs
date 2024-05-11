@@ -5,15 +5,8 @@ using RentBuddyBackend.DAL.Entities;
 
 namespace RentBuddyBackend.Modules.UserModule.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(ApplicationDbContext context) : IUserRepository
     {
-        private readonly ApplicationDbContext context;
-
-        public UserRepository(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
-
         public async Task<UserEntity?> FindAsync(Guid id)
             => await context.Users.FindAsync(id);
 
