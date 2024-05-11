@@ -7,26 +7,31 @@ import { Observable } from 'rxjs';
 import { PostService } from '../requests/services/post/post.service';
 import { NgArrayPipesModule } from 'ngx-pipes';
 import { FilterRent, Post } from '../interfaces/interface';
+import { FilterPipe } from '../filter.pipe';
 
 
 @Component({
   selector: 'app-select-rent',
   standalone: true,
-  imports: [SortBarComponent, BigCardComponent, NgArrayPipesModule, NextBtnComponent, CommonModule],
+  imports: [SortBarComponent, BigCardComponent, FilterPipe ,NgArrayPipesModule, NextBtnComponent, CommonModule],
   templateUrl: './select-rent.component.html',
   styleUrl: './select-rent.component.css'
 })
-export class SelectRentComponent implements OnInit{
-  public Cards$?: Observable<Post[]>
 
-  filter:FilterRent = {
-    city: '123',
-    inhabitantsCount: 2,
-    square: 3
+export class SelectRentComponent implements OnInit{
+  protected Cards$?: Observable<Post[]>
+
+  filterData:FilterRent = {
+    city: '',
+    inhabitantsCount: 0,
+    square: 0,
+    minPrice: 0,
+    maxPrice: 0
   }
 
   public handleFilterChange(filterData: FilterRent){
-    return this.filter = filterData
+    this.filterData = filterData
+    console.log(this.filterData)
   }
 
   constructor(private postService:PostService){}
