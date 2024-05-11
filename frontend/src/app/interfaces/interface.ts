@@ -1,7 +1,9 @@
 export interface FilterRent{
-  city:string
+  city:string | null,
   inhabitantsCount: number,
   square: number,
+  minPrice: number,
+  maxPrice: number
 }
 
 

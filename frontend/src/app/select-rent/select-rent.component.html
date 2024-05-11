@@ -4,12 +4,12 @@
   </header>
   <div class="container mx-auto px-5 md:px-40 xl:px-96 mb-16">
     @if (Cards$ | async; as cards){
-      @for (card of (cards | filterBy:['apartment.address','inhabitantsCount','square']: [ filter.city, filter.inhabitantsCount, filter.square]); track card.id ){
+      @for (card of (cards | filter:filterData); track card.id ){
         <app-big-card [card] = 'card'></app-big-card>
       }
     }
   </div>
   <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
-    <app-next-btn ></app-next-btn>
+    <app-next-btn [buttonText]="buttonText"> </app-next-btn>
   </div>
 </div>
