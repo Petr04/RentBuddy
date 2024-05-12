@@ -9,12 +9,19 @@ import { FilterRent, Post } from './interfaces/interface';
 export class FilterPipe implements PipeTransform {
 
   transform(cards: Post[], filters: FilterRent): Post[] {
-    return cards.filter(card => {
-      return ((filters.square == 0 || filters.square == null) &&
-        (filters.inhabitantsCount == 0 || filters.inhabitantsCount == null) &&
-        (filters.maxPrice == 0 || filters.maxPrice == null)) ||
-      (card.square== filters.square ||  card.inhabitantsCount == filters.inhabitantsCount || (filters.minPrice<=card.price && card.price<=filters.maxPrice))
+
+    const arr = cards.filter(card => {
+
+      const matchesInhabitants = !filters.inhabitantsCount || card.inhabitantsCount === filters.inhabitantsCount;
+      const matchesSquare = !filters.square || card.square === filters.square;
+      const matchesMinPrice = !filters.minPrice || card.price >= filters.minPrice;
+      const matchesMaxPrice = !filters.maxPrice || card.price <= filters.maxPrice
+      const hasCity = !filters.city || card.apartment.address.includes(filters.city || "");
+
+      return matchesInhabitants && matchesSquare && matchesMinPrice && matchesMaxPrice && hasCity;
+
     });
+    return arr
   }
 }
-// return card.square== filters.square ||  card.inhabitantsCount == filters.inhabitantsCount || (filters.minPrice<card.price && card.price<filters.maxPrice)
+// return card.square== filterss.square ||  card.inhabitantsCount == filters.inhabitantsCount || (filters.minPrice<card.price && card.price<filters.maxPrice)

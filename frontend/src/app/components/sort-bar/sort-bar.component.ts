@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterRent } from '../../interfaces/interface';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-sort-bar',
@@ -32,12 +33,12 @@ export class SortBarComponent {
 
   fitlerEvent(){
     this.filterObj.city = this.city.value
-    this.filterObj.inhabitantsCount = this.inhabitantsCount.value
-    this.filterObj.square = this.square.value
-    this.filterObj.minPrice = this.minPrice.value
-    this.filterObj.maxPrice = this.maxPrice.value
+    this.filterObj.inhabitantsCount = this.inhabitantsCount.value ? +this.inhabitantsCount.value : this.inhabitantsCount.value
+    this.filterObj.square = this.square.value ? +this.square.value:this.square.value
+    this.filterObj.minPrice = this.minPrice.value ? +this.minPrice.value:this.minPrice.value
+    this.filterObj.maxPrice = this.maxPrice.value ? +this.maxPrice.value:this.maxPrice.value
     this.filterChange.emit(this.filterObj)
-    
+
   }
 }
 

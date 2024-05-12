@@ -9,7 +9,6 @@ export const routes: Routes = [
   {path:'profile', component: AboutUserComponent},
   {path:'match', component: MatchPageComponent},
   {path:'registration', component: RegistrationPageComponent}
-
 ];
 
 // https://angdev.ru/archive/angular9/angular-routing-guards/ Guards
