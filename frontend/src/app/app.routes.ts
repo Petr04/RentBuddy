@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { SelectRentComponent } from './select-rent/select-rent.component';
 import { AboutUserComponent } from './about-user/about-user.component';
 import { MatchPageComponent } from './match-page/match-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { VerificationPageComponent } from './verification-page/verification-page.component';
+import { SelectRentComponent } from './select-rent/select-rent.component';
 
 
 export const routes: Routes = [
