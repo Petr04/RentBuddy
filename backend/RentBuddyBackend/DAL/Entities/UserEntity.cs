@@ -25,6 +25,8 @@ namespace RentBuddyBackend.DAL.Entities
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
         public DateTime SleepTime { get; set; }
         public TimeSpentAtHome TimeSpentAtHome { get; set; }
+        public Guid FavoritesUsersId { get; set;}
+        public Guid BlacklistId { get; set;}
         
     }
 }

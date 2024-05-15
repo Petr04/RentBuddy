@@ -9,6 +9,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<RoomEntity> Rooms { get; set; }
     public DbSet<ApartmentEntity> Apartments { get; set; }
     public DbSet<UserEntity> Users { get; set; }
+    public DbSet<BlacklistEntity> BlacklistEntites { get; set; }
+    public DbSet<FavouritesEntity> FavouritesEntities { get; set; }
     private readonly Config config; 
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, Config config) : base(options)
