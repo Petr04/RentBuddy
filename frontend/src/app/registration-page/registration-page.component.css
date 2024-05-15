@@ -1,0 +1,13 @@
+input.ng-touched.ng-invalid{
+  border: solid 2px red;
+}
+
+input.ng-touched.ng-valid{
+  border: solid 2px green;
+}
+.input__img{
+  top:50%;
+  bottom: 50%;
+  transform:translate(-50%, -50%);
+  right: 0;
+}

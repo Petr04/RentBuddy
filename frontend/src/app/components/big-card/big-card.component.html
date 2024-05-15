@@ -1,5 +1,4 @@
-@if (Cards$ | async; as cards){
-  @for (card of cards; track card.price){
+
   <div class="flex flex-col items-center w-full mt-5 bg-[#FFFFFF] rounded-2xl mb-5 relative">
         <img class="w-full h-48 min-h-48 rounded-t-2xl lg:h-96" src="../assets/room.png">
         <div class="flex flex-row w-full justify-between p-4">
@@ -14,8 +13,6 @@
             <img src="../assets/selected.svg" class="absolute top-2 right-2" alt="">
         </div>
   </div>
-  }
-}
 
 
 <!-- <div class="flex flex-col items-center w-full mt-5 bg-[#FFFFFF] rounded-2xl mb-5">

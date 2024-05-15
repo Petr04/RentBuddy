@@ -1,0 +1,28 @@
+<div class="w-full mx-auto flex flex-col h-dvh bg-[#FFFFFF] overflow-auto">
+    <header class="mt-10">
+      <div class="bg-[#FFFFFF] flex gap-2.5 p-5 flex-col items-center justify-evenly w-full text-[#000000] rounded-b-2xl py-5 z-50">
+        <div>
+            <h3 class="font-semibold text-xl">Мы отправили вам код <br/> <span class="pl-1">на электронную почту</span></h3>
+        </div>
+      </div>
+    </header>
+    <div class="mt-10 container mx-auto px-8 md:px-40 xl:px-80 flex flex-col">
+        <div class="mt-2.5 font-semibold w-full text-2xl bg-gradient-to-r from-[#8567FA] to-[#4FACE2] pl-1.5 text-transparent bg-clip-text text-center">
+            <code-input [isCodeHidden]="false"
+              [codeLength]="4"
+              (codeChanged)="onCodeChanged($event)"
+              (codeCompleted)="onCodeCompleted($event)">
+            </code-input>
+        </div>
+    </div>
+    <div class="mt-10 container mx-auto px-5 md:px-40 xl:px-80 flex flex-col mb-20">
+        <div class="w-full text-center">
+            <button class="text-center leading-6 mx-auto w-full text-[#FFFFFF]
+            bg-gradient-to-r from-[#8567FA] to-[#4FACE2] py-3.5 rounded-3xl font-semibold">Продолжить</button>
+            <h4 class="text-[#8e8e8e] text-sm mt-2.5">Не получили код?
+                <span class="bg-gradient-to-r from-[#8567FA] to-[#4FACE2] inline-block text-transparent bg-clip-text">Отправить еще раз</span>
+            </h4>
+        </div>
+    </div>
+</div>
+
