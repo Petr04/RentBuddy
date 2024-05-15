@@ -1,0 +1,6 @@
+#@RentBackendTest_HostAddress = http://localhost:5096
+#
+#GET {{RentBackendTest_HostAddress}}/weatherforecast/
+#Accept: application/json
+#
+####

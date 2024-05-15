@@ -1,0 +1,38 @@
+version: '3.9'
+
+networks:
+  rb-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+
+services:
+  rb-backend:
+    container_name: rb-backend
+    image: soranoshie/rbbackendcontainer:latest
+    networks:
+      - rb-network
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
+    volumes:
+      - ./web:/usr/share/nginx/html
+    depends_on:
+      - rb-postgresdb
+  
+  rb-postgresdb:
+    container_name: rb-postgresdb
+    image: postgres:15
+    networks:
+      - rb-network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1
+      POSTGRES_DB: RentBuddyDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data

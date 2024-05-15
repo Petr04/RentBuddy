@@ -1,0 +1,26 @@
+<div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly  fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
+  <div class="flex flex-row  items-center justify-between w-full ">
+    <button class=""><img src="../assets/arrow.png"></button>
+    <h2 class="self-center text-xl font-semibold">Выберите от 4-х комнат</h2>
+    <button id="filters" class="" (click)="isOpen=!isOpen"><img src="../assets/hamburger.png"></button>
+  </div>
+  <ng-container *ngIf="isOpen">
+    <div class="bg-[#9A81FF] rounded-xl w-full px-2.5 ">
+      <ul class="flex  flex-col my-1.5">
+        <li class="flex items-center "><img src="../assets/filter-city.svg" alt=""><input class="bg-[#9A81FF] ml-1.5 placeholder-white h-10 w-full opacity-80" type="text" placeholder="Город"></li>
+        <li class="flex items-center "><img src="../assets/filter-person.svg" alt=""><input class="bg-[#9A81FF] ml-1.5 placeholder-white h-10 w-full opacity-80" type="text" placeholder="Кол-во соседей по комнате"></li>
+        <li class="flex items-center "><img src="../assets/filter-square.svg" alt=""><input class="bg-[#9A81FF] ml-1.5 placeholder-white h-10 w-full opacity-80" type="text" placeholder="Площадь"></li>
+        <li class="flex items-center justify-between h-10 opacity-80 flex-nowrap">
+          <div class="flex"><img src="../assets/filter-price.svg" alt="">
+            <span class="ml-1.5">Цена</span>
+          </div>
+          <div class="flex flex-nowrap ">
+            <input class="bg-[#8C6FFF] max-w-20 px-2.5 placeholder-white rounded-xl opacity-80 flex-nowrap" type="text" placeholder="от">
+            <input class="bg-[#8C6FFF] max-w-20 px-2.5 ml-1.5  placeholder-white rounded-xl opacity-80 flex-nowrap " type="text" placeholder="до">
+          </div>
+        </li>
+      </ul>
+    </div>
+    <button class="bg-[#4F4948] w-full rounded-2xl py-2">Поиск</button>
+  </ng-container>
+</div>
