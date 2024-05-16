@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { RouterLink } from '@angular/router';
 import { customValidator } from '../custom-validator/custom-validator.component';
 import { CLIENT_RENEG_LIMIT } from 'tls';
+import { AccountService } from '../requests/services/account/account.service';
 
 @Component({
   selector: 'app-login-page',
@@ -14,8 +15,7 @@ import { CLIENT_RENEG_LIMIT } from 'tls';
 export class LoginPageComponent {
 
   public authorizationForm!: FormGroup
-
-  constructor(){
+  constructor(private _accountSerrvice: AccountService){
     this.authorizationForm = new FormGroup({
       userEmail: new FormControl("", [Validators.required ,Validators.email]),
       userPassword: new FormControl("", customValidator(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/))
@@ -24,6 +24,7 @@ export class LoginPageComponent {
   protected confirmAuth(){
     if (this.authorizationForm.invalid){
       this.authorizationForm.markAllAsTouched()
+      this._accountSerrvice.login()
       return
     }
     console.log(this.authorizationForm.value)
