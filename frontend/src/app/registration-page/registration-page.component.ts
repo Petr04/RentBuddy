@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import { conformPassword, customValidator } from '../custom-validator/custom-validator.component';
+import { conformPassword } from '../custom-validator/custom-validator.component';
 import { RouterLink } from '@angular/router';
 import { PasswordStrengthDirective } from '../directives/password-strenght-validator.directive';
 
