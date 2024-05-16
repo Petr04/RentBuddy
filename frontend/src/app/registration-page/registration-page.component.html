@@ -2,12 +2,12 @@
   <header class="mt-10">
     <div class="bg-[#FFFFFF] flex gap-2.5 p-5 flex-col items-center justify-evenly  w-full text-[#000000] rounded-b-2xl py-5 z-50">
       <div class="flex flex-row justify-start w-full ">
-        <button class="justify-start"><img src="../assets/down.svg"></button>
+        <button [routerLink]="['/login']" class="justify-start"><img src="../assets/down.svg"></button>
         <h2 class="mx-auto text-xl font-semibold">Регистрация</h2>
       </div>
     </div>
   </header>
-  <div   class="mt-7 container mx-auto px-5 md:px-40 xl:px-80 flex  flex-col mb-20">
+  <div class="mt-7 container mx-auto px-5 md:px-40 xl:px-80 flex  flex-col mb-20">
       <div class="mt-2.5 w-full">
         <div class="relative flex flex-row justify-between border border-[#8e8e8e] rounded-2xl">
           <input formControlName="userEmail" type="mail" placeholder="Почта" class="p-2.5 bg-[#FFFFFF] rounded-2xl text-[#8e8e8e] w-full outline-none">
