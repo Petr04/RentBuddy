@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { customValidator } from '../custom-validator/custom-validator.component';
 import { CLIENT_RENEG_LIMIT } from 'tls';
+import { AccountService } from '../requests/services/account/account.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,8 +15,7 @@ import { CLIENT_RENEG_LIMIT } from 'tls';
 export class LoginPageComponent {
 
   public authorizationForm!: FormGroup
-
-  constructor(){
+  constructor(private _accountSerrvice: AccountService, private router: Router){
     this.authorizationForm = new FormGroup({
       userEmail: new FormControl("", [Validators.required ,Validators.email]),
       userPassword: new FormControl("")
@@ -24,6 +25,10 @@ export class LoginPageComponent {
     if (this.authorizationForm.invalid){
       this.authorizationForm.markAllAsTouched()
       return
+    }
+    else{
+      this._accountSerrvice.login()
+      this.router.navigate(['/profile'])
     }
     console.log(this.authorizationForm.value)
   }

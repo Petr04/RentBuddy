@@ -1,0 +1,28 @@
+<div class="w-full   mx-auto flex flex-col h-dvh bg-[#EBEBEB] overflow-auto">
+    <header class="mb-16">
+        <div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly  fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
+            <div class="flex flex-row justify-start w-full ">
+              <button class="justify-start"><img src="../assets/arrow.png"></button>
+              <h2 class="mx-auto text-xl font-semibold">Мы подобрали вам жилье</h2>
+            </div>
+          </div>
+    </header>
+    <div class="container mx-auto px-5 md:px-40 xl:px-96 mb-40">
+        <app-big-card [card] = 'card'></app-big-card>
+        <div class="mt-5">
+            <h3 class="mx-auto text-xl font-semibold text-[#000000] text-center">Ваши соседи:</h3>
+            <div class="flex flex-row gap-2.5 justify-center mt-2.5">
+                <img class="rounded-full w-20 h-20 object-cover object-center" src="../assets/sigma-2.jpg">
+                <img class="rounded-full w-20 h-20 object-cover object-center" src="../assets/sigma.jpg">
+            </div>
+            <button class="mt-5 text-center leading-6 mx-auto w-full text-[#FFFFFF]
+            bg-gradient-to-r from-[#8567FA] to-[#4FACE2] py-3.5 rounded-3xl font-semibold flex flex-row justify-center"><img src="../assets/tg.svg"><a class="pt-1 pl-2.5">Перейти в общий чат</a></button>
+            <button class="flex flex-row justify-center mt-2.5 text-center leading-6 bg-[#FFFFFF] border-[#8567FA] border py-3.5 px-4 rounded-3xl font-semibold w-full"><img src="../assets/tg-gradient.svg"><a class="bg-gradient-to-r from-[#8567FA] to-[#4FACE2] text-transparent
+                bg-clip-text pt-1 pl-2.5">Связаться с владельцем</a></button>
+        </div>
+    </div>
+    <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
+        <h4 class="mx-auto font-semibold text-[#000000] text-center mb-2.5">Не договорились об аренде?</h4>
+        <app-next-btn buttonText="Продолжить поиск"></app-next-btn>
+    </div>
+  </div>
