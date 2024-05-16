@@ -11,7 +11,7 @@ import { authorizedGuard } from './authorized.guard';
 
 export const routes: Routes = [
   {path:'select-rent', component: SelectRentComponent},
-  {path:'profile', component: AboutUserComponent, canActivate:[authorizedGuard]},
+  {path:'profile', component: AboutUserComponent, },//canActivate:[authorizedGuard]},
   {path:'match', component: MatchPageComponent},
   {path:'registration', component: RegistrationPageComponent},
   {path:'login', component: LoginPageComponent},
