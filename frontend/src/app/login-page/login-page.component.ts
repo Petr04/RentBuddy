@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { customValidator } from '../custom-validator/custom-validator.component';
 import { CLIENT_RENEG_LIMIT } from 'tls';
 
 @Component({
@@ -18,7 +17,7 @@ export class LoginPageComponent {
   constructor(){
     this.authorizationForm = new FormGroup({
       userEmail: new FormControl("", [Validators.required ,Validators.email]),
-      userPassword: new FormControl("", customValidator(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/))
+      userPassword: new FormControl("")
     })
   }
   protected confirmAuth(){

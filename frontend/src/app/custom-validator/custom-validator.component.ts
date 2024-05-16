@@ -1,9 +1,15 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
-export function customValidator(regExp:RegExp): ValidatorFn{
+export function customValidator(): ValidatorFn{
   return (control: AbstractControl): ValidationErrors | null => {
-    const forbidden = regExp.test(control.value)
-    return !forbidden ? { forbiddenValue: {value: control.value} }: null
+    const value = control.value
+
+    const hasUpperCase = /[A-Z]+/.test(value)
+    const hasLowerCase = /[a-z]+/.test(value)
+    const hasNum = /[0-9]+/.test(value)
+    const specSymphol = /[#?!@$%^&*-]+/.test(value)
+    const passwordValid =  hasLowerCase && hasUpperCase && hasNum && specSymphol
+    return !passwordValid ? { passwordStrength: true }: null
   }
 
 }

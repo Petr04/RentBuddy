@@ -3,12 +3,12 @@ import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { conformPassword, customValidator } from '../custom-validator/custom-validator.component';
 import { RouterLink } from '@angular/router';
-
+import { PasswordStrengthDirective } from '../directives/password-strenght-validator.directive';
 
 @Component({
   selector: 'app-registration-page',
   standalone: true,
-  imports: [NextBtnComponent, ReactiveFormsModule, FormsModule, RouterLink],
+  imports: [NextBtnComponent, ReactiveFormsModule, FormsModule, RouterLink, PasswordStrengthDirective],
   templateUrl: './registration-page.component.html',
   styleUrl: './registration-page.component.css'
 })
@@ -21,8 +21,8 @@ export class RegistrationPageComponent {
     this.registrationForm = new FormGroup(
       {
         userEmail: new FormControl('', [Validators.required, Validators.email]),
-        userPassword: new FormControl('', [customValidator(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)]),
-        userPassword2: new FormControl('', [customValidator(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)])
+        userPassword: new FormControl(''),
+        userPassword2: new FormControl('')
       },
       conformPassword
     );
