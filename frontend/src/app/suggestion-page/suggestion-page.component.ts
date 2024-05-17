@@ -17,13 +17,13 @@ export class SuggestionPageComponent {
       "roomsCount": 3,
       "currentFloor": 9,
       "maxFloor": 12,
-     "imageLink":'12321' ,
       "address": "Ленина 52"
     },
     "id": "369c4a8d-3f4a-499f-be72-a5ad4a9521e0",
     "price": 30000,
     "square": 52,
     "inhabitantsCount": 2,
+    "imageLink":'12321' ,
     "apartmentId": "0e218c4d-1619-4542-82df-52c8c921a9a1"
   }
 }

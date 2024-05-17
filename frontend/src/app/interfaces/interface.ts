@@ -13,13 +13,13 @@ export interface Post{
     roomsCount: number,
     currentFloor: number,
     maxFloor: number,
-    imageLink: string,
     address: string
   },
   apartmentId: string,
   id: string,
   inhabitantsCount: number,
   price: number,
+  imageLink: string,
   square: number
 }
 
