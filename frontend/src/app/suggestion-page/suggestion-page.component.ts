@@ -23,7 +23,7 @@ export class SuggestionPageComponent {
     "price": 30000,
     "square": 52,
     "inhabitantsCount": 2,
-    "imageLink":'12321' ,
+    'imageLink': '12321',
     "apartmentId": "0e218c4d-1619-4542-82df-52c8c921a9a1"
   }
 }
