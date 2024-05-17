@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using RentBuddyBackend.DAL.Entities;
 using RentBuddyBackend.Infrastructure;
 using RentBuddyBackend.Modules.BlacklistModule.Repository;
+using RentBuddyBackend.Modules.BlacklistModule.Service;
+using RentBuddyBackend.Modules.FavoriteUsersModule.Service;
 using RentBuddyBackend.Modules.UserModule.Repository;
 
 namespace RentBuddyBackend.Modules.UserModule.Service
@@ -13,12 +15,22 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         private readonly IUserRepository userRepository;
         private readonly IBlacklistRepository blacklistRepository;
         private readonly IMapper mapper;
+        private readonly IBlackListService blackListService;
+        private readonly IFavoriteService favoriteService;
 
-        public UserService(IUserRepository userRepository, IMapper mapper, IBlacklistRepository blacklistRepository)
+        public UserService
+            (
+                IUserRepository userRepository,
+                IMapper mapper,
+                IBlacklistRepository blacklistRepository,
+                IBlackListService blackListService,
+                IFavoriteService favoriteService)
         {
             this.userRepository = userRepository;
             this.mapper = mapper;
             this.blacklistRepository = blacklistRepository;
+            this.blackListService = blackListService;
+            this.favoriteService = favoriteService;
         }
 
         public async Task<ActionResult<UserEntity>> CreateOrUpdateUser(UserEntity userEntity)
@@ -26,7 +38,15 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             var user = await userRepository.FindAsync(userEntity.Id);
 
             if (user == null)
+            {
+                var blacklistEntity = new BlacklistEntity(Guid.NewGuid(), []);
+                await blackListService.CreateOrUpdateBlacklist(blacklistEntity);
+                var favouritesEntity = new FavouritesEntity(Guid.NewGuid(), []);
+                await favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
+                userEntity.FavoritesUsersId = favouritesEntity.Id;
+                userEntity.BlacklistId = blacklistEntity.Id;
                 await userRepository.AddAsync(userEntity);
+            }
             else
                 mapper.Map(userEntity, user);
 

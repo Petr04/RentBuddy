@@ -6,7 +6,7 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FavouritesController : ControllerBase, IFavoriteService
+    public class FavouritesController : ControllerBase
     {
 
         private readonly IFavoriteService favoriteService;
@@ -15,14 +15,10 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule
         {
             this.favoriteService = favoriteService;
         }
-
+        /*
         [HttpGet]
         public Task<ActionResult<IEnumerable<FavouritesEntity>>> GetFavouritiesList()
             => favoriteService.GetFavouritiesList();
-
-        [HttpGet("{id:guid}")]
-        public Task<ActionResult<FavouritesEntity>> GetFavouritiesEntity([FromRoute] Guid id)
-            => favoriteService.GetFavouritiesEntity(id);
 
         [HttpDelete("{id:guid}")]
         public Task<ActionResult> DeleteFavourities([FromRoute] Guid id)
@@ -31,14 +27,18 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule
         [HttpPost]
         public Task<ActionResult<FavouritesEntity>> CreateOrUpdateFavouritiesEntity([FromBody] FavouritesEntity favouritesEntity)
             => favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
-
+        */
+        [HttpGet("{id:guid}")]
+        public Task<ActionResult<FavouritesEntity>> GetFavouritiesEntity([FromRoute] Guid id)
+         => favoriteService.GetFavouritiesEntity(id); 
+        
         [HttpPost("AddUserToFavourities/{targetUserId:Guid}")]
-        public Task<ActionResult> AddFavouritiesUser([FromBody] Guid favouritiesId, Guid targetUserId)
-            => favoriteService.AddFavouritiesUser(favouritiesId, targetUserId);
+        public Task<ActionResult> AddFavouritiesUser([FromBody] Guid currentUserId, Guid targetUserId)
+            => favoriteService.AddFavouritiesUser(currentUserId, targetUserId);
 
         [HttpPost("DeleteUserFromFavourities/{targetUserId:Guid}")]
-        public Task<ActionResult> DeleteFavouritiesUser([FromBody] Guid favouritiesId, Guid targetUserId)
-            => favoriteService.DeleteFavouritiesUser(favouritiesId, targetUserId);    
+        public Task<ActionResult> DeleteFavouritiesUser([FromBody] Guid currentUserId, Guid targetUserId)
+            => favoriteService.DeleteFavouritiesUser(currentUserId, targetUserId);    
 
     }
 }

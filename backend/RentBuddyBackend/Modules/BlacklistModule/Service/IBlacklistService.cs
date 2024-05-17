@@ -9,7 +9,7 @@ namespace RentBuddyBackend.Modules.BlacklistModule.Service
         Task<ActionResult<BlacklistEntity>> GetBlacklist(Guid id);
         Task<ActionResult<BlacklistEntity>> CreateOrUpdateBlacklist(BlacklistEntity blacklistEntity);
         Task<ActionResult> DeleteBlacklist(Guid id);
-        Task<ActionResult> AddBlacklistUser(Guid blacklistId, Guid targetUserId);
-        Task<ActionResult> DeleteBlacklistUser(Guid blacklistId, Guid targetUserId);
+        Task<ActionResult> AddBlacklistUser(Guid currentUserId, Guid targetUserId);
+        Task<ActionResult> DeleteBlacklistUser(Guid currentUserId, Guid targetUserId);
     }
 }
