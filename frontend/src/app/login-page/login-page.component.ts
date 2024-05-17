@@ -18,7 +18,7 @@ export class LoginPageComponent {
   constructor(private _accountSerrvice: AccountService, private router: Router){
     this.authorizationForm = new FormGroup({
       userEmail: new FormControl("", [Validators.required ,Validators.email]),
-      userPassword: new FormControl("", customValidator(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/))
+      userPassword: new FormControl("")
     })
   }
   protected confirmAuth(){

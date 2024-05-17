@@ -5,15 +5,14 @@ import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { PostService } from '../requests/services/post/post.service';
-import { NgArrayPipesModule } from 'ngx-pipes';
 import { FilterRent, Post } from '../interfaces/interface';
-import { FilterPipe } from '../filter.pipe';
+import { FilterPipe } from '../pipes/filter.pipe';
 
 
 @Component({
   selector: 'app-select-rent',
   standalone: true,
-  imports: [SortBarComponent, BigCardComponent, FilterPipe ,NgArrayPipesModule, NextBtnComponent, CommonModule],
+  imports: [SortBarComponent, BigCardComponent, FilterPipe, NextBtnComponent, CommonModule],
   templateUrl: './select-rent.component.html',
   styleUrl: './select-rent.component.css'
 })
@@ -39,7 +38,7 @@ export class SelectRentComponent implements OnInit{
   ngOnInit() {
     this.Cards$ = this.postService.getPosts()
   }
-  
+
   buttonText:string ='Далее'
 }
 

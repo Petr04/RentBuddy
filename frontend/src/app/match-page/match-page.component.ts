@@ -3,12 +3,12 @@ import { Subject } from 'rxjs';
 import { User } from '../interfaces/interface';
 import { animate, keyframes, transition, trigger } from '@angular/animations';
 import * as kf from '../keyframes/keyframes';
-
+import { SelectCardDirective } from '../directives/select-card.directive';
 
 @Component({
   selector: 'app-match-page',
   standalone: true,
-  imports: [ ],
+  imports: [SelectCardDirective],
   templateUrl: './match-page.component.html',
   styleUrl: './match-page.component.css',
   animations: [

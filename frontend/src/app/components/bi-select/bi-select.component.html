@@ -1,21 +1,21 @@
 <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
     <h4 class="ml-2 font-medium">Ваш пол</h4>
     <div class="flex justify-evenly gap-2.5">
-      <button class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">м</button>
-      <button class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">ж</button>
+      <button id="male" (click)="male()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">м</button>
+      <button id="female" (click)="female()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">ж</button>
     </div>
   </div>
   <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
     <h4 class="ml-2 font-medium">Вы курите?</h4>
     <div class="flex justify-evenly gap-2.5">
-      <button class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">да</button>
-      <button class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">нет</button>
+      <button id="smoke" (click)="smoke()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">да</button>
+      <button id="noSmoke" (click)="noSmoke()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">нет</button>
     </div>
   </div>
   <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
     <h4 class="ml-2 font-medium">Есть питомец?</h4>
     <div class="flex justify-evenly gap-2.5">
-      <button class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">да</button>
-      <button class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">нет</button>
+      <button id="pet" (click)="pet()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">да</button>
+      <button id="noPet" (click)="noPet()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">нет</button>
     </div>
   </div>
