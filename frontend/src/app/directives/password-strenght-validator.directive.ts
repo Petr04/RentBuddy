@@ -1,19 +1,20 @@
 import {Directive} from '@angular/core';
-import { ValidationErrors } from '@angular/forms';
+import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 import { customValidator } from '../custom-validator/custom-validator.component';
 
 @Directive({
-  selector: '[appPasswordStrenghtValidator]',
+  selector: '[passwordStrength]',
+  providers: [{
+    provide: NG_VALIDATORS,
+    useExisting: PasswordStrengthDirective,
+    multi: true
+  }],
   standalone: true
 })
-export class PasswordStrenghtValidatorDirective {
+export class PasswordStrengthDirective implements Validator {
 
-  constructor(){
-
-  }
-
-  public validate(control: AbortController): ValidationErrors |null {
-    return customValidator(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
+  public validate(control: AbstractControl): ValidationErrors | null {
+    return customValidator()(control)
   }
 
 }

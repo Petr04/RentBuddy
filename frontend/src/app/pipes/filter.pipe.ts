@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FilterRent, Post } from './interfaces/interface';
+import { FilterRent, Post } from '../interfaces/interface';
 
 @Pipe({
   name: 'filter',

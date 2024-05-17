@@ -13,7 +13,7 @@
             <img class="absolute input__img" src="../assets/mail.svg">
           </div>
           <div class="relative flex flex-row justify-between border border-[#8e8e8e] rounded-2xl mt-4">
-            <input formControlName="userPassword" type="password" placeholder="Пароль" class="p-2.5 bg-[#FFFFFF]  text-[#8e8e8e]  rounded-2xl w-full outline-none">
+            <input passwordStrength formControlName="userPassword" type="password" placeholder="Пароль" class="p-2.5 bg-[#FFFFFF]  text-[#8e8e8e]  rounded-2xl w-full outline-none">
             <img class="absolute input__img" src="../assets/eyes-close.svg">
           </div>
           <h5 [routerLink]="['/verification']" class="bg-gradient-to-r from-[#8567FA] to-[#4FACE2] pl-1.5 text-transparent bg-clip-text text-sm mt-4">Забыли пароль?</h5>
