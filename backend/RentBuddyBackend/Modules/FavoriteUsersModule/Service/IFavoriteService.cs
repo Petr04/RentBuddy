@@ -9,7 +9,7 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
         Task<ActionResult<FavouritesEntity>> GetFavouritiesEntity(Guid id);
         Task<ActionResult<FavouritesEntity>> CreateOrUpdateFavouritiesEntity(FavouritesEntity favouritiesEntity);
         Task<ActionResult> DeleteFavourities(Guid id);
-        Task<ActionResult> AddFavouritiesUser(Guid favouritiesId, Guid targetUserId);
-        Task<ActionResult> DeleteFavouritiesUser(Guid favouritiesId, Guid targetUserId);
+        Task<ActionResult> AddFavouritiesUser(Guid currentUserId, Guid targetUserId);
+        Task<ActionResult> DeleteFavouritiesUser(Guid currentUserId, Guid targetUserId);
     }
 }

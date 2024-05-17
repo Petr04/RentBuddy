@@ -20,18 +20,20 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
             this.favoriteUsersMapper = favoriteMapper;
         }
 
-        public async Task<ActionResult> AddFavouritiesUser(Guid FavouritesId, Guid targetUserId)
-        {
-            var favourities = await favoriteUsersRepository.FindAsync(FavouritesId);
+        public async Task<ActionResult> AddFavouritiesUser(Guid currentUserId, Guid targetUserId)
+        {   
+            var currentUser = await userRepository.FindAsync(currentUserId);
+            var favourities = await favoriteUsersRepository.FindAsync(currentUser.FavoritesUsersId);
             var targetUser = await userRepository.FindAsync(targetUserId);
             favourities.Users.Add(targetUser);
             await favoriteUsersRepository.SaveChangesAsync();
             return NoContent();
         }
 
-        public async Task<ActionResult> DeleteFavouritiesUser(Guid FavouritesId, Guid targetUserId)
+        public async Task<ActionResult> DeleteFavouritiesUser(Guid currentUserId, Guid targetUserId)
         {
-            var favourities = await favoriteUsersRepository.FindAsync(FavouritesId);
+            var currentUser = await userRepository.FindAsync(currentUserId);
+            var favourities = await favoriteUsersRepository.FindAsync(currentUser.FavoritesUsersId);
             var targetUser = await userRepository.FindAsync(targetUserId);
             favourities.Users.Remove(targetUser);
             await favoriteUsersRepository.SaveChangesAsync();

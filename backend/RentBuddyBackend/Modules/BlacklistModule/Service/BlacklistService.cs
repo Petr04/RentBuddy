@@ -20,18 +20,20 @@ namespace RentBuddyBackend.Modules.BlacklistModule.Service
             this.blacklistMapper = blacklistMapper;
         }
 
-        public async Task<ActionResult> AddBlacklistUser(Guid blacklistId, Guid targetUserId)
+        public async Task<ActionResult> AddBlacklistUser(Guid currentUserId, Guid targetUserId)
         {
-            var blacklist = await blacklistRepository.FindAsync(blacklistId);
+            var currentUser = await userRepository.FindAsync(targetUserId);
+            var blacklist = await blacklistRepository.FindAsync(currentUser.BlacklistId);
             var targetUser = await userRepository.FindAsync(targetUserId);
             blacklist.Users.Add(targetUser);
             await blacklistRepository.SaveChangesAsync();
             return NoContent();
         }
 
-        public async Task<ActionResult> DeleteBlacklistUser(Guid blacklistId, Guid targetUserId)
+        public async Task<ActionResult> DeleteBlacklistUser(Guid currentUserId, Guid targetUserId)
         {
-            var blacklist = await blacklistRepository.FindAsync(blacklistId);
+            var currentUser = await userRepository.FindAsync(targetUserId);
+            var blacklist = await blacklistRepository.FindAsync(currentUser.BlacklistId);
             var targetUser = await userRepository.FindAsync(targetUserId);
             blacklist.Users.Remove(targetUser);
             await blacklistRepository.SaveChangesAsync();
