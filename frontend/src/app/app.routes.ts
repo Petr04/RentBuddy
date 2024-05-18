@@ -6,7 +6,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { VerificationPageComponent } from './verification-page/verification-page.component';
 import { SuggestionPageComponent } from './suggestion-page/suggestion-page.component';
 import { SelectRentComponent } from './select-rent/select-rent.component';
-import { authorizedGuard } from './authorized.guard';
+// import { authorizedGuard } from './authorized.guard';
 
 
 export const routes: Routes = [

@@ -11,7 +11,7 @@ import { FilterRent, Post } from '../../interfaces/interface';
 @Component({
   selector: 'app-big-card',
   standalone: true,
-  imports: [CommonModule, SelectRentComponent, SortBarComponent ,BigCardComponent, NextBtnComponent],
+  imports: [CommonModule, SortBarComponent, NextBtnComponent],
   templateUrl: './big-card.component.html',
   styleUrl: './big-card.component.css'
 })
