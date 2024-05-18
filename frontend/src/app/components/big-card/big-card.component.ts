@@ -20,4 +20,18 @@ import { SelectCardDirective } from '../../directives/select-card.directive'
 export class BigCardComponent {
   @Input() card!: Post
   @Input() filterObj!:FilterRent
+
+  private arraySelectedCards: Array<string> = [];
+
+  isSelected: boolean = false
+  getIdCard(){
+    // if () {
+
+    // }
+
+  }
+
+  set(){
+    console.log(this.arraySelectedCards)
+  }
 }

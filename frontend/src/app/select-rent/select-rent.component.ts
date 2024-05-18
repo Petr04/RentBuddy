@@ -7,6 +7,7 @@ import { PostService } from '../requests/services/post/post.service';
 import { FilterRent, Post } from '../interfaces/interface';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { BigCardComponent } from '../components/big-card/big-card.component';
+import { AnyTxtRecord } from 'dns';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class SelectRentComponent implements OnInit{
     this.filterData = filterData
     console.log(this.filterData)
   }
+
 
   constructor(private postService:PostService){}
 
