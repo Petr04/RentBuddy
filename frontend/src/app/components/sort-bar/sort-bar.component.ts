@@ -1,13 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl} from '@angular/forms';
 import { FilterRent } from '../../interfaces/interface';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-sort-bar',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  standalone: false,
   templateUrl: './sort-bar.component.html',
   styleUrl: './sort-bar.component.css'
 })

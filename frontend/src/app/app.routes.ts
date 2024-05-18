@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { AboutUserComponent } from './about-user/about-user.component';
 import { MatchPageComponent } from './match-page/match-page.component';
-import { RegistrationPageComponent } from './registration-page/registration-page.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { VerificationPageComponent } from './verification-page/verification-page.component';
+import { VerificationPageComponent } from './authentication/verification-page/verification-page.component';
 import { SuggestionPageComponent } from './suggestion-page/suggestion-page.component';
-import { SelectRentComponent } from './select-rent/select-rent.component';
+import { SelectRentComponent } from './select-rent-page/select-rent/select-rent.component';
+import { RegistrationPageComponent } from './authentication/registration-page/registration-page.component';
+import { LoginPageComponent } from './authentication/login-page/login-page.component';
 // import { authorizedGuard } from './authorized.guard';
 
 

@@ -1,19 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SortBarComponent } from '../components/sort-bar/sort-bar.component';
-import { NextBtnComponent } from '../components/next-btn/next-btn.component';
-import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
-import { PostService } from '../requests/services/post/post.service';
-import { FilterRent, Post } from '../interfaces/interface';
-import { FilterPipe } from '../pipes/filter.pipe';
-import { BigCardComponent } from '../components/big-card/big-card.component';
-import { AnyTxtRecord } from 'dns';
-
+import { PostService } from '../../requests/services/post/post.service';
+import { FilterRent, Post } from '../../interfaces/interface';
 
 @Component({
   selector: 'app-select-rent',
-  standalone: true,
-  imports: [SortBarComponent, BigCardComponent, FilterPipe, NextBtnComponent, CommonModule],
+  standalone: false,
   templateUrl: './select-rent.component.html',
   styleUrl: './select-rent.component.css'
 })

@@ -1,14 +1,9 @@
-import { Component } from '@angular/core';
-import { NextBtnComponent } from '../components/next-btn/next-btn.component';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import { conformPassword } from '../custom-validator/custom-validator.component';
-import { RouterLink } from '@angular/router';
-import { PasswordStrengthDirective } from '../directives/password-strenght-validator.directive';
-
+import { Component } from '@angular/core'; ;
+import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { conformPassword } from '../../custom-validator/custom-validator.component';
 @Component({
   selector: 'app-registration-page',
-  standalone: true,
-  imports: [NextBtnComponent, ReactiveFormsModule, FormsModule, RouterLink, PasswordStrengthDirective],
+  standalone: false,
   templateUrl: './registration-page.component.html',
   styleUrl: './registration-page.component.css'
 })

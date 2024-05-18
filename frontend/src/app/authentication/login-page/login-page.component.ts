@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { customValidator } from '../custom-validator/custom-validator.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { customValidator } from '../../custom-validator/custom-validator.component';
 import { CLIENT_RENEG_LIMIT } from 'tls';
-import { AccountService } from '../requests/services/account/account.service';
+import { AccountService } from '../../requests/services/account/account.service';
 
 @Component({
   selector: 'app-login-page',
-  standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })

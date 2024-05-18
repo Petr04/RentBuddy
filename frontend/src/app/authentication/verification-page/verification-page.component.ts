@@ -5,8 +5,7 @@ import { CodeInputModule } from 'angular-code-input';
 
 @Component({
   selector: 'app-verification-page',
-  standalone: true,
-  imports: [RouterLink, CodeInputModule],
+  standalone: false,
   templateUrl: './verification-page.component.html',
   styleUrl: './verification-page.component.css'
 })
