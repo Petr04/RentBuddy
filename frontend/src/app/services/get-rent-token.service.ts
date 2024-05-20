@@ -14,7 +14,7 @@ export const FLAT_PROVIDER: Provider = {
 
         return route.params.pipe(
             switchMap(params => {
-                const id = params.get('id');
+                const id = params["id"];
 
                 return service.getPostByID(id);
             }),

@@ -10,8 +10,9 @@ import { CodeInputModule } from 'angular-code-input';
 import { VerificationPageComponent } from './verification-page/verification-page.component';
 
 const routes:Routes = [
-  {path: '', component: LoginPageComponent }
-
+  {path: 'login', component: LoginPageComponent },
+  {path:'registration', component: RegistrationPageComponent},
+  {path:'verification', component: VerificationPageComponent}
 ]
 
 @NgModule({

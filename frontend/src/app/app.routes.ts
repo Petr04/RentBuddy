@@ -15,12 +15,10 @@ export const routes: Routes = [
   {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule)},
   {path:'profile', component: AboutUserComponent, },//canActivate:[authorizedGuard]},
   {path:'match', component: MatchPageComponent},
-  {path:'login', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule)},
-  {path:'registration', component: RegistrationPageComponent},
-  {path:'verification', component: VerificationPageComponent},
   {path:'suggestion', component: SuggestionPageComponent},
   {path:'test/:id', component: TestDetailComponent},
   {path:'', redirectTo: "/login", pathMatch: 'full'},
+  {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule)},
   {path:'**', component: NotFoundPageComponent},
 ];
 
