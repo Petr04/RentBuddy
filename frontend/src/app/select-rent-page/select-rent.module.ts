@@ -6,8 +6,11 @@ import { BigCardComponent } from '../components/big-card/big-card.component';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-
+const routes:Routes = [
+  {path: '', component: SelectRentComponent}
+]
 
 @NgModule({
   declarations: [SelectRentComponent, SortBarComponent],
@@ -18,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NextBtnComponent,
     ReactiveFormsModule,
     FormsModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class SelectRentModule { }

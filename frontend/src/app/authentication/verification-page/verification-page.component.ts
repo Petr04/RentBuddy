@@ -11,11 +11,11 @@ import { CodeInputModule } from 'angular-code-input';
 })
 export class VerificationPageComponent {
 
-  onCodeChanged(code: string) {
+  onCodeChanged( ) {
   }
 
   // this called only if user entered full code
-  onCodeCompleted(code: string) {
+  onCodeCompleted() {
   }
 }
 

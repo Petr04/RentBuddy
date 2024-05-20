@@ -1,5 +1,5 @@
 import { CanActivateFn } from '@angular/router';
-import { AccountService } from '../app/requests/services/account/account.service'
+import { AccountService } from './services/account.service'
 import { Injectable, inject } from '@angular/core';
 
 @Injectable({

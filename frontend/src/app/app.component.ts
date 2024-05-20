@@ -6,13 +6,15 @@ import { MatchPageComponent } from './match-page/match-page.component';
 import { CommonModule } from '@angular/common';
 import { SelectRentModule } from './select-rent-page/select-rent.module';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { TestDetailComponent } from './test-route/test-route.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SelectRentModule, AboutUserComponent, MatchPageComponent, AuthenticationModule, HttpClientModule, CommonModule],
+  imports: [RouterOutlet, SelectRentModule, NotFoundPageComponent,TestDetailComponent, AboutUserComponent, MatchPageComponent, AuthenticationModule, HttpClientModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

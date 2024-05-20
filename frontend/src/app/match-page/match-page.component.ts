@@ -19,7 +19,7 @@ import { SelectCardDirective } from '../directives/select-card.directive';
   ]
 })
 export class MatchPageComponent {
-  data: User[] = [
+  data: {id: number,picture: string, age: number, name: string, gender: string}[] = [
     {
       "id": 0,
       "picture": "https://placehold.it/350x349",
@@ -30,7 +30,7 @@ export class MatchPageComponent {
   ]
   parentSubject:Subject<string> = new Subject();
 
-  public users: User[] = this.data;
+  public users:  {id: number,picture: string, age: number, name: string, gender: string}[]= this.data;
   public index = 0;
 
   animationState!: string;

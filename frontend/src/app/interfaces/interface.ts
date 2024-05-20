@@ -24,9 +24,20 @@ export interface Post{
 }
 
 export interface User {
-  id: number;
-  picture: string;
-  age: number;
-  name: string;
-  gender: string;
+  userEmail: string,
+  userPassword: string
+}
+
+export interface UserProfile {
+  name: string,
+  lastname: string,
+  birthDate: string,
+  gender: number,
+  isSmoke: true,
+  hasPet: true,
+  communicationLevel: number,
+  pureLevel: number,
+  riseTime: string,
+  sleepTime: string,
+  timeSpentAtHome: number
 }

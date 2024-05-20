@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PostService } from '../../requests/services/post/post.service';
+import { PostService } from '../../services/post.service';
 import { FilterRent, Post } from '../../interfaces/interface';
 
 @Component({
@@ -31,6 +31,7 @@ export class SelectRentComponent implements OnInit{
 
   ngOnInit() {
     this.Cards$ = this.postService.getPosts()
+    console.log(this.Cards$)
   }
 
   buttonText:string ='Далее'
