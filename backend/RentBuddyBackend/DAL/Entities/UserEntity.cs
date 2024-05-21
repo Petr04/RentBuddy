@@ -29,6 +29,7 @@ namespace RentBuddyBackend.DAL.Entities
         public Guid FavoritesUsersId { get; set; }
         [JsonIgnore]
         public Guid BlacklistId { get; set;}
-
+        public string Email { get; set; }
+        public string PasswordHash { get; set; }
     }
 }
