@@ -20,7 +20,8 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             IBlacklistRepository blacklistRepository,
             IBlackListService blackListService,
             IFavoriteService favoriteService,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            AuthService authService)
         : ControllerBase, IUserService
     {
         public async Task<ActionResult<UserEntity>> CreateOrUpdateUser(UserEntity userEntity)
@@ -77,71 +78,59 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             var resultUsers = users.Where(u => !userBlackList.Users.Any(ub => u.Id == ub.Id));
             var matches = Matching.Match(user, resultUsers);
             var matchedUsers = matches.Keys.ToList();
+            
             return Ok(matchedUsers);
         }
         
-        public async Task<(bool Success, string[] Errors, UserEntity? User)> RegisterUser(RegisterModel model)
+        public async Task<ActionResult<UserEntity>> RegisterUser(RegisterModel model)
         {
             if (await userRepository.UserExists(model.Email))
-                return (false, new[] { "User already exists" }, null);
+                return BadRequest("Почта зарегистрирована");
 
             var user = new UserEntity
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Empty,
                 Email = model.Email,
-                PasswordHash = HashPassword(model.Password)
+                PasswordHash = AuthService.HashPassword(model.Password),
+                Name = "temp",
+                Lastname = "temp",
+                BirthDate = DateTime.Today,
+                Gender = GenderType.Male,
+                IsSmoke = false,
+                HasPet = false,
+                CommunicationLevel = 0,
+                PureLevel = 0,
+                RiseTime = DateTime.Today,
+                SleepTime = DateTime.Today,
             };
+
+            var blacklistEntity = new BlacklistEntity(Guid.Empty, new List<UserEntity>());
+            await blackListService.CreateOrUpdateBlacklist(blacklistEntity);
+            
+            var favouritesEntity = new FavouritesEntity(Guid.Empty, new List<UserEntity>());
+            await favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
+            
+            user.FavoritesUsersId = favouritesEntity.Id;
+            user.BlacklistId = blacklistEntity.Id;
 
             await userRepository.AddAsync(user);
             await userRepository.SaveChangesAsync();
-    
-            return (true, Array.Empty<string>(), user);
+            
+            var token = authService.GenerateJwtToken(user);
+
+            return Ok(new { user, token });
         }
 
-        public async Task<(bool Success, string[] Errors, string? Token)> AuthUser(AuthModel model)
+        public async Task<ActionResult<string>> AuthUser(AuthModel model)
         {
             var user = await userRepository.FindByEmailAsync(model.Email);
-            if (user == null || !VerifyPassword(model.Password, user.PasswordHash))
-                return (false, new[] { "Invalid credentials" }, null);
+            
+            if (user == null || !AuthService.VerifyPassword(model.Password, user.PasswordHash))
+                return Unauthorized("Invalid credentials");
 
-            var token = GenerateJwtToken(user);
+            var token = authService.GenerateJwtToken(user);
 
-            return (true, Array.Empty<string>(), token);
-        }
-        
-        string HashPassword(string password)
-        {
-            using var hmac = new HMACSHA512();
-            var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            return Convert.ToBase64String(hash);
-        }
-
-        bool VerifyPassword(string password, string hashedPassword)
-        {
-            using var hmac = new HMACSHA512();
-            var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            return Convert.ToBase64String(hash) == hashedPassword;
-        }
-
-        string GenerateJwtToken(UserEntity user)
-        {
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: configuration["Jwt:Issuer"],
-                audience: configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
-                signingCredentials: creds);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return Ok(token);
         }
     }
 }

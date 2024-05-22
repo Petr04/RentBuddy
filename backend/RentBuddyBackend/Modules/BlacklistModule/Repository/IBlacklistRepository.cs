@@ -10,6 +10,6 @@ namespace RentBuddyBackend.Modules.BlacklistModule.Repository
         public Task<EntityEntry<BlacklistEntity>> AddAsync(BlacklistEntity blaclistEntity);
         public Task<List<BlacklistEntity>> ToListAsync();
         public void Remove(BlacklistEntity blacklistEntity);
-        public EntityEntry<BlacklistEntity> Update(BlacklistEntity blaclistEntity);
+        public EntityEntry<BlacklistEntity> Update(BlacklistEntity blacklistEntity);
     }
 }

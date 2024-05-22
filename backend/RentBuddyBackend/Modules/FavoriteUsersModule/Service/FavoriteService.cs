@@ -51,7 +51,6 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
             await favoriteUsersRepository.SaveChangesAsync();
 
             return Ok(favourities);
-
         }
 
         public async Task<ActionResult> DeleteFavourities(Guid id)
