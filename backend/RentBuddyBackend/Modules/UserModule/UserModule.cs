@@ -11,6 +11,7 @@ namespace RentBuddyBackend.Modules.UserModule
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<AuthService>();
             services.AddAutoMapper(typeof(UserMapping));
 
             return services;

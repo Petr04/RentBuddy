@@ -2,11 +2,11 @@
 
 public class Config(bool isDev)
 {
-    /*    public string DbConnectionString { get; } = isDev
-            ? "Server=localhost;Database=RentBuddyDB;Port=5432;User Id=postgres;Password=1"
-            : Environment.GetEnvironmentVariable("Connection");  */
-
     public string DbConnectionString { get; } = isDev
-        ? "Server=rb-postgresdb;Database=RentBuddyDB;Port=5432;User Id=postgres;Password=1"
+        ? "Server=localhost;Database=RentBuddyDB;Port=5432;User Id=postgres;Password=1"
         : Environment.GetEnvironmentVariable("Connection");
+
+    /*public string DbConnectionString { get; } = isDev
+        ? "Server=rb-postgresdb;Database=RentBuddyDB;Port=5432;User Id=postgres;Password=1"
+        : Environment.GetEnvironmentVariable("Connection");*/
 }
