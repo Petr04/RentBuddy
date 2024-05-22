@@ -12,8 +12,8 @@ using RentBuddyBackend.DAL;
 namespace RentBuddyBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240517093322_IDontKnow")]
-    partial class IDontKnow
+    [Migration("20240521232621_RegAndAuth")]
+    partial class RegAndAuth
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,28 @@ namespace RentBuddyBackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Apartments");
+                });
+
+            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.BlacklistEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BlacklistEntities");
+                });
+
+            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.FavouritesEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FavouritesEntities");
                 });
 
             modelBuilder.Entity("RentBuddyBackend.DAL.Entities.RoomEntity", b =>
@@ -90,8 +112,21 @@ namespace RentBuddyBackend.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<Guid>("BlacklistId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("CommunicationLevel")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("FavoritesId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FavoritesUsersId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Gender")
                         .HasColumnType("integer");
@@ -110,6 +145,10 @@ namespace RentBuddyBackend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("PureLevel")
                         .HasColumnType("integer");
 
@@ -124,6 +163,10 @@ namespace RentBuddyBackend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BlacklistId");
+
+                    b.HasIndex("FavoritesId");
+
                     b.ToTable("Users");
                 });
 
@@ -136,9 +179,38 @@ namespace RentBuddyBackend.Migrations
                     b.Navigation("Apartment");
                 });
 
+            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.UserEntity", b =>
+                {
+                    b.HasOne("RentBuddyBackend.DAL.Entities.BlacklistEntity", "Blacklist")
+                        .WithMany("Users")
+                        .HasForeignKey("BlacklistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RentBuddyBackend.DAL.Entities.FavouritesEntity", "Favorites")
+                        .WithMany("Users")
+                        .HasForeignKey("FavoritesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blacklist");
+
+                    b.Navigation("Favorites");
+                });
+
             modelBuilder.Entity("RentBuddyBackend.DAL.Entities.ApartmentEntity", b =>
                 {
                     b.Navigation("Rooms");
+                });
+
+            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.BlacklistEntity", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.FavouritesEntity", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

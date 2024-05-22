@@ -24,5 +24,11 @@ namespace RentBuddyBackend.Modules.UserModule.Repository
 
         public EntityEntry<UserEntity> Update(UserEntity? userEntity)
             => context.Users.Update(userEntity);
+        
+        public async Task<UserEntity?> FindByEmailAsync(string email)
+            => await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+        public async Task<bool> UserExists(string email)
+            => await context.Users.AnyAsync(u => u.Email == email);
     }
 }

@@ -9,12 +9,14 @@ public class ApplicationDbContext : DbContext
     public DbSet<RoomEntity> Rooms { get; set; }
     public DbSet<ApartmentEntity> Apartments { get; set; }
     public DbSet<UserEntity> Users { get; set; }
+    public DbSet<BlacklistEntity> BlacklistEntities { get; set; }
+    public DbSet<FavouritesEntity> FavouritesEntities { get; set; }
     private readonly Config config; 
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, Config config) : base(options)
     {
         this.config = config;
-        Database.Migrate();
+        //Database.Migrate();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

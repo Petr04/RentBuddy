@@ -12,9 +12,8 @@ public class RoomEntity : IEntity
     public int Square { get; set; }
     public int InhabitantsCount { get; set; }
     public string ImageLink { get; set; } = "Images/1.png";
+    public Guid? ApartmentId { get; set; }  = Guid.Empty;
     
     [Ignore, JsonIgnore]
     public virtual ApartmentEntity? Apartment { get; set; }
-    
-    public Guid? ApartmentId { get; set; }  = Guid.Empty;
 }
