@@ -1,10 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PostService } from '../services/post.service';
 import { Post } from '../interfaces/interface';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { FLAT_PROVIDER, FLAT_TOKEN } from '../services/get-rent-token.service';
+import { FLAT_PROVIDER, FLAT_TOKEN } from '../services/getCard.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-test-route',
@@ -17,19 +16,21 @@ import { FLAT_PROVIDER, FLAT_TOKEN } from '../services/get-rent-token.service';
   ]
 })
 export class TestDetailComponent implements OnInit {
-  testId!: string;
-
-  card$?: Observable<Post> = inject(FLAT_TOKEN)
-
-  constructor(private route: ActivatedRoute, private _card: PostService) { }
+  public card$?: Observable<Post> = inject(FLAT_TOKEN)
+  public _account = inject(AccountService)
+  constructor() { }
 
   ngOnInit(): void {
-  //   this.route.params.subscribe(params => {
-  //     this.testId = params['id']; // Access the 'id' parameter from the URL
-  //     console.log('Test ID:', this.testId);
-  //   }
-  // );
+
   //   this.card$ = this._card.getPostByID('a61618b9-c076-471d-a2b7-14b3d593a6b9')
+  }
+
+  loginIn(){
+    this._account.login()
+  }
+
+  logout(){
+    this._account.logout()
   }
 
   cardSubmit(){

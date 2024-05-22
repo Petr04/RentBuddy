@@ -1,21 +1,16 @@
 import { Routes } from '@angular/router';
 import { AboutUserComponent } from './about-user/about-user.component';
 import { MatchPageComponent } from './match-page/match-page.component';
-import { VerificationPageComponent } from './authentication/verification-page/verification-page.component';
-import { SuggestionPageComponent } from './suggestion-page/suggestion-page.component';
-import { SelectRentComponent } from './select-rent-page/select-rent/select-rent.component';
-import { RegistrationPageComponent } from './authentication/registration-page/registration-page.component';
-import { LoginPageComponent } from './authentication/login-page/login-page.component';
+import { SuggestionPageComponent } from './suggestion-page/suggestion-page.component'; ;
 import { TestDetailComponent } from './test-route/test-route.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
-// import { authorizedGuard } from './authorized.guard';
-
+import { authGuardFn } from './authorized.guard';
 
 export const routes: Routes = [
   {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule)},
-  {path:'profile', component: AboutUserComponent, },//canActivate:[authorizedGuard]},
-  {path:'match', component: MatchPageComponent},
-  {path:'suggestion', component: SuggestionPageComponent},
+  {path:'profile', component: AboutUserComponent, canActivate: [authGuardFn]},//canActivate:[authGuardFn]},
+  {path:'match', component: MatchPageComponent, canActivate:[authGuardFn]},
+  {path:'suggestion', component: SuggestionPageComponent, canActivate: [authGuardFn]},
   {path:'test/:id', component: TestDetailComponent},
   {path:'', redirectTo: "/login", pathMatch: 'full'},
   {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule)},

@@ -2,8 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { customValidator } from '../../custom-validator/custom-validator.component';
-import { CLIENT_RENEG_LIMIT } from 'tls';
-import { AccountService } from '../../services/account.service';
+import { CLIENT_RENEG_LIMIT } from 'tls'; 
 import { error } from 'console';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -33,20 +32,23 @@ export class LoginPageComponent implements OnDestroy {
   }
 
 
-  protected confirmAuth(){
+
+  public confirmAuth():void{
     if (this.authorizationForm.invalid || this.authorizationForm.disabled){
       this.authorizationForm.markAllAsTouched()
       return
     }
     else{
+      // this._account.login()
       this.authorizationForm.disable()
-      this.aSub = this.authService.login(this.authorizationForm.value).subscribe({
-        next: () => this.router.navigate(['/select-rent']),
-        error: (err) => {
-          console.log(err)
-          this.authorizationForm.enable()
-        }
-      })
+      // this._accountService.login()
+      // this.aSub = this.authService.login(this.authorizationForm.value).subscribe({
+      //   next: () => this.router.navigate(['/select-rent']),
+      //   error: (err) => {
+      //     console.log(err)
+      //     this.authorizationForm.enable()
+      //   }
+      // })
       // this._accountSerrvice.login()
       // this.router.navigate(['/profile'])
     }

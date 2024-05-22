@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { FilterRent, Post } from '../../interfaces/interface';
+import { SetService } from '../../services/set.service';
 
 @Component({
   selector: 'app-select-rent',
@@ -12,6 +13,7 @@ import { FilterRent, Post } from '../../interfaces/interface';
 
 export class SelectRentComponent implements OnInit{
   protected Cards$?: Observable<Post[]>
+  public setId = inject(SetService)
 
   filterData:FilterRent = {
     city: '',
@@ -27,11 +29,18 @@ export class SelectRentComponent implements OnInit{
   }
 
 
-  constructor(private postService:PostService){}
+  constructor(private postService:PostService){
+
+  }
 
   ngOnInit() {
     this.Cards$ = this.postService.getPosts()
-    console.log(this.Cards$)
+
+  }
+
+  printId(){
+    const arrayId: string[] = Array.from(this.setId)
+    console.log(arrayId)
   }
 
   buttonText:string ='Далее'

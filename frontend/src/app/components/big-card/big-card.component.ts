@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NextBtnComponent } from '../next-btn/next-btn.component';
 import { FilterRent, Post } from '../../interfaces/interface';
-import { SelectCardDirective } from '../../directives/select-card.directive' 
+import { SelectCardDirective } from '../../directives/select-card.directive'
+import { SetService } from '../../services/set.service';
+import { IndexKind } from 'typescript';
 
 
 
@@ -18,18 +20,21 @@ import { SelectCardDirective } from '../../directives/select-card.directive'
 export class BigCardComponent {
   @Input() card!: Post
   @Input() filterObj!:FilterRent
+  public setId = inject(SetService)
 
-  private arraySelectedCards: Array<string> = [];
+  constructor( ){
 
-  isSelected: boolean = false
+  }
+
   getIdCard(){
-    // if () {
-
-    // }
+    if (!this.setId.has(this.card.id)){
+      this.setId.add(this.card.id)
+    }
+    else{
+      this.setId.delete(this.card.id)
+    }
 
   }
 
-  set(){
-    console.log(this.arraySelectedCards)
-  }
+
 }
