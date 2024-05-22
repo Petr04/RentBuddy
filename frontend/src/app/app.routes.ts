@@ -2,9 +2,9 @@ import { Routes } from '@angular/router';
 import { AboutUserComponent } from './about-user/about-user.component';
 import { MatchPageComponent } from './match-page/match-page.component';
 import { SuggestionPageComponent } from './suggestion-page/suggestion-page.component'; ;
-import { TestDetailComponent } from './test-route/test-route.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { authGuardFn } from './authorized.guard';
+import { TestDetailComponent } from './test-route/test-route.component';
 
 export const routes: Routes = [
   {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule)},

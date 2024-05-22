@@ -5,7 +5,7 @@ import { Observable, map } from 'rxjs';
 
 export const authGuardFn = ()=>{
   const auth = inject(AccountService)
-  const router = inject(Router)
+
   return auth.isUserLoggedIn
 
 }
