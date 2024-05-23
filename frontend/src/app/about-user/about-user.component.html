@@ -15,7 +15,7 @@
       </div>
 
       <div class="mt-2.5 w-full">
-        <input formControlName="surname" type="text" placeholder="Ваше имя" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
+        <input formControlName="lastname" type="text" placeholder="Ваша фамилия" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
       </div>
 
       <h4 class="mt-3.5 ml-2 font-medium">Дата рождения</h4>
@@ -26,33 +26,83 @@
       <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
         <h4 class="ml-2 font-medium">Ваш пол</h4>
         <div class="flex justify-evenly gap-2.5">
-          <button id="male"  class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">м</button>
-          <button id="female"  class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">ж</button>
+          <button id="male" (click)="male()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">м</button>
+          <button id="female" (click)="female()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">ж</button>
         </div>
       </div>
 
       <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
         <h4 class="ml-2 font-medium">Вы курите?</h4>
         <div class="flex justify-evenly gap-2.5">
-          <button id="smoke" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">да</button>
-          <button id="noSmoke" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">нет</button>
+          <button id="smoke" (click)="smoke()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">да</button>
+          <button id="noSmoke" (click)="noSmoke()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">нет</button>
         </div>
       </div>
 
       <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
         <h4 class="ml-2 font-medium">Есть питомец?</h4>
         <div class="flex justify-evenly gap-2.5">
-          <button id="pet"  class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">да</button>
-          <button id="noPet"  class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">нет</button>
+          <button id="pet" (click)="pet()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">да</button>
+          <button id="noPet" (click)="noPet()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">нет</button>
         </div>
       </div>
 
-      <app-range-input formControlName="riseTime"></app-range-input>
-      <app-time-select formControlName="sleepTime"></app-time-select>
-      <app-radio-select formControlName="timeSpentAtHome"></app-radio-select>
+      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col mt-3.5">
+        <h4 class="ml-2 font-medium">Насколько вы настроены на общение с соседом?</h4>
+        <input formControlName="communicationLevel" type="range" class="mt-3 accent-[#8567FA]" min="0" max="10" />
+      </div>
+      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col mt-3.5">
+        <h4 class="ml-2 font-medium">Насколько вы чистоплотны?</h4>
+        <input formControlName="pureLevel" type="range" class="mt-3 accent-[#8567FA]" min="0" max="10" />
+      </div>
+
+      <h4 class="mt-3.5 ml-2 font-medium">Во сколько вы встаёте?</h4>
+      <div class="mt-2.5 w-full">
+        <input formControlName="riseTime" type="time" placeholder="чч/мм" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
+      </div>
+      <h4 class="mt-3.5 ml-2 font-medium">Во сколько вы ложитесь?</h4>
+      <div class="mt-2.5 w-full">
+        <input formControlName="sleepTime" type="time" placeholder="чч/мм" lang="ru" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
+      </div>
+
+      <h4 class="mt-3.5 ml-2 font-medium">Сколько времени вы дома в течении дня?</h4>
+      <div class="bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col mt-1 color-[#00000080]">
+        <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
+          <input formControlName="timeSpentAtHome" class=" accent-[#8567FA] h-5 w-5" type="radio" name="timeSpentAtHome" value="до 5 часов"/>
+          <label class=" pl-2 text-center" for="checkbox">до 5 часов</label>
+        </div>
+        <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
+          <input formControlName="timeSpentAtHome" class=" accent-[#8567FA] h-5 w-5" type="radio" name="timeSpentAtHome" value="от 5 до 10 часов"/>
+          <label class=" pl-2" for="checkbox">от 5 до 10 часов</label>
+        </div>
+        <div class="pl-3 p-2.5 items-center flex flex-row">
+          <input formControlName="timeSpentAtHome" class="accent-[#8567FA] h-5 w-5" type="radio"  name="timeSpentAtHome" value="больше 10 часов"/>
+          <label class="pl-2" for="checkbox">больше 10 часов</label>
+        </div>
+      </div>
+      <h4 class="mt-3.5 ml-2 font-medium">Насколько часто устраиваете вечеринки?</h4>
+      <div class="bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col mt-1 color-[#00000080]">
+        <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
+          <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="раз в неделю"/>
+          <label class="pl-2 text-center" for="checkbox">раз в неделю</label>
+        </div>
+        <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
+          <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="раз в месяц"/>
+          <label class="pl-2" for="checkbox">раз в месяц</label>
+        </div>
+        <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
+          <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="несколько раз в год"/>
+          <label class="pl-2" for="checkbox">несколько раз в год</label>
+        </div>
+        <div class="pl-3 p-2.5 items-center flex flex-row">
+          <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="не устраиваю вечеринки"/>
+          <label class="pl-2" for="checkbox">не устраиваю вечеринки</label>
+        </div>
+      </div>
+
     </div>
     <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
-      <app-next-btn buttonText="Сохранить и продолжить"></app-next-btn>
+      <app-next-btn (click)="saveAndContinue()" [buttonText]="buttonText"></app-next-btn>
     </div>
   </div>
 </div>
