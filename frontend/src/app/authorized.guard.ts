@@ -1,7 +1,5 @@
-import { Router } from '@angular/router';
 import { AccountService } from './services/account.service'
-import { Injectable, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { inject } from '@angular/core';
 
 export const authGuardFn = ()=>{
   const auth = inject(AccountService)
@@ -10,6 +8,3 @@ export const authGuardFn = ()=>{
 
 }
 
-// export const authorizedGuard: CanActivateFn = (route,) => {
-//   return inject(AccountService);
-// };
