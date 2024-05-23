@@ -23,7 +23,19 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             var user = await userRepository.FindAsync(userEntity.Id);
 
             if (user == null)
+            {
+                var blacklistEntity = new BlacklistEntity(userEntity.FavoritesUsersId, new List<UserEntity>());
+                await blackListService.CreateOrUpdateBlacklist(blacklistEntity);
+                
+                var favouritesEntity = new FavouritesEntity(userEntity.BlacklistId, new List<UserEntity>());
+                await favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
+                
+                /*userEntity.FavoritesUsersId = favouritesEntity.Id;
+                userEntity.BlacklistId = blacklistEntity.Id;*/
                 await userRepository.AddAsync(userEntity);
+                
+                user = userEntity;
+            }
             else
                 mapper.Map(userEntity, user);
 
@@ -64,5 +76,59 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             var matchedUsers = matches.Keys.ToList();
             return Ok(matchedUsers);
         }
+<<<<<<< Updated upstream
+=======
+        
+        public async Task<ActionResult<UserEntity>> RegisterUser(RegisterModel model)
+        {
+            if (await userRepository.UserExists(model.Email))
+                return BadRequest("Почта зарегистрирована");
+
+            var user = new UserEntity
+            {
+                Id = Guid.Empty,
+                Email = model.Email,
+                PasswordHash = AuthService.HashPassword(model.Password),
+                Name = "temp",
+                Lastname = "temp",
+                BirthDate = DateTime.Today,
+                Gender = GenderType.Male,
+                IsSmoke = false,
+                HasPet = false,
+                CommunicationLevel = 0,
+                PureLevel = 0,
+                RiseTime = DateTime.Today,
+                SleepTime = DateTime.Today,
+            };
+
+            var blacklistEntity = new BlacklistEntity(Guid.NewGuid(), new List<UserEntity>());
+            await blackListService.CreateOrUpdateBlacklist(blacklistEntity);
+            
+            var favouritesEntity = new FavouritesEntity(Guid.NewGuid(), new List<UserEntity>());
+            await favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
+            
+            user.FavoritesUsersId = favouritesEntity.Id;
+            user.BlacklistId = blacklistEntity.Id;
+
+            await userRepository.AddAsync(user);
+            await userRepository.SaveChangesAsync();
+            
+            var token = authService.GenerateJwtToken(user);
+
+            return Ok(new { user, token });
+        }
+
+        public async Task<ActionResult<string>> AuthUser(AuthModel model)
+        {
+            var user = await userRepository.FindByEmailAsync(model.Email);
+            
+            if (user == null || !AuthService.VerifyPassword(model.Password, user.PasswordHash))
+                return Unauthorized("Invalid credentials");
+
+            var token = authService.GenerateJwtToken(user);
+
+            return Ok(token);
+        }
+>>>>>>> Stashed changes
     }
 }
