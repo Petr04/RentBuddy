@@ -16,7 +16,9 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, Config config) : base(options)
     {
         this.config = config;
-        //Database.Migrate();
+        
+        if(Database.GetPendingMigrations().Any())
+            Database.Migrate();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
