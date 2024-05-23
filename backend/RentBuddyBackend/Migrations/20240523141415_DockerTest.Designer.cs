@@ -12,8 +12,8 @@ using RentBuddyBackend.DAL;
 namespace RentBuddyBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240521232621_RegAndAuth")]
-    partial class RegAndAuth
+    [Migration("20240523141415_DockerTest")]
+    partial class DockerTest
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
