@@ -29,11 +29,15 @@ public class UsersController(IUserService usersService) : ControllerBase
     public Task<ActionResult<IEnumerable<UserEntity>>> MatchUser([FromRoute] Guid id)
         => usersService.MatchUser(id);
 
-    [HttpPost("register")]
+    [HttpPost("register")]  
     public Task<ActionResult<UserEntity>> Register([FromBody] RegisterModel model)
         => usersService.RegisterUser(model);
 
     [HttpPost("login")]
     public Task<ActionResult<string>> Login([FromBody] AuthModel model)
         => usersService.AuthUser(model);
+
+    [HttpGet("GetSuitableRoom/{id:guid}")]
+    public Task<ActionResult> GetSuitableRoom(Guid id)
+        => usersService.GetSuitableRoom(id);
 }

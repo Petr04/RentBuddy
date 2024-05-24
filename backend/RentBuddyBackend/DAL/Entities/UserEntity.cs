@@ -1,4 +1,5 @@
-﻿using RentBuddyBackend.Modules.UserModule;
+﻿using AutoMapper.Configuration.Annotations;
+using RentBuddyBackend.Modules.UserModule;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -24,14 +25,14 @@ public class UserEntity : IEntity
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
     public DateTime SleepTime { get; set; }
     public TimeSpentAtHome TimeSpentAtHome { get; set; }
+
     [JsonIgnore]
-    public Guid FavoritesUsersId { get; set; }
+    public virtual BlacklistEntity? Blacklist { get; set; } 
     [JsonIgnore]
-    public Guid BlacklistId { get; set;}
-    
+    public virtual FavoriteUsersEntity? FavoriteUsers { get; set; } 
+    [JsonIgnore]
+    public virtual FavoriteRoomsEntity? FavoriteRooms { get; set; }
+
     public string Email { get; set; }
     public string PasswordHash { get; set; }
-        
-    public virtual BlacklistEntity Blacklist { get; set; }
-    public virtual FavouritesEntity Favorites { get; set; }
 }

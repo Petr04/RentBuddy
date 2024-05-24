@@ -60,7 +60,18 @@ namespace RentBuddyBackend.Migrations
                     b.ToTable("BlacklistEntities");
                 });
 
-            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.FavouritesEntity", b =>
+            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.FavoriteRoomsEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FavoriteRoomsEntities");
+                });
+
+            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.FavoriteUsersEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,6 +91,9 @@ namespace RentBuddyBackend.Migrations
                     b.Property<Guid?>("ApartmentId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("FavoriteRoomsEntityId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("ImageLink")
                         .IsRequired()
                         .HasColumnType("text");
@@ -97,6 +111,8 @@ namespace RentBuddyBackend.Migrations
 
                     b.HasIndex("ApartmentId");
 
+                    b.HasIndex("FavoriteRoomsEntityId");
+
                     b.ToTable("Rooms");
                 });
 
@@ -109,7 +125,7 @@ namespace RentBuddyBackend.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("BlacklistId")
+                    b.Property<Guid?>("BlacklistId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("CommunicationLevel")
@@ -119,10 +135,10 @@ namespace RentBuddyBackend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("FavoritesId")
+                    b.Property<Guid?>("FavoriteRoomsId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("FavoritesUsersId")
+                    b.Property<Guid?>("FavoriteUsersId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("Gender")
@@ -162,7 +178,9 @@ namespace RentBuddyBackend.Migrations
 
                     b.HasIndex("BlacklistId");
 
-                    b.HasIndex("FavoritesId");
+                    b.HasIndex("FavoriteRoomsId");
+
+                    b.HasIndex("FavoriteUsersId");
 
                     b.ToTable("Users");
                 });
@@ -173,6 +191,10 @@ namespace RentBuddyBackend.Migrations
                         .WithMany("Rooms")
                         .HasForeignKey("ApartmentId");
 
+                    b.HasOne("RentBuddyBackend.DAL.Entities.FavoriteRoomsEntity", null)
+                        .WithMany("Rooms")
+                        .HasForeignKey("FavoriteRoomsEntityId");
+
                     b.Navigation("Apartment");
                 });
 
@@ -180,19 +202,21 @@ namespace RentBuddyBackend.Migrations
                 {
                     b.HasOne("RentBuddyBackend.DAL.Entities.BlacklistEntity", "Blacklist")
                         .WithMany("Users")
-                        .HasForeignKey("BlacklistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BlacklistId");
 
-                    b.HasOne("RentBuddyBackend.DAL.Entities.FavouritesEntity", "Favorites")
+                    b.HasOne("RentBuddyBackend.DAL.Entities.FavoriteRoomsEntity", "FavoriteRooms")
+                        .WithMany()
+                        .HasForeignKey("FavoriteRoomsId");
+
+                    b.HasOne("RentBuddyBackend.DAL.Entities.FavoriteUsersEntity", "FavoriteUsers")
                         .WithMany("Users")
-                        .HasForeignKey("FavoritesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FavoriteUsersId");
 
                     b.Navigation("Blacklist");
 
-                    b.Navigation("Favorites");
+                    b.Navigation("FavoriteRooms");
+
+                    b.Navigation("FavoriteUsers");
                 });
 
             modelBuilder.Entity("RentBuddyBackend.DAL.Entities.ApartmentEntity", b =>
@@ -205,7 +229,12 @@ namespace RentBuddyBackend.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.FavouritesEntity", b =>
+            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.FavoriteRoomsEntity", b =>
+                {
+                    b.Navigation("Rooms");
+                });
+
+            modelBuilder.Entity("RentBuddyBackend.DAL.Entities.FavoriteUsersEntity", b =>
                 {
                     b.Navigation("Users");
                 });

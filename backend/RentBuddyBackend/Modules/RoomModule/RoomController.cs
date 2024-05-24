@@ -8,7 +8,8 @@ namespace RentBuddyBackend.Modules.RoomModule;
 [ApiController]
 [Route("api/[controller]")]
 public class RoomController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment) : ControllerBase
-{
+{   
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<RoomEntity>>> GetRooms()
     {
@@ -65,4 +66,6 @@ public class RoomController(ApplicationDbContext context, IWebHostEnvironment we
         var imageData = await System.IO.File.ReadAllBytesAsync(imagePath);
         return File(imageData, "image/jpeg");
     }
+
+    
 }

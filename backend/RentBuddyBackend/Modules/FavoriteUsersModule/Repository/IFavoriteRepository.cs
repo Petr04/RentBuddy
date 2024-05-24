@@ -5,11 +5,11 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Repository
 {
     public interface IFavoriteRepository
     {
-        Task<FavouritesEntity?> FindAsync(Guid id);
+        Task<FavoriteUsersEntity?> FindAsync(Guid id);
         public Task<int> SaveChangesAsync();
-        public Task<EntityEntry<FavouritesEntity>> AddAsync(FavouritesEntity favoriteUsersEntity);
-        public Task<List<FavouritesEntity>> ToListAsync();
-        public void Remove(FavouritesEntity FavoriteUsersEntity);
-        public EntityEntry<FavouritesEntity> Update(FavouritesEntity favoriteUsersEntity);
+        public Task<EntityEntry<FavoriteUsersEntity>> AddAsync(FavoriteUsersEntity favoriteUsersEntity);
+        public Task<List<FavoriteUsersEntity>> ToListAsync();
+        public void Remove(FavoriteUsersEntity FavoriteUsersEntity);
+        public EntityEntry<FavoriteUsersEntity> Update(FavoriteUsersEntity favoriteUsersEntity);
     }
 }
