@@ -23,7 +23,7 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
         public async Task<ActionResult> AddFavouritiesUser(Guid currentUserId, Guid targetUserId)
         {   
             var currentUser = await userRepository.FindAsync(currentUserId);
-            var favourities = await favoriteUsersRepository.FindAsync(currentUser.FavoritesUsersId);
+            var favourities = await favoriteUsersRepository.FindAsync(currentUser.FavoriteUsers.Id);
             var targetUser = await userRepository.FindAsync(targetUserId);
             favourities.Users.Add(targetUser);
             await favoriteUsersRepository.SaveChangesAsync();
@@ -33,14 +33,14 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
         public async Task<ActionResult> DeleteFavouritiesUser(Guid currentUserId, Guid targetUserId)
         {
             var currentUser = await userRepository.FindAsync(currentUserId);
-            var favourities = await favoriteUsersRepository.FindAsync(currentUser.FavoritesUsersId);
+            var favourities = await favoriteUsersRepository.FindAsync(currentUser.FavoriteUsers.Id);
             var targetUser = await userRepository.FindAsync(targetUserId);
             favourities.Users.Remove(targetUser);
             await favoriteUsersRepository.SaveChangesAsync();
             return NoContent();
         }
 
-        public async Task<ActionResult<FavouritesEntity>> CreateOrUpdateFavouritiesEntity(FavouritesEntity favouritesEntity)
+        public async Task<ActionResult<FavoriteUsersEntity>> CreateOrUpdateFavouritiesEntity(FavoriteUsersEntity favouritesEntity)
         {
             var favourities = await favoriteUsersRepository.FindAsync(favouritesEntity.Id);
             if (favourities == null)
@@ -62,7 +62,7 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
             return NoContent();
         }
 
-        public async Task<ActionResult<FavouritesEntity>> GetFavouritiesEntity(Guid id)
+        public async Task<ActionResult<FavoriteUsersEntity>> GetFavouritiesEntity(Guid id)
         {
             var favourities = await favoriteUsersRepository.FindAsync(id);
             if (favourities == null)
@@ -70,7 +70,7 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
             return Ok(favourities);
         }
 
-        public async Task<ActionResult<IEnumerable<FavouritesEntity>>> GetFavouritiesList()
+        public async Task<ActionResult<IEnumerable<FavoriteUsersEntity>>> GetFavouritiesList()
         {
             var favourities = await favoriteUsersRepository.ToListAsync();
             return favourities;

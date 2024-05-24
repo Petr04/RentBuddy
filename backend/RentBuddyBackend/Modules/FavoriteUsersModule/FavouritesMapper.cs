@@ -7,7 +7,7 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule
     {
         public FavouritesMapper()
         {
-            CreateMap<FavouritesEntity, FavouritesEntity>();
+            CreateMap<FavoriteUsersEntity, FavoriteUsersEntity>();
         }
     }
 }
