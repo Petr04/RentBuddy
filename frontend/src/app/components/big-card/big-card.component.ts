@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelectRentComponent } from '../../select-rent/select-rent.component';
-import {  SortBarComponent } from '../sort-bar/sort-bar.component';
 import { NextBtnComponent } from '../next-btn/next-btn.component';
 import { FilterRent, Post } from '../../interfaces/interface';
+import { SelectCardDirective } from '../../directives/select-card.directive'
+import { SetService } from '../../services/set.service';
+import { IndexKind } from 'typescript';
 
 
 
@@ -11,7 +12,7 @@ import { FilterRent, Post } from '../../interfaces/interface';
 @Component({
   selector: 'app-big-card',
   standalone: true,
-  imports: [CommonModule, SelectRentComponent, SortBarComponent ,BigCardComponent, NextBtnComponent],
+  imports: [CommonModule, NextBtnComponent, SelectCardDirective],
   templateUrl: './big-card.component.html',
   styleUrl: './big-card.component.css'
 })
@@ -19,4 +20,21 @@ import { FilterRent, Post } from '../../interfaces/interface';
 export class BigCardComponent {
   @Input() card!: Post
   @Input() filterObj!:FilterRent
+  public setId = inject(SetService)
+
+  constructor( ){
+
+  }
+
+  getIdCard(){
+    if (!this.setId.has(this.card.id)){
+      this.setId.add(this.card.id)
+    }
+    else{
+      this.setId.delete(this.card.id)
+    }
+
+  }
+
+
 }

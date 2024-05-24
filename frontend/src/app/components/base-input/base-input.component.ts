@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-base-input',
@@ -7,6 +7,5 @@ import { Component } from '@angular/core';
   templateUrl: './base-input.component.html',
   styleUrl: './base-input.component.css'
 })
-export class BaseInputComponent {
-
+export class BaseInputComponent { 
 }

@@ -6,7 +6,7 @@ import { customValidator } from '../custom-validator/custom-validator.component'
   selector: '[passwordStrength]',
   providers: [{
     provide: NG_VALIDATORS,
-    useExisting: PasswordStrengthDirective,
+    useFactory: () => new PasswordStrengthDirective(),
     multi: true
   }],
   standalone: true

@@ -1,22 +1,20 @@
 import { Routes } from '@angular/router';
 import { AboutUserComponent } from './about-user/about-user.component';
 import { MatchPageComponent } from './match-page/match-page.component';
-import { RegistrationPageComponent } from './registration-page/registration-page.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { VerificationPageComponent } from './verification-page/verification-page.component';
-import { SuggestionPageComponent } from './suggestion-page/suggestion-page.component';
-import { SelectRentComponent } from './select-rent/select-rent.component';
-import { authorizedGuard } from './authorized.guard';
-
+import { SuggestionPageComponent } from './suggestion-page/suggestion-page.component'; ;
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { authGuardFn } from './authorized.guard';
+import { TestDetailComponent } from './test-route/test-route.component';
 
 export const routes: Routes = [
-  {path:'select-rent', component: SelectRentComponent},
-  {path:'profile', component: AboutUserComponent, },//canActivate:[authorizedGuard]},
-  {path:'match', component: MatchPageComponent},
-  {path:'registration', component: RegistrationPageComponent},
-  {path:'login', component: LoginPageComponent},
-  {path:'verification', component: VerificationPageComponent},
-  {path:'suggestion', component: SuggestionPageComponent}
+  {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule)},
+  {path:'profile', component: AboutUserComponent, canActivate: [authGuardFn]},//canActivate:[authGuardFn]},
+  {path:'match', component: MatchPageComponent, canActivate:[authGuardFn]},
+  {path:'suggestion', component: SuggestionPageComponent, canActivate: [authGuardFn]},
+  {path:'test/:id', component: TestDetailComponent},
+  {path:'', redirectTo: "/login", pathMatch: 'full'},
+  {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule)},
+  {path:'**', component: NotFoundPageComponent},
 ];
 
 // https://angdev.ru/archive/angular9/angular-routing-guards/ Guards

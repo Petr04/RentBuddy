@@ -5,18 +5,17 @@ import { CodeInputModule } from 'angular-code-input';
 
 @Component({
   selector: 'app-verification-page',
-  standalone: true,
-  imports: [RouterLink, CodeInputModule],
+  standalone: false,
   templateUrl: './verification-page.component.html',
   styleUrl: './verification-page.component.css'
 })
 export class VerificationPageComponent {
 
-  onCodeChanged(code: string) {
+  onCodeChanged( ) {
   }
 
   // this called only if user entered full code
-  onCodeCompleted(code: string) {
+  onCodeCompleted() {
   }
 }
 
