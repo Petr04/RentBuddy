@@ -1,0 +1,179 @@
+<div class="w-full mx-auto flex flex-col h-dvh bg-[#EBEBEB] overflow-auto">
+  <header>
+    <div class="flex flex-col items-center w-full bg-gradient-to-r from-[#8567FA] to-[#4FACE2]
+    text-[#FFFFFF] rounded-2xl relative">
+      <img class="w-full h-72 min-h-72 lg:h-96 object-cover object-center" src="../assets/room.png">
+      <div class="flex flex-row w-full justify-between p-4 px-10">
+        <div class="flex flex-col w-full">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold text-xl">{{card.price}} ₽/мес.</h3>
+            <div class="text-xs text-[#FFFFFF] font-semibold"><h4 class="border-[#FFFFFF] rounded-3xl border px-2">для {{card.inhabitantsCount}} чел.</h4></div>
+          </div>
+          <h4 class="text-sm">Комната {{card.square}} м² в {{card.apartment.roomsCount}}-к, {{card.apartment.currentFloor}}/{{card.apartment.maxFloor}} эт.</h4>
+          <h4 class="text-xs text-[#FFFFFF]">{{card.apartment.address}}</h4>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="mt-4 container mx-auto px-5 md:px-40 xl:px-96 flex  flex-col mb-20">
+    <div class="bg-[#FFFFFF] p-4 rounded-2xl">
+      <h3 class="font-semibold text-xl">Описание</h3>
+      <h4 class="text-xs mt-1">Уютное жилье с современной мебелью и бытовой техникой.
+        Расположена в центре города, рядом со всей необходимой инфраструктурой.
+        Отличный вариант для семьи или студентов.</h4>
+      <button class="text-xs mt-1 underline">Читать полностью</button>
+    </div>
+    <div class="bg-[#FFFFFF] p-4 rounded-2xl mt-4">
+      <h3 class="font-semibold text-xl">В комнате есть</h3>
+      <div class="flex flex-row ml-1.5 mt-2.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/double-bed.svg" alt="кровать">
+        <h4 class="text-sm mt-1">Кровать (двуспальная)</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/sofa.svg" alt="диван">
+        <h4 class="text-sm mt-1">Диван</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/closet.svg" alt="шкаф">
+        <h4 class="text-sm mt-1">Шкаф</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/desk.svg" alt="стол">
+        <h4 class="text-sm mt-1">Стол</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/chair.svg" alt="стул">
+        <h4 class="text-sm mt-1">Стул (2 шт.)</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/table-lamp.svg" alt="лампа">
+        <h4 class="text-sm mt-1">Настольная лампа</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/tv.svg" alt="теливизор">
+        <h4 class="text-sm mt-1">Теливизор</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 p-1.5">
+        <img src="../assets/air.svg" alt="теливизор">
+        <h4 class="text-sm mt-1">Кондиционер</h4>
+      </div>
+    </div>
+    <div class="bg-[#FFFFFF] p-4 rounded-2xl mt-4">
+      <h3 class="font-semibold text-xl">Предпочтения по соседу</h3>
+      <div class="flex flex-row ml-1.5 border-b border-[#8e8e8e] p-1.5 justify-between mt-2.5">
+        <h4 class="text-[#8e8e8e]">Возраст</h4>
+        <h4 class="text-[#8567FA] ">18-26</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 border-b border-[#8e8e8e] p-1.5 justify-between">
+        <h4 class="text-[#8e8e8e]">Пол</h4>
+        <h4 class="text-[#8567FA] ">не важно</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 border-b border-[#8e8e8e] p-1.5 justify-between">
+        <h4 class="text-[#8e8e8e]">Питомец</h4>
+        <h4 class="text-[#8567FA] ">нет</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 border-b border-[#8e8e8e] p-1.5 justify-between">
+        <h4 class="text-[#8e8e8e]">Курение</h4>
+        <h4 class="text-[#8567FA] ">нет</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 border-b border-[#8e8e8e] p-1.5 justify-between">
+        <h4 class="text-[#8e8e8e]">Нахождение дома</h4>
+        <h4 class="text-[#8567FA] ">не важно</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 border-b border-[#8e8e8e] p-1.5 justify-between">
+        <h4 class="text-[#8e8e8e]">Вечеринки</h4>
+        <h4 class="text-[#8567FA] ">не важно</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 border-b border-[#8e8e8e] p-1.5 justify-between">
+        <h4 class="text-[#8e8e8e]">Время подъёма</h4>
+        <h4 class="text-[#8567FA] ">не важно</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 border-b border-[#8e8e8e] p-1.5 justify-between">
+        <h4 class="text-[#8e8e8e]">Время сна</h4>
+        <h4 class="text-[#8567FA] ">22:00-01:00</h4>
+      </div>
+      <div class="p-2.5 bg-[#FFFFFF] border-b border-[#8e8e8e] flex flex-col">
+        <h4 class="text-[#8e8e8e]">Чистоплотность</h4>
+        <input type="range" class="mt-1.5 accent-[#8567FA]" min="0" max="10" />
+      </div>
+      <div class="p-2.5 bg-[#FFFFFF] flex flex-col">
+        <h4 class="text-[#8e8e8e]">Настрой на общение</h4>
+        <input type="range" class="mt-1.5 accent-[#8567FA]" min="0" max="10" />
+      </div>
+    </div>
+    <h2 class="mx-auto mt-4 text-2xl">Квартира</h2>
+    <div class="mt-2.5 bg-gradient-to-r from-[#8567FA] to-[#4FACE2]
+    text-[#FFFFFF] rounded-2xl p-3.5">
+      <h4 class="font-semibold">3 комнаты, 95 м², 9 этажей. </h4>
+      <h4 class="font-semibold">Максимум: 3 человека</h4>
+      <h5 class="font-semibold opacity-50 text-xs">г. Москва, ул. Кирова, 43</h5>
+    </div>
+    <div class="bg-[#FFFFFF] p-4 rounded-2xl mt-2.5">
+      <h3 class="font-semibold text-xl">Описание</h3>
+      <h4 class="text-xs mt-1">Современная новая квартира в уютном районе Москвы.
+        Есть парковка, площадка, рядом магазины и метро.</h4>
+      <button class="text-xs mt-1 underline">Читать полностью</button>
+    </div>
+    <div class="bg-[#FFFFFF] p-4 rounded-2xl mt-4">
+      <h3 class="font-semibold text-xl">В квартире есть</h3>
+      <div class="flex flex-row ml-1.5 mt-2.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/wifi.svg" alt="wi-fi">
+        <h4 class="text-sm mt-1">Wi-Fi</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/sofa.svg" alt="холодильник">
+        <h4 class="text-sm mt-1">Холодильник</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/microwave.svg" alt="микроволновка">
+        <h4 class="text-sm mt-1">Микроволновка</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/w-machine.svg" alt="стиральная машина">
+        <h4 class="text-sm mt-1">Стиральная машина</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/d-machine.svg" alt="осудомоечная машина">
+        <h4 class="text-sm mt-1">Посудомоечная машина</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/panel.svg" alt="плита">
+        <h4 class="text-sm mt-1">Плита</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 p-1.5">
+        <img src="../assets/toilet.svg" alt="санузел">
+        <h4 class="text-sm mt-1">1 Санузел (разд.)</h4>
+      </div>
+    </div>
+    <div class="bg-[#FFFFFF] p-4 rounded-2xl mt-4">
+      <h3 class="font-semibold text-xl">Удобства</h3>
+      <div class="flex flex-row ml-1.5 mt-2.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/car.svg" alt="парковка">
+        <h4 class="text-sm mt-1">Парковка</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/elevator.svg" alt="лифт">
+        <h4 class="text-sm mt-1">Лифт (пассажирский, грузовой)</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5 border-b border-[#8e8e8e] p-1.5">
+        <img src="../assets/court.svg" alt="двор">
+        <h4 class="text-sm mt-1">Двор (закрытый)</h4>
+      </div>
+      <div class="flex flex-row ml-1.5 gap-2.5  p-1.5">
+        <img src="../assets/sport.svg" alt="cпорт">
+        <h4 class="text-sm mt-1">Спортивная площадка</h4>
+      </div>
+    </div>
+    <div class="bg-[#FFFFFF] p-4 rounded-2xl mt-4">
+      <h3 class="font-semibold text-xl">Собственник</h3>
+      <div class="flex flex-row gap-4 mt-2.5">
+        <img src="../assets/sigma.jpg" alt="фото" class="rounded-full w-20 h-20 object-cover object-center">
+        <h3 class="text-xl pt-6">Сигма</h3>
+      </div>
+    </div>
+    <h3 class="font-semibold text-xl mt-5 ml-1.5">Комнаты в квартире</h3>
+  </div>
+  <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
+    <app-next-btn buttonText="Записаться на просмотр"> </app-next-btn>
+  </div>
+</div>
