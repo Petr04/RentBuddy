@@ -13,20 +13,31 @@ export interface Post{
     roomsCount: number,
     currentFloor: number,
     maxFloor: number,
-    imageLink: string,
     address: string
   },
   apartmentId: string,
   id: string,
   inhabitantsCount: number,
   price: number,
+  imageLink: string,
   square: number
 }
 
 export interface User {
-  id: number;
-  picture: string;
-  age: number;
-  name: string;
-  gender: string;
+  userEmail: string,
+  userPassword: string
+}
+
+export interface UserProfile {
+  name: string,
+  lastname: string,
+  birthDate: string,
+  gender: number,
+  isSmoke: true,
+  hasPet: true,
+  communicationLevel: number,
+  pureLevel: number,
+  riseTime: string,
+  sleepTime: string,
+  timeSpentAtHome: number
 }

@@ -17,9 +17,13 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, Config config) : base(options)
     {
         this.config = config;
-        //Database.Migrate();
-        //Database.EnsureDeleted();
 
+        //Database.EnsureDeleted();
+        if (Database.GetPendingMigrations().Any())
+        {
+            Database.EnsureDeleted();
+            Database.Migrate();
+        }
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

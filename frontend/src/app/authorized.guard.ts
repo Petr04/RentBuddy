@@ -1,12 +1,10 @@
-import { CanActivateFn } from '@angular/router';
-import { AccountService } from '../app/requests/services/account/account.service'
-import { Injectable, inject } from '@angular/core';
+import { AccountService } from './services/account.service'
+import { inject } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class authorizedGuardService {}
+export const authGuardFn = ()=>{
+  const auth = inject(AccountService)
 
-export const authorizedGuard: CanActivateFn = () => {
-  return inject(AccountService).isUserLoggedIn;
-};
+  return auth.isUserLoggedIn
+
+}
+
