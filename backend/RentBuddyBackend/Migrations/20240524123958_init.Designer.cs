@@ -12,13 +12,8 @@ using RentBuddyBackend.DAL;
 namespace RentBuddyBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:backend/RentBuddyBackend/Migrations/20240522112723_init.Designer.cs
-    [Migration("20240522112723_init")]
+    [Migration("20240524123958_init")]
     partial class init
-========
-    [Migration("20240523141415_DockerTest")]
-    partial class DockerTest
->>>>>>>> 2c53a827605d48de2dc1b32b9fe09ac868cba826:backend/RentBuddyBackend/Migrations/20240523141415_DockerTest.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

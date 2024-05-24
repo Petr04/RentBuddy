@@ -6,11 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RentBuddyBackend.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:backend/RentBuddyBackend/Migrations/20240522112723_init.cs
     public partial class init : Migration
-========
-    public partial class DockerTest : Migration
->>>>>>>> 2c53a827605d48de2dc1b32b9fe09ac868cba826:backend/RentBuddyBackend/Migrations/20240523141415_DockerTest.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
