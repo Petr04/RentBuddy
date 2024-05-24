@@ -1,12 +1,11 @@
-using System.Security.Cryptography;
-using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
 using RentBuddyBackend.DAL.Entities;
 
-namespace RentBuddyBackend.Infrastructure
+namespace RentBuddyBackend.Modules.UserModule.Service
 {
     public class AuthService(IConfiguration configuration)
     {
@@ -32,12 +31,12 @@ namespace RentBuddyBackend.Infrastructure
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("dKt3Y#9^3nTv%2GpB&y8U@C*#w!WqS"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: configuration["Jwt:Issuer"],
-                audience: configuration["Jwt:Audience"],
+                issuer: "RentBuddyApp",
+                audience: "RentBuddyUsers",
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds);
