@@ -114,7 +114,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             await CreateOrUpdateUser(user);
             var token = authService.GenerateJwtToken(user);
 
-            return Ok(token);
+            return Ok(new JwtTokenModel { Token = token});
         }
 
         public async Task<ActionResult<string>> AuthUser(AuthModel model)
@@ -129,7 +129,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
 
             var token = authService.GenerateJwtToken(user);
 
-            return Ok(token);
+            return Ok(new JwtTokenModel { Token = token});
         }
 
         public async Task<ActionResult<UserEntity>> GetCurrentUser()
