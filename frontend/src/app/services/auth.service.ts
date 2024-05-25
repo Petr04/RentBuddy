@@ -13,12 +13,12 @@ export class AuthService {
   }
 
   register(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:5000/api/User', user)
+    return this.http.post<User>('https://reqres.in/api/regiser', user)
   }
 
   login(user: User): Observable<{token: string}>{
 
-    return this.http.post<{token: string}>('http://localhost:5000/api/User', user)
+    return this.http.post<{token: string}>('https://reqres.in/api/login', user)
       .pipe(
         tap(
           ({token}) => {
@@ -28,21 +28,17 @@ export class AuthService {
       )
   }
 
-  setToken(token: string | null){
-    this.token = token
+  logout(): void {
+    localStorage.removeItem('auth-token');
   }
 
-  getToken():string | null {
-    return this.token
+  getToken(): string | null{
+    return localStorage.getItem('auth-token');
   }
 
-  isAuthenticated():boolean{
-    return !!this.token
-  }
-
-  logout(){
-    this.setToken(null)
-    localStorage.clear()
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    return !!token;
   }
 
 }
