@@ -1,8 +1,10 @@
+.isSelect{
+  opacity: 100;
+}
 
-
-
-
-
+.isNotSelect{
+  opacity: 0.4;
+}
 
 
 
