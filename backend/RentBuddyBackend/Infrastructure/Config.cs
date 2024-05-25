@@ -3,7 +3,7 @@
 public class Config(bool isDev)
 {
         public string DbConnectionString { get; } = isDev
-        ? "Server=localhost;Database=RentBuddyDB;Port=5432;User Id=postgres;Password=1"
+        ? "Server=rb-postgresdb;Database=RentBuddyDB;Port=5432;User Id=postgres;Password=1"
         : Environment.GetEnvironmentVariable("Connection");
         // Чтобы сделать миграцию - хост менять на localhost
         // Для работы в контейнере - rb-postgresdb
