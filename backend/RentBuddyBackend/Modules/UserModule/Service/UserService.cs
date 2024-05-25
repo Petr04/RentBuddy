@@ -110,22 +110,11 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 RiseTime = DateTime.Today,
                 SleepTime = DateTime.Today,
             };
-
-            var blacklistEntity = new BlacklistEntity(Guid.Empty, new List<UserEntity>());
-            await blackListService.CreateOrUpdateBlacklist(blacklistEntity);
             
-            var favouritesEntity = new FavoriteUsersEntity(Guid.Empty, new List<UserEntity>());
-            await favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
-            
-            user.FavoriteUsers.Id = favouritesEntity.Id;
-            user.Blacklist.Id = blacklistEntity.Id;
-
-            await userRepository.AddAsync(user);
-            await userRepository.SaveChangesAsync();
-            
+            await CreateOrUpdateUser(user);
             var token = authService.GenerateJwtToken(user);
 
-            return Ok(new { user, token });
+            return Ok(token);
         }
 
         public async Task<ActionResult<string>> AuthUser(AuthModel model)
