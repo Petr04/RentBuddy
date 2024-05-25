@@ -4,23 +4,28 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using RentBuddyBackend.DAL.Entities;
+using RentBuddyBackend.Infrastructure;
 
 namespace RentBuddyBackend.Modules.UserModule.Service
 {
-    public class AuthService(IConfiguration configuration)
+    public class AuthService(Config config)
     {
-        public static string HashPassword(string password)
+        public string HashPassword(string password)
         {
             using var hmac = new HMACSHA512();
+            hmac.Key = config.PasswordSalt;
             var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            
             return Convert.ToBase64String(hash);
         }
 
-        public static bool VerifyPassword(string password, string hashedPassword)
+        public bool VerifyPassword(string password, string hashedPassword)
         {
-            using var hmac = new HMACSHA512();
-            var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            return Convert.ToBase64String(hash) == hashedPassword;
+            var passwordHashInBytes = Convert.FromBase64String(hashedPassword);
+            using var hmac = new HMACSHA512(config.PasswordSalt);
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+            return computedHash.SequenceEqual(passwordHashInBytes);
         }
 
         public string GenerateJwtToken(UserEntity user)

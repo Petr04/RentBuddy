@@ -89,16 +89,16 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             return Ok(matchedUsers);
         }
         
-        public async Task<ActionResult<UserEntity>> RegisterUser(RegisterModel model)
+        public async Task<ActionResult<UserEntity>> RegisterUser(RegisterModel regModel)
         {
-            if (await userRepository.UserExists(model.Email))
+            if (await userRepository.UserExists(regModel.Email))
                 return BadRequest("Почта зарегистрирована");
 
             var user = new UserEntity
             {
                 Id = Guid.Empty,
-                Email = model.Email,
-                PasswordHash = AuthService.HashPassword(model.Password),
+                Email = regModel.Email,
+                PasswordHash = authService.HashPassword(regModel.Password),
                 Name = "temp",
                 Lastname = "temp",
                 BirthDate = DateTime.Today,
@@ -120,9 +120,12 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         public async Task<ActionResult<string>> AuthUser(AuthModel model)
         {
             var user = await userRepository.FindByEmailAsync(model.Email);
+
+            if (user == null)
+                return NotFound();
             
-            if (user == null || !AuthService.VerifyPassword(model.Password, user.PasswordHash))
-                return Unauthorized("Invalid credentials");
+            if (!authService.VerifyPassword(model.Password, user.PasswordHash))
+                return BadRequest();
 
             var token = authService.GenerateJwtToken(user);
 
