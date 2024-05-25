@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RentBuddyBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class RegAndAuth : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,6 +38,17 @@ namespace RentBuddyBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FavoriteRoomsEntities",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FavoriteRoomsEntities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FavouritesEntities",
                 columns: table => new
                 {
@@ -57,7 +68,8 @@ namespace RentBuddyBackend.Migrations
                     Square = table.Column<int>(type: "integer", nullable: false),
                     InhabitantsCount = table.Column<int>(type: "integer", nullable: false),
                     ImageLink = table.Column<string>(type: "text", nullable: false),
-                    ApartmentId = table.Column<Guid>(type: "uuid", nullable: true)
+                    ApartmentId = table.Column<Guid>(type: "uuid", nullable: true),
+                    FavoriteRoomsEntityId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,6 +78,11 @@ namespace RentBuddyBackend.Migrations
                         name: "FK_Rooms_Apartments_ApartmentId",
                         column: x => x.ApartmentId,
                         principalTable: "Apartments",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Rooms_FavoriteRoomsEntities_FavoriteRoomsEntityId",
+                        column: x => x.FavoriteRoomsEntityId,
+                        principalTable: "FavoriteRoomsEntities",
                         principalColumn: "Id");
                 });
 
@@ -85,11 +102,11 @@ namespace RentBuddyBackend.Migrations
                     RiseTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     SleepTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimeSpentAtHome = table.Column<int>(type: "integer", nullable: false),
-                    FavoritesUsersId = table.Column<Guid>(type: "uuid", nullable: false),
-                    BlacklistId = table.Column<Guid>(type: "uuid", nullable: false),
+                    BlacklistId = table.Column<Guid>(type: "uuid", nullable: true),
+                    FavoriteUsersId = table.Column<Guid>(type: "uuid", nullable: true),
+                    FavoriteRoomsId = table.Column<Guid>(type: "uuid", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: false),
-                    PasswordHash = table.Column<string>(type: "text", nullable: false),
-                    FavoritesId = table.Column<Guid>(type: "uuid", nullable: false)
+                    PasswordHash = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,14 +115,17 @@ namespace RentBuddyBackend.Migrations
                         name: "FK_Users_BlacklistEntities_BlacklistId",
                         column: x => x.BlacklistId,
                         principalTable: "BlacklistEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Users_FavouritesEntities_FavoritesId",
-                        column: x => x.FavoritesId,
+                        name: "FK_Users_FavoriteRoomsEntities_FavoriteRoomsId",
+                        column: x => x.FavoriteRoomsId,
+                        principalTable: "FavoriteRoomsEntities",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Users_FavouritesEntities_FavoriteUsersId",
+                        column: x => x.FavoriteUsersId,
                         principalTable: "FavouritesEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -114,14 +134,24 @@ namespace RentBuddyBackend.Migrations
                 column: "ApartmentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Rooms_FavoriteRoomsEntityId",
+                table: "Rooms",
+                column: "FavoriteRoomsEntityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_BlacklistId",
                 table: "Users",
                 column: "BlacklistId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_FavoritesId",
+                name: "IX_Users_FavoriteRoomsId",
                 table: "Users",
-                column: "FavoritesId");
+                column: "FavoriteRoomsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_FavoriteUsersId",
+                table: "Users",
+                column: "FavoriteUsersId");
         }
 
         /// <inheritdoc />
@@ -138,6 +168,9 @@ namespace RentBuddyBackend.Migrations
 
             migrationBuilder.DropTable(
                 name: "BlacklistEntities");
+
+            migrationBuilder.DropTable(
+                name: "FavoriteRoomsEntities");
 
             migrationBuilder.DropTable(
                 name: "FavouritesEntities");

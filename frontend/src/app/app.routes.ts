@@ -2,7 +2,9 @@ import { Routes } from '@angular/router';
 import { AboutUserComponent } from './about-user/about-user.component';
 import { MatchPageComponent } from './match-page/match-page.component';
 import { SuggestionPageComponent } from './suggestion-page/suggestion-page.component'; ;
+
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import {ApartmentInfoComponent} from "./apartment-info/apartment-info.component";
 import { authGuardFn } from './authorized.guard';
 import { TestDetailComponent } from './test-route/test-route.component';
 
@@ -11,6 +13,7 @@ export const routes: Routes = [
   {path:'profile', component: AboutUserComponent, },//canActivate:[authGuardFn]},
   {path:'match', component: MatchPageComponent, canActivate:[authGuardFn]},
   {path:'suggestion', component: SuggestionPageComponent, canActivate: [authGuardFn]},
+  {path:'apartment-info', component: ApartmentInfoComponent},
   {path:'test/:id', component: TestDetailComponent},
   {path:'', redirectTo: "/login", pathMatch: 'full'},
   {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule)},

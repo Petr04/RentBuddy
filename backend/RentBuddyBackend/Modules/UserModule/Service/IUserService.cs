@@ -13,5 +13,6 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         Task<ActionResult<IEnumerable<UserEntity>>> MatchUser(Guid id);
         Task<ActionResult<UserEntity>> RegisterUser(RegisterModel model);
         Task<ActionResult<string>> AuthUser(AuthModel model);
+        Task<ActionResult> GetSuitableRoom(Guid id);
     }
 }

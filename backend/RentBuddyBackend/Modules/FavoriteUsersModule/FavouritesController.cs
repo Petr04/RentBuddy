@@ -29,7 +29,7 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule
             => favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
         */
         [HttpGet("{id:guid}")]
-        public Task<ActionResult<FavouritesEntity>> GetFavouritiesEntity([FromRoute] Guid id)
+        public Task<ActionResult<FavoriteUsersEntity>> GetFavouritiesEntity([FromRoute] Guid id)
          => favoriteService.GetFavouritiesEntity(id); 
         
         [HttpPost("AddUserToFavourities/{targetUserId:Guid}")]

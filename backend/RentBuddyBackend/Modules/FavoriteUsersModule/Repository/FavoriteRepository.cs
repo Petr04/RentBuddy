@@ -7,22 +7,22 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Repository
 {
     public class FavoriteRepository(ApplicationDbContext context) : IFavoriteRepository
     {
-        public async Task<EntityEntry<FavouritesEntity>> AddAsync(FavouritesEntity favoriteUsersEntity)
+        public async Task<EntityEntry<FavoriteUsersEntity>> AddAsync(FavoriteUsersEntity favoriteUsersEntity)
             => await context.FavouritesEntities.AddAsync(favoriteUsersEntity);
 
-        public async Task<FavouritesEntity?> FindAsync(Guid id)
+        public async Task<FavoriteUsersEntity?> FindAsync(Guid id)
             => await context.FavouritesEntities.FindAsync(id);
 
-        public void Remove(FavouritesEntity favoriteUsersEntity)
+        public void Remove(FavoriteUsersEntity favoriteUsersEntity)
             => context.FavouritesEntities.Remove(favoriteUsersEntity);
 
         public async Task<int> SaveChangesAsync()
             => await context.SaveChangesAsync();
 
-        public async Task<List<FavouritesEntity>> ToListAsync()
+        public async Task<List<FavoriteUsersEntity>> ToListAsync()
             => await context.FavouritesEntities.ToListAsync();
 
-        public EntityEntry<FavouritesEntity> Update(FavouritesEntity favoriteUsersEntity)
+        public EntityEntry<FavoriteUsersEntity> Update(FavoriteUsersEntity favoriteUsersEntity)
             => context.FavouritesEntities.Update(favoriteUsersEntity);
     }
 }
