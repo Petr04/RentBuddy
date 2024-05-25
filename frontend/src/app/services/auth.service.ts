@@ -7,18 +7,16 @@ import { User } from '../interfaces/interface';
 })
 export class AuthService {
 
-  private token: string | null = null
-
   constructor(private http: HttpClient){
   }
 
   register(user: User): Observable<User> {
-    return this.http.post<User>('https://reqres.in/api/regiser', user)
+    return this.http.post<User>('http://localhost:5000/api/Users/register', user)
   }
 
   login(user: User): Observable<{token: string}>{
 
-    return this.http.post<{token: string}>('https://reqres.in/api/login', user)
+    return this.http.post<{token: string}>('http://localhost:5000/api/Users/login', user)
       .pipe(
         tap(
           ({token}) => {

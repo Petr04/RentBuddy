@@ -34,7 +34,7 @@ export class LoginPageComponent implements OnDestroy {
 
 
   public confirmAuth():void{
-    if (  this.authorizationForm.disabled){
+    if (this.authorizationForm.disabled){
       this.authorizationForm.markAllAsTouched()
       return
     }
@@ -47,7 +47,6 @@ export class LoginPageComponent implements OnDestroy {
           this.authorizationForm.enable()
         }
       })
-      // this.router.navigate(['/profile'])
     }
     console.log(this.authorizationForm.value)
   }
