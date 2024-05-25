@@ -17,6 +17,6 @@ public class Config(bool isDev)
                 : Environment.GetEnvironmentVariable("JwtAudience");
         
         public string JwtKey { get; } = isDev
-                ? "dKt3Y#9^3nTv%2GpB&y8U@C*#w!WqS"
+                ? "dKt3Y#9^3nTv%2GpB&y8U@C*#w!WqS6D"
                 : Environment.GetEnvironmentVariable("JwtKey");
 }
