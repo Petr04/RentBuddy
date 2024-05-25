@@ -10,10 +10,10 @@ import { TestDetailComponent } from './test-route/test-route.component';
 
 export const routes: Routes = [
   {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule)},
-  {path:'profile', component: AboutUserComponent, },//canActivate:[authGuardFn]},
+  {path:'profile', component: AboutUserComponent, canActivate:[authGuardFn] },
   {path:'match', component: MatchPageComponent, canActivate:[authGuardFn]},
   {path:'suggestion', component: SuggestionPageComponent, canActivate: [authGuardFn]},
-  {path:'apartment-info', component: ApartmentInfoComponent},
+  {path:'apartment-info', component: ApartmentInfoComponent, canActivate:[authGuardFn]},
   {path:'test/:id', component: TestDetailComponent},
   {path:'', redirectTo: "/login", pathMatch: 'full'},
   {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule)},
