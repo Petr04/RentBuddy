@@ -52,36 +52,27 @@ export class AboutUserComponent {
 
   gender:boolean = true;
   public male(){
-    document.getElementById('male')!.classList.remove('opacity-40');
-    document.getElementById('female')!.classList.add('opacity-40');
     this.gender = true
   }
   public female(){
-    document.getElementById('male')!.classList.add('opacity-40');
-    document.getElementById('female')!.classList.remove('opacity-40');
     this.gender = false
   }
+
   isSmoke:boolean = true;
   public smoke(){
-    document.getElementById('smoke')!.classList.remove('opacity-40');
-    document.getElementById('noSmoke')!.classList.add('opacity-40');
     this.isSmoke = true
   }
   public noSmoke(){
-    document.getElementById('smoke')!.classList.add('opacity-40');
-    document.getElementById('noSmoke')!.classList.remove('opacity-40');
     this.isSmoke = false
   }
-  hasPet:boolean = false;
+
+  hasPet:boolean = true;
   public pet(){
-    document.getElementById('pet')!.classList.remove('opacity-40');
-    document.getElementById('noPet')!.classList.add('opacity-40');
     this.hasPet = true
   }
   public noPet(){
-    document.getElementById('pet')!.classList.add('opacity-40');
-    document.getElementById('noPet')!.classList.remove('opacity-40');
     this.hasPet = false
   }
+
   buttonText:string = "Сохранить и продолжить";
 }

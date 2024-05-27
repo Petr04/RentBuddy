@@ -89,16 +89,16 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             return Ok(matchedUsers);
         }
         
-        public async Task<ActionResult<UserEntity>> RegisterUser(RegisterModel model)
+        public async Task<ActionResult<UserEntity>> RegisterUser(RegisterModel regModel)
         {
-            if (await userRepository.UserExists(model.Email))
+            if (await userRepository.UserExists(regModel.Email))
                 return BadRequest("Почта зарегистрирована");
 
             var user = new UserEntity
             {
                 Id = Guid.Empty,
-                Email = model.Email,
-                PasswordHash = AuthService.HashPassword(model.Password),
+                Email = regModel.Email,
+                PasswordHash = authService.HashPassword(regModel.Password),
                 Name = "temp",
                 Lastname = "temp",
                 BirthDate = DateTime.Today,
@@ -110,34 +110,26 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 RiseTime = DateTime.Today,
                 SleepTime = DateTime.Today,
             };
-
-            var blacklistEntity = new BlacklistEntity(Guid.Empty, new List<UserEntity>());
-            await blackListService.CreateOrUpdateBlacklist(blacklistEntity);
             
-            var favouritesEntity = new FavoriteUsersEntity(Guid.Empty, new List<UserEntity>());
-            await favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
-            
-            user.FavoriteUsers.Id = favouritesEntity.Id;
-            user.Blacklist.Id = blacklistEntity.Id;
-
-            await userRepository.AddAsync(user);
-            await userRepository.SaveChangesAsync();
-            
+            await CreateOrUpdateUser(user);
             var token = authService.GenerateJwtToken(user);
 
-            return Ok(new { user, token });
+            return Ok(new JwtTokenModel { Token = token});
         }
 
         public async Task<ActionResult<string>> AuthUser(AuthModel model)
         {
             var user = await userRepository.FindByEmailAsync(model.Email);
+
+            if (user == null)
+                return NotFound();
             
-            if (user == null || !AuthService.VerifyPassword(model.Password, user.PasswordHash))
-                return Unauthorized("Invalid credentials");
+            if (!authService.VerifyPassword(model.Password, user.PasswordHash))
+                return BadRequest();
 
             var token = authService.GenerateJwtToken(user);
 
-            return Ok(token);
+            return Ok(new JwtTokenModel { Token = token});
         }
 
         public async Task<ActionResult<UserEntity>> GetCurrentUser()

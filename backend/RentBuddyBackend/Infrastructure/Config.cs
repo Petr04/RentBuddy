@@ -1,7 +1,11 @@
-﻿namespace RentBuddyBackend.Infrastructure;
+﻿using System.Security.Cryptography;
+using System.Text;
+
+namespace RentBuddyBackend.Infrastructure;
 
 public class Config(bool isDev)
 {
+        public byte[] PasswordSalt { get; } = new HMACSHA512(Encoding.ASCII.GetBytes("qlsdfgtbzxbs4qwe")).Key;
         public string DbConnectionString { get; } = isDev
         ? "Server=rb-postgresdb;Database=RentBuddyDB;Port=5432;User Id=postgres;Password=1"
         : Environment.GetEnvironmentVariable("Connection");
@@ -17,6 +21,6 @@ public class Config(bool isDev)
                 : Environment.GetEnvironmentVariable("JwtAudience");
         
         public string JwtKey { get; } = isDev
-                ? "dKt3Y#9^3nTv%2GpB&y8U@C*#w!WqS"
+                ? "dKt3Y#9^3nTv%2GpB&y8U@C*#w!WqS6D"
                 : Environment.GetEnvironmentVariable("JwtKey");
 }

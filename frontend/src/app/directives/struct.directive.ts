@@ -1,18 +1,21 @@
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
 
-@Directive({
-  selector: '[appStruct]',
-  standalone: true
-})
-export class StructDirective {
-
-  constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) { }
-
-  @Input()
-  public set appStruct(condition: boolean){
-    console.log()
-  }
+interface LetContext<T> {
+    ngLet: T;
 }
 
+@Directive({
+    selector: '[ngLet]'
+})
+export class LetDirective<T> {
+    private _context!: LetContext<T>
 
+    constructor(_viewContainer: ViewContainerRef, _templateRef: TemplateRef<LetContext<T>>) {
+        _viewContainer.createEmbeddedView(_templateRef, this._context);
+    }
 
+    @Input()
+    set ngLet(value: T) {
+        this._context.ngLet = value;
+    }
+}
