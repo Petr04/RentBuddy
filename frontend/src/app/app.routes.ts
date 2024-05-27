@@ -7,6 +7,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import {ApartmentInfoComponent} from "./apartment-info/apartment-info.component";
 import { authGuardFn } from './authorized.guard';
 import { TestDetailComponent } from './test-route/test-route.component';
+import {ApartmentEditComponent} from "./apartment-edit/apartment-edit.component";
 
 export const routes: Routes = [
   {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule)},
@@ -14,6 +15,7 @@ export const routes: Routes = [
   {path:'match', component: MatchPageComponent, canActivate:[authGuardFn]},
   {path:'suggestion', component: SuggestionPageComponent, canActivate: [authGuardFn]},
   {path:'apartment-info', component: ApartmentInfoComponent},
+  {path:'apartment-edit', component: ApartmentEditComponent},
   {path:'test/:id', component: TestDetailComponent},
   {path:'', redirectTo: "/login", pathMatch: 'full'},
   {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule)},
