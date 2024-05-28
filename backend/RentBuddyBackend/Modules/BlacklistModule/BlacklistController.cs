@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RentBuddyBackend.DAL.Entities;
 using RentBuddyBackend.Modules.BlacklistModule.Service;
-using RentBuddyBackend.Modules.FavoriteUsersModule.Service;
 
 namespace RentBuddyBackend.Modules.BlacklistModule
 {

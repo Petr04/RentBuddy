@@ -1,9 +1,6 @@
 ﻿using RentBuddyBackend.Infrastructure;
-using RentBuddyBackend.Modules.BlacklistModule.Repository;
-using RentBuddyBackend.Modules.BlacklistModule.Service;
-using RentBuddyBackend.Modules.BlacklistModule;
-using RentBuddyBackend.Modules.FavoriteUsersModule.Service;
 using RentBuddyBackend.Modules.FavoriteUsersModule.Repository;
+using RentBuddyBackend.Modules.FavoriteUsersModule.Service;
 
 namespace RentBuddyBackend.Modules.FavoriteUsersModule
 {

@@ -2,16 +2,31 @@ using RentBuddyBackend.DAL.Entities;
 
 namespace RentBuddyBackend.Infrastructure;
 
-public abstract class Matching : IMatching
+public class MatchingService : IMatchingService
 {
-    public static Dictionary<UserEntity, int> Match(UserEntity user, IEnumerable<UserEntity> users)
+    public Dictionary<UserEntity, int> Match(UserEntity user, IEnumerable<UserEntity> users)
     {
         var matchDictionary = new Dictionary<UserEntity, int>();
 
         foreach (var comparedUser in users)
         {
-            if (user.Id == comparedUser.Id)
+            var isMatch = user.FavoriteRooms?.Rooms?
+                .Any(userRoom =>
+                comparedUser.FavoriteRooms?.Rooms?
+                    .Any(comparedUserRoom => comparedUserRoom.Id == userRoom.Id) 
+                ?? false) 
+                          ?? false;
+            
+            if (user.Id == comparedUser.Id || !isMatch)
                 continue;
+
+            var userRooms = user.FavoriteRooms?.Rooms;
+            var comparedUserRooms = comparedUser.FavoriteRooms?.Rooms;
+
+            /*foreach (var userRoom  in userRooms)
+            {
+                userRoom.Se
+            }*/
             
             var priorityPoints = 0;
 

@@ -15,7 +15,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             using var hmac = new HMACSHA512();
             hmac.Key = config.PasswordSalt;
             var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            
+
             return Convert.ToBase64String(hash);
         }
 
