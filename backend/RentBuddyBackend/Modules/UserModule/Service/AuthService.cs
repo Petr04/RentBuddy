@@ -9,14 +9,14 @@ namespace RentBuddyBackend.Modules.UserModule.Service
 {
     public class AuthService(IConfiguration configuration)
     {
-        public static string HashPassword(string password)
+        public string HashPassword(string password)
         {
             using var hmac = new HMACSHA512();
             var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             return Convert.ToBase64String(hash);
         }
 
-        public static bool VerifyPassword(string password, string hashedPassword)
+        public bool VerifyPassword(string password, string hashedPassword)
         {
             using var hmac = new HMACSHA512();
             var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));

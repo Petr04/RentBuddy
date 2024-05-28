@@ -1,5 +1,4 @@
 ﻿using RentBuddyBackend.Infrastructure;
-using RentBuddyBackend.Modules.UserModule.Service;
 using RentBuddyBackend.Modules.ApartmentModule.Repository;
 
 namespace RentBuddyBackend.Modules.ApartmentModule

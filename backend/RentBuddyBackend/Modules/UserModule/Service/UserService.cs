@@ -1,20 +1,15 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Security.Claims;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using RentBuddyBackend.DAL.Entities;
 using RentBuddyBackend.DAL.Models;
 using RentBuddyBackend.Infrastructure;
+using RentBuddyBackend.Modules.ApartmentModule.Repository;
 using RentBuddyBackend.Modules.BlacklistModule.Repository;
 using RentBuddyBackend.Modules.BlacklistModule.Service;
 using RentBuddyBackend.Modules.FavoriteRooms.Service;
 using RentBuddyBackend.Modules.FavoriteUsersModule.Service;
 using RentBuddyBackend.Modules.UserModule.Repository;
-using RentBuddyBackend.Modules.ApartmentModule.Repository;
 
 namespace RentBuddyBackend.Modules.UserModule.Service
 {
@@ -25,7 +20,8 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             IBlackListService blackListService,
             IFavoriteService favoriteService,
             IFavoriteRoomsService favoriteRoomsService,
-            AuthService authService)
+            AuthService authService,
+            IMatchingService matchingService)
         : ControllerBase, IUserService
     {
         public async Task<ActionResult<UserEntity>> CreateOrUpdateUser(UserEntity userEntity)
@@ -83,7 +79,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             var userBlackList = await blacklistRepository.FindAsync(user.Blacklist.Id);
             var users = await userRepository.ToListAsync();
             var resultUsers = users.Where(u => !userBlackList.Users.Any(ub => u.Id == ub.Id));
-            var matches = Matching.Match(user, resultUsers);
+            var matches = matchingService.Match(user, resultUsers);
             var matchedUsers = matches.Keys.ToList();
             
             return Ok(matchedUsers);
@@ -98,7 +94,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             {
                 Id = Guid.Empty,
                 Email = model.Email,
-                PasswordHash = AuthService.HashPassword(model.Password),
+                PasswordHash = authService.HashPassword(model.Password),
                 Name = "temp",
                 Lastname = "temp",
                 BirthDate = DateTime.Today,
@@ -132,7 +128,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         {
             var user = await userRepository.FindByEmailAsync(model.Email);
             
-            if (user == null || !AuthService.VerifyPassword(model.Password, user.PasswordHash))
+            if (user == null || !authService.VerifyPassword(model.Password, user.PasswordHash))
                 return Unauthorized("Invalid credentials");
 
             var token = authService.GenerateJwtToken(user);
@@ -182,10 +178,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             }
 
             foreach (var kvp in keysToRemove)
-            {
                 dictCopy.Remove(kvp);
-            }
-
 
             if (dictCopy.Count() == 0)
                 return NoContent();

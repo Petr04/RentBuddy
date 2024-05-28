@@ -1,8 +1,6 @@
-﻿using AutoMapper.Configuration.Annotations;
-using RentBuddyBackend.Modules.UserModule;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using AutoMapper.Configuration.Annotations;
+using RentBuddyBackend.Modules.UserModule;
 
 namespace RentBuddyBackend.DAL.Entities;
 
