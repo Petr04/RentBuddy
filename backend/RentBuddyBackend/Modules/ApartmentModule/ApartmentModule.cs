@@ -1,5 +1,4 @@
 ﻿using RentBuddyBackend.Infrastructure;
-using RentBuddyBackend.Modules.UserModule.Service;
 using RentBuddyBackend.Modules.ApartmentModule.Repository;
 
 namespace RentBuddyBackend.Modules.ApartmentModule
@@ -9,6 +8,8 @@ namespace RentBuddyBackend.Modules.ApartmentModule
         public IServiceCollection RegisterModule(IServiceCollection services)
         {
             services.AddScoped<IApartmentRepository, ApartmentRepository>();
+            services.AddAutoMapper(typeof(ApartmentMapping));
+            
             return services;
         }
     }

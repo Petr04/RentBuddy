@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentBuddyBackend.DAL;
 using RentBuddyBackend.DAL.Entities;
@@ -7,7 +8,10 @@ namespace RentBuddyBackend.Modules.RoomModule;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RoomController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment) : ControllerBase
+public class RoomController(
+    ApplicationDbContext context,
+    IWebHostEnvironment webHostEnvironment,
+    IMapper mapper) : ControllerBase
 {   
     
     [HttpGet]
@@ -29,13 +33,23 @@ public class RoomController(ApplicationDbContext context, IWebHostEnvironment we
     [HttpPost]
     public async Task<ActionResult<RoomEntity>> CreateOrUpdateRoom([FromBody] RoomEntity room)
     {
-        room.Id = Guid.Empty;
-        await context.Rooms.AddAsync(room);
+        var dbEntity = await context.Rooms.FindAsync(room.Id);
+        var isCreated = dbEntity != null;
+
+        if (isCreated)
+            mapper.Map(room, dbEntity);
+        else
+        {
+            room.Id = Guid.Empty;
+            await context.Rooms.AddAsync(room);
+        }
+        
         await context.SaveChangesAsync();
 
         return Ok(new CreatedOrUpdateResponse
         {
             Id = room.Id,
+            IsCreated = isCreated
         });
     }
 

@@ -1,9 +1,6 @@
 ﻿using RentBuddyBackend.Infrastructure;
-using RentBuddyBackend.Modules.FavoriteUsersModule.Repository;
-using RentBuddyBackend.Modules.FavoriteUsersModule.Service;
-using RentBuddyBackend.Modules.FavoriteUsersModule;
-using RentBuddyBackend.Modules.FavoriteRooms.Service;
 using RentBuddyBackend.Modules.FavoriteRooms.Repository;
+using RentBuddyBackend.Modules.FavoriteRooms.Service;
 
 namespace RentBuddyBackend.Modules.FavoriteRoomsModule
 {

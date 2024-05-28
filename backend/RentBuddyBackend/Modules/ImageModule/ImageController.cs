@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using RentBuddyBackend.DAL;
 using RentBuddyBackend.DAL.Entities;
 
 namespace RentBuddyBackend.Modules.ImageModule;
