@@ -11,5 +11,7 @@ namespace RentBuddyBackend.Modules.UserModule.Repository
         public Task<List<UserEntity>> ToListAsync();
         public void Remove(UserEntity userEntity);
         public EntityEntry<UserEntity> Update(UserEntity userEntity);
+        public Task<UserEntity?> FindByEmailAsync(string email);
+        public Task<bool> UserExists(string email);
     }
 }

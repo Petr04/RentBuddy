@@ -1,40 +1,49 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using RentBuddyBackend.DAL.Entities;
+using RentBuddyBackend.DAL.Models;
 using RentBuddyBackend.Infrastructure;
+using RentBuddyBackend.Modules.BlacklistModule.Repository;
+using RentBuddyBackend.Modules.BlacklistModule.Service;
+using RentBuddyBackend.Modules.FavoriteRooms.Service;
+using RentBuddyBackend.Modules.FavoriteUsersModule.Service;
 using RentBuddyBackend.Modules.UserModule.Repository;
+using RentBuddyBackend.Modules.ApartmentModule.Repository;
 
 namespace RentBuddyBackend.Modules.UserModule.Service
 {
-    public class UserService : ControllerBase, IUserService
+    public class UserService(IUserRepository userRepository,
+            IApartmentRepository apparmentRepostory,
+            IMapper mapper,
+            IBlacklistRepository blacklistRepository,
+            IBlackListService blackListService,
+            IFavoriteService favoriteService,
+            IFavoriteRoomsService favoriteRoomsService,
+            AuthService authService)
+        : ControllerBase, IUserService
     {
-        private readonly IUserRepository userRepository;
-        private readonly IMapper mapper;
-
-        public UserService(IUserRepository userRepository, IMapper mapper)
-        {
-            this.userRepository = userRepository;
-            this.mapper = mapper;
-        }
-
         public async Task<ActionResult<UserEntity>> CreateOrUpdateUser(UserEntity userEntity)
         {
             var user = await userRepository.FindAsync(userEntity.Id);
 
             if (user == null)
             {
-                var blacklistEntity = new BlacklistEntity(userEntity.FavoritesUsersId, new List<UserEntity>());
-                await blackListService.CreateOrUpdateBlacklist(blacklistEntity);
-                
-                var favouritesEntity = new FavouritesEntity(userEntity.BlacklistId, new List<UserEntity>());
-                await favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
-                
-                /*userEntity.FavoritesUsersId = favouritesEntity.Id;
-                userEntity.BlacklistId = blacklistEntity.Id;*/
+                var blackList =  new BlacklistEntity(Guid.NewGuid(), new List<UserEntity>());
+                var favoriteUsers = new FavoriteUsersEntity(Guid.NewGuid(), new List<UserEntity>());
+                var favoriteRooms = new FavoriteRoomsEntity(Guid.NewGuid(), new List<RoomEntity>());
+                await blackListService.CreateOrUpdateBlacklist(blackList);
+                await favoriteService.CreateOrUpdateFavouritiesEntity(favoriteUsers);
+                await favoriteRoomsService.CreateFavoriteRooms(favoriteRooms);
+                userEntity.Blacklist = blackList;
+                userEntity.FavoriteUsers = favoriteUsers;
+                userEntity.FavoriteRooms = favoriteRooms;
                 await userRepository.AddAsync(userEntity);
-                
-                user = userEntity;
             }
             else
                 mapper.Map(userEntity, user);
@@ -71,13 +80,14 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         public async Task<ActionResult<IEnumerable<UserEntity>>> MatchUser(Guid id)
         {
             var user = await userRepository.FindAsync(id);
+            var userBlackList = await blacklistRepository.FindAsync(user.Blacklist.Id);
             var users = await userRepository.ToListAsync();
-            var matches = Matching.Match(user, users);
+            var resultUsers = users.Where(u => !userBlackList.Users.Any(ub => u.Id == ub.Id));
+            var matches = Matching.Match(user, resultUsers);
             var matchedUsers = matches.Keys.ToList();
+            
             return Ok(matchedUsers);
         }
-<<<<<<< Updated upstream
-=======
         
         public async Task<ActionResult<UserEntity>> RegisterUser(RegisterModel model)
         {
@@ -101,14 +111,14 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 SleepTime = DateTime.Today,
             };
 
-            var blacklistEntity = new BlacklistEntity(Guid.NewGuid(), new List<UserEntity>());
+            var blacklistEntity = new BlacklistEntity(Guid.Empty, new List<UserEntity>());
             await blackListService.CreateOrUpdateBlacklist(blacklistEntity);
             
-            var favouritesEntity = new FavouritesEntity(Guid.NewGuid(), new List<UserEntity>());
+            var favouritesEntity = new FavoriteUsersEntity(Guid.Empty, new List<UserEntity>());
             await favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
             
-            user.FavoritesUsersId = favouritesEntity.Id;
-            user.BlacklistId = blacklistEntity.Id;
+            user.FavoriteUsers.Id = favouritesEntity.Id;
+            user.Blacklist.Id = blacklistEntity.Id;
 
             await userRepository.AddAsync(user);
             await userRepository.SaveChangesAsync();
@@ -129,6 +139,68 @@ namespace RentBuddyBackend.Modules.UserModule.Service
 
             return Ok(token);
         }
->>>>>>> Stashed changes
+
+        public async Task<ActionResult<UserEntity>> GetCurrentUser()
+        {
+
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var user = await userRepository.FindAsync(userId);
+            return Ok(user);
+                
+        }
+
+        public async Task<ActionResult> GetSuitableRoom(Guid id)
+        {
+            /*            if (User == null)
+                            return BadRequest("Пользователь не авторизован");
+
+                        var currentUser = GetCurrentUser().Result.Value;*/
+            var currentUser = await userRepository.FindAsync(id);
+            var favoriteUsers = currentUser.FavoriteUsers;
+            if (favoriteUsers.Users.Count == 0)
+                return NoContent();
+
+            var favoriteApartments = currentUser.FavoriteRooms.Rooms.Select(r=> r.Apartment.Id).ToList();
+            if (favoriteApartments.Count == 0)
+                return NoContent();
+
+            var dictCopy = FavoriteApartmentEntity.UsersFavoriteApartments;
+            var keysToRemove = new List<Guid>();
+            int i = 0;
+            foreach (var kvp in dictCopy)
+            {
+                if (!kvp.Key.Equals(favoriteApartments[i]))
+                    keysToRemove.Add(kvp.Key);
+
+                kvp.Value.Where(u1 => favoriteUsers.Users.Any(u2 => u1 == u2.Id)); // и наоборот
+                kvp.Value.Select(u => userRepository.FindAsync(u).Result).Where(u=>u.FavoriteUsers.Users.Contains(currentUser));
+
+                if (kvp.Value.Count() == 0)
+                    keysToRemove.Add(kvp.Key);
+
+                i++;
+            }
+
+            foreach (var kvp in keysToRemove)
+            {
+                dictCopy.Remove(kvp);
+            }
+
+
+            if (dictCopy.Count() == 0)
+                return NoContent();
+
+            var rand = new Random();
+            var favoriteKey = dictCopy.ElementAt(rand.Next(0, dictCopy.Count)).Key;
+            var apartmentEntity = await apparmentRepostory.FindAsync(favoriteKey);
+            var apartmentRooms = apartmentEntity.Rooms;
+            var resultRooms = apartmentRooms.Where(currentUser.FavoriteRooms.Rooms.Contains);
+
+            var resultRoom = resultRooms.ElementAt(rand.Next(0, resultRooms.Count()));
+            var resultUsers = dictCopy[favoriteKey].Select(u => userRepository.FindAsync(u).Result).ToList();
+
+            var result = new Tuple<RoomEntity, List<UserEntity>>(resultRoom, resultUsers);
+            return Ok(result);
+        }
     }
-}
+}   

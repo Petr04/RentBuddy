@@ -1,0 +1,15 @@
+<div class="w-full   mx-auto flex flex-col h-dvh bg-[#EBEBEB] overflow-auto">
+  <header class="mb-20">
+    <app-sort-bar (filterChange)="handleFilterChange($event)"></app-sort-bar>
+  </header>
+  <div class="container mx-auto px-5 md:px-40 xl:px-96 mb-16">
+    @if (Cards$ | async; as cards){
+      @for (card of (cards | filter:filterData); track card.id ){
+        <app-big-card [card] = 'card'  ></app-big-card>
+      }
+    }
+  </div>
+  <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
+    <app-next-btn (click)="printId()" [buttonText]="buttonText"> </app-next-btn>
+  </div>
+</div>
