@@ -4,23 +4,28 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using RentBuddyBackend.DAL.Entities;
+using RentBuddyBackend.Infrastructure;
 
 namespace RentBuddyBackend.Modules.UserModule.Service
 {
-    public class AuthService(IConfiguration configuration)
+    public class AuthService(Config config)
     {
         public string HashPassword(string password)
         {
             using var hmac = new HMACSHA512();
+            hmac.Key = config.PasswordSalt;
             var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+
             return Convert.ToBase64String(hash);
         }
 
         public bool VerifyPassword(string password, string hashedPassword)
         {
-            using var hmac = new HMACSHA512();
-            var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            return Convert.ToBase64String(hash) == hashedPassword;
+            var passwordHashInBytes = Convert.FromBase64String(hashedPassword);
+            using var hmac = new HMACSHA512(config.PasswordSalt);
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+            return computedHash.SequenceEqual(passwordHashInBytes);
         }
 
         public string GenerateJwtToken(UserEntity user)
@@ -31,7 +36,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("dKt3Y#9^3nTv%2GpB&y8U@C*#w!WqS"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("dKt3Y#9^3nTv%2GpB&y8U@C*#w!WqS6D"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
