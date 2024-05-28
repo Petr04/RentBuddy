@@ -8,6 +8,8 @@ namespace RentBuddyBackend.Modules.ApartmentModule
         public IServiceCollection RegisterModule(IServiceCollection services)
         {
             services.AddScoped<IApartmentRepository, ApartmentRepository>();
+            services.AddAutoMapper(typeof(ApartmentMapping));
+            
             return services;
         }
     }

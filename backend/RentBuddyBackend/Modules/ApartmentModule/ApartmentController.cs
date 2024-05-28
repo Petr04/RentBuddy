@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentBuddyBackend.DAL;
 using RentBuddyBackend.DAL.Entities;
@@ -7,7 +8,7 @@ namespace RentBuddyBackend.Modules.ApartmentModule;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ApartmentController(ApplicationDbContext context) : ControllerBase
+public class ApartmentController(ApplicationDbContext context, IMapper mapper) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ApartmentEntity>>> GetApartment()
@@ -28,13 +29,22 @@ public class ApartmentController(ApplicationDbContext context) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ApartmentEntity>> CreateOrUpdateApartment([FromBody] ApartmentEntity apartment)
     {
-        apartment.Id = Guid.Empty;
-        await context.Apartments.AddAsync(apartment);
+        var dbEntity = await context.Apartments.FindAsync(apartment.Id);
+        var isCreated = dbEntity != null;
+
+        if (isCreated)
+            mapper.Map(apartment, dbEntity);
+        else
+        {
+            apartment.Id = Guid.Empty;
+            await context.Apartments.AddAsync(apartment);
+        }
         await context.SaveChangesAsync();
         
         return Ok(new CreatedOrUpdateResponse
         {
             Id = apartment.Id,
+            IsCreated = isCreated
         });
     }
 
