@@ -31,12 +31,12 @@ namespace RentBuddyBackend.Modules.BlacklistModule
         public Task<ActionResult<BlacklistEntity>> GetBlacklist([FromRoute] Guid id)
             => blackListService.GetBlacklist(id);
 
-        [HttpPost("AddUserToBlacklist/{targetUserId:Guid}")]
-        public Task<ActionResult> AddBlacklistUser([FromBody] Guid currentUserId, [FromRoute] Guid targetUserId)
+        [HttpPost("{currentUserId:Guid}/AddUserToBlacklist/{targetUserId:Guid}")]
+        public Task<ActionResult> AddBlacklistUser([FromRoute] Guid currentUserId, [FromRoute] Guid targetUserId)
             => blackListService.AddBlacklistUser(currentUserId, targetUserId);
 
-        [HttpPost("DeleteUserFromBlacklist/{targetUserId:Guid}")]
-        public Task<ActionResult> DeleteBlacklistUser([FromBody] Guid currentUserId, [FromRoute] Guid targetUserId)
+        [HttpPost("{currentUserId:Guid}/DeleteUserFromBlacklist/{targetUserId:Guid}")]
+        public Task<ActionResult> DeleteBlacklistUser([FromRoute] Guid currentUserId, [FromRoute] Guid targetUserId)
             => blackListService.DeleteBlacklistUser(currentUserId, targetUserId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using RentBuddyBackend.DAL.Entities;
 using RentBuddyBackend.Modules.FavoriteRooms.Repository;
 using RentBuddyBackend.Modules.RoomModule.Repository;
@@ -12,15 +13,15 @@ namespace RentBuddyBackend.Modules.FavoriteRooms.Service
         IRoomRepository roomRepository
         ) : ControllerBase, IFavoriteRoomsService
     {
-        public async Task<ActionResult> AddRoomToFavorites(Guid roomId, Guid currentUserId)
+        public async Task<ActionResult> AddRoomToFavorites(List<Guid> roomsId, Guid currentUserId)
         {   
             var user =  await userRepository.FindAsync(currentUserId);
             if (user == null)
                 return BadRequest("Пользователя не существует");
 
-            var targetRoom = await roomRepository.FindAsync(roomId);
-            var favoriteRoomsEntity = await favoriteRoomsRepository.FindAsync(user.FavoriteRooms.Id);
-            favoriteRoomsEntity.Rooms.Add(targetRoom);
+           
+            var favoriteRoomsEntity = await favoriteRoomsRepository.FindAsync(user.FavoriteRoomsId);
+            favoriteRoomsEntity.RoomsId.AddRange(roomsId);
 
             await favoriteRoomsRepository.SaveChangesAsync();
 

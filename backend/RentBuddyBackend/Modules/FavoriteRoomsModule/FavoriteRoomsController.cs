@@ -15,9 +15,9 @@ namespace RentBuddyBackend.Modules.FavoriteRooms
             this.service = service;
         }
 
-        [HttpPost("AddRoomToFavorites")]
-        public Task<ActionResult> AddRoomToFavorites([FromBody] Guid roomId, Guid currentUserId)
-            => service.AddRoomToFavorites(roomId, currentUserId);
+        [HttpPost("{currentUserId:Guid}/AddRoomToFavorites")]
+        public Task<ActionResult> AddRoomToFavorites([FromBody] List<Guid> roomsId, Guid currentUserId)
+            => service.AddRoomToFavorites(roomsId, currentUserId);
 
         [HttpGet("{favoritesRoomsId:Guid}")]
         public Task<ActionResult<FavoriteRoomsEntity>> GetFavoritesRooms(Guid favoritesRoomsId)

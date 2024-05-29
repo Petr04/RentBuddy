@@ -6,13 +6,13 @@ using RentBuddyBackend.Modules.UserModule.Repository;
 
 namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
 {
-    public class FavoriteService : ControllerBase, IFavoriteService
+    public class FavoriteUsersService : ControllerBase, IFavoriteUsersService
     {   
-        private IFavoriteRepository favoriteUsersRepository;
+        private IFavoriteUsersRepository favoriteUsersRepository;
         private IUserRepository userRepository;
         private IMapper favoriteUsersMapper;
 
-        public FavoriteService(IFavoriteRepository favoriteUsersRepository, IUserRepository userRepository, IMapper favoriteMapper)
+        public FavoriteUsersService(IFavoriteUsersRepository favoriteUsersRepository, IUserRepository userRepository, IMapper favoriteMapper)
         {
             this.favoriteUsersRepository = favoriteUsersRepository;
             this.userRepository = userRepository;
@@ -22,9 +22,8 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
         public async Task<ActionResult> AddFavouritiesUser(Guid currentUserId, Guid targetUserId)
         {   
             var currentUser = await userRepository.FindAsync(currentUserId);
-            var favourities = await favoriteUsersRepository.FindAsync(currentUser.FavoriteUsers.Id);
-            var targetUser = await userRepository.FindAsync(targetUserId);
-            favourities.Users.Add(targetUser);
+            var favourities = await favoriteUsersRepository.FindAsync(currentUser.FavoriteUsersId);
+            favourities.UsersId.Add(targetUserId);
             await favoriteUsersRepository.SaveChangesAsync();
             return NoContent();
         }
@@ -32,9 +31,8 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
         public async Task<ActionResult> DeleteFavouritiesUser(Guid currentUserId, Guid targetUserId)
         {
             var currentUser = await userRepository.FindAsync(currentUserId);
-            var favourities = await favoriteUsersRepository.FindAsync(currentUser.FavoriteUsers.Id);
-            var targetUser = await userRepository.FindAsync(targetUserId);
-            favourities.Users.Remove(targetUser);
+            var favourities = await favoriteUsersRepository.FindAsync(currentUser.FavoriteUsersId);
+            favourities.UsersId.Remove(targetUserId);
             await favoriteUsersRepository.SaveChangesAsync();
             return NoContent();
         }

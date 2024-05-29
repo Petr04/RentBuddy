@@ -5,7 +5,7 @@ using RentBuddyBackend.DAL.Entities;
 
 namespace RentBuddyBackend.Modules.FavoriteUsersModule.Repository
 {
-    public class FavoriteRepository(ApplicationDbContext context) : IFavoriteRepository
+    public class FavoriteUsersRepository(ApplicationDbContext context) : IFavoriteUsersRepository
     {
         public async Task<EntityEntry<FavoriteUsersEntity>> AddAsync(FavoriteUsersEntity favoriteUsersEntity)
             => await context.FavouritesEntities.AddAsync(favoriteUsersEntity);

@@ -8,7 +8,7 @@ public class Config(bool isDev)
     public byte[] PasswordSalt { get; } = new HMACSHA512(Encoding.ASCII.GetBytes("qlsdfgtbzxbs4qwe")).Key;
 
     public string DbConnectionString { get; } = isDev
-        ? "Server=rb-postgresdb;Database=RentBuddyDB;Port=5432;User Id=postgres;Password=1"
+        ? "Server=localhost;Database=RentBuddyDB;Port=5432;User Id=postgres;Password=1"
         : Environment.GetEnvironmentVariable("Connection");
     // Чтобы сделать миграцию - хост менять на localhost
     // Для работы в контейнере - rb-postgresdb
