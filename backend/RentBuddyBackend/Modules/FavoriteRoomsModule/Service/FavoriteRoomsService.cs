@@ -19,11 +19,8 @@ namespace RentBuddyBackend.Modules.FavoriteRooms.Service
                 return BadRequest("Пользователя не существует");
 
             var targetRoom = await roomRepository.FindAsync(roomId);
-            user.FavoriteRooms.Rooms.Add(targetRoom);
-
-            var apartmentId = targetRoom.Apartment.Id;
-
-            AddFavoriteApartment(apartmentId, user.Id);
+            var favoriteRoomsEntity = await favoriteRoomsRepository.FindAsync(user.FavoriteRooms.Id);
+            favoriteRoomsEntity.Rooms.Add(targetRoom);
 
             await favoriteRoomsRepository.SaveChangesAsync();
 
@@ -45,13 +42,6 @@ namespace RentBuddyBackend.Modules.FavoriteRooms.Service
             if (favoriteRooms == null)
                 await favoriteRoomsRepository.AddAsync(favoriteRoomsEntity);
             return Ok(favoriteRoomsEntity);
-        }
-
-        public void AddFavoriteApartment(Guid apartmentId, Guid userId)
-        {
-            if (!FavoriteApartmentEntity.UsersFavoriteApartments.ContainsKey(apartmentId))
-                FavoriteApartmentEntity.UsersFavoriteApartments.Add(apartmentId, new List<Guid> { userId });
-            FavoriteApartmentEntity.UsersFavoriteApartments[apartmentId].Add(userId);
         }
     }
 }
