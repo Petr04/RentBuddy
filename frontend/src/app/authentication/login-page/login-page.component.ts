@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { customValidator } from '../../custom-validator/custom-validator.component';
-import { CLIENT_RENEG_LIMIT } from 'tls'; 
+import { CLIENT_RENEG_LIMIT } from 'tls';
 import { error } from 'console';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -20,8 +20,8 @@ export class LoginPageComponent implements OnDestroy {
 
   constructor(private authService: AuthService , private router: Router){
     this.authorizationForm = new FormGroup({
-      userEmail: new FormControl("", [Validators.required ,Validators.email]),
-      userPassword: new FormControl("")
+      email: new FormControl("", [Validators.required ,Validators.email]),
+      password: new FormControl("")
     })
   }
 
@@ -34,23 +34,19 @@ export class LoginPageComponent implements OnDestroy {
 
 
   public confirmAuth():void{
-    if (this.authorizationForm.invalid || this.authorizationForm.disabled){
+    if (this.authorizationForm.disabled){
       this.authorizationForm.markAllAsTouched()
       return
     }
     else{
-      // this._account.login()
       this.authorizationForm.disable()
-      // this._accountService.login()
-      // this.aSub = this.authService.login(this.authorizationForm.value).subscribe({
-      //   next: () => this.router.navigate(['/select-rent']),
-      //   error: (err) => {
-      //     console.log(err)
-      //     this.authorizationForm.enable()
-      //   }
-      // })
-      // this._accountSerrvice.login()
-      // this.router.navigate(['/profile'])
+      this.aSub = this.authService.login(this.authorizationForm.value).subscribe({
+        next: () => this.router.navigate(['/profile']),
+        error: (err) => {
+          console.log(err)
+          this.authorizationForm.enable()
+        }
+      })
     }
     console.log(this.authorizationForm.value)
   }

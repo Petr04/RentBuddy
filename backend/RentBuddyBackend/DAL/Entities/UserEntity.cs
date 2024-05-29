@@ -1,7 +1,6 @@
-﻿using AutoMapper.Configuration.Annotations;
-using RentBuddyBackend.Modules.UserModule;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using RentBuddyBackend.Modules.UserModule;
 
 namespace RentBuddyBackend.DAL.Entities;
 
@@ -33,6 +32,8 @@ public class UserEntity : IEntity
     [JsonIgnore]
     public virtual FavoriteRoomsEntity? FavoriteRooms { get; set; }
 
+    [Required(ErrorMessage = "Email is required")]
+    [EmailAddress(ErrorMessage = "Invalid Email Address")]
     public string Email { get; set; }
     public string PasswordHash { get; set; }
 }

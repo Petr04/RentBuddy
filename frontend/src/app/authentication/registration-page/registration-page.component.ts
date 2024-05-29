@@ -19,9 +19,9 @@ export class RegistrationPageComponent implements OnDestroy{
   constructor(private auth: AuthService, private router: Router){
     this.registrationForm = new FormGroup(
       {
-        userEmail: new FormControl('', [Validators.required, Validators.email]),
-        userPassword: new FormControl(''),
-        userPassword2: new FormControl('')
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl(''),
+        passwordConfirm: new FormControl('')
       },
       conformPassword
     );
@@ -38,22 +38,16 @@ export class RegistrationPageComponent implements OnDestroy{
       this.registrationForm.markAllAsTouched()
       return
     }
-    else {
+    else{
       this.registrationForm.disable()
-      this.aSub = this.auth.register(this.registrationForm.value).subscribe(
-        ()=> this.router.navigate(['/login'], {
-          queryParams: {
-            registered: true
-          }
-        }),
-        error => {
-          console.warn(error)
+      this.aSub = this.auth.register(this.registrationForm.value).subscribe({
+        next: () => this.router.navigate(['/login']),
+        error: (err) => {
+          console.log(err)
           this.registrationForm.enable()
         }
-      )
-
-    }
+      })
     console.log(this.registrationForm.value)
+    }
   }
-
 }

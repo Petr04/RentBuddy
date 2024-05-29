@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using RentBuddyBackend.DAL;
-using RentBuddyBackend.DAL.Entities;
-using RentBuddyBackend.Infrastructure;
+﻿using RentBuddyBackend.Infrastructure;
 using RentBuddyBackend.Modules.UserModule.Repository;
 using RentBuddyBackend.Modules.UserModule.Service;
-using System.Text.Json.Serialization;
 
 namespace RentBuddyBackend.Modules.UserModule
 {

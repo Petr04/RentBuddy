@@ -1,6 +1,7 @@
 <div class="w-full mx-auto flex flex-col h-dvh bg-[#FFFFFF] overflow-auto">
   <header class="mb-16">
-    <div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly  fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
+    <div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly
+    fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
       <div class="flex flex-row justify-start w-full ">
         <button class="justify-start"><img src="../assets/arrow.png"></button>
         <h2 class="mx-auto text-xl font-semibold">Профиль</h2>
@@ -26,24 +27,24 @@
       <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
         <h4 class="ml-2 font-medium">Ваш пол</h4>
         <div class="flex justify-evenly gap-2.5">
-          <button id="male" (click)="male()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">м</button>
-          <button id="female" (click)="female()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">ж</button>
+          <button  [ngClass]="{isSelect: gender}" (click)="male()" class= "opacity-40 bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">м</button>
+          <button  [ngClass]="{isNotSelect: gender}" (click)="female()" class=" bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm ">ж</button>
         </div>
       </div>
 
       <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
         <h4 class="ml-2 font-medium">Вы курите?</h4>
         <div class="flex justify-evenly gap-2.5">
-          <button id="smoke" (click)="smoke()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">да</button>
-          <button id="noSmoke" (click)="noSmoke()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">нет</button>
+          <button  [ngClass]="{isSelect: isSmoke}" (click)="smoke()" class="opacity-40  bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">да</button>
+          <button [ngClass]="{isNotSelect: isSmoke}" (click)="noSmoke()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">нет</button>
         </div>
       </div>
 
       <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
         <h4 class="ml-2 font-medium">Есть питомец?</h4>
         <div class="flex justify-evenly gap-2.5">
-          <button id="pet" (click)="pet()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm opacity-40">да</button>
-          <button id="noPet" (click)="noPet()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">нет</button>
+          <button [ngClass]="{isSelect: hasPet}" (click)="pet()" class="opacity-40  bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">да</button>
+          <button [ngClass]="{isNotSelect: hasPet}" (click)="noPet()" class="bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">нет</button>
         </div>
       </div>
 

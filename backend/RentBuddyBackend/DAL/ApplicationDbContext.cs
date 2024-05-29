@@ -17,8 +17,7 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, Config config) : base(options)
     {
         this.config = config;
-
-        //Database.EnsureDeleted();
+        
         if (Database.GetPendingMigrations().Any())
         {
             Database.EnsureDeleted();

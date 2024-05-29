@@ -1,9 +1,6 @@
 ﻿using RentBuddyBackend.Infrastructure;
-using RentBuddyBackend.Modules.UserModule.Repository;
-using RentBuddyBackend.Modules.UserModule.Service;
-using RentBuddyBackend.Modules.UserModule;
-using RentBuddyBackend.Modules.BlacklistModule.Service;
 using RentBuddyBackend.Modules.BlacklistModule.Repository;
+using RentBuddyBackend.Modules.BlacklistModule.Service;
 
 namespace RentBuddyBackend.Modules.BlacklistModule
 {
