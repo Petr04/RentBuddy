@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json.Converters;
 using RentBuddyBackend.Modules.UserModule;
 
 namespace RentBuddyBackend.DAL.Entities;
@@ -12,6 +13,7 @@ public class UserEntity : IEntity
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime BirthDate { get; set; }
+    [JsonConverter(typeof(StringEnumConverter))]
     public GenderType Gender { get; set; }
     public bool IsSmoke { get; set; }
     public bool HasPet { get; set; }

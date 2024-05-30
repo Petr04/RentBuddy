@@ -12,6 +12,6 @@ public class BlacklistEntity : IEntity
     public BlacklistEntity()
     {
         Id = Guid.NewGuid();
-        UsersId = new List<Guid>();
+        UsersId = new List<Guid> {};
     }
 }

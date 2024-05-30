@@ -22,6 +22,14 @@ public class RoomController(
         return Ok(data);
     }
 
+    [HttpGet("PublishedRooms")]
+    public async Task<ActionResult<IEnumerable<RoomEntity>>> GetPublishedRooms()
+    {
+        var data = await context.Rooms.ToListAsync();
+        var publishedRooms = data.Where(r => r.IsPublished).ToList();
+        return Ok(publishedRooms);
+    }
+
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<RoomEntity>> GetRoom([FromRoute] Guid id)
     {
@@ -80,6 +88,7 @@ public class RoomController(
         var imageData = await System.IO.File.ReadAllBytesAsync(imagePath);
         return File(imageData, "image/jpeg");
     }
+    
 
     
 }
