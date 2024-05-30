@@ -5,20 +5,30 @@
       <div class="flex flex-row justify-start w-full ">
         <button class="justify-start"><img src="../assets/arrow.png"></button>
         <h2 class="mx-auto text-xl font-semibold">Профиль</h2>
+        <button class="justify-end">Выйти</button>
       </div>
     </div>
   </header>
   <div [formGroup]="profileForm">
     <div class="mt-7 container mx-auto px-5 md:px-40 xl:px-96 flex  flex-col mb-20">
       <h3 class="font-semibold text-xl ml-2">Заполни информацию о себе:</h3>
-      <div class="mt-2.5 w-full">
-        <input formControlName="name" type="text" placeholder="Ваше имя" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
+      <div class="flex flex-row gap-2.5 mt-2.5 w-full">
+        <div class="w-2/5">
+          <label for="img-input-1">
+            <img id="blah-1" alt="" class="mt-2.5 rounded-full h-24 w-24 object-cover object-center bg-[url('assets/default.svg')] bg-center"/>
+            <input type="file" id="img-input-1" class="hidden"
+                   onchange="document.getElementById('blah-1').src = window.URL.createObjectURL(this.files[0])">
+          </label>
+        </div>
+        <div class="flex flex-col w-full">
+          <div class="mt-2.5 w-full">
+            <input formControlName="name" type="text" placeholder="Ваше имя" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
+          </div>
+          <div class="mt-2.5 w-full">
+            <input formControlName="lastname" type="text" placeholder="Ваша фамилия" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
+          </div>
+        </div>
       </div>
-
-      <div class="mt-2.5 w-full">
-        <input formControlName="lastname" type="text" placeholder="Ваша фамилия" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
-      </div>
-
       <h4 class="mt-3.5 ml-2 font-medium">Дата рождения</h4>
       <div class="mt-2.5 w-full">
         <input formControlName="birthDate" type="date" placeholder="мм/дд/гггг" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
@@ -100,7 +110,12 @@
           <label class="pl-2" for="checkbox">не устраиваю вечеринки</label>
         </div>
       </div>
-
+      <h4 class="mt-3.5 ml-2 font-medium">Расскажи о себе</h4>
+      <div class="mt-1 w-full">
+        <textarea formControlName="description" type="text" rows="4"
+                  placeholder="Расскажите о себе, это поможет найти вам соседа."
+                  class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full resize-none outline-none"></textarea>
+      </div>
     </div>
     <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
       <app-next-btn (click)="saveAndContinue()" [buttonText]="buttonText"></app-next-btn>
