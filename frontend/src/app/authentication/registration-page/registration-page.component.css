@@ -11,3 +11,18 @@ input.ng-touched.ng-valid{
   transform:translate(-50%, -50%);
   right: 0;
 }
+
+.input__img{
+  top:50%;
+  bottom: 50%;
+  transform:translate(-50%, -50%);
+  right: 0;
+}
+
+.eye{
+  background-image: url('/assets/eyes.svg');
+}
+
+.eye-closed{
+  background-image: url('/assets/eyes-close.svg');
+}

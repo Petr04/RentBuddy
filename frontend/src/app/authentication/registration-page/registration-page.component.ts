@@ -50,4 +50,11 @@ export class RegistrationPageComponent implements OnDestroy{
     console.log(this.registrationForm.value)
     }
   }
+  visible:boolean = true;
+  changetype:boolean =true;
+
+  viewpass(){
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
+  }
 }
