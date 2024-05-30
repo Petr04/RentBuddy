@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch.Operations;
+using Microsoft.AspNetCore.Mvc;
 using RentBuddyBackend.DAL.Entities;
 using RentBuddyBackend.DAL.Models;
 using RentBuddyBackend.Modules.UserModule.Service;
@@ -9,6 +10,7 @@ namespace RentBuddyBackend.Modules.UserModule;
 [ApiController]
 public class UsersController(IUserService usersService) : ControllerBase
 {
+    
     [HttpGet]
     public Task<ActionResult<IEnumerable<UserEntity>>> GetUsers()
         => usersService.GetUsers();
@@ -34,7 +36,7 @@ public class UsersController(IUserService usersService) : ControllerBase
         => usersService.RegisterUser(model);
 
     [HttpPost("login")]
-    public Task<ActionResult<string>> Login([FromBody] AuthModel model)
+    public Task<ActionResult<Guid>> Login([FromBody] AuthModel model)
         => usersService.AuthUser(model);
 
     [HttpGet("GetSuitableRoom/{id:guid}")]

@@ -4,11 +4,12 @@ import { User } from '../interfaces/interface';
 import { animate, keyframes, transition, trigger } from '@angular/animations';
 import * as kf from '../keyframes/keyframes';
 import { SelectCardDirective } from '../directives/select-card.directive';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-match-page',
   standalone: true,
-  imports: [SelectCardDirective],
+  imports: [SelectCardDirective, RouterLink],
   templateUrl: './match-page.component.html',
   styleUrl: './match-page.component.css',
   animations: [

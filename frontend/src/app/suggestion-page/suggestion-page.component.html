@@ -2,7 +2,7 @@
     <header class="mb-16">
         <div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly  fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
             <div class="flex flex-row justify-start w-full ">
-              <button class="justify-start"><img src="../assets/arrow.png"></button>
+              <button class="justify-start" [routerLink]="['/match']"><img src="../assets/arrow.png"></button>
               <h2 class="mx-auto text-xl font-semibold">Мы подобрали вам жилье</h2>
             </div>
           </div>
@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
-        <h4 class="mx-auto font-semibold text-[#000000] text-center mb-2.5">Не договорились об аренде?</h4>
+        <h4 class="mx-auto font-semibold text-[#000000] text-center mb-2.5 bg-[#EBEBEB]">Не договорились об аренде?</h4>
         <app-next-btn buttonText="Продолжить поиск"></app-next-btn>
     </div>
   </div>

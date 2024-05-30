@@ -22,20 +22,28 @@ namespace RentBuddyBackend.Modules.BlacklistModule.Service
 
         public async Task<ActionResult> AddBlacklistUser(Guid currentUserId, Guid targetUserId)
         {
+            if (currentUserId == targetUserId)
+                return BadRequest("CurrentUserId совпадает с targetUserId");
             var currentUser = await userRepository.FindAsync(currentUserId);
+            if (currentUser == null)
+                return BadRequest("Пользователя не существует");
             var blacklist = await blacklistRepository.FindAsync(currentUser.BlacklistId);
             blacklist.UsersId.Add(targetUserId);
             await blacklistRepository.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
 
         public async Task<ActionResult> DeleteBlacklistUser(Guid currentUserId, Guid targetUserId)
         {
+            if (currentUserId == targetUserId)
+                return BadRequest("CurrentUserId совпадает с targetUserId");
             var currentUser = await userRepository.FindAsync(currentUserId);
+            if (currentUser == null)
+                return BadRequest("Пользователя не существует");
             var blacklist = await blacklistRepository.FindAsync(currentUser.BlacklistId);
             blacklist.UsersId.Remove(targetUserId);
             await blacklistRepository.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
 
         public async Task<ActionResult<BlacklistEntity>> CreateOrUpdateBlacklist(BlacklistEntity blacklistEntity)

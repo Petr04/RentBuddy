@@ -121,7 +121,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             return Ok(new JwtTokenModel { Token = token});
         }
 
-        public async Task<ActionResult<string>> AuthUser(AuthModel model)
+        public async Task<ActionResult<Guid>> AuthUser(AuthModel model)
         {
             var user = await userRepository.FindByEmailAsync(model.Email);
 
