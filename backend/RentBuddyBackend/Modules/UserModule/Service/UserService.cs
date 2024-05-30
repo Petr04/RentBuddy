@@ -113,12 +113,12 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 PureLevel = 0,
                 RiseTime = DateTime.Today,
                 SleepTime = DateTime.Today,
+                AboutMe = ""
             };
 
             await CreateOrUpdateUser(user);
-            var token = authService.GenerateJwtToken(user);
 
-            return Ok(new JwtTokenModel { Token = token});
+            return Ok(new RegReturnModel{ UserId = user.Id });
         }
 
         public async Task<ActionResult<Guid>> AuthUser(AuthModel model)
@@ -130,8 +130,14 @@ namespace RentBuddyBackend.Modules.UserModule.Service
 
             if (!authService.VerifyPassword(model.Password, user.PasswordHash))
                 return BadRequest();
+            
+            var token = authService.GenerateJwtToken(user);
 
-            return Ok(user.Id);
+            return Ok(new AuthReturnModel
+            {
+                Token = token,
+                UserId = user.Id
+            });
         }
 
         public async Task<ActionResult<UserEntity>> GetCurrentUser()
