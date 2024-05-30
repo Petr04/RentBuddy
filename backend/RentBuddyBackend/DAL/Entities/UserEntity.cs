@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json.Converters;
 using RentBuddyBackend.Modules.UserModule;
 
 namespace RentBuddyBackend.DAL.Entities;
@@ -12,6 +13,7 @@ public class UserEntity : IEntity
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime BirthDate { get; set; }
+    [JsonConverter(typeof(StringEnumConverter))]
     public GenderType Gender { get; set; }
     public bool IsSmoke { get; set; }
     public bool HasPet { get; set; }
@@ -24,16 +26,19 @@ public class UserEntity : IEntity
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
     public DateTime SleepTime { get; set; }
     public TimeSpentAtHome TimeSpentAtHome { get; set; }
+    public string AboutMe { get; set; }
 
     [JsonIgnore]
-    public virtual BlacklistEntity? Blacklist { get; set; } 
+    public Guid BlacklistId { get; set; } 
     [JsonIgnore]
-    public virtual FavoriteUsersEntity? FavoriteUsers { get; set; } 
+    public Guid FavoriteUsersId { get; set; } 
     [JsonIgnore]
-    public virtual FavoriteRoomsEntity? FavoriteRooms { get; set; }
-
-    [Required(ErrorMessage = "Email is required")]
+    public Guid FavoriteRoomsId { get; set; }
+/*
+    [Required(ErrorMessage = "Email is required")]*/
     [EmailAddress(ErrorMessage = "Invalid Email Address")]
-    public string Email { get; set; }
-    public string PasswordHash { get; set; }
+    [JsonIgnore]
+    public string? Email { get; set; }
+    [JsonIgnore]
+    public string? PasswordHash { get; set; }
 }

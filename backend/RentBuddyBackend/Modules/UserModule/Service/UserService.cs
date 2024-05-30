@@ -7,8 +7,11 @@ using RentBuddyBackend.Infrastructure;
 using RentBuddyBackend.Modules.ApartmentModule.Repository;
 using RentBuddyBackend.Modules.BlacklistModule.Repository;
 using RentBuddyBackend.Modules.BlacklistModule.Service;
+using RentBuddyBackend.Modules.FavoriteRooms.Repository;
 using RentBuddyBackend.Modules.FavoriteRooms.Service;
+using RentBuddyBackend.Modules.FavoriteUsersModule.Repository;
 using RentBuddyBackend.Modules.FavoriteUsersModule.Service;
+using RentBuddyBackend.Modules.RoomModule.Repository;
 using RentBuddyBackend.Modules.UserModule.Repository;
 
 namespace RentBuddyBackend.Modules.UserModule.Service
@@ -18,10 +21,13 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             IMapper mapper,
             IBlacklistRepository blacklistRepository,
             IBlackListService blackListService,
-            IFavoriteService favoriteService,
+            IFavoriteUsersService favoriteService,
             IFavoriteRoomsService favoriteRoomsService,
             AuthService authService,
-            IMatchingService matchingService)
+            IMatchingService matchingService,
+            IFavoriteUsersRepository favoriteUsersRepository,
+            IFavoriteRoomsRepository favoriteRoomsRepository,
+            IRoomRepository roomRepository)
         : ControllerBase, IUserService
     {
         public async Task<ActionResult<UserEntity>> CreateOrUpdateUser(UserEntity userEntity)
@@ -30,16 +36,18 @@ namespace RentBuddyBackend.Modules.UserModule.Service
 
             if (user == null)
             {
-                var blackList =  new BlacklistEntity(Guid.NewGuid(), new List<UserEntity>());
-                var favoriteUsers = new FavoriteUsersEntity(Guid.NewGuid(), new List<UserEntity>());
-                var favoriteRooms = new FavoriteRoomsEntity(Guid.NewGuid(), new List<RoomEntity>());
+                var blackList =  new BlacklistEntity();
+                var favoriteUsers = new FavoriteUsersEntity();
+                var favoriteRooms = new FavoriteRoomsEntity();
                 await blackListService.CreateOrUpdateBlacklist(blackList);
                 await favoriteService.CreateOrUpdateFavouritiesEntity(favoriteUsers);
                 await favoriteRoomsService.CreateFavoriteRooms(favoriteRooms);
-                userEntity.Blacklist = blackList;
-                userEntity.FavoriteUsers = favoriteUsers;
-                userEntity.FavoriteRooms = favoriteRooms;
+                userEntity.BlacklistId = blackList.Id;
+                userEntity.FavoriteUsersId = favoriteUsers.Id;
+                userEntity.FavoriteRoomsId = favoriteRooms.Id;
                 await userRepository.AddAsync(userEntity);
+                await userRepository.SaveChangesAsync();
+                return userEntity;
             }
             else
                 mapper.Map(userEntity, user);
@@ -76,9 +84,9 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         public async Task<ActionResult<IEnumerable<UserEntity>>> MatchUser(Guid id)
         {
             var user = await userRepository.FindAsync(id);
-            var userBlackList = await blacklistRepository.FindAsync(user.Blacklist.Id);
+            var userBlackList = await blacklistRepository.FindAsync(user.BlacklistId);
             var users = await userRepository.ToListAsync();
-            var resultUsers = users.Where(u => !userBlackList.Users.Any(ub => u.Id == ub.Id));
+            var resultUsers = users.Where(u => !userBlackList.UsersId.Any(ub => u.Id == ub));
             var matches = matchingService.Match(user, resultUsers);
             var matchedUsers = matches.Keys.ToList();
             
@@ -113,7 +121,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             return Ok(new JwtTokenModel { Token = token});
         }
 
-        public async Task<ActionResult<string>> AuthUser(AuthModel model)
+        public async Task<ActionResult<Guid>> AuthUser(AuthModel model)
         {
             var user = await userRepository.FindByEmailAsync(model.Email);
 
@@ -123,9 +131,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             if (!authService.VerifyPassword(model.Password, user.PasswordHash))
                 return BadRequest();
 
-            var token = authService.GenerateJwtToken(user);
-
-            return Ok(new JwtTokenModel { Token = token});
+            return Ok(user.Id);
         }
 
         public async Task<ActionResult<UserEntity>> GetCurrentUser()
@@ -137,55 +143,113 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 
         }
 
-        public async Task<ActionResult> GetSuitableRoom(Guid id)
+        public async Task<ActionResult> GetSuitableRoom(Guid id) 
         {
-            /*            if (User == null)
-                            return BadRequest("Пользователь не авторизован");
-
-                        var currentUser = GetCurrentUser().Result.Value;*/
             var currentUser = await userRepository.FindAsync(id);
-            var favoriteUsers = currentUser.FavoriteUsers;
-            if (favoriteUsers.Users.Count == 0)
+            var idFavoriteUsers = await favoriteUsersRepository.FindAsync(currentUser.FavoriteUsersId);
+            var selectedFavoriteUsers = idFavoriteUsers.UsersId.Select(u => userRepository.FindAsync(u).Result);
+            var filteredFavoriteUsers = selectedFavoriteUsers
+                    .Where(u => favoriteUsersRepository
+                    .FindAsync(u.FavoriteUsersId).Result.UsersId
+                    .Contains(currentUser.Id) && u.Id != currentUser.Id)
+                    .ToList();
+
+            if (filteredFavoriteUsers.Count == 0)
                 return NoContent();
 
-            var favoriteApartments = currentUser.FavoriteRooms.Rooms.Select(r=> r.Apartment.Id).ToList();
-            if (favoriteApartments.Count == 0)
-                return NoContent();
+            var dict = new Dictionary<RoomEntity, List<List<UserEntity>>>();
 
-            var dictCopy = FavoriteApartmentEntity.UsersFavoriteApartments;
-            var keysToRemove = new List<Guid>();
-            int i = 0;
-            foreach (var kvp in dictCopy)
+            var userFavoriteRooms = favoriteRoomsRepository
+                .FindAsync(currentUser.FavoriteRoomsId).Result.RoomsId
+                .Select(id => roomRepository.FindAsync(id).Result)
+                .ToList();
+
+            var rnd = new Random();
+
+            for (var i = 0; i < userFavoriteRooms.Count; i++)
             {
-                if (!kvp.Key.Equals(favoriteApartments[i]))
-                    keysToRemove.Add(kvp.Key);
-
-                kvp.Value.Where(u1 => favoriteUsers.Users.Any(u2 => u1 == u2.Id)); // и наоборот
-                kvp.Value.Select(u => userRepository.FindAsync(u).Result).Where(u=>u.FavoriteUsers.Users.Contains(currentUser));
-
-                if (kvp.Value.Count() == 0)
-                    keysToRemove.Add(kvp.Key);
-
-                i++;
+                dict.Add(userFavoriteRooms[i], new List<List<UserEntity>>());
             }
 
-            foreach (var kvp in keysToRemove)
-                dictCopy.Remove(kvp);
+            foreach (var kvp in dict)
+            {
+                var apartment = kvp.Key.Apartment;
+                for (int i = 0; i < apartment.Rooms.Count; i++)
+                {
+                    if (apartment.Rooms[i].Id == kvp.Key.Id)
+                        continue;
+                    else
+                    {
+                        int count = 0;
+                        var currentRoomUsers = new List<UserEntity>();
+                        for (int j = 0; j < filteredFavoriteUsers.Count; j++)
+                        {
+                            var currentFavoriteRooms = favoriteRoomsRepository.FindAsync(filteredFavoriteUsers[j].FavoriteRoomsId).Result.RoomsId;
+                            if (currentFavoriteRooms.Contains(apartment.Rooms[i].Id))
+                            {
+                                currentRoomUsers.Add(filteredFavoriteUsers[j]);
+                                count++;
+                            }
+                        }
+                        if (count == 0)
+                        {
+                            break;
+                        }
+                        dict[kvp.Key].Add(currentRoomUsers);
+                    }
+                }
+            }
 
-            if (dictCopy.Count() == 0)
-                return NoContent();
+            foreach (var kvp in dict)
+            {
+                var resultUsers = new List<UserEntity>();
+                var listsUsers = new List<List<UserEntity>>();
+                foreach (var value in kvp.Value)
+                {
+                    var resUser = GetResultUser(value, rnd, ref resultUsers, ref listsUsers);
+                    if (resUser == null)
+                        break;
+                    resultUsers.Add(resUser);
+                }
+                if (resultUsers.Count == kvp.Key.Apartment.RoomsCount - 1) 
+                {
+                    return Ok((kvp.Key, resultUsers));
+                }
 
-            var rand = new Random();
-            var favoriteKey = dictCopy.ElementAt(rand.Next(0, dictCopy.Count)).Key;
-            var apartmentEntity = await apparmentRepostory.FindAsync(favoriteKey);
-            var apartmentRooms = apartmentEntity.Rooms;
-            var resultRooms = apartmentRooms.Where(currentUser.FavoriteRooms.Rooms.Contains);
+            }
 
-            var resultRoom = resultRooms.ElementAt(rand.Next(0, resultRooms.Count()));
-            var resultUsers = dictCopy[favoriteKey].Select(u => userRepository.FindAsync(u).Result).ToList();
+            return NoContent();
+        }
 
-            var result = new Tuple<RoomEntity, List<UserEntity>>(resultRoom, resultUsers);
-            return Ok(result);
+        private UserEntity GetResultUser(List<UserEntity> users, Random rnd, ref List<UserEntity> result, ref List<List<UserEntity>> listsUsers )
+        {
+            var user = users[rnd.Next(0, users.Count-1)];
+            if (result.Contains(user))
+            {
+                if (users.Count > 1)
+                {
+                    user = GetRightRandomUser(users, user, rnd);
+                }
+
+                if (users.Count == 1)
+                {
+                    var index = result.IndexOf(user);
+                    var prevList = listsUsers[index];
+                    if (prevList.Count == 1)
+                        return null;
+                    user = GetRightRandomUser(prevList, user, rnd);
+                }
+            }
+
+            listsUsers.Add(users);
+            return user;
+        }
+
+        private UserEntity GetRightRandomUser(List<UserEntity> currentUsers, UserEntity user, Random rnd)
+        {
+            currentUsers = currentUsers.Where(u => u != user).ToList();
+            user = currentUsers [rnd.Next(0, currentUsers.Count-1)];
+            return user;
         }
     }
 }   

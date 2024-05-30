@@ -3,7 +3,7 @@ using RentBuddyBackend.DAL.Entities;
 
 namespace RentBuddyBackend.Modules.FavoriteUsersModule.Repository
 {
-    public interface IFavoriteRepository
+    public interface IFavoriteUsersRepository
     {
         Task<FavoriteUsersEntity?> FindAsync(Guid id);
         public Task<int> SaveChangesAsync();

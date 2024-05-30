@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RentBuddyBackend.DAL.Entities;
 using RentBuddyBackend.Modules.BlacklistModule.Repository;
@@ -21,22 +22,28 @@ namespace RentBuddyBackend.Modules.BlacklistModule.Service
 
         public async Task<ActionResult> AddBlacklistUser(Guid currentUserId, Guid targetUserId)
         {
-            var currentUser = await userRepository.FindAsync(targetUserId);
-            var blacklist = await blacklistRepository.FindAsync(currentUser.Blacklist.Id);
-            var targetUser = await userRepository.FindAsync(targetUserId);
-            blacklist.Users.Add(targetUser);
+            if (currentUserId == targetUserId)
+                return BadRequest("CurrentUserId совпадает с targetUserId");
+            var currentUser = await userRepository.FindAsync(currentUserId);
+            if (currentUser == null)
+                return BadRequest("Пользователя не существует");
+            var blacklist = await blacklistRepository.FindAsync(currentUser.BlacklistId);
+            blacklist.UsersId.Add(targetUserId);
             await blacklistRepository.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
 
         public async Task<ActionResult> DeleteBlacklistUser(Guid currentUserId, Guid targetUserId)
         {
-            var currentUser = await userRepository.FindAsync(targetUserId);
-            var blacklist = await blacklistRepository.FindAsync(currentUser.Blacklist.Id);
-            var targetUser = await userRepository.FindAsync(targetUserId);
-            blacklist.Users.Remove(targetUser);
+            if (currentUserId == targetUserId)
+                return BadRequest("CurrentUserId совпадает с targetUserId");
+            var currentUser = await userRepository.FindAsync(currentUserId);
+            if (currentUser == null)
+                return BadRequest("Пользователя не существует");
+            var blacklist = await blacklistRepository.FindAsync(currentUser.BlacklistId);
+            blacklist.UsersId.Remove(targetUserId);
             await blacklistRepository.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
 
         public async Task<ActionResult<BlacklistEntity>> CreateOrUpdateBlacklist(BlacklistEntity blacklistEntity)

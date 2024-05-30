@@ -6,12 +6,12 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FavouritesController : ControllerBase
+    public class FavoriteUsersController : ControllerBase
     {
 
-        private readonly IFavoriteService favoriteService;
+        private readonly IFavoriteUsersService favoriteService;
 
-        public FavouritesController(IFavoriteService favoriteService)
+        public FavoriteUsersController(IFavoriteUsersService favoriteService)
         {
             this.favoriteService = favoriteService;
         }
@@ -32,12 +32,12 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule
         public Task<ActionResult<FavoriteUsersEntity>> GetFavouritiesEntity([FromRoute] Guid id)
          => favoriteService.GetFavouritiesEntity(id); 
         
-        [HttpPost("AddUserToFavourities/{targetUserId:Guid}")]
-        public Task<ActionResult> AddFavouritiesUser([FromBody] Guid currentUserId, Guid targetUserId)
+        [HttpPost("{currentUserId:Guid}/AddUserToFavourities/{targetUserId:Guid}")]
+        public Task<ActionResult> AddFavouritiesUser([FromRoute] Guid currentUserId, Guid targetUserId)
             => favoriteService.AddFavouritiesUser(currentUserId, targetUserId);
 
-        [HttpPost("DeleteUserFromFavourities/{targetUserId:Guid}")]
-        public Task<ActionResult> DeleteFavouritiesUser([FromBody] Guid currentUserId, Guid targetUserId)
+        [HttpPost("{currentUserId:Guid}/DeleteUserFromFavourities/{targetUserId:Guid}")]
+        public Task<ActionResult> DeleteFavouritiesUser([FromRoute] Guid currentUserId, Guid targetUserId)
             => favoriteService.DeleteFavouritiesUser(currentUserId, targetUserId);    
 
     }

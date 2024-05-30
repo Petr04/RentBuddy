@@ -1,33 +1,39 @@
 using RentBuddyBackend.DAL.Entities;
+using RentBuddyBackend.Modules.FavoriteRooms.Repository;
+using RentBuddyBackend.Modules.RoomModule.Repository;
 
 namespace RentBuddyBackend.Infrastructure;
 
-public class MatchingService : IMatchingService
+public class MatchingService(IFavoriteRoomsRepository favoriteRoomsRepository, IRoomRepository roomRepository) : IMatchingService
 {
     public Dictionary<UserEntity, int> Match(UserEntity user, IEnumerable<UserEntity> users)
     {
         var matchDictionary = new Dictionary<UserEntity, int>();
 
+        var currentFavoriteRooms = favoriteRoomsRepository.FindAsync(user.FavoriteRoomsId).Result;
+
+
         foreach (var comparedUser in users)
         {
-            var isMatch = user.FavoriteRooms?.Rooms?
-                .Any(userRoom =>
-                comparedUser.FavoriteRooms?.Rooms?
-                    .Any(comparedUserRoom => comparedUserRoom.Id == userRoom.Id) 
-                ?? false) 
-                          ?? false;
+            
+            var comparedFavoriteRooms = favoriteRoomsRepository
+                .FindAsync(comparedUser.FavoriteRoomsId).Result.RoomsId
+                .Select(id => roomRepository.FindAsync(id).Result);
+
+            var isMatch = currentFavoriteRooms.RoomsId
+                .Any(userRoom => comparedFavoriteRooms.Any(comparedUserRoom => comparedUserRoom.Id == userRoom));
             
             if (user.Id == comparedUser.Id || !isMatch)
                 continue;
 
-            var userRooms = user.FavoriteRooms?.Rooms;
-            var comparedUserRooms = comparedUser.FavoriteRooms?.Rooms;
+            var userRooms = currentFavoriteRooms;
+            var comparedUserRooms = comparedFavoriteRooms;
 
             /*foreach (var userRoom  in userRooms)
             {
                 userRoom.Se
             }*/
-            
+
             var priorityPoints = 0;
 
             if (user.IsSmoke != comparedUser.IsSmoke)

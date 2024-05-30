@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RentBuddyBackend.DAL;
@@ -12,9 +13,11 @@ using RentBuddyBackend.DAL;
 namespace RentBuddyBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240529175022_updLists")]
+    partial class updLists
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,59 +35,17 @@ namespace RentBuddyBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AboutApartment")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("BathrooomCount")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("CanUserSmoke")
-                        .HasColumnType("boolean");
-
                     b.Property<int>("CurrentFloor")
                         .HasColumnType("integer");
-
-                    b.Property<bool>("HasFreightElevator")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("HasPassengerElevator")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("HasPet")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("HasWifi")
-                        .HasColumnType("boolean");
-
-                    b.Property<List<string>>("ImageLinks")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
-                    b.Property<bool>("IsCombinedBathroom")
-                        .HasColumnType("boolean");
 
                     b.Property<int>("MaxFloor")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("ParkingType")
-                        .HasColumnType("integer");
-
                     b.Property<int>("RoomsCount")
-                        .HasColumnType("integer");
-
-                    b.Property<int[]>("TechnicType")
-                        .IsRequired()
-                        .HasColumnType("integer[]");
-
-                    b.Property<int>("YardType")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -141,16 +102,8 @@ namespace RentBuddyBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AboutRoom")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<Guid?>("ApartmentId")
                         .HasColumnType("uuid");
-
-                    b.Property<int[]>("FurnitureTypes")
-                        .IsRequired()
-                        .HasColumnType("integer[]");
 
                     b.Property<string>("ImageLink")
                         .IsRequired()
@@ -159,18 +112,11 @@ namespace RentBuddyBackend.Migrations
                     b.Property<int>("InhabitantsCount")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("IsPublished")
-                        .HasColumnType("boolean");
-
                     b.Property<int>("Price")
                         .HasColumnType("integer");
 
                     b.Property<int>("Square")
                         .HasColumnType("integer");
-
-                    b.Property<int[]>("TechnicTypes")
-                        .IsRequired()
-                        .HasColumnType("integer[]");
 
                     b.HasKey("Id");
 

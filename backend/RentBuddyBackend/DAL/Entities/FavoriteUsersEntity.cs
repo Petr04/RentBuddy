@@ -6,13 +6,11 @@ public class FavoriteUsersEntity : IEntity
 {
     [Key]
     public Guid Id { get; set; }
-    public virtual List<UserEntity>? Users { get; set; }
+    public List<Guid>? UsersId { get; set; }
 
-    public FavoriteUsersEntity(Guid id, List<UserEntity> userEntities)
+    public FavoriteUsersEntity()
     {
-        Id = id;
-        Users = userEntities;  
+        Id = Guid.NewGuid();
+        UsersId = new List<Guid>();  
     }
-
-    public FavoriteUsersEntity(){}
 }
