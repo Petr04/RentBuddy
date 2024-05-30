@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 import { BigCardComponent } from '../components/big-card/big-card.component';
 import { Post } from '../interfaces/interface';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-suggestion-page',
   standalone: true,
-  imports: [NextBtnComponent, BigCardComponent],
+  imports: [NextBtnComponent, BigCardComponent, RouterLink],
   templateUrl: './suggestion-page.component.html',
   styleUrl: './suggestion-page.component.css'
 })

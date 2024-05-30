@@ -50,4 +50,12 @@ export class LoginPageComponent implements OnDestroy {
     }
     console.log(this.authorizationForm.value)
   }
+
+  visible:boolean = true;
+  changetype:boolean =true;
+
+  viewpass(){
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
+  }
 }
