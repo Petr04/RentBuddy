@@ -28,9 +28,23 @@ ENV ASPNETCORE_ENVIRONMENT=Development
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "RentBuddyBackend.dll"]
 
-FROM node:lts-alpine as builder
-COPY . /app
-WORKDIR /app
-RUN npm install
+FROM node:21
+
 RUN npm install -g @angular/cli
-CMD ["ng","serve","--host","0.0.0.0"]
+
+WORKDIR /
+RUN mkdir angular-app
+WORKDIR /angular-app
+
+ENV APP_NAME 'my-app'
+ENV ROUTING 'true'
+ENV STANDALONE 'false'
+ENV STRICT 'true'
+ENV STYLE 'css'
+
+CMD ng new $APP_NAME --routing=$ROUTING --standalone=$STANDALONE --strict=$STRICT --style=$STYLE \
+    && mv $APP_NAME/* . \
+    && rm -rf $APP_NAME \
+    && ng serve --host 0.0.0.0 --port 4200
+
+EXPOSE 4200
