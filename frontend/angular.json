@@ -29,10 +29,8 @@
             ],
             "scripts": [],
             "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "prerender": false,
+            "ssr": false
           },
           "configurations": {
             "production": {
@@ -65,7 +63,8 @@
               "buildTarget": "rent-buddy:build:production"
             },
             "development": {
-              "buildTarget": "rent-buddy:build:development"
+              "buildTarget": "rent-buddy:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

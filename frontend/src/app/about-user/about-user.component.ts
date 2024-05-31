@@ -37,9 +37,9 @@ export class AboutUserComponent {
       pureLevel: new FormControl(5),
       riseTime: new FormControl('', Validators.required),
       sleepTime: new FormControl('', Validators.required),
-      timeSpentAtHome: new FormControl('', Validators.required),
+      timeSpentAtHome: new FormControl(""),
       partyFrequency: new FormControl('', Validators.required),
-      description: new FormControl("", Validators.required)
+      aboutMe: new FormControl("", Validators.required)
     })
   }
   saveAndContinue(){
@@ -47,12 +47,14 @@ export class AboutUserComponent {
     this.profileForm.value.gender = 1
     this.profileForm.value.isSmoke = this.isSmoke
     this.profileForm.value.hasPet = this.hasPet
+    this.profileForm.value.timeSpentAtHome = +this.profileForm.value.timeSpentAtHome
 
     // if (this.profileForm.invalid || this.profileForm.disabled){
     //   this.profileForm.markAllAsTouched()
     //   return
     // }
-    this.postService.getPosts().subscribe(res => console.log(res))
+    this.postService.postUser(this.profileForm.value).subscribe()
+    console.log(this.profileForm.value)
 
   }
 

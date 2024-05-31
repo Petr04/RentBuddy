@@ -20,10 +20,10 @@ export class ApartmentEditComponent {
 
   constructor( ){
     this.apartmentForm = new FormGroup({
-      adress: new FormControl('', Validators.required),
-      floor: new FormControl('', Validators.required),
-      roomsAmount: new FormControl('', Validators.required),
-      square: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
+      currentFloor: new FormControl('', Validators.required),
+      roomsCount: new FormControl('', Validators.required),
+      // square: new FormControl('', Validators.required),
       bathroom: new FormControl(false),
       bathroomAmount: new FormControl('', Validators.required),
       technique: new FormControl([]),
@@ -89,10 +89,10 @@ export class ApartmentEditComponent {
     this.apartmentForm.value.smokingAllowed = this.smokingAllowedBool
     this.apartmentForm.value.technique = this.techniqueForm.value
 
-    if (this.apartmentForm.invalid || this.apartmentForm.disabled){
-      this.apartmentForm.markAllAsTouched()
-      return
-    }
+    // if (this.apartmentForm.invalid || this.apartmentForm.disabled){
+    //   this.apartmentForm.markAllAsTouched()
+    //   return
+    // }
     console.log(this.apartmentForm.value)
   }
 }

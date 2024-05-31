@@ -29,6 +29,7 @@ export class MatchPageComponent {
       "gender": "female"
     }
   ]
+  
   parentSubject:Subject<string> = new Subject();
 
   public users:  {id: number,picture: string, age: number, name: string, gender: string}[]= this.data;
