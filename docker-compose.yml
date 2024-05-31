@@ -37,14 +37,9 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  angular-app:
-    build: .
+  rb-frontend:
+    build: frontend
+    image: cr.yandex/crp1i88lts07dl1mahg7
     container_name: angular-app
     ports:
-      - '4200:4200'
-    volumes:
-      - ./:/angular-app
-    environment:
-      - STYLE=css
-
-
+      - '80:4000'
