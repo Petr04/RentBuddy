@@ -29,6 +29,7 @@ export interface User {
 }
 
 export interface UserProfile {
+  id: string,
   name: string,
   lastname: string,
   birthDate: string,
@@ -39,6 +40,7 @@ export interface UserProfile {
   pureLevel: number,
   riseTime: string,
   sleepTime: string,
-  timeSpentAtHome: number
+  timeSpentAtHome: number,
+  about: string
 }
 

@@ -8,6 +8,7 @@ import { RangeInputComponent } from '../components/range-input/range-input.compo
 import { TimeSelectComponent } from '../components/time-select/time-select.component';
 import { RadioSelectComponent } from '../components/radio-select/radio-select.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PostService } from '../services/post.service';
 
 
 @Component({
@@ -20,14 +21,16 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './about-user.component.css'
 })
 export class AboutUserComponent {
+  buttonText:string = "Сохранить и продолжить";
   profileForm!: FormGroup
 
-  constructor( ){
+  constructor(private postService: PostService){
     this.profileForm = new FormGroup({
+      id: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
       birthDate: new FormControl('', Validators.required),
-      gender: new FormControl(true),
+      gender: new FormControl(1),
       isSmoke:new FormControl(true),
       hasPet:new FormControl(false),
       communicationLevel: new FormControl(5),
@@ -36,18 +39,21 @@ export class AboutUserComponent {
       sleepTime: new FormControl('', Validators.required),
       timeSpentAtHome: new FormControl('', Validators.required),
       partyFrequency: new FormControl('', Validators.required),
+      description: new FormControl("", Validators.required)
     })
   }
   saveAndContinue(){
-    this.profileForm.value.gender = this.gender
+    this.profileForm.value.id = localStorage.getItem('userId')
+    this.profileForm.value.gender = 1
     this.profileForm.value.isSmoke = this.isSmoke
     this.profileForm.value.hasPet = this.hasPet
 
-    if (this.profileForm.invalid || this.profileForm.disabled){
-      this.profileForm.markAllAsTouched()
-      return
-    }
-    console.log(this.profileForm.value)
+    // if (this.profileForm.invalid || this.profileForm.disabled){
+    //   this.profileForm.markAllAsTouched()
+    //   return
+    // }
+    this.postService.getPosts().subscribe(res => console.log(res))
+
   }
 
   gender:boolean = true;
@@ -74,5 +80,4 @@ export class AboutUserComponent {
     this.hasPet = false
   }
 
-  buttonText:string = "Сохранить и продолжить";
 }
