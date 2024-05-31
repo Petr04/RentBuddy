@@ -14,12 +14,12 @@
           <img class="absolute input__img" src="../assets/mail.svg">
         </div>
         <div class="relative flex flex-row justify-between border border-[#8e8e8e] rounded-2xl mt-4">
-          <input passwordStrength formControlName="password" [type]="changetype?'password':'text'" placeholder="Пароль" class="p-2.5 bg-[#FFFFFF]  text-[#8e8e8e]  rounded-2xl w-full outline-none">
-          <span class="cursor-pointer" (click)="viewpass()"><i class="absolute input__img w-6 h-6" [ngClass]="visible?'eye':'eye-closed'"></i></span>
+          <input passwordStrength formControlName="password" type="text" placeholder="Введите пароль" class="p-2.5 bg-[#FFFFFF] text-[#8e8e8e]  rounded-2xl w-full outline-none">
+          <img class="absolute input__img" src="../assets/eyes.svg">
         </div>
         <div class="relative flex flex-row justify-between border border-[#8e8e8e] rounded-2xl mt-4">
-          <input passwordStrength formControlName="password" [type]="changetype?'password':'text'" placeholder="Пароль" class="p-2.5 bg-[#FFFFFF]  text-[#8e8e8e]  rounded-2xl w-full outline-none">
-          <span class="cursor-pointer" (click)="viewpass()"><i class="absolute input__img w-6 h-6" [ngClass]="visible?'eye':'eye-closed'"></i></span>
+          <input passwordStrength formControlName="passwordConfirm" type="password" placeholder="Повторите пароль" class="p-2.5 bg-[#FFFFFF]  text-[#8e8e8e]  rounded-2xl w-full outline-none">
+          <img class="absolute input__img" src="../assets/eyes-close.svg">
         </div>
         <div>
           @if (registrationForm.errors?.["PasswordDoNotMatch"]) {
