@@ -37,11 +37,11 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  angular-app:
+  rb-frontend:
     build: frontend
     container_name: angular-app
     ports:
-      - '80:4200'
+      - '80:4000'
     environment:
       - STYLE=css
 
