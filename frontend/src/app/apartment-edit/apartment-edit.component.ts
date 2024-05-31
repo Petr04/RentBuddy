@@ -20,26 +20,28 @@ export class ApartmentEditComponent {
 
   constructor( ){
     this.apartmentForm = new FormGroup({
+      id: new FormControl(''),
       address: new FormControl('', Validators.required),
-      currentFloor: new FormControl('', Validators.required),
-      roomsCount: new FormControl('', Validators.required),
+      currentFloor: new FormControl(null, Validators.required),
+      roomsCount: new FormControl(null, Validators.required),
       // square: new FormControl('', Validators.required),
-      bathroom: new FormControl(false),
-      bathroomAmount: new FormControl('', Validators.required),
-      technique: new FormControl([]),
-      wifi: new FormControl(false),
-      floorMax: new FormControl('', Validators.required),
-      passengerElevator: new FormControl(false),
-      serviceElevator: new FormControl(false),
-      parking: new FormControl('', Validators.required),
-      courtyard: new FormControl('', Validators.required),
-      sportsGround: new FormControl(false),
-      maxGuests: new FormControl('', Validators.required),
-      petAllowed: new FormControl(false),
-      smokingAllowed: new FormControl(false),
-      photos: new FormControl([]),
-      description: new FormControl('', Validators.required),
-      rooms: new FormControl([]),
+      isCombinedBathroom: new FormControl(false),
+      bathroomCount: new FormControl(null, Validators.required),
+      technicType: new FormControl([0]), //  нужно переделать из массива буллов в массив number
+      hasWifi: new FormControl(false),
+      maxFloor: new FormControl(null, Validators.required),
+      hasPassengerElevator: new FormControl(false),
+      hasFreightElevator: new FormControl(false),
+      parkingType: new FormControl(null, Validators.required),//num
+      yardType: new FormControl(null, Validators.required),
+      //sportsGround: new FormControl(false),  нету на беке
+      //maxGuests: new FormControl('', Validators.required),  нету на беке
+      hasPet: new FormControl(false),
+      canUserSmoke: new FormControl(false),
+      imageLinks: new FormControl(['']),
+      aboutApartment: new FormControl('', Validators.required),
+      //rooms: new FormControl([]),
+      ownerId: new FormControl(''),
     })
     this.techniqueForm = new FormGroup({
       fridge: new FormControl(false),
@@ -80,15 +82,21 @@ export class ApartmentEditComponent {
   }
 
   next(){
-    this.apartmentForm.value.bathroom = this.bathroomBool
-    this.apartmentForm.value.wifi = this.wifiBool
-    this.apartmentForm.value.passengerElevator = this.passengerElevatorBool
-    this.apartmentForm.value.serviceElevator = this.serviceElevatorBool
-    this.apartmentForm.value.sportsGround = this.sportsGroundBool
-    this.apartmentForm.value.petAllowed = this.petAllowedBool
-    this.apartmentForm.value.smokingAllowed = this.smokingAllowedBool
-    this.apartmentForm.value.technique = this.techniqueForm.value
+    this.apartmentForm.value.isCombinedBathroom = this.bathroomBool
+    this.apartmentForm.value.hasWifi = this.wifiBool
+    this.apartmentForm.value.hasPassengerElevator = this.passengerElevatorBool
+    this.apartmentForm.value.hasFreightElevator = this.serviceElevatorBool
+    //this.apartmentForm.value.sportsGround = this.sportsGroundBool
+    this.apartmentForm.value.hasPet = this.petAllowedBool
+    this.apartmentForm.value.canUserSmoke = this.smokingAllowedBool
+    //this.apartmentForm.value.technique = this.techniqueForm.value
 
+    this.apartmentForm.value.parkingType = +this.apartmentForm.value.parkingType
+    this.apartmentForm.value.yardType = +this.apartmentForm.value.yardType
+    this.apartmentForm.value.currentFloor = +this.apartmentForm.value.currentFloor
+    this.apartmentForm.value.roomsCount = +this.apartmentForm.value.roomsCount
+    this.apartmentForm.value.bathroomCount = +this.apartmentForm.value.bathroomCount
+    this.apartmentForm.value.maxFloor = +this.apartmentForm.value.maxFloor
     // if (this.apartmentForm.invalid || this.apartmentForm.disabled){
     //   this.apartmentForm.markAllAsTouched()
     //   return
