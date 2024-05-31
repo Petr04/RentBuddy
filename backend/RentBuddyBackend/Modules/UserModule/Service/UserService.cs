@@ -116,9 +116,9 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 AboutMe = ""
             };
 
-            await CreateOrUpdateUser(user);
+            var newUser = await CreateOrUpdateUser(user);
 
-            return Ok(new RegReturnModel{ UserId = user.Id });
+            return Ok(new RegReturnModel{ UserId = newUser.Value.Id });
         }
 
         public async Task<ActionResult<Guid>> AuthUser(AuthModel model)
