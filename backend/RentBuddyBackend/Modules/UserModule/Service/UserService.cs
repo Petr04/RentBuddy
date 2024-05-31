@@ -36,7 +36,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
 
             if (user == null)
             {
-                var blackList =  new BlacklistEntity();
+                var blackList = new BlacklistEntity();
                 var favoriteUsers = new FavoriteUsersEntity();
                 var favoriteRooms = new FavoriteRoomsEntity();
                 await blackListService.CreateOrUpdateBlacklist(blackList);
@@ -50,7 +50,14 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 return userEntity;
             }
             else
+            {
+                userEntity.BlacklistId = user.BlacklistId;
+                userEntity.FavoriteUsersId = user.FavoriteUsersId;
+                userEntity.FavoriteRoomsId = user.FavoriteRoomsId;
+                userEntity.Email = user.Email;
+                userEntity.PasswordHash = user.PasswordHash;
                 mapper.Map(userEntity, user);
+            }
 
             await userRepository.SaveChangesAsync();
 
