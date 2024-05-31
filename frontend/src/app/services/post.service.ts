@@ -9,7 +9,12 @@ import { AuthService } from './auth.service';
 })
 export class PostService {
 
-  constructor(private _httpCLient: HttpClient) { }
+  constructor(private _httpCLient: HttpClient) {
+
+  }
+  public getUserId(){
+    return localStorage.getItem('userId')
+  }
 
   public getPosts(): Observable<Post[]>{
     return this._httpCLient.get<Post[]>('/api/Room')
@@ -28,7 +33,15 @@ export class PostService {
   }
 
   public postListRooms(arr: Array<string>){
-    const id = localStorage.getItem('userId')
-    return this._httpCLient.post(`/api/${id}/AddRoomToFavorites`, arr)
+    return this._httpCLient.post(`/api/FavoriteRooms/${this.getUserId()}/AddRoomToFavorites`, arr)
+  }
+
+  public getUserForMatch():Observable<UserProfile[]>{
+    return this._httpCLient.get<UserProfile[]>(`api/Users/${this.getUserId()}/matches`)
+  }
+
+
+  public like(targetId: string):Observable<{}>{
+    return this._httpCLient.post(`api/FavoriteUsers/${this.getUserId()}/AddUserToFavourities/${targetId}`, {"currentUserId":this.getUserId(), "targetUserId": targetId })
   }
 }
