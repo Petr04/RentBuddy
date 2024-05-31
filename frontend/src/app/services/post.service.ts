@@ -1,7 +1,7 @@
 import { HttpClient, HttpHandler, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Post, User } from '../interfaces/interface';
+import { Post, User, UserProfile } from '../interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +19,10 @@ export class PostService {
   }
 
   public getUsers(): Observable<User>{
-    return this._httpCLient.get<User>('http://localhost:5000/api/User')
+    return this._httpCLient.get<User>('http://localhost:5000/api/Users')
   }
 
-  public postUser(userObjL: User){
-    return this._httpCLient.post<User>('http://localhost:5000/api/User', userObjL)
+  public postUser(obj: any){
+    return this._httpCLient.post('http://localhost:5000/api/Users', obj)
   }
 }
