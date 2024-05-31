@@ -24,8 +24,8 @@ export class RoomEditComponent {
       imageLink: new FormControl(''),
       aboutRoom: new FormControl('', Validators.required),
       price: new FormControl('', Validators.required),
-      technique: new FormControl([]),
-      furniture: new FormControl([]),
+      technique: new FormControl([0]),
+      furniture: new FormControl([0]),
     })
 
     this.techniqueForm = new FormGroup({
@@ -43,13 +43,13 @@ export class RoomEditComponent {
   }
 
   next(){
-    this.roomForm.value.technique = this.techniqueForm.value
-    this.roomForm.value.furniture = this.furnitureForm.value
+    // this.roomForm.value.technique = this.techniqueForm.value
+    // this.roomForm.value.furniture = this.furnitureForm.value
 
-    if (this.roomForm.invalid || this.roomForm.disabled){
-      this.roomForm.markAllAsTouched()
-      return
-    }
+    // if (this.roomForm.invalid || this.roomForm.disabled){
+    //   this.roomForm.markAllAsTouched()
+    //   return
+    // }
     console.log(this.roomForm.value)
   }
 }

@@ -32,7 +32,7 @@ export class ApartmentEditComponent {
       maxFloor: new FormControl(null, Validators.required),
       hasPassengerElevator: new FormControl(false),
       hasFreightElevator: new FormControl(false),
-      parkingType: new FormControl(null, Validators.required),//num
+      parkingType: new FormControl(null, Validators.required),
       yardType: new FormControl(null, Validators.required),
       //sportsGround: new FormControl(false),  нету на беке
       //maxGuests: new FormControl('', Validators.required),  нету на беке
