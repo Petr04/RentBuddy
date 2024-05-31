@@ -13,20 +13,20 @@
       <h3 class="font-semibold text-2xl">Квартира</h3>
       <h4 class="mt-3.5">Адрес</h4>
       <div class="mt-1 w-full">
-        <input formControlName="adress" type="text" placeholder="Введите улицу и номер дома" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
+        <input formControlName="address" type="text" placeholder="Введите улицу и номер дома" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
       </div>
       <h4 class="mt-3.5">Этаж</h4>
       <div class="mt-1 w-full">
-        <input formControlName="floor" type="text" placeholder="Введите номер этажа" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
+        <input formControlName="currentFloor" type="text" placeholder="Введите номер этажа" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
       </div>
       <h4 class="mt-3.5">Количество комнат</h4>
       <div class="mt-1 w-full">
-        <input formControlName="roomsAmount" type="text" placeholder="Введите количество комнат" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
+        <input formControlName="roomsCount" type="text" placeholder="Введите количество комнат" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
       </div>
-      <h4 class="mt-3.5">Общая площадь, м²</h4>
-      <div class="mt-1 w-full">
+      <!-- <h4 class="mt-3.5">Общая площадь, м²</h4> -->
+      <!-- <div class="mt-1 w-full">
         <input formControlName="square" type="text" placeholder="0,0" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
-      </div>
+      </div> -->
       <h4 class="mt-3.5">Санузел</h4>
       <div class="flex justify-evenly gap-2.5 mt-1.5">
         <button [ngClass]="{isSelect: bathroomBool}" (click)="bath(true)" class="bg-[#8567FA] text-[#FEFEFE] py-2.5 px-6 font-semibold rounded-2xl  opacity-40 w-full">Совмещённый</button>

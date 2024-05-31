@@ -53,6 +53,6 @@ export interface UserProfile {
   riseTime: string,
   sleepTime: string,
   timeSpentAtHome: number,
-  about: string
+  aboutMe: string
 }
 

@@ -11,12 +11,12 @@ export class AuthService {
   }
 
   register(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:5000/api/Users/register', user)
+    return this.http.post<User>('/api/Users/register', user)
   }
 
   login(user: User): Observable<{token: string, userId: string}>{
 
-    return this.http.post<{token: string, userId: string}>('http://localhost:5000/api/Users/login', user)
+    return this.http.post<{token: string, userId: string}>('/api/Users/login', user)
       .pipe(
         tap(
           ({token, userId}) => {
@@ -38,6 +38,10 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = this.getToken();
     return !!token;
+  }
+
+  getUserId(): string | null{
+    return localStorage.getItem("userId")
   }
 
 }
