@@ -6,6 +6,18 @@ export interface FilterRent{
   maxPrice?: number
 }
 
+export interface Room {
+  id: string;
+  price: number;
+  square: number;
+  inhabitantsCount: number;
+  imageLink: string;
+  apartmentId: string;
+  technicTypes: number[];
+  furnitureTypes: number[];
+  aboutRoom: string;
+  isPublished: boolean;
+}
 
 export interface Post{
   apartment: {
