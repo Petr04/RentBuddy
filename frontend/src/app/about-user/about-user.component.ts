@@ -9,12 +9,13 @@ import { TimeSelectComponent } from '../components/time-select/time-select.compo
 import { RadioSelectComponent } from '../components/radio-select/radio-select.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostService } from '../services/post.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-about-user',
   standalone: true,
-  imports: [NextBtnComponent, CommonModule,
+  imports: [RouterLink ,NextBtnComponent, CommonModule,
   BaseInputComponent, BirthdaySelectComponent, BiSelectComponent,
   RangeInputComponent, TimeSelectComponent, RadioSelectComponent, ReactiveFormsModule ],
   templateUrl: './about-user.component.html',

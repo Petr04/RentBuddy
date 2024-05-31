@@ -1,4 +1,4 @@
-import { HttpClient, HttpHandler, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post, User, UserProfile } from '../interfaces/interface';
@@ -44,4 +44,9 @@ export class PostService {
   public like(targetId: string):Observable<{}>{
     return this._httpCLient.post(`api/FavoriteUsers/${this.getUserId()}/AddUserToFavourities/${targetId}`, {"currentUserId":this.getUserId(), "targetUserId": targetId })
   }
+
+  public match():Observable<Post>{
+    return this._httpCLient.get<Post>(`api/Users/GetSuitableRoom/${this.getUserId()}`)
+  }
+
 }

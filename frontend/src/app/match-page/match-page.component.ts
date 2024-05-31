@@ -46,7 +46,7 @@ export class MatchPageComponent {
     if (!this.animationState) {
       this.animationState = state;
       if (this.len != this.index+1){
-        this.postService.like(matchId)
+        this.postService.like(matchId).subscribe(res => console.log(res))
         this.index++
       }
 
