@@ -9,6 +9,8 @@ import { authGuardFn } from './authorized.guard';
 import { TestDetailComponent } from './test-route/test-route.component';
 import {ApartmentEditComponent} from "./apartment-edit/apartment-edit.component";
 import {RoomEditComponent} from "./room-edit/room-edit.component";
+import {PostApartmentComponent} from "./post-apartment/post-apartment.component";
+import {SuccessfulPostComponent} from "./successful-post/successful-post.component";
 
 export const routes: Routes = [
   {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule)},
@@ -17,6 +19,8 @@ export const routes: Routes = [
   {path:'suggestion', component: SuggestionPageComponent, canActivate: [authGuardFn]},
   {path:'apartment-edit', component: ApartmentEditComponent},
   {path:'room-edit', component: RoomEditComponent},
+  {path:'post-apartment', component: PostApartmentComponent},
+  {path:'successful-post', component: SuccessfulPostComponent},
   {path:'apartment-info', component: ApartmentInfoComponent, canActivate:[authGuardFn]},
   {path:'test/:id', component: TestDetailComponent},
   {path:'', redirectTo: "/login", pathMatch: 'full'},
