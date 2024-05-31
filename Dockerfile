@@ -27,3 +27,10 @@ WORKDIR /app
 ENV ASPNETCORE_ENVIRONMENT=Development
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "RentBuddyBackend.dll"]
+
+FROM node:lts-alpine as builder
+COPY . /app
+WORKDIR /app
+RUN npm install
+RUN npm install -g @angular/cli
+CMD ["ng","serve","--host","0.0.0.0"]
