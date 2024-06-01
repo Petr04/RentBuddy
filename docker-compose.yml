@@ -40,6 +40,7 @@ services:
   rb-frontend:
     build: frontend
     image: cr.yandex/crp1i88lts07dl1mahg7
-    container_name: angular-app
+    container_name: rb-frontend
     ports:
-      - '80:4000'
+      - '80:80' # If server-side rendering is disabled
+      # - '80:4000' # If server-side rendering is enabled
