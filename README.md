@@ -29,7 +29,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | MVVM                                               |                |
 | Продвинутое использование DI (использование токенов, useFactory) |      +         |
 | DRY                                                |                |
-| Хлебные крошки                                     |                |
+| Хлебные крошки                                     |        +       |
 | Кастомная структурная директива                    |        +       |
 | Обработка ошибок. Global error handler             |                |
 | Динамический рендер                                |                |
