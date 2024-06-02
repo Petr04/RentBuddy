@@ -1,6 +1,6 @@
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { TuiRootModule } from "@taiga-ui/core";
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, ErrorHandler, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -10,7 +10,8 @@ import { httpInterceptor } from './http.interceptor';
 import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideAnimations(), provideRouter(routes), provideClientHydration(), GlobalErrorHandlerService, HttpClientModule,importProvidersFrom(HttpClientModule, TuiRootModule) , provideAnimationsAsync(),
+  providers: [provideAnimations(), provideRouter(routes), provideClientHydration(), {provide:ErrorHandler, useClass:GlobalErrorHandlerService},
+    HttpClientModule, importProvidersFrom(HttpClientModule, TuiRootModule) , provideAnimationsAsync(),
     provideHttpClient(withInterceptors([httpInterceptor]))
   ]
 };
