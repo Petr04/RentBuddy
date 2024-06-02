@@ -50,7 +50,7 @@ export class RegistrationPageComponent implements OnDestroy{
     else{
       this.registrationForm.disable()
       this.aSub = this.auth.register(this.registrationForm.value).subscribe({
-        next: () => this.router.navigate(['/login']),
+        next: () => setTimeout(()=>this.router.navigate(['/login']),5000),
         error: (err) => {
           console.log(err)
           this.registrationForm.enable()
