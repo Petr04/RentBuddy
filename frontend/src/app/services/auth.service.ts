@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   getToken(): string | null{
-    return localStorage.getItem('auth-token');
+    return localStorage?.getItem('auth-token');
   }
 
   isAuthenticated(): boolean {
@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   getUserId(): string | null{
-    return localStorage.getItem("userId")
+    return localStorage?.getItem("userId")
   }
 
 }

@@ -6,18 +6,6 @@ export interface FilterRent{
   maxPrice?: number
 }
 
-export interface Room {
-  id: string;
-  price: number;
-  square: number;
-  inhabitantsCount: number;
-  imageLink: string;
-  apartmentId: string;
-  technicTypes: number[];
-  furnitureTypes: number[];
-  aboutRoom: string;
-  isPublished: boolean;
-}
 
 export interface Post{
   apartment: {
@@ -56,3 +44,63 @@ export interface UserProfile {
   aboutMe: string
 }
 
+export interface Room {
+  apartment: Apartment;
+  id: string;
+  price: number;
+  square: number;
+  inhabitantsCount: number;
+  imageLink: string;
+  apartmentId: string;
+  technicTypes: number[];
+  furnitureTypes: number[];
+  aboutRoom: string;
+  isPublished: boolean;
+}
+
+export interface Apartment {
+  id: string;
+  roomsCount: number;
+  currentFloor: number;
+  maxFloor: number;
+  address: string;
+  isCombinedBathroom: boolean;
+  bathrooomCount: number;
+  technicType: number[];
+  hasWifi: boolean;
+  hasPassengerElevator: boolean;
+  hasFreightElevator: boolean;
+  parkingType: number;
+  yardType: number;
+  hasPet: boolean;
+  canUserSmoke: boolean;
+  imageLinks: string[];
+  aboutApartment: string;
+  ownerId: string;
+}
+
+export interface SuggestionRoom {
+  item1: Room;
+  item2: Item2;
+}
+
+export interface Item2 {
+  id: string;
+  name: string;
+  lastname: string;
+  birthDate: string;
+  gender: number;
+  isSmoke: boolean;
+  hasPet: boolean;
+  communicationLevel: number;
+  pureLevel: number;
+  riseTime: string;
+  sleepTime: string;
+  timeSpentAtHome: number;
+  aboutMe: string;
+  blacklistId: string;
+  favoriteUsersId: string;
+  favoriteRoomsId: string;
+  email: string;
+  passwordHash: string;
+}

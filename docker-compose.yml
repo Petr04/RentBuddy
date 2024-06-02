@@ -3,11 +3,7 @@ version: '3.9'
 networks:
   rb-network:
     driver: bridge
-  main:
-    driver: bridge
-  database:
-    driver: bridge
-
+ 
 volumes:
   postgres-data:
 
@@ -41,18 +37,4 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  angular_devel:
-    image: angular:1.0.0
-    container_name: angular_devel
-    hostname: angular_devel
-    ports:
-      - "4200:4200"
-    volumes:
-      - "./angular_devel/node_modules:/app/node_modules"
-      - "./angular_devel:/app"
-    restart: always
-    networks:
-      - main
-      - database
-
-
+ 
