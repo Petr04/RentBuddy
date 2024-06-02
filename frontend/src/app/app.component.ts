@@ -9,13 +9,14 @@ import { SelectRentModule } from './select-rent-page/select-rent.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { TestDetailComponent } from './test-route/test-route.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { ImageScrollerComponent } from "./app-image-scroller";
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SelectRentModule, NotFoundPageComponent,TestDetailComponent, AboutUserComponent, MatchPageComponent, AuthenticationModule, HttpClientModule, CommonModule, TuiRootModule, TuiDialogModule, TuiAlertModule],
+  imports: [RouterOutlet, SelectRentModule, NotFoundPageComponent,TestDetailComponent, AboutUserComponent, MatchPageComponent, AuthenticationModule, HttpClientModule, CommonModule, TuiRootModule, TuiDialogModule, TuiAlertModule, ImageScrollerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

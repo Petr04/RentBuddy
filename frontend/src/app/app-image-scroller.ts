@@ -1,48 +1,39 @@
-import { Component, ElementRef, Input, QueryList, ViewChildren, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NextBtnComponent } from '../next-btn/next-btn.component';
-import { FilterRent, Post } from '../../interfaces/interface';
-import { SelectCardDirective } from '../../directives/select-card.directive'
-import { SetService } from '../../services/set.service';
-
-
-
+import { Component, QueryList, ViewChildren, ElementRef, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-big-card',
   standalone: true,
-  imports: [CommonModule, NextBtnComponent, SelectCardDirective],
-  templateUrl: './big-card.component.html',
-  styleUrl: './big-card.component.css'
+  selector: 'app-image-scroller',
+  imports:[CommonModule],
+  template: `
+    <div class="image-container">
+      <img #image *ngFor="let image of imageList" [src]="image" class="image-item">
+    </div>
+  `,
+  styles: [`
+    .image-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+    .image-item {
+      flex: 0 0 auto;
+      width: 320px;
+      height: 616px;
+      margin-right: 10px;
+    }
+  `],
+
 })
-
-export class BigCardComponent {
-  @Input() card!: Post
-  @Input() filterObj!:FilterRent
-  public setId = inject(SetService)
-
-  constructor(){
-
-  }
-
-  getIdCard(){
-    if (!this.setId.has(this.card.id)){
-      this.setId.add(this.card.id)
-    }
-    else{
-      this.setId.delete(this.card.id)
-    }
-
-  }
-
+export class ImageScrollerComponent {
   @ViewChildren('image') images!: QueryList<ElementRef>;
   imageList: string[] = [
     'https://sun9-35.userapi.com/impg/6u7pQchCMWUkMIQQ9ZKFwwGNHQxKLVMe83MCWg/G3tZ-tP0cpo.jpg?size=604x456&quality=95&sign=eef65f9e1decdade460db568254d3646&type=album',
-    'https://data.chpic.su/stickers/o/onlymrpenis/onlymrpenis_021.webp?v=1707763503',
+    'https://data.chpic.su/stickers/o/onlymrpenis/onlymrpenis_001.webp',
     'https://data.chpic.su/stickers/o/onlymrpenis/onlymrpenis_015.webp?v=1707763503',
     'https://data.chpic.su/stickers/o/onlymrpenis/onlymrpenis_025.webp?v=1707763503',
     'https://data.chpic.su/stickers/o/onlymrpenis/onlymrpenis_007.webp?v=1707763503',
-    'https://data.chpic.su/stickers/o/onlymrpenis/onlymrpenis_016.webp?v=1707763503',
+    'https://sticker-collection.com/stickers/plain/Mrpen1s/thumbs/0ab175be-7408-4f86-9c54-09ddbec90c14file_4884361.webp',
     'https://i.redd.it/xy6v023tymhc1.jpeg',
     'https://data.chpic.su/stickers/o/onlymrpenis/onlymrpenis_017.webp?v=1707763503',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-TReD03uugsP5fho8Xphf-3wWRIg0uu1hrBx904tVSh4jLNb1IME00dcTaY2zZZ_u-g&usqp=CAU',
@@ -52,7 +43,7 @@ export class BigCardComponent {
     'https://data.chpic.su/stickers/o/onlymrpenis/onlymrpenis_014.webp?v=1707763503',
     'https://media.tenor.com/rl5HSMVQcbcAAAAe/mr-penis-mister-penis.png',
     'https://data.chpic.su/stickers/o/onlymrpenis/onlymrpenis_008.webp?v=1707763503',
-    'https://data.chpic.su/stickers/o/onlymrpenis/onlymrpenis_024.webp?v=1707763503',
+    'https://sticker-collection.com/stickers/plain/Mrpen1s/thumbs/0ab175be-7408-4f86-9c54-09ddbec90c14file_4884361.webp',
 
   ];
 
@@ -71,4 +62,3 @@ export class BigCardComponent {
     }
   }
 }
-

@@ -1,3 +1,14 @@
 .directive path {
   stroke-opacity: 1;
  }
+
+ .image-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  border: none;
+
+}
+.image-item {
+  flex: 0 0 auto;
+}
