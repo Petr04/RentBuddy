@@ -1,3 +1,4 @@
+import { TuiRootModule, TuiDialogModule, TuiAlertModule } from "@taiga-ui/core";
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +15,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SelectRentModule, NotFoundPageComponent,TestDetailComponent, AboutUserComponent, MatchPageComponent, AuthenticationModule, HttpClientModule, CommonModule],
+  imports: [RouterOutlet, SelectRentModule, NotFoundPageComponent,TestDetailComponent, AboutUserComponent, MatchPageComponent, AuthenticationModule, HttpClientModule, CommonModule, TuiRootModule, TuiDialogModule, TuiAlertModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
