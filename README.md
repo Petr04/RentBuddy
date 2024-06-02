@@ -31,7 +31,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | DRY                                                |                |
 | Хлебные крошки                                     |        +       |
 | Кастомная структурная директива                    |        +       |
-| Обработка ошибок. Global error handler             |                |
+| Обработка ошибок. Global error handler             |        +       |
 | Динамический рендер                                |                |
 | Использование @HostListener                        |        +       |
 | **80 - 100**                                                         |
