@@ -10,7 +10,12 @@ import { httpInterceptor } from './http.interceptor';
 import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 
 export const appConfig: ApplicationConfig = {
+<<<<<<< Updated upstream
   providers: [provideAnimations(), provideRouter(routes), provideClientHydration(), GlobalErrorHandlerService, HttpClientModule,importProvidersFrom(HttpClientModule, TuiRootModule) , provideAnimationsAsync(),
+=======
+  providers: [provideRouter(routes), provideClientHydration(), GlobalErrorHandlerService,
+    HttpClientModule,importProvidersFrom(HttpClientModule) , provideAnimationsAsync(),
+>>>>>>> Stashed changes
     provideHttpClient(withInterceptors([httpInterceptor]))
   ]
 };
