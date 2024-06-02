@@ -18,7 +18,7 @@
           <span class="cursor-pointer" (click)="viewpass()"><i class="absolute input__img w-6 h-6" [ngClass]="visible?'eye':'eye-closed'"></i></span>
         </div>
         <div class="relative flex flex-row justify-between border border-[#8e8e8e] rounded-2xl mt-4">
-          <input passwordStrength formControlName="password" [type]="changetype?'password':'text'" placeholder="Пароль" class="p-2.5 bg-[#FFFFFF]  text-[#8e8e8e]  rounded-2xl w-full outline-none">
+          <input passwordStrength formControlName="passwordConfirm" [type]="changetype?'password':'text'" placeholder="Пароль" class="p-2.5 bg-[#FFFFFF]  text-[#8e8e8e]  rounded-2xl w-full outline-none">
           <span class="cursor-pointer" (click)="viewpass()"><i class="absolute input__img w-6 h-6" [ngClass]="visible?'eye':'eye-closed'"></i></span>
         </div>
         <div>
@@ -55,7 +55,7 @@
       <button
         tuiButton
         type="button"
-        (click)="toggle(true)"
+        (click)="onSubmit()"
         class="text-center leading-6 mx-auto w-full text-[#FFFFFF]
         bg-gradient-to-r from-[#8567FA] to-[#4FACE2] py-3.5 rounded-3xl mb-5 font-semibold"
       >

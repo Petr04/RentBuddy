@@ -56,6 +56,7 @@ export class RegistrationPageComponent implements OnDestroy{
           this.registrationForm.enable()
         }
       })
+    this.toggle(true)
     console.log(this.registrationForm.value)
     }
   }
