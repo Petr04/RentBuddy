@@ -22,7 +22,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | Строгая типизация и отсутствие any                 |        +       |
 | 1-2 кастомная атрибутивная директива               |        +       |
 | 1-2 кастомных пайпы                                |        +       |
-| Использование свойств с декораторами @ViewChild и @ViewChildren |                |
+| Использование свойств с декораторами @ViewChild и @ViewChildren |       +        |
 | Запросы на сервер                                  |        +       |
 | Использование общего code-style (настройка eslint) |        +       |
 | **60 - 80**                                                         |
@@ -31,7 +31,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | DRY                                                |                |
 | Хлебные крошки                                     |        +       |
 | Кастомная структурная директива                    |        +       |
-| Обработка ошибок. Global error handler             |        +       |
+| Обработка ошибок. Global error handler             |               |
 | Динамический рендер                                |                |
 | Использование @HostListener                        |        +       |
 | **80 - 100**                                                         |
