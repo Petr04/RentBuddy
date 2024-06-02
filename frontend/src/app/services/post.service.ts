@@ -1,7 +1,7 @@
 import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Post, User, UserProfile } from '../interfaces/interface';
+import { Post, Room, SuggestionRoom, User, UserProfile } from '../interfaces/interface';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -45,8 +45,8 @@ export class PostService {
     return this._httpCLient.post(`api/FavoriteUsers/${this.getUserId()}/AddUserToFavourities/${targetId}`, {"currentUserId":this.getUserId(), "targetUserId": targetId })
   }
 
-  public match():Observable<Post>{
-    return this._httpCLient.get<Post>(`api/Users/GetSuitableRoom/${this.getUserId()}`)
+  public match():Observable<SuggestionRoom>{
+    return this._httpCLient.get<SuggestionRoom>(`api/Users/GetSuitableRoom/${this.getUserId()}`)
   }
 
 }

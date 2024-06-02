@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 import { BigCardComponent } from '../components/big-card/big-card.component';
-import { Post } from '../interfaces/interface';
+import { Post, SuggestionRoom } from '../interfaces/interface';
 import {RouterLink} from "@angular/router";
 import { Observable, map } from 'rxjs';
 import { PostService } from '../services/post.service';
@@ -23,7 +23,7 @@ export class SuggestionPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.cardOfUser$ = this.postService.match().pipe(
-      map((res:any)=> res.item1)
+      map((res:SuggestionRoom)=> res?.item1)
     )
     this.postService.match().subscribe(res => console.log(res))
   }

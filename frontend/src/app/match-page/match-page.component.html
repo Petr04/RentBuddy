@@ -13,7 +13,7 @@
     <div class="mt-5 container h-full mx-auto px-5 md:px-33 flex flex-col xl:px-96 xl:object-fit xl:object-center"
 
     [@cardAnimator]="animationState"
-    (@cardAnimator.done)="resetAnimationState($event)"
+    (@cardAnimator.done)="resetAnimationState()"
     (swipeleft)='startAnimation("swipeleft", user[index].id)'
     (swiperight)='startAnimation("swiperight", user[index].id)'>
         <img class="rounded-2xl h-5/6 w-auto object-cover object-center" src="../assets/nikita.png">
