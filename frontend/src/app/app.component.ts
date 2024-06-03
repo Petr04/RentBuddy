@@ -9,8 +9,7 @@ import { SelectRentModule } from './select-rent-page/select-rent.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { TestDetailComponent } from './test-route/test-route.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
-import { ImageScrollerComponent } from "./app-image-scroller/app-image-scroller.component";
-
+import { ImageScrollerComponent } from "./app-image-scroller";
 
 
 @Component({

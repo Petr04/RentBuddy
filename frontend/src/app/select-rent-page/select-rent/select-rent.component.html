@@ -5,7 +5,7 @@
   <div class="container mx-auto px-5 md:px-40 xl:px-96 mb-16">
     @if (Cards$ | async; as cards){
       @for (card of (cards | filter:filterData); track card.id ){
-        <app-big-card [card] = 'card'  ></app-big-card>
+        <app-big-card [card] = 'card' ></app-big-card>
       }
     }
   </div>

@@ -16,6 +16,7 @@ export class SelectRentComponent implements OnInit{
   public setId = inject(SetService)
   protected testObj?: Post[]
 
+
   filterData:FilterRent = {
     city: '',
     inhabitantsCount: 0,

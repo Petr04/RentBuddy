@@ -1,5 +1,7 @@
  <div SelectCard (click)="getIdCard()" class="flex flex-col items-center w-full mt-5 bg-[#FFFFFF] rounded-2xl mb-5 relative">
-        <img class="w-full h-48 min-h-48 rounded-t-2xl lg:h-96 object-cover object-center" src="../assets/room.png">
+        <div class="image-container rounded-t-2xl object-contain object-center w-full min-w-48">
+          <img  #image *ngFor="let image of imageList" [src]="image" class="image-item object-centern w-full h-56 lg:h-80 min-h-56">
+        </div>
         <div class="flex flex-row w-full justify-between p-4">
             <div class="flex flex-col w-full">
               <div class="flex items-center justify-between">
