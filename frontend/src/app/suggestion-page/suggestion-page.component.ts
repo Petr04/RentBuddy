@@ -25,7 +25,7 @@ export class SuggestionPageComponent implements OnInit{
     this.cardOfUser$ = this.postService.match().pipe(
       map((res:SuggestionRoom)=> res?.item1)
     )
-    this.postService.match().subscribe(res => console.log(res))
+    this.postService.match().subscribe()
   }
 
 }

@@ -13,7 +13,7 @@ export class PostService {
 
   }
   public getUserId(){
-    return localStorage.getItem('userId')
+    return localStorage?.getItem('userId')
   }
 
   public getPosts(): Observable<Post[]>{
@@ -26,6 +26,10 @@ export class PostService {
 
   public getUsers(): Observable<User>{
     return this._httpCLient.get<User>('/api/Users')
+  }
+
+  public getUserById():Observable<UserProfile>{
+    return this._httpCLient.get<UserProfile>(`http://localhost:5000/api/Users/${this.getUserId()}`)
   }
 
   public postUser(obj: UserProfile){

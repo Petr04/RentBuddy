@@ -52,12 +52,10 @@ export class RegistrationPageComponent implements OnDestroy{
       this.aSub = this.auth.register(this.registrationForm.value).subscribe({
         next: () => this.router.navigate(['/login']),
         error: (err) => {
-          console.log(err)
           this.registrationForm.enable()
         }
       })
     this.toggle(true)
-    console.log(this.registrationForm.value)
     }
   }
   visible:boolean = true;

@@ -28,13 +28,10 @@ export class TestDetailComponent implements OnInit {
 
 
   logout(){
-    console.log(this._account.isAuthenticated())
     this._account.logout()
-    console.log(this._account.isAuthenticated())
   }
 
   cardSubmit(){
-    console.log(this.card$)
   }
 
 }

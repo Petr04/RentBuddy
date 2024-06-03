@@ -39,7 +39,6 @@ export class SelectRentComponent implements OnInit{
 
   printId(){
     const arrayId: string[] = Array.from(this.setId)
-    console.log(arrayId)
     this.postService.postListRooms(arrayId).subscribe()
   }
 

@@ -50,6 +50,5 @@ export class RoomEditComponent {
       this.roomForm.markAllAsTouched()
       return
     }
-    console.log(this.roomForm.value)
   }
 }

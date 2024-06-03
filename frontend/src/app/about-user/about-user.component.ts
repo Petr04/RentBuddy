@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NextBtnComponent } from '../components/next-btn/next-btn.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { BaseInputComponent } from '../components/base-input/base-input.component';
 import { BirthdaySelectComponent } from '../components/birthday-select/birthday-select.component';
 import { BiSelectComponent } from '../components/bi-select/bi-select.component';
@@ -10,6 +10,8 @@ import { RadioSelectComponent } from '../components/radio-select/radio-select.co
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostService } from '../services/post.service';
 import { RouterLink } from '@angular/router';
+import { Observable, map } from 'rxjs';
+import { UserProfile } from '../interfaces/interface';
 
 
 @Component({
@@ -18,16 +20,17 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink ,NextBtnComponent, CommonModule,
   BaseInputComponent, BirthdaySelectComponent, BiSelectComponent,
   RangeInputComponent, TimeSelectComponent, RadioSelectComponent, ReactiveFormsModule ],
+  providers: [DatePipe],
   templateUrl: './about-user.component.html',
   styleUrl: './about-user.component.css'
 })
-export class AboutUserComponent {
-  buttonText:string = "Сохранить и продолжить";
+export class AboutUserComponent implements OnInit {
+  profileSavedInfo!: UserProfile
   profileForm!: FormGroup
+  buttonText:string = "Сохранить и продолжить";
 
-  constructor(private postService: PostService){
+  constructor(private postService: PostService, private datePipe:DatePipe){
     this.profileForm = new FormGroup({
-      id: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
       birthDate: new FormControl('', Validators.required),
@@ -43,8 +46,32 @@ export class AboutUserComponent {
       aboutMe: new FormControl("", Validators.required)
     })
   }
+
+  ngOnInit(): void {
+    this.postService.getUserById().subscribe(res => {
+      this.profileSavedInfo = res;
+      this.profileForm.patchValue({
+        id: res.id,
+        name: res.name,
+        lastname: res.lastname,
+        birthDate: this.datePipe.transform(res.birthDate, 'yyyy-MM-dd'),
+        gender: +res.gender,
+        isSmoke: res.isSmoke,
+        hasPet: res.hasPet,
+        communicationLevel: +res.communicationLevel,
+        pureLevel: +res.pureLevel,
+        riseTime: this.datePipe.transform(res.riseTime, 'HH:mm'),
+        sleepTime: this.datePipe.transform(res.sleepTime, 'HH:mm'),
+        timeSpentAtHome: +res.timeSpentAtHome,
+        aboutMe: res.aboutMe
+      });
+    });
+  }
+
+
+
   saveAndContinue(){
-    this.profileForm.value.id = localStorage.getItem('userId')
+    this.profileForm.value.id = localStorage?.getItem('userId')
     this.profileForm.value.gender = 1
     this.profileForm.value.isSmoke = this.isSmoke
     this.profileForm.value.hasPet = this.hasPet
@@ -55,7 +82,6 @@ export class AboutUserComponent {
     //   return
     // }
     this.postService.postUser(this.profileForm.value).subscribe()
-    console.log(this.profileForm.value)
 
   }
 

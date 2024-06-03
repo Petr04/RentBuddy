@@ -101,7 +101,6 @@ export class ApartmentEditComponent {
     //   this.apartmentForm.markAllAsTouched()
     //   return
     // }
-    console.log(this.apartmentForm.value)
   }
 }
 

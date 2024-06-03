@@ -1,9 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { customValidator } from '../../custom-validator/custom-validator.component';
-import { CLIENT_RENEG_LIMIT } from 'tls';
-import { error } from 'console';
+
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
@@ -43,12 +41,10 @@ export class LoginPageComponent implements OnDestroy {
       this.aSub = this.authService.login(this.authorizationForm.value).subscribe({
         next: () => this.router.navigate(['/profile']),
         error: (err) => {
-          console.log(err)
           this.authorizationForm.enable()
         }
       })
     }
-    console.log(this.authorizationForm.value)
   }
 
   visible:boolean = true;
