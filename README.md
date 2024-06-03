@@ -26,7 +26,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | Запросы на сервер                                  |        +       |
 | Использование общего code-style (настройка eslint) |        +       |
 | **60 - 80**                                                         |
-| MVVM                                               |                |
+| MVVM                                               |        +       |
 | Продвинутое использование DI (использование токенов, useFactory) |      +         |
 | DRY                                                |                |
 | Хлебные крошки                                     |        +       |
