@@ -65,8 +65,7 @@
               "buildTarget": "rent-buddy:build:production"
             },
             "development": {
-              "buildTarget": "rent-buddy:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "buildTarget": "rent-buddy:build:development"
             }
           },
           "defaultConfiguration": "development"
