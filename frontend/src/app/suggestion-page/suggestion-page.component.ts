@@ -6,11 +6,12 @@ import {RouterLink} from "@angular/router";
 import { Observable, map } from 'rxjs';
 import { PostService } from '../services/post.service';
 import { CommonModule } from '@angular/common';
+import { LetDirective } from '../directives/struct.directive';
 
 @Component({
   selector: 'app-suggestion-page',
   standalone: true,
-  imports: [NextBtnComponent, BigCardComponent, RouterLink, CommonModule],
+  imports: [NextBtnComponent, BigCardComponent, RouterLink, CommonModule, LetDirective],
   templateUrl: './suggestion-page.component.html',
   styleUrl: './suggestion-page.component.css'
 })

@@ -15,6 +15,8 @@ export class LoginPageComponent implements OnDestroy {
 
   aSub!: Subscription
   public authorizationForm!: FormGroup
+  visible:boolean = true;
+  changetype:boolean =true;
 
   constructor(private authService: AuthService , private router: Router){
     this.authorizationForm = new FormGroup({
@@ -28,8 +30,6 @@ export class LoginPageComponent implements OnDestroy {
       this.aSub.unsubscribe()
     }
   }
-
-
 
   public confirmAuth():void{
     if (this.authorizationForm.disabled){
@@ -47,10 +47,7 @@ export class LoginPageComponent implements OnDestroy {
     }
   }
 
-  visible:boolean = true;
-  changetype:boolean =true;
-
-  viewpass(){
+  public viewpass(){
     this.visible = !this.visible;
     this.changetype = !this.changetype;
   }

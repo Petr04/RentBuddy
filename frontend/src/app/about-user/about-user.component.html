@@ -5,7 +5,7 @@
       <div class="flex flex-row justify-start w-full ">
         <button class="justify-start"><img src="../assets/arrow.png"></button>
         <h2 class="mx-auto text-xl font-semibold">Профиль</h2>
-        <button class="justify-end"><img src="../assets/logout.svg"></button>
+        <button (click)="logout()" routerLink="/login" class="justify-end"><img src="../assets/logout.svg"></button>
       </div>
     </div>
   </header>
@@ -76,7 +76,7 @@
         <input formControlName="sleepTime" type="time" placeholder="чч/мм" lang="ru" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
       </div>
 
-      <h4 class="mt-3.5 ml-2 font-medium">Сколько времени вы дома в течении дня?</h4>
+      <h4 class="mt-3.5 ml-2 font-medium">Сколько времени вы дома в течение дня?</h4>
       <div class="bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col mt-1 color-[#00000080]">
         <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
           <input formControlName="timeSpentAtHome" class=" accent-[#8567FA] h-5 w-5" type="radio" name="timeSpentAtHome" value="4"/>
@@ -113,7 +113,7 @@
       <h4 class="mt-3.5 ml-2 font-medium">Расскажи о себе</h4>
       <div class="mt-1 w-full">
         <textarea formControlName="aboutMe" type="text" rows="4"
-                  placeholder="Расскажите о себе, это поможет найти вам соседа."
+                  placeholder=""
                   class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full resize-none outline-none"></textarea>
       </div>
     </div>

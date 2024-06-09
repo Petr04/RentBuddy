@@ -9,9 +9,10 @@ import { TimeSelectComponent } from '../components/time-select/time-select.compo
 import { RadioSelectComponent } from '../components/radio-select/radio-select.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostService } from '../services/post.service';
-import { RouterLink } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 import { UserProfile } from '../interfaces/interface';
+import { AuthService } from '../services/auth.service';
+import { routes } from '../app.routes';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class AboutUserComponent implements OnInit {
   profileForm!: FormGroup
   buttonText:string = "Сохранить и продолжить";
 
-  constructor(private postService: PostService, private datePipe:DatePipe){
+  constructor(private postService: PostService, private datePipe:DatePipe, private auth: AuthService, private router: Router){
     this.profileForm = new FormGroup({
       name: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
@@ -68,7 +69,9 @@ export class AboutUserComponent implements OnInit {
     });
   }
 
-
+  logout(){
+    this.auth.logout()
+  }
 
   saveAndContinue(){
     this.profileForm.value.id = localStorage?.getItem('userId')
@@ -76,7 +79,6 @@ export class AboutUserComponent implements OnInit {
     this.profileForm.value.isSmoke = this.isSmoke
     this.profileForm.value.hasPet = this.hasPet
     this.profileForm.value.timeSpentAtHome = +this.profileForm.value.timeSpentAtHome
-
     // if (this.profileForm.invalid || this.profileForm.disabled){
     //   this.profileForm.markAllAsTouched()
     //   return
@@ -85,7 +87,7 @@ export class AboutUserComponent implements OnInit {
 
   }
 
-  gender:boolean = true;
+  gender:boolean = false;
   public male(){
     this.gender = true
   }
@@ -93,7 +95,7 @@ export class AboutUserComponent implements OnInit {
     this.gender = false
   }
 
-  isSmoke:boolean = true;
+  isSmoke:boolean = false;
   public smoke(){
     this.isSmoke = true
   }
@@ -101,7 +103,7 @@ export class AboutUserComponent implements OnInit {
     this.isSmoke = false
   }
 
-  hasPet:boolean = true;
+  hasPet:boolean = false;
   public pet(){
     this.hasPet = true
   }
