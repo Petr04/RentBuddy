@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import {NextBtnComponent} from "../components/next-btn/next-btn.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-room-edit',
   standalone: true,
   imports: [
     NextBtnComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './room-edit.component.html',
   styleUrl: './room-edit.component.css'

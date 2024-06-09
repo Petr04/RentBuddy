@@ -116,6 +116,13 @@
                   placeholder=""
                   class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full resize-none outline-none"></textarea>
       </div>
+      <h3 class="font-semibold text-xl mt-5">Разместить объявление</h3>
+      <button class="bg-[#8567FA] text-[#FEFEFE] py-2.5 px-6 font-semibold rounded-2xl w-2/4 flex gap-1.5 justify-center mt-2.5 mb-10" [routerLink]="['/apartment-edit']">
+        <img src="./assets/plus.svg">
+        Добавить
+      </button>
+      <h3 class="font-semibold text-xl mt-5">Мои объявления</h3>
+      <select></select>
     </div>
     <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
       <app-next-btn [routerLink]="['/select-rent']"   (click)="saveAndContinue()" [buttonText]="buttonText"></app-next-btn>

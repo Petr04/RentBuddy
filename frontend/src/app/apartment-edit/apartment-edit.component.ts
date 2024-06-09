@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import {NextBtnComponent} from "../components/next-btn/next-btn.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {RouterLink} from "@angular/router";
 
 
 @Component({
   selector: 'app-apartment-edit',
   standalone: true,
   imports: [
-    NextBtnComponent, CommonModule, ReactiveFormsModule
+    NextBtnComponent, CommonModule, ReactiveFormsModule, RouterLink
   ],
   templateUrl: './apartment-edit.component.html',
   styleUrl: './apartment-edit.component.css'
