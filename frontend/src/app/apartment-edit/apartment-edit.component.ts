@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import {NextBtnComponent} from "../components/next-btn/next-btn.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {RouterLink} from "@angular/router";
+import { PostService } from '../services/post.service';
 
 
 @Component({
   selector: 'app-apartment-edit',
   standalone: true,
   imports: [
-    NextBtnComponent, CommonModule, ReactiveFormsModule
+    NextBtnComponent, CommonModule, ReactiveFormsModule, RouterLink
   ],
   templateUrl: './apartment-edit.component.html',
   styleUrl: './apartment-edit.component.css'
@@ -17,31 +19,38 @@ import { CommonModule } from '@angular/common';
 export class ApartmentEditComponent {
   apartmentForm!: FormGroup
   techniqueForm!: FormGroup
+  bathroomBool = false
+  wifiBool = false
+  passengerElevatorBool = false
+  serviceElevatorBool = false
+  sportsGroundBool = false
+  petAllowedBool = false
+  smokingAllowedBool = false
 
-  constructor( ){
+  constructor(private _postService: PostService){
     this.apartmentForm = new FormGroup({
-      id: new FormControl(''),
-      address: new FormControl('', Validators.required),
-      currentFloor: new FormControl(null, Validators.required),
-      roomsCount: new FormControl(null, Validators.required),
-      // square: new FormControl('', Validators.required),
-      isCombinedBathroom: new FormControl(false),
-      bathroomCount: new FormControl(null, Validators.required),
-      technicType: new FormControl([0]), //  нужно переделать из массива буллов в массив number
-      hasWifi: new FormControl(false),
-      maxFloor: new FormControl(null, Validators.required),
-      hasPassengerElevator: new FormControl(false),
-      hasFreightElevator: new FormControl(false),
-      parkingType: new FormControl(null, Validators.required),
-      yardType: new FormControl(null, Validators.required),
+      id: new FormControl(),
+      ownerId: new FormControl(localStorage.getItem("userId")),
+      address: new FormControl(''),
+      currentFloor: new FormControl(),
+      roomsCount: new FormControl(),
+      isCombinedBathroom: new FormControl(),
+      bathroomCount: new FormControl(),
+      technicType: new FormControl([]), //  нужно переделать из массива буллов в массив number
+      hasWifi: new FormControl(),
+
+      maxFloor: new FormControl(),
+      hasPassengerElevator: new FormControl(),
+      hasFreightElevator: new FormControl(),
+      parkingType: new FormControl(),//num
+      yardType: new FormControl(),
       //sportsGround: new FormControl(false),  нету на беке
-      //maxGuests: new FormControl('', Validators.required),  нету на беке
-      hasPet: new FormControl(false),
-      canUserSmoke: new FormControl(false),
+      //maxGuests: new FormControl(''),  нету на беке
+      hasPet: new FormControl(),
+      canUserSmoke: new FormControl(),
       imageLinks: new FormControl(['']),
-      aboutApartment: new FormControl('', Validators.required),
+      aboutApartment: new FormControl(''),
       //rooms: new FormControl([]),
-      ownerId: new FormControl(''),
     })
     this.techniqueForm = new FormGroup({
       fridge: new FormControl(false),
@@ -52,31 +61,24 @@ export class ApartmentEditComponent {
     })
   }
 
-  bathroomBool = false
   bath(bool:boolean){
     bool? this.bathroomBool = true : this.bathroomBool = false
   }
-  wifiBool = false
   wifi(bool: boolean){
     bool? this.wifiBool = true : this.wifiBool = false
   }
-  passengerElevatorBool = false
   passengerElevator(bool: boolean){
     bool? this.passengerElevatorBool = true : this.passengerElevatorBool = false
   }
-  serviceElevatorBool = false
   serviceElevator(bool: boolean){
     bool? this.serviceElevatorBool = true : this.serviceElevatorBool = false
   }
-  sportsGroundBool = false
   sportsGround(bool: boolean){
     bool? this.sportsGroundBool = true : this.sportsGroundBool = false
   }
-  petAllowedBool = false
   petAllowed(bool: boolean){
     bool? this.petAllowedBool = true : this.petAllowedBool = false
   }
-  smokingAllowedBool = false
   smokingAllowed(bool: boolean){
     bool? this.smokingAllowedBool = true : this.smokingAllowedBool = false
   }
@@ -97,11 +99,8 @@ export class ApartmentEditComponent {
     this.apartmentForm.value.roomsCount = +this.apartmentForm.value.roomsCount
     this.apartmentForm.value.bathroomCount = +this.apartmentForm.value.bathroomCount
     this.apartmentForm.value.maxFloor = +this.apartmentForm.value.maxFloor
-    // if (this.apartmentForm.invalid || this.apartmentForm.disabled){
-    //   this.apartmentForm.markAllAsTouched()
-    //   return
-    // }
-    console.log(this.apartmentForm.value)
+
+    this._postService.postApartment(this.apartmentForm.value).subscribe()
   }
 }
 

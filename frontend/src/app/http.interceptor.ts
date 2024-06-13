@@ -3,9 +3,9 @@ import { catchError, throwError } from 'rxjs';
 
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
-    catchError((err:any)=>{
+    catchError((err: {status: number})=>{
       if (err.status == 0){
-        console.error("Нет подключение к серверу")
+        alert("Сервер не отвечает")
       }
       return throwError(()=> err)
     }));

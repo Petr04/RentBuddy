@@ -16,7 +16,7 @@ export const FLAT_PROVIDER: Provider = {
             switchMap(params => {
                 const id = params["id"];
 
-                return service.getPostByID(id);
+                return service.getRoomByID(id);
             }),
         );
     }

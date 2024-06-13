@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap, throwError } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { User } from '../interfaces/interface';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient, private router: Router){
   }
 
   register(user: User): Observable<User> {
@@ -29,10 +30,11 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('auth-token');
+    localStorage.removeItem('userId');
   }
 
   getToken(): string | null{
-    return localStorage.getItem('auth-token');
+    return localStorage?.getItem('auth-token');
   }
 
   isAuthenticated(): boolean {
@@ -41,7 +43,7 @@ export class AuthService {
   }
 
   getUserId(): string | null{
-    return localStorage.getItem("userId")
+    return localStorage?.getItem("userId")
   }
 
 }

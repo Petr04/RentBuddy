@@ -7,7 +7,7 @@
             </div>
           </div>
     </header>
-    <div class="container mx-auto px-5 md:px-40 xl:px-96 mb-40">
+    <div  class="container mx-auto px-5 md:px-40 xl:px-96 mb-40">
       @if (cardOfUser$ | async; as card){
         <div  class="flex flex-col items-center w-full mt-5 bg-[#FFFFFF] rounded-2xl mb-5 relative">
           <img class="w-full h-48 min-h-48 rounded-t-2xl lg:h-96 object-cover object-center" src="../assets/room.png">
@@ -36,10 +36,10 @@
                 <img class="rounded-full w-20 h-20 object-cover object-center" src="../assets/sigma-2.jpg">
                 <img class="rounded-full w-20 h-20 object-cover object-center" src="../assets/sigma.jpg">
             </div>
-            <button class="mt-5 text-center leading-6 mx-auto w-full text-[#FFFFFF]
-            bg-gradient-to-r from-[#8567FA] to-[#4FACE2] py-3.5 rounded-3xl font-semibold flex flex-row justify-center"><img src="../assets/tg.svg"><a class="pt-1 pl-2.5">Перейти в общий чат</a></button>
-            <button class="flex flex-row justify-center mt-2.5 text-center leading-6 bg-[#FFFFFF] border-[#8567FA] border py-3.5 px-4 rounded-3xl font-semibold w-full"><img src="../assets/tg-gradient.svg"><a class="bg-gradient-to-r from-[#8567FA] to-[#4FACE2] text-transparent
-                bg-clip-text pt-1 pl-2.5">Связаться с владельцем</a></button>
+            <a class="mt-5 text-center leading-6 mx-auto w-full text-[#FFFFFF] cursor-pointer
+            bg-gradient-to-r from-[#8567FA] to-[#4FACE2] py-3.5 rounded-3xl font-semibold flex flex-row justify-center" href="https://t.me/child_p01"><img src="../assets/tg.svg"><a class="pt-1 pl-2.5">Перейти в общий чат</a></a>
+            <a class="flex flex-row justify-center mt-2.5 text-center leading-6 bg-[#FFFFFF] border-[#8567FA] border py-3.5 px-4 rounded-3xl font-semibold w-full cursor-pointer" href="https://t.me/piotr_makarov"><img src="../assets/tg-gradient.svg"><a class="bg-gradient-to-r from-[#8567FA] to-[#4FACE2] text-transparent
+                bg-clip-text pt-1 pl-2.5">Связаться с владельцем</a></a>
         </div>
 
 

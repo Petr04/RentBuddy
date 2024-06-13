@@ -23,18 +23,15 @@ export class TestDetailComponent implements OnInit {
   constructor() { }
   ngOnInit(): void {
 
-  //   this.card$ = this._card.getPostByID('a61618b9-c076-471d-a2b7-14b3d593a6b9')
+  //   this.card$ = this._card.getRoomByID('a61618b9-c076-471d-a2b7-14b3d593a6b9')
   }
 
 
   logout(){
-    console.log(this._account.isAuthenticated())
     this._account.logout()
-    console.log(this._account.isAuthenticated())
   }
 
   cardSubmit(){
-    console.log(this.card$)
   }
 
 }

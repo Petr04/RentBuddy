@@ -16,6 +16,7 @@ export class SelectRentComponent implements OnInit{
   public setId = inject(SetService)
   protected testObj?: Post[]
 
+
   filterData:FilterRent = {
     city: '',
     inhabitantsCount: 0,
@@ -34,13 +35,12 @@ export class SelectRentComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.Cards$ = this.postService.getPosts()
+    this.Cards$ = this.postService.getRooms()
   }
 
   printId(){
     const arrayId: string[] = Array.from(this.setId)
-    console.log(arrayId)
-    this.postService.postListRooms(arrayId).subscribe()
+    this.postService.postFavoriteRooms(arrayId).subscribe()
   }
 
   buttonText:string ='Далее'

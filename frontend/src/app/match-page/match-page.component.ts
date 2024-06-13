@@ -32,28 +32,28 @@ export class MatchPageComponent {
 
   animationState!: string;
 
-  constructor(private postService: PostService) { }
-
-  public cardAnimation(value: any) {
-    this.parentSubject.next(value);
+  constructor(private postService: PostService) {
   }
+
+
   ngOnInit() {
-    this.usersForMatching$ =  this.postService.getUserForMatch()
-    this.postService.getUserForMatch().subscribe(res => this.len = res.length)
+    this.usersForMatching$ =  this.postService.getUsersMatches()
+    this.postService.getUsersMatches().subscribe(res => this.len = res.length)
   }
 
   public startAnimation(state: string, matchId: string) {
     if (!this.animationState) {
       this.animationState = state;
       if (this.len != this.index+1){
-        this.postService.like(matchId).subscribe(res => console.log(res))
+        this.postService.like(matchId).subscribe()
         this.index++
+
       }
 
     }
   }
 
-  public resetAnimationState(state: any) {
+  public resetAnimationState() {
     this.animationState = '';
     // this.index++;
 

@@ -14,12 +14,12 @@
           <img class="absolute input__img" src="../assets/mail.svg">
         </div>
         <div class="relative flex flex-row justify-between border border-[#8e8e8e] rounded-2xl mt-4">
-          <input passwordStrength formControlName="password" type="text" placeholder="Введите пароль" class="p-2.5 bg-[#FFFFFF] text-[#8e8e8e]  rounded-2xl w-full outline-none">
-          <img class="absolute input__img" src="../assets/eyes.svg">
+          <input passwordStrength formControlName="password" [type]="changetype?'password':'text'" placeholder="Пароль" class="p-2.5 bg-[#FFFFFF]  text-[#8e8e8e]  rounded-2xl w-full outline-none">
+          <span class="cursor-pointer" (click)="viewpass()"><i class="absolute input__img w-6 h-6" [ngClass]="visible?'eye':'eye-closed'"></i></span>
         </div>
         <div class="relative flex flex-row justify-between border border-[#8e8e8e] rounded-2xl mt-4">
-          <input passwordStrength formControlName="passwordConfirm" type="password" placeholder="Повторите пароль" class="p-2.5 bg-[#FFFFFF]  text-[#8e8e8e]  rounded-2xl w-full outline-none">
-          <img class="absolute input__img" src="../assets/eyes-close.svg">
+          <input passwordStrength formControlName="passwordConfirm" [type]="changetype?'password':'text'" placeholder="Пароль" class="p-2.5 bg-[#FFFFFF]  text-[#8e8e8e]  rounded-2xl w-full outline-none">
+          <span class="cursor-pointer" (click)="viewpass()"><i class="absolute input__img w-6 h-6" [ngClass]="visible?'eye':'eye-closed'"></i></span>
         </div>
         <div>
           @if (registrationForm.errors?.["PasswordDoNotMatch"]) {
@@ -50,6 +50,26 @@
       Условиями использования</span> и подтверждаете
       <span class="bg-gradient-to-r from-[#8567FA] to-[#4FACE2] inline-block text-transparent bg-clip-text">Политику
       конфиденциальности и Политику конфиденциальности</span></h4>
-    <app-next-btn (click)="onSubmit()"  buttonText="Далее"></app-next-btn>
+    <tui-root>
+
+      <button
+        tuiButton
+        type="button"
+        (click)="onSubmit()"
+        class="text-center leading-6 mx-auto w-full text-[#FFFFFF]
+        bg-gradient-to-r from-[#8567FA] to-[#4FACE2] py-3.5 rounded-3xl mb-5 font-semibold"
+      >
+          Далее
+      </button>
+
+      <tui-push
+        *tuiPush="open"
+        heading="Успешная Регистрация"
+        (close)="toggle(false)"
+      >
+
+      </tui-push>
+
+    </tui-root>
   </div>
 </div>
