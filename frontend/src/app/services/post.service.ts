@@ -17,27 +17,27 @@ export class PostService {
   }
 
   public getRooms(): Observable<Post[]>{
-    return this._httpCLient.get<Post[]>('/api/Room')
+    return this._httpCLient.get<Post[]>('api/Room')
   }
 
   public getRoomByID(id: string): Observable<Post>{
-    return this._httpCLient.get<Post>(`/api/Room/${id}`)
+    return this._httpCLient.get<Post>(`api/Room/${id}`)
   }
 
   public getUsers(): Observable<User>{
-    return this._httpCLient.get<User>('/api/Users')
+    return this._httpCLient.get<User>('api/Users')
   }
 
   public getUserById():Observable<UserProfile>{
-    return this._httpCLient.get<UserProfile>(`/api/Users/${this.getUserId()}`)
+    return this._httpCLient.get<UserProfile>(`api/Users/${this.getUserId()}`)
   }
 
   public postUser(obj: UserProfile){
-    return this._httpCLient.post('/api/Users', obj)
+    return this._httpCLient.post('api/Users', obj)
   }
 
   public postFavoriteRooms(arr: Array<string>){
-    return this._httpCLient.post(`/api/FavoriteRooms/${this.getUserId()}/AddRoomToFavorites`, arr)
+    return this._httpCLient.post(`api/FavoriteRooms/${this.getUserId()}/AddRoomToFavorites`, arr)
   }
 
   public getUsersMatches():Observable<UserProfile[]>{

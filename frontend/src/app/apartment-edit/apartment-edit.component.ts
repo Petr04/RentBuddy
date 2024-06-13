@@ -29,7 +29,6 @@ export class ApartmentEditComponent {
 
   constructor(private _postService: PostService){
     this.apartmentForm = new FormGroup({
-      id: new FormControl(),
       ownerId: new FormControl(localStorage.getItem("userId")),
       address: new FormControl(''),
       currentFloor: new FormControl(),
