@@ -37,8 +37,8 @@ export class MatchPageComponent {
 
 
   ngOnInit() {
-    this.usersForMatching$ =  this.postService.getUserForMatch()
-    this.postService.getUserForMatch().subscribe(res => this.len = res.length)
+    this.usersForMatching$ =  this.postService.getUsersMatches()
+    this.postService.getUsersMatches().subscribe(res => this.len = res.length)
   }
 
   public startAnimation(state: string, matchId: string) {

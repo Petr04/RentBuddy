@@ -22,7 +22,6 @@ export const routes: Routes = [
   {path:'room-edit', component: RoomEditComponent, canActivate:[authGuardFn]},
   {path:'post-apartment', component: PostApartmentComponent, canActivate:[authGuardFn]},
   {path:'successful-post', component: SuccessfulPostComponent, canActivate:[authGuardFn]},
-  {path:'apartment-edit', component: ApartmentEditComponent, canActivate:[authGuardFn]},
   {path:'room-edit', component: RoomEditComponent, canActivate:[authGuardFn]},
   {path:'apartment-info', component: ApartmentInfoComponent, canActivate:[authGuardFn]},
   {path:'test/:id', component: TestDetailComponent, canActivate:[authGuardFn]},

@@ -9,10 +9,9 @@ import { TimeSelectComponent } from '../components/time-select/time-select.compo
 import { RadioSelectComponent } from '../components/radio-select/radio-select.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostService } from '../services/post.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { UserProfile } from '../interfaces/interface';
 import { AuthService } from '../services/auth.service';
-import { routes } from '../app.routes';
 
 
 @Component({
@@ -28,37 +27,40 @@ import { routes } from '../app.routes';
 export class AboutUserComponent implements OnInit {
   profileSavedInfo!: UserProfile
   profileForm!: FormGroup
+  gender:boolean = false;
+  isSmoke:boolean = false;
+  hasPet:boolean = false;
   buttonText:string = "Сохранить и продолжить";
 
-  constructor(private postService: PostService, private datePipe:DatePipe, private auth: AuthService, private router: Router){
+  constructor(private postService: PostService, private datePipe:DatePipe, private auth: AuthService){
     this.profileForm = new FormGroup({
       name: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
       birthDate: new FormControl('', Validators.required),
-      gender: new FormControl(1),
-      isSmoke:new FormControl(true),
-      hasPet:new FormControl(false),
+      gender: new FormControl(''),
+      isSmoke:new FormControl(''),
+      hasPet:new FormControl(''),
       communicationLevel: new FormControl(5),
       pureLevel: new FormControl(5),
       riseTime: new FormControl('', Validators.required),
       sleepTime: new FormControl('', Validators.required),
-      timeSpentAtHome: new FormControl(""),
+      timeSpentAtHome: new FormControl(''),
       partyFrequency: new FormControl('', Validators.required),
-      aboutMe: new FormControl("", Validators.required)
+      aboutMe: new FormControl('', Validators.required)
     })
   }
 
   ngOnInit(): void {
     this.postService.getUserById().subscribe(res => {
       this.profileSavedInfo = res;
+      this.isSmoke = res.isSmoke
+      this.hasPet = res.hasPet
+      this.gender = Boolean(res.gender)
       this.profileForm.patchValue({
         id: res.id,
         name: res.name,
         lastname: res.lastname,
         birthDate: this.datePipe.transform(res.birthDate, 'yyyy-MM-dd'),
-        gender: +res.gender,
-        isSmoke: res.isSmoke,
-        hasPet: res.hasPet,
         communicationLevel: +res.communicationLevel,
         pureLevel: +res.pureLevel,
         riseTime: this.datePipe.transform(res.riseTime, 'HH:mm'),
@@ -75,19 +77,15 @@ export class AboutUserComponent implements OnInit {
 
   saveAndContinue(){
     this.profileForm.value.id = localStorage?.getItem('userId')
-    this.profileForm.value.gender = 1
+    this.profileForm.value.gender = this.gender
     this.profileForm.value.isSmoke = this.isSmoke
     this.profileForm.value.hasPet = this.hasPet
     this.profileForm.value.timeSpentAtHome = +this.profileForm.value.timeSpentAtHome
-    // if (this.profileForm.invalid || this.profileForm.disabled){
-    //   this.profileForm.markAllAsTouched()
-    //   return
-    // }
     this.postService.postUser(this.profileForm.value).subscribe()
-
+    console.log(this.profileSavedInfo)
+    console.log(this.profileForm.value)
   }
 
-  gender:boolean = false;
   public male(){
     this.gender = true
   }
@@ -95,7 +93,6 @@ export class AboutUserComponent implements OnInit {
     this.gender = false
   }
 
-  isSmoke:boolean = false;
   public smoke(){
     this.isSmoke = true
   }
@@ -103,7 +100,6 @@ export class AboutUserComponent implements OnInit {
     this.isSmoke = false
   }
 
-  hasPet:boolean = false;
   public pet(){
     this.hasPet = true
   }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NextBtnComponent} from "../components/next-btn/next-btn.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {RouterLink} from "@angular/router";
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-room-edit',
@@ -19,15 +20,16 @@ export class RoomEditComponent {
   techniqueForm!: FormGroup
   furnitureForm!: FormGroup
 
-  constructor( ){
+  constructor(private _postService: PostService ){
     this.roomForm = new FormGroup({
+      apartmentId: new FormControl(localStorage.getItem('apartmentId')),
       square: new FormControl('', Validators.required),
       inhabitantsCount: new FormControl('', Validators.required),
       imageLink: new FormControl(''),
       aboutRoom: new FormControl('', Validators.required),
       price: new FormControl('', Validators.required),
-      technique: new FormControl([]),
-      furniture: new FormControl([]),
+      technicTypes: new FormControl([]),
+      furnitureTypes: new FormControl([]),
     })
 
     this.techniqueForm = new FormGroup({
@@ -45,12 +47,10 @@ export class RoomEditComponent {
   }
 
   next(){
-    this.roomForm.value.technique = this.techniqueForm.value
-    this.roomForm.value.furniture = this.furnitureForm.value
+    // this.roomForm.value.technicTypes = this.techniqueForm.value
+    // this.roomForm.value.furnitureTypes = this.furnitureForm.value
 
-    if (this.roomForm.invalid || this.roomForm.disabled){
-      this.roomForm.markAllAsTouched()
-      return
-    }
+    console.log(this.roomForm.value)
+    this._postService.postRoom(this.roomForm.value).subscribe()
   }
 }

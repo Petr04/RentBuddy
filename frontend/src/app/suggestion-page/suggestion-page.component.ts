@@ -23,10 +23,10 @@ export class SuggestionPageComponent implements OnInit{
    }
 
   ngOnInit(): void {
-    this.cardOfUser$ = this.postService.match().pipe(
+    this.cardOfUser$ = this.postService.getSuitableRoom().pipe(
       map((res:SuggestionRoom)=> res?.item1)
     )
-    this.postService.match().subscribe()
+    this.postService.getSuitableRoom().subscribe()
   }
 
 }

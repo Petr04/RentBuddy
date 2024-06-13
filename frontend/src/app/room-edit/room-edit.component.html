@@ -3,7 +3,7 @@
     <div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly
     fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
       <div class="flex flex-row justify-start w-full ">
-        <button class="justify-start"><img src="../assets/arrow.png"></button>
+        <button class="justify-start" [routerLink]='["/apartment-edit"]' ><img src="../assets/arrow.png" ></button>
         <h2 class="mx-auto text-xl font-semibold">Ваше объявление</h2>
       </div>
     </div>
@@ -53,7 +53,8 @@
           <label class=" pl-2 text-center" for="checkbox">Стол</label>
         </div>
       </div>
-      <h4 class="mt-3.5">Кровать</h4>
+
+      <!-- <h4 class="mt-3.5">Кровать</h4>
       <div class="flex justify-evenly gap-2.5 mt-1.5">
         <button class="bg-[#8567FA] text-[#FEFEFE] py-2.5 px-6 font-semibold rounded-2xl  opacity-40 w-full">Односпальная</button>
         <button class="bg-[#8567FA] text-[#FEFEFE] py-2.5 px-6 font-semibold rounded-2xl  w-full">Двуспальная</button>
@@ -65,7 +66,8 @@
       </div>
       <div class="mt-1.5 w-full">
         <input type="text" placeholder="Количество стульев в квартире" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
-      </div>
+      </div> -->
+
       <h3 class="font-semibold text-xl mt-5">Фотографии</h3>
       <div class="flex flex-row gap-2.5">
         <label for="img-input-1">
@@ -91,7 +93,8 @@
         <input formControlName="price" type="text" placeholder="₽" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
       </div>
       <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
-        <app-next-btn buttonText="Сохранить и продолжить" [routerLink]='["/apartment-edit"]' (click)="next()"></app-next-btn>
+        <app-next-btn buttonText="Сохранить и продолжить" [routerLink]='["/apartment-edit"]'  (click)="next()"></app-next-btn>
+
       </div>
     </div>
 
