@@ -29,7 +29,6 @@ export class ApartmentEditComponent {
 
   constructor(private _postService: PostService){
     this.apartmentForm = new FormGroup({
-      id: new FormControl(),
       ownerId: new FormControl(localStorage.getItem("userId")),
       address: new FormControl(''),
       currentFloor: new FormControl(),
@@ -100,7 +99,9 @@ export class ApartmentEditComponent {
     this.apartmentForm.value.bathroomCount = +this.apartmentForm.value.bathroomCount
     this.apartmentForm.value.maxFloor = +this.apartmentForm.value.maxFloor
 
+    console.log(this.apartmentForm.value)
     this._postService.postApartment(this.apartmentForm.value).subscribe()
+
   }
 }
 

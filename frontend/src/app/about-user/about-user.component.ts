@@ -82,8 +82,6 @@ export class AboutUserComponent implements OnInit {
     this.profileForm.value.hasPet = this.hasPet
     this.profileForm.value.timeSpentAtHome = +this.profileForm.value.timeSpentAtHome
     this.postService.postUser(this.profileForm.value).subscribe()
-    console.log(this.profileSavedInfo)
-    console.log(this.profileForm.value)
   }
 
   public male(){
