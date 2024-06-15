@@ -224,7 +224,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                         break;
                     resultUsers.Add(resUser);
                 }
-                if (resultUsers.Count == kvp.Key.Apartment.RoomsCount - 1) 
+                if (resultUsers.Count == kvp.Key.Apartment.Rooms.Count - 1)
                 {
                     return Ok((kvp.Key, resultUsers));
                 }

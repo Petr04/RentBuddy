@@ -48,6 +48,8 @@ app.UseCors(x => x
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseAuthentication();
 app.UseAuthentication();
 

@@ -8,7 +8,6 @@ public class ApartmentEntity : IEntity
 {
     [Key]
     public Guid Id { get; set; }
-    public int RoomsCount { get; set; }
     public int CurrentFloor { get; set; }
     public int MaxFloor { get; set; }
     public string Address { get; set; }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RentBuddyBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Migration1506 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

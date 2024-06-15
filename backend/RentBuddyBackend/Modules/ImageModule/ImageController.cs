@@ -10,7 +10,7 @@ public class ImageController(IWebHostEnvironment webHostEnvironment) : Controlle
     [HttpGet("{imageName}")]
     public async Task<ActionResult> GetImage([FromRoute] string imageName)
     {
-        var imagePath = Path.Combine(webHostEnvironment.ContentRootPath, "Images", imageName + ".jpg");
+        var imagePath = Path.Combine(webHostEnvironment.WebRootPath, "Image", imageName + ".jpg");
 
         if (!System.IO.File.Exists(imagePath))
             return NotFound();

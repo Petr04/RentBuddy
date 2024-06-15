@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentBuddyBackend.DAL;
 using RentBuddyBackend.DAL.Entities;
+using RentBuddyBackend.DAL.Models;
 
 namespace RentBuddyBackend.Modules.ApartmentModule;
 
@@ -22,7 +23,7 @@ public class ApartmentController(ApplicationDbContext context, IMapper mapper) :
     public async Task<ActionResult<ApartmentEntity>> GetApartment([FromRoute] Guid id)
     {
         var data = await context.Apartments.FirstOrDefaultAsync(a => a.Id == id);
-        
+
         return Ok(data);
     }
 
@@ -39,8 +40,9 @@ public class ApartmentController(ApplicationDbContext context, IMapper mapper) :
             apartment.Id = Guid.Empty;
             await context.Apartments.AddAsync(apartment);
         }
+
         await context.SaveChangesAsync();
-        
+
         return Ok(new CreatedOrUpdateResponse
         {
             Id = apartment.Id,
@@ -60,5 +62,23 @@ public class ApartmentController(ApplicationDbContext context, IMapper mapper) :
         await context.SaveChangesAsync();
 
         return NoContent();
+    }
+
+    [HttpGet("{id:guid}/gethostsapatment")]
+    public async Task<ActionResult<ApartmentEntity>> GetHostsApartments([FromRoute] Guid id)
+    {
+        var data = await context.Apartments
+            .Where(a => a.OwnerId == id)
+            .ToListAsync();
+
+        var result = new HostsApartment
+        {
+            HostsApartments = data
+        };
+
+        if (result.HostsApartments.Count == 0)
+            return NoContent();
+
+        return Ok(result);
     }
 }

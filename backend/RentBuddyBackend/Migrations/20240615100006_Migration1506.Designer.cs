@@ -13,8 +13,8 @@ using RentBuddyBackend.DAL;
 namespace RentBuddyBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240530143310_init")]
-    partial class init
+    [Migration("20240615100006_Migration1506")]
+    partial class Migration1506
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
