@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RentBuddyBackend</name>
+    </assembly>
+    <members>
+        <member name="P:RentBuddyBackend.DAL.Entities.UserEntity.Name">
+            <summary>
+            Имя
+            </summary>
+        </member>
+        <member name="T:RentBuddyBackend.Migrations.Migration1506">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.Migration1506.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.Migration1506.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.Migration1506.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RentBuddyBackend.Migrations.DeletedRoomsCount">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.DeletedRoomsCount.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.DeletedRoomsCount.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.DeletedRoomsCount.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RentBuddyBackend.Modules.UserModule.UsersController">
+            <summary>
+            Управление пользователем
+            </summary>
+            <param name="usersService"></param>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.#ctor(RentBuddyBackend.Modules.UserModule.Service.IUserService)">
+            <summary>
+            Управление пользователем
+            </summary>
+            <param name="usersService"></param>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.Register(RentBuddyBackend.DAL.Models.RegisterModel)">
+            <summary>
+            rega
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.Login(RentBuddyBackend.DAL.Models.AuthModel)">
+            <summary>
+            Вход в личный кабинет
+            </summary>
+            <param name="model">login</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.GetSuitableRoom(System.Guid)">
+            <summary>
+            Подбор подходящей комнаты
+            </summary>
+            <remarks>
+            Возвращает RoomEntity и список юзеров(соседей), если пусто, значит такой комнаты или соседей не нашлось
+            </remarks>
+            <param name="id"> Id Юзера</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

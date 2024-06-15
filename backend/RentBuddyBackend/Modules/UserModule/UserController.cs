@@ -6,6 +6,10 @@ using RentBuddyBackend.Modules.UserModule.Service;
 
 namespace RentBuddyBackend.Modules.UserModule;
 
+/// <summary>
+/// Управление пользователем
+/// </summary>
+/// <param name="usersService"></param>
 [Route("api/[controller]")]
 [ApiController]
 public class UsersController(IUserService usersService) : ControllerBase
@@ -31,15 +35,35 @@ public class UsersController(IUserService usersService) : ControllerBase
     public Task<ActionResult<IEnumerable<UserEntity>>> MatchUser([FromRoute] Guid id)
         => usersService.MatchUser(id);
 
+
+    /// <summary>
+    /// rega
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpPost("register")]  
     public Task<ActionResult<UserEntity>> Register([FromBody] RegisterModel model)
         => usersService.RegisterUser(model);
 
+
+    /// <summary>
+    /// Вход в личный кабинет
+    /// </summary>
+    /// <param name="model">login</param>
+    /// <returns></returns>
     [HttpPost("login")]
     public Task<ActionResult<Guid>> Login([FromBody] AuthModel model)
         => usersService.AuthUser(model);
 
+    /// <summary>
+    /// Подбор подходящей комнаты
+    /// </summary>
+    /// <remarks>
+    /// Возвращает RoomEntity и список юзеров(соседей), если пусто, значит такой комнаты или соседей не нашлось
+    /// </remarks>
+    /// <param name="id"> Id Юзера</param>
+    /// <returns></returns>
     [HttpGet("GetSuitableRoom/{id:guid}")]
-    public Task<ActionResult> GetSuitableRoom(Guid id)
+    public Task<ActionResult<SuitableRoom>> GetSuitableRoom(Guid id)
         => usersService.GetSuitableRoom(id);
 }
