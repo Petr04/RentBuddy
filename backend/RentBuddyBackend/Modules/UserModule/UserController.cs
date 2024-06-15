@@ -10,7 +10,6 @@ namespace RentBuddyBackend.Modules.UserModule;
 [ApiController]
 public class UsersController(IUserService usersService) : ControllerBase
 {
-    
     [HttpGet]
     public Task<ActionResult<IEnumerable<UserEntity>>> GetUsers()
         => usersService.GetUsers();
@@ -42,4 +41,8 @@ public class UsersController(IUserService usersService) : ControllerBase
     [HttpGet("GetSuitableRoom/{id:guid}")]
     public Task<ActionResult> GetSuitableRoom(Guid id)
         => usersService.GetSuitableRoom(id);
+
+    [HttpGet("{id:guid}/gethostsapatment")]
+    public Task<ActionResult<IEnumerable<ApartmentEntity>>> GetHostsApartments([FromRoute] Guid id)
+        => usersService.GetHostsApartment(id);
 }

@@ -13,5 +13,6 @@ namespace RentBuddyBackend.Modules.UserModule.Repository
         public EntityEntry<UserEntity> Update(UserEntity userEntity);
         public Task<UserEntity?> FindByEmailAsync(string email);
         public Task<bool> UserExists(string email);
+        public Task<List<ApartmentEntity>> FindHostsApartments(Guid id);
     }
 }

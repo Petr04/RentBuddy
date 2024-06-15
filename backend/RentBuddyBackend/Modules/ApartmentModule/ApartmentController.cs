@@ -63,22 +63,4 @@ public class ApartmentController(ApplicationDbContext context, IMapper mapper) :
 
         return NoContent();
     }
-
-    [HttpGet("{id:guid}/gethostsapatment")]
-    public async Task<ActionResult<ApartmentEntity>> GetHostsApartments([FromRoute] Guid id)
-    {
-        var data = await context.Apartments
-            .Where(a => a.OwnerId == id)
-            .ToListAsync();
-
-        var result = new HostsApartment
-        {
-            HostsApartments = data
-        };
-
-        if (result.HostsApartments.Count == 0)
-            return NoContent();
-
-        return Ok(result);
-    }
 }

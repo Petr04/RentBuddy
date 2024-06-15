@@ -133,7 +133,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             var user = await userRepository.FindByEmailAsync(model.Email);
 
             if (user == null)
-                return NotFound();
+                return Unauthorized();
 
             if (!authService.VerifyPassword(model.Password, user.PasswordHash))
                 return BadRequest();
@@ -149,11 +149,9 @@ namespace RentBuddyBackend.Modules.UserModule.Service
 
         public async Task<ActionResult<UserEntity>> GetCurrentUser()
         {
-
             var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             var user = await userRepository.FindAsync(userId);
             return Ok(user);
-                
         }
 
         public async Task<ActionResult> GetSuitableRoom(Guid id) 
@@ -236,7 +234,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
 
         private UserEntity GetResultUser(List<UserEntity> users, Random rnd, ref List<UserEntity> result, ref List<List<UserEntity>> listsUsers )
         {
-            var user = users[rnd.Next(0, users.Count-1)];
+            var user = users[rnd.Next(0, users.Count - 1)];
             if (result.Contains(user))
             {
                 if (users.Count > 1)
@@ -263,6 +261,21 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             currentUsers = currentUsers.Where(u => u != user).ToList();
             user = currentUsers [rnd.Next(0, currentUsers.Count-1)];
             return user;
+        }
+
+        public async Task<ActionResult<IEnumerable<ApartmentEntity>>> GetHostsApartment(Guid id)
+        {
+            var data = await userRepository.FindHostsApartments(id);
+
+            var result = new HostsApartment
+            {
+                HostsApartments = data
+            };
+
+            if (result.HostsApartments.Count == 0)
+                return NoContent();
+
+            return Ok(result);
         }
     }
 }   
