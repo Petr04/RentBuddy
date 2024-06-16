@@ -66,4 +66,9 @@ export class PostService {
   public postRoom(obj: any):Observable<any>{
     return this._httpCLient.post<any>('api/Room', obj)
   }
+
+  public getHostsApartment(): Observable<any>{
+    return this._httpCLient.get<any>(`api/Apartment/${this.getUserId()}/gethostsapatment`)
+  }
+
 }

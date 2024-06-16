@@ -10,8 +10,9 @@ import { RadioSelectComponent } from '../components/radio-select/radio-select.co
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostService } from '../services/post.service';
 import { RouterLink } from '@angular/router';
-import { UserProfile } from '../interfaces/interface';
+import { Apartment, UserProfile } from '../interfaces/interface';
 import { AuthService } from '../services/auth.service';
+import { Observable, map } from 'rxjs';
 
 
 @Component({
@@ -27,6 +28,7 @@ import { AuthService } from '../services/auth.service';
 export class AboutUserComponent implements OnInit {
   profileSavedInfo!: UserProfile
   profileForm!: FormGroup
+  hostApartment$?: Observable<Apartment[]>
   gender:boolean = false;
   isSmoke:boolean = false;
   hasPet:boolean = false;
@@ -56,6 +58,7 @@ export class AboutUserComponent implements OnInit {
       this.isSmoke = res.isSmoke
       this.hasPet = res.hasPet
       this.gender = Boolean(res.gender)
+
       this.profileForm.patchValue({
         id: res.id,
         name: res.name,
@@ -68,7 +71,13 @@ export class AboutUserComponent implements OnInit {
         timeSpentAtHome: +res.timeSpentAtHome,
         aboutMe: res.aboutMe
       });
+      
+      this.hostApartment$ = this.postService.getHostsApartment().pipe(
+        map((data: any)=> data.hostsApartments )
+      )
     });
+
+
   }
 
   logout(){
@@ -82,8 +91,6 @@ export class AboutUserComponent implements OnInit {
     this.profileForm.value.hasPet = this.hasPet
     this.profileForm.value.timeSpentAtHome = +this.profileForm.value.timeSpentAtHome
     this.postService.postUser(this.profileForm.value).subscribe()
-    console.log(this.profileSavedInfo)
-    console.log(this.profileForm.value)
   }
 
   public male(){

@@ -5,9 +5,6 @@ import { FilterRent, Post } from '../../interfaces/interface';
 import { SelectCardDirective } from '../../directives/select-card.directive'
 import { SetService } from '../../services/set.service';
 
-
-
-
 @Component({
   selector: 'app-big-card',
   standalone: true,

@@ -36,6 +36,7 @@ export class SelectRentComponent implements OnInit{
 
   ngOnInit() {
     this.Cards$ = this.postService.getRooms()
+    this.postService.getRooms().subscribe(res=> console.log(res))
   }
 
   printId(){
