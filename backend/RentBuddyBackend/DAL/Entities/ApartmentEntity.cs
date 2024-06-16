@@ -17,6 +17,9 @@ public class ApartmentEntity : IEntity
     public bool HasWifi { get; set; }
     public bool HasPassengerElevator { get; set; }
     public bool HasFreightElevator { get; set; }
+    /// <summary>
+    /// Тип парковки
+    /// </summary>
     public Parking.ParkingType ParkingType { get; set; }
     public Yard.YardType YardType { get; set; }
     public bool HasPet { get; set; }

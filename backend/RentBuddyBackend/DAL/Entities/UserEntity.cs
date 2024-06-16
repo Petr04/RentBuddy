@@ -8,9 +8,6 @@ namespace RentBuddyBackend.DAL.Entities;
 public class UserEntity : IEntity
 {
     public Guid Id { get; set; }
-    /// <summary>
-    /// Имя
-    /// </summary>
     public string Name { get; set; }
     public string Lastname { get; set; }
     [DataType(DataType.Date)]

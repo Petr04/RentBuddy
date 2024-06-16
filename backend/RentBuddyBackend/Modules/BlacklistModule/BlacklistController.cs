@@ -26,15 +26,33 @@ namespace RentBuddyBackend.Modules.BlacklistModule
         [HttpPost]
         public Task<ActionResult<BlacklistEntity>> CreateOrUpdateBlacklist([FromBody] BlacklistEntity BlacklistEntity)
             => blackListService.CreateOrUpdateBlacklist(BlacklistEntity);*/
+        
 
+        /// <summary>
+        /// Получить черный список по id
+        /// </summary>
+        /// <param name="id">id черного списка</param>
+        /// <returns></returns>
         [HttpGet("{id:guid}")]
         public Task<ActionResult<BlacklistEntity>> GetBlacklist([FromRoute] Guid id)
             => blackListService.GetBlacklist(id);
 
+        /// <summary>
+        /// Добавить пользователя в черный список 
+        /// </summary>
+        /// <param name="currentUserId">Текущий юзер</param>
+        /// <param name="targetUserId">Тот юзер, кого добавляем в черный список</param>
+        /// <returns></returns>
         [HttpPost("{currentUserId:Guid}/AddUserToBlacklist/{targetUserId:Guid}")]
         public Task<ActionResult> AddBlacklistUser([FromRoute] Guid currentUserId, [FromRoute] Guid targetUserId)
             => blackListService.AddBlacklistUser(currentUserId, targetUserId);
 
+        /// <summary>
+        /// Удалить пользователя из черного списка 
+        /// </summary>
+        /// <param name="currentUserId">Текущий юзер</param>
+        /// <param name="targetUserId">Юзер, которого удаляем из черного списка</param>
+        /// <returns></returns>
         [HttpPost("{currentUserId:Guid}/DeleteUserFromBlacklist/{targetUserId:Guid}")]
         public Task<ActionResult> DeleteBlacklistUser([FromRoute] Guid currentUserId, [FromRoute] Guid targetUserId)
             => blackListService.DeleteBlacklistUser(currentUserId, targetUserId);

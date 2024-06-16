@@ -28,14 +28,32 @@ namespace RentBuddyBackend.Modules.FavoriteUsersModule
         public Task<ActionResult<FavouritesEntity>> CreateOrUpdateFavouritiesEntity([FromBody] FavouritesEntity favouritesEntity)
             => favoriteService.CreateOrUpdateFavouritiesEntity(favouritesEntity);
         */
+
+        /// <summary>
+        /// Получить список избранных пользователей по id
+        /// </summary>
+        /// <param name="id">id сущности избранных пользователей</param>
+        /// <returns></returns>
         [HttpGet("{id:guid}")]
         public Task<ActionResult<FavoriteUsersEntity>> GetFavouritiesEntity([FromRoute] Guid id)
          => favoriteService.GetFavouritiesEntity(id); 
         
+        /// <summary>
+        /// Добавить пользователя в список избранного 
+        /// </summary>
+        /// <param name="currentUserId">Id текущего юзера</param>
+        /// <param name="targetUserId">Id Юзера, которого добавляем в список избранного</param>
+        /// <returns></returns>
         [HttpPost("{currentUserId:Guid}/AddUserToFavourities/{targetUserId:Guid}")]
         public Task<ActionResult> AddFavouritiesUser([FromRoute] Guid currentUserId, Guid targetUserId)
             => favoriteService.AddFavouritiesUser(currentUserId, targetUserId);
 
+        /// <summary>
+        /// Удалить пользователя из списка избранного
+        /// </summary>
+        /// <param name="currentUserId">Id текущего юзера</param>
+        /// <param name="targetUserId">Id юзера, которого убираем из списка избранного</param>
+        /// <returns></returns>
         [HttpPost("{currentUserId:Guid}/DeleteUserFromFavourities/{targetUserId:Guid}")]
         public Task<ActionResult> DeleteFavouritiesUser([FromRoute] Guid currentUserId, Guid targetUserId)
             => favoriteService.DeleteFavouritiesUser(currentUserId, targetUserId);    

@@ -10,7 +10,11 @@ namespace RentBuddyBackend.Modules.ApartmentModule;
 [ApiController]
 [Route("api/[controller]")]
 public class ApartmentController(ApplicationDbContext context, IMapper mapper) : ControllerBase
-{
+{   
+    /// <summary>
+    /// Получить все квартиры
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ApartmentEntity>>> GetApartment()
     {
@@ -19,6 +23,11 @@ public class ApartmentController(ApplicationDbContext context, IMapper mapper) :
         return Ok(data);
     }
 
+    /// <summary>
+    /// Получить квартиру по id
+    /// </summary>
+    /// <param name="id">id квартиры</param>
+    /// <returns></returns>
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<ApartmentEntity>> GetApartment([FromRoute] Guid id)
     {
@@ -27,6 +36,11 @@ public class ApartmentController(ApplicationDbContext context, IMapper mapper) :
         return Ok(data);
     }
 
+    /// <summary>
+    /// Создание или обновление квартиры
+    /// </summary>
+    /// <param name="apartment">Сущность квартиры</param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<ActionResult<ApartmentEntity>> CreateOrUpdateApartment([FromBody] ApartmentEntity apartment)
     {
@@ -50,6 +64,11 @@ public class ApartmentController(ApplicationDbContext context, IMapper mapper) :
         });
     }
 
+    /// <summary>
+    /// Удалить квартиру по id
+    /// </summary>
+    /// <param name="id">id квартиры</param>
+    /// <returns></returns>
     [HttpDelete("{id:Guid}")]
     public async Task<ActionResult> DeleteApartment([FromRoute] Guid id)
     {
@@ -64,6 +83,11 @@ public class ApartmentController(ApplicationDbContext context, IMapper mapper) :
         return NoContent();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet("{id:guid}/gethostsapatment")]
     public async Task<ActionResult<ApartmentEntity>> GetHostsApartments([FromRoute] Guid id)
     {

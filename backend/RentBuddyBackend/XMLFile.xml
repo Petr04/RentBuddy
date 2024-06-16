@@ -4,9 +4,29 @@
         <name>RentBuddyBackend</name>
     </assembly>
     <members>
-        <member name="P:RentBuddyBackend.DAL.Entities.UserEntity.Name">
+        <member name="P:RentBuddyBackend.DAL.Entities.ApartmentEntity.ParkingType">
             <summary>
-            Имя
+            Тип парковки
+            </summary>
+        </member>
+        <member name="T:RentBuddyBackend.DAL.Entities.Furniture.FurnitureType">
+            <summary>
+            Типы мебели
+            </summary>
+        </member>
+        <member name="T:RentBuddyBackend.DAL.Entities.Parking.ParkingType">
+            <summary>
+            Типы парковки
+            </summary>
+        </member>
+        <member name="T:RentBuddyBackend.DAL.Entities.Technic.TechnicType">
+            <summary>
+            Типы техники
+            </summary>
+        </member>
+        <member name="T:RentBuddyBackend.DAL.Entities.Yard.YardType">
+            <summary>
+            Типы двора
             </summary>
         </member>
         <member name="T:RentBuddyBackend.Migrations.Migration1506">
@@ -33,21 +53,171 @@
         <member name="M:RentBuddyBackend.Migrations.DeletedRoomsCount.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:RentBuddyBackend.Modules.UserModule.UsersController">
+        <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.GetApartment">
             <summary>
-            Управление пользователем
+            Получить все квартиры
             </summary>
-            <param name="usersService"></param>
+            <returns></returns>
         </member>
-        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.#ctor(RentBuddyBackend.Modules.UserModule.Service.IUserService)">
+        <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.GetApartment(System.Guid)">
             <summary>
-            Управление пользователем
+            Получить квартиру по id
             </summary>
-            <param name="usersService"></param>
+            <param name="id">id квартиры</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.CreateOrUpdateApartment(RentBuddyBackend.DAL.Entities.ApartmentEntity)">
+            <summary>
+            Создание или обновление квартиры
+            </summary>
+            <param name="apartment">Сущность квартиры</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.DeleteApartment(System.Guid)">
+            <summary>
+            Удалить квартиру по id
+            </summary>
+            <param name="id">id квартиры</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.GetHostsApartments(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.BlacklistModule.BlacklistController.GetBlacklist(System.Guid)">
+            <summary>
+            Получить черный список по id
+            </summary>
+            <param name="id">id черного списка</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.BlacklistModule.BlacklistController.AddBlacklistUser(System.Guid,System.Guid)">
+            <summary>
+            Добавить пользователя в черный список 
+            </summary>
+            <param name="currentUserId">Текущий юзер</param>
+            <param name="targetUserId">Тот юзер, кого добавляем в черный список</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.BlacklistModule.BlacklistController.DeleteBlacklistUser(System.Guid,System.Guid)">
+            <summary>
+            Удалить пользователя из черного списка 
+            </summary>
+            <param name="currentUserId">Текущий юзер</param>
+            <param name="targetUserId">Юзер, которого удаляем из черного списка</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.FavoriteRooms.FavoriteRoomsController.AddRoomToFavorites(System.Collections.Generic.List{System.Guid},System.Guid)">
+            <summary>
+            Добавить комнату в избранное
+            </summary>
+            <param name="roomsId">Id Комнаты</param>
+            <param name="currentUserId">Id текущего пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.FavoriteRooms.FavoriteRoomsController.GetFavoritesRooms(System.Guid)">
+            <summary>
+            Получить список избранных комнат
+            </summary>
+            <param name="favoritesRoomsId">Id сущности избранных комнат</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.FavoriteUsersModule.FavoriteUsersController.GetFavouritiesEntity(System.Guid)">
+            <summary>
+            Получить список избранных пользователей по id
+            </summary>
+            <param name="id">id сущности избранных пользователей</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.FavoriteUsersModule.FavoriteUsersController.AddFavouritiesUser(System.Guid,System.Guid)">
+            <summary>
+            Добавить пользователя в список избранного 
+            </summary>
+            <param name="currentUserId">Id текущего юзера</param>
+            <param name="targetUserId">Id Юзера, которого добавляем в список избранного</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.FavoriteUsersModule.FavoriteUsersController.DeleteFavouritiesUser(System.Guid,System.Guid)">
+            <summary>
+            Удалить пользователя из списка избранного
+            </summary>
+            <param name="currentUserId">Id текущего юзера</param>
+            <param name="targetUserId">Id юзера, которого убираем из списка избранного</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.RoomModule.RoomController.GetRooms">
+            <summary>
+            Получить все комнаты
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.RoomModule.RoomController.GetPublishedRooms">
+            <summary>
+            Получить все опубликованные комнаты
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.RoomModule.RoomController.GetRoom(System.Guid)">
+            <summary>
+            Получить комнату по id
+            </summary>
+            <param name="id">id комнаты</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.RoomModule.RoomController.CreateOrUpdateRoom(RentBuddyBackend.DAL.Entities.RoomEntity)">
+            <summary>
+            Создание или обновление комнаты
+            </summary>
+            <param name="room">Сущность комнаты</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.RoomModule.RoomController.DeleteRoom(System.Guid)">
+            <summary>
+            Удалить комнату по id 
+            </summary>
+            <param name="id">id комнаты</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.RoomModule.RoomController.GetRoomImage(System.Guid)">
+            <summary>
+            Получить изображение комнаты
+            </summary>
+            <param name="id">id комнаты</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.GetUsers">
+            <summary>
+            Получить всех пользователей
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.GetUser(System.Guid)">
+            <summary>
+            Получить пользователя по id
+            </summary>
+            <param name="id">id пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.DeleteUser(System.Guid)">
+            <summary>
+            Удалить пользователя по id
+            </summary>
+            <param name="id">id пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.CreateOrUpdateUser(RentBuddyBackend.DAL.Entities.UserEntity)">
+            <summary>
+            Создание или обновление пользователя
+            </summary>
+            <param name="userEntity"></param>
+            <returns></returns>
         </member>
         <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.Register(RentBuddyBackend.DAL.Models.RegisterModel)">
             <summary>
-            rega
+            Регистрация
             </summary>
             <param name="model"></param>
             <returns></returns>
@@ -64,7 +234,10 @@
             Подбор подходящей комнаты
             </summary>
             <remarks>
-            Возвращает RoomEntity и список юзеров(соседей), если пусто, значит такой комнаты или соседей не нашлось
+            Возвращает RoomEntity и список юзеров(соседей), если пусто, значит такой комнаты или соседей не нашлось.
+            Условия выполнения алгоритма:
+            1. Текущий пользователь должен быть в избранном у остальных
+            2. У текущего и остальных должны быть выбраны комнаты в одной и той же квартире
             </remarks>
             <param name="id"> Id Юзера</param>
             <returns></returns>
