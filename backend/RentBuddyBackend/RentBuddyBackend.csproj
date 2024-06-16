@@ -6,6 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <LangVersion>12</LangVersion>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <DocumentationFile>D:\Programming\ASPNET\RentBuddy\RentBuddy\backend\RentBuddyBackend\XMLFile.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>

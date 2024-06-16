@@ -1,13 +1,21 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using RentBuddyBackend.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = new Config(builder.Environment.IsDevelopment());
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(op =>
+{
+    op.SwaggerDoc("v1", new OpenApiInfo { Title = "RentBuddyAPI", Version = "v1" });
+    var basePath = Environment.CurrentDirectory;
+    var xmlPath = Path.Combine(basePath, "XMLFile.xml");
+    op.IncludeXmlComments(xmlPath);
+});
 builder.Services.AddSingleton(config);
 builder.Services.RegisterModules();
 

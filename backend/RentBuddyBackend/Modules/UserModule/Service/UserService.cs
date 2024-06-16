@@ -154,7 +154,8 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             return Ok(user);
         }
 
-        public async Task<ActionResult> GetSuitableRoom(Guid id) 
+
+        public async Task<ActionResult<SuitableRoom>> GetSuitableRoom(Guid id) 
         {
             var currentUser = await userRepository.FindAsync(id);
             var idFavoriteUsers = await favoriteUsersRepository.FindAsync(currentUser.FavoriteUsersId);
@@ -224,7 +225,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 }
                 if (resultUsers.Count == kvp.Key.Apartment.Rooms.Count - 1)
                 {
-                    return Ok((kvp.Key, resultUsers));
+                    return Ok(new SuitableRoom(kvp.Key, resultUsers));
                 }
 
             }
