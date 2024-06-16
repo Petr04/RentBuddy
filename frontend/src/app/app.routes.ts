@@ -20,6 +20,7 @@ export const routes: Routes = [
   {path:'profile', component: AboutUserComponent, canActivate:[authGuardFn] },
   {path:'match', component: MatchPageComponent, canActivate:[authGuardFn]},
   {path:'suggestion', component: SuggestionPageComponent, canActivate: [authGuardFn]},
+  {path:'apartment-edit/:id', component: ApartmentEditComponent, canActivate:[authGuardFn]},
   {path:'apartment-edit', component: ApartmentEditComponent, canActivate:[authGuardFn]},
   {path:'room-edit', component: RoomEditComponent, canActivate:[authGuardFn]},
   {path:'post-apartment', component: PostApartmentComponent, canActivate:[authGuardFn]},

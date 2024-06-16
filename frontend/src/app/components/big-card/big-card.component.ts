@@ -47,12 +47,7 @@ export class BigCardComponent {
   }
 
   scrollImages() {
-    if (this.images) {
-      const imageArray = this.images.toArray();
-      this.currentIndex = (this.currentIndex+1) % imageArray.length;
-      const currentImage = imageArray[this.currentIndex].nativeElement;
-      currentImage.scrollIntoView({ behavior: 'smooth', inline: 'start', block: "center" });
-    }
+ 
   }
 }
 
