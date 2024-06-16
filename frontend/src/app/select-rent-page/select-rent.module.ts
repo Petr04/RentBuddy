@@ -7,6 +7,7 @@ import { FilterPipe } from '../pipes/filter.pipe';
 import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { ImageScrollerComponent } from '../app-image-scroller';
 
 const routes:Routes = [
   {path: '', component: SelectRentComponent}
@@ -21,6 +22,7 @@ const routes:Routes = [
     NextBtnComponent,
     ReactiveFormsModule,
     FormsModule,
+    ImageScrollerComponent,
     RouterModule.forChild(routes)
   ]
 })

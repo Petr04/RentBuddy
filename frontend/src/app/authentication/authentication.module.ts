@@ -8,6 +8,8 @@ import { PasswordStrengthDirective } from '../directives/password-strenght-valid
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { CodeInputModule } from 'angular-code-input';
 import { VerificationPageComponent } from './verification-page/verification-page.component';
+import {TuiPushModule} from "@taiga-ui/kit";
+import {TuiRootModule} from "@taiga-ui/core";
 
 const routes:Routes = [
   {path: 'login', component: LoginPageComponent },
@@ -25,7 +27,9 @@ const routes:Routes = [
     NextBtnComponent,
     PasswordStrengthDirective,
     CodeInputModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TuiPushModule,
+    TuiRootModule
   ],
   exports: [LoginPageComponent, RegistrationPageComponent],
 })

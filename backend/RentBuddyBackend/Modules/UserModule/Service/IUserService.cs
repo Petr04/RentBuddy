@@ -12,7 +12,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         Task<ActionResult> DeleteUser(Guid id);
         Task<ActionResult<IEnumerable<UserEntity>>> MatchUser(Guid id);
         Task<ActionResult<UserEntity>> RegisterUser(RegisterModel regModel);
-        Task<ActionResult<string>> AuthUser(AuthModel model);
-        Task<ActionResult> GetSuitableRoom(Guid id);
+        Task<ActionResult<Guid>> AuthUser(AuthModel model);
+        Task<ActionResult<SuitableRoom>> GetSuitableRoom(Guid id);
     }
 }

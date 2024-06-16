@@ -6,16 +6,12 @@ public class BlacklistEntity : IEntity
 {
     [Key]
     public Guid Id { get; set; }
-    public virtual List<UserEntity>? Users { get; set; }
+    public List<Guid>? UsersId { get; set;}
 
-    public BlacklistEntity(Guid id, List<UserEntity> userEntities)
-    {
-        Id = id;
-        Users = userEntities;
-    }
 
     public BlacklistEntity()
     {
-            
+        Id = Guid.NewGuid();
+        UsersId = new List<Guid> {};
     }
 }

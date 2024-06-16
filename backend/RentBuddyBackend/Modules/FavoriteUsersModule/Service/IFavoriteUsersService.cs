@@ -3,7 +3,7 @@ using RentBuddyBackend.DAL.Entities;
 
 namespace RentBuddyBackend.Modules.FavoriteUsersModule.Service
 {
-    public interface IFavoriteService
+    public interface IFavoriteUsersService
     {
         Task<ActionResult<IEnumerable<FavoriteUsersEntity>>> GetFavouritiesList();
         Task<ActionResult<FavoriteUsersEntity>> GetFavouritiesEntity(Guid id);

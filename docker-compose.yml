@@ -3,7 +3,6 @@ version: '3.9'
 networks:
   rb-network:
     driver: bridge
-
 volumes:
   postgres-data:
 
@@ -22,7 +21,7 @@ services:
       - ./web:/usr/share/nginx/html
     depends_on:
       - rb-postgresdb
-  
+
   rb-postgresdb:
     container_name: rb-postgresdb
     image: postgres:15
@@ -36,3 +35,11 @@ services:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+
+  rb-frontend:
+    build: frontend
+    image: cr.yandex/crp1i88lts07dl1mahg7
+    container_name: rb-frontend
+    ports:
+      # - '80:80' # If server-side rendering is disabled
+      - '80:4000' # If server-side rendering is enabled

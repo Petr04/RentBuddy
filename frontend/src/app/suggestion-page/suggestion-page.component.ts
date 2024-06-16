@@ -1,29 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 import { BigCardComponent } from '../components/big-card/big-card.component';
-import { Post } from '../interfaces/interface';
+import { Post, SuggestionRoom } from '../interfaces/interface';
+import {RouterLink} from "@angular/router";
+import { Observable, map } from 'rxjs';
+import { PostService } from '../services/post.service';
+import { CommonModule } from '@angular/common';
+import { LetDirective } from '../directives/struct.directive';
 
 @Component({
   selector: 'app-suggestion-page',
   standalone: true,
-  imports: [NextBtnComponent, BigCardComponent],
+  imports: [NextBtnComponent, BigCardComponent, RouterLink, CommonModule, LetDirective],
   templateUrl: './suggestion-page.component.html',
   styleUrl: './suggestion-page.component.css'
 })
-export class SuggestionPageComponent {
-  card:Post = {
-    "apartment": {
-      "id": "0e218c4d-1619-4542-82df-52c8c921a9a1",
-      "roomsCount": 3,
-      "currentFloor": 9,
-      "maxFloor": 12,
-      "address": "Ленина 52"
-    },
-    "id": "369c4a8d-3f4a-499f-be72-a5ad4a9521e0",
-    "price": 30000,
-    "square": 52,
-    "inhabitantsCount": 2,
-    'imageLink': '12321',
-    "apartmentId": "0e218c4d-1619-4542-82df-52c8c921a9a1"
+export class SuggestionPageComponent implements OnInit{
+  public cardOfUser$?: Observable<Post>
+
+   constructor(private postService: PostService){
+
+   }
+
+  ngOnInit(): void {
+    this.cardOfUser$ = this.postService.getSuitableRoom().pipe(
+      map((res:SuggestionRoom)=> res?.item1)
+    )
+    this.postService.getSuitableRoom().subscribe()
   }
+
 }

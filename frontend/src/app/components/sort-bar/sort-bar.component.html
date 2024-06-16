@@ -1,6 +1,6 @@
 <div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly  fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
   <div class="flex flex-row  items-center justify-between w-full ">
-    <button class=""><img src="../assets/arrow.png"></button>
+    <button class=""><img src="../assets/arrow.png" [routerLink]="['/profile']"></button>
     <h2 class="self-center text-xl font-semibold">Выберите от 4-х комнат</h2>
     <button id="filters" class="" (click)="isOpen=!isOpen"><img src="../assets/hamburger.png"></button>
   </div>

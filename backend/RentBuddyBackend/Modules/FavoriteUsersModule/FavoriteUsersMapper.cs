@@ -3,9 +3,9 @@ using RentBuddyBackend.DAL.Entities;
 
 namespace RentBuddyBackend.Modules.FavoriteUsersModule
 {
-    public class FavouritesMapper : Profile
+    public class FavoriteUsersMapper : Profile
     {
-        public FavouritesMapper()
+        public FavoriteUsersMapper()
         {
             CreateMap<FavoriteUsersEntity, FavoriteUsersEntity>();
         }

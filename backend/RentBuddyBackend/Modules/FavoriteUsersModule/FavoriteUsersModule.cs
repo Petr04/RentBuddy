@@ -4,13 +4,13 @@ using RentBuddyBackend.Modules.FavoriteUsersModule.Service;
 
 namespace RentBuddyBackend.Modules.FavoriteUsersModule
 {
-    public class FavouritesModule : IModule
+    public class FavoriteUsersModule : IModule
     {
         public IServiceCollection RegisterModule(IServiceCollection services)
         {
-            services.AddScoped<IFavoriteService, FavoriteService>();
-            services.AddScoped<IFavoriteRepository, FavoriteRepository>();
-            services.AddAutoMapper(typeof(FavoriteMapper));
+            services.AddScoped<IFavoriteUsersService, FavoriteUsersService>();
+            services.AddScoped<IFavoriteUsersRepository, FavoriteUsersRepository>();
+            services.AddAutoMapper(typeof(FavoriteUsersMapper));
 
             return services;
         }

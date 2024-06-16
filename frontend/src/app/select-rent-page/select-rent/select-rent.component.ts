@@ -14,6 +14,8 @@ import { SetService } from '../../services/set.service';
 export class SelectRentComponent implements OnInit{
   protected Cards$?: Observable<Post[]>
   public setId = inject(SetService)
+  protected testObj?: Post[]
+
 
   filterData:FilterRent = {
     city: '',
@@ -25,7 +27,6 @@ export class SelectRentComponent implements OnInit{
 
   public handleFilterChange(filterData: FilterRent){
     this.filterData = filterData
-    console.log(this.filterData)
   }
 
 
@@ -34,13 +35,12 @@ export class SelectRentComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.Cards$ = this.postService.getPosts()
-
+    this.Cards$ = this.postService.getRooms()
   }
 
   printId(){
     const arrayId: string[] = Array.from(this.setId)
-    console.log(arrayId)
+    this.postService.postFavoriteRooms(arrayId).subscribe()
   }
 
   buttonText:string ='Далее'

@@ -14,6 +14,10 @@ public class RoomController(
     IMapper mapper) : ControllerBase
 {   
     
+    /// <summary>
+    /// Получить все комнаты
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<RoomEntity>>> GetRooms()
     {
@@ -22,6 +26,23 @@ public class RoomController(
         return Ok(data);
     }
 
+    /// <summary>
+    /// Получить все опубликованные комнаты
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("PublishedRooms")]
+    public async Task<ActionResult<IEnumerable<RoomEntity>>> GetPublishedRooms()
+    {
+        var data = await context.Rooms.ToListAsync();
+        var publishedRooms = data.Where(r => r.IsPublished).ToList();
+        return Ok(publishedRooms);
+    }
+
+    /// <summary>
+    /// Получить комнату по id
+    /// </summary>
+    /// <param name="id">id комнаты</param>
+    /// <returns></returns>
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<RoomEntity>> GetRoom([FromRoute] Guid id)
     {
@@ -30,6 +51,11 @@ public class RoomController(
         return Ok(data);
     }
 
+    /// <summary>
+    /// Создание или обновление комнаты
+    /// </summary>
+    /// <param name="room">Сущность комнаты</param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<ActionResult<RoomEntity>> CreateOrUpdateRoom([FromBody] RoomEntity room)
     {
@@ -53,6 +79,11 @@ public class RoomController(
         });
     }
 
+    /// <summary>
+    /// Удалить комнату по id 
+    /// </summary>
+    /// <param name="id">id комнаты</param>
+    /// <returns></returns>
     [HttpDelete("{id:Guid}")]
     public async Task<ActionResult> DeleteRoom([FromRoute] Guid id)
     {
@@ -67,6 +98,11 @@ public class RoomController(
         return NoContent();
     }
     
+    /// <summary>
+    /// Получить изображение комнаты
+    /// </summary>
+    /// <param name="id">id комнаты</param>
+    /// <returns></returns>
     [HttpGet("{id:Guid}/image")]
     public async Task<ActionResult> GetRoomImage([FromRoute] Guid id)
     {
@@ -80,6 +116,7 @@ public class RoomController(
         var imageData = await System.IO.File.ReadAllBytesAsync(imagePath);
         return File(imageData, "image/jpeg");
     }
+    
 
     
 }

@@ -1,0 +1,11 @@
+.image-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+.image-item {
+  flex: 0 0 auto;
+  width: 200px;
+  height: 200px;
+  margin-right: 10px;
+}
