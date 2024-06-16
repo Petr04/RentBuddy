@@ -28,6 +28,6 @@ public class ApartmentEntity : IEntity
     public string AboutApartment { get; set; }
     public Guid OwnerId { get; set; }
 
-    [Ignore, JsonIgnore]
+    [JsonIgnore]
     public virtual List<RoomEntity> Rooms { get; } = new List<RoomEntity>();
 }
