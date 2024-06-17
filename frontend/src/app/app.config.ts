@@ -12,7 +12,7 @@ import { APIInterceptor } from './base-url.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes), provideClientHydration(), GlobalErrorHandlerService, HttpClientModule,importProvidersFrom(HttpClientModule) , provideAnimationsAsync(),
+    importProvidersFrom(TuiRootModule), provideRouter(routes), provideClientHydration(), GlobalErrorHandlerService, HttpClientModule,importProvidersFrom(HttpClientModule) , provideAnimationsAsync(),
     provideHttpClient(withInterceptors([httpInterceptor])),
     {
       provide: HTTP_INTERCEPTORS,
