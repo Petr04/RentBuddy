@@ -120,7 +120,8 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 PureLevel = 0,
                 RiseTime = DateTime.Today,
                 SleepTime = DateTime.Today,
-                AboutMe = ""
+                AboutMe = "",
+                Image = ""
             };
 
             var newUser = await CreateOrUpdateUser(user);
