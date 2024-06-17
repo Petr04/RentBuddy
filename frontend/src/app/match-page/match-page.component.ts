@@ -26,7 +26,7 @@ export class MatchPageComponent {
   protected usersForMatching$?: Observable<UserProfile[]>
   protected userList?: UserProfile[]
   parentSubject:Subject<string> = new Subject();
-  public len: number = 0
+  public length: number = 0
   public index: number = 0;
   animationState!: string;
 
@@ -36,23 +36,20 @@ export class MatchPageComponent {
 
   ngOnInit() {
     this.usersForMatching$ =  this.postService.getUsersMatches()
-    this.postService.getUsersMatches().subscribe(res => this.len = res.length)
+    this.postService.getUsersMatches().subscribe(res => this.length = res.length)
   }
 
 
   public startAnimation(state: string, matchId: string) {
-    this.postService.like(matchId).subscribe()
     if (!this.animationState) {
       this.animationState = state;
-      if (this.len != this.index+1){
+      if (this.length != this.index){
+        this.postService.like(matchId).subscribe()
         this.index++
-
       }
       else{
-        alert('Пользователи закончились')
-        return
+        alert("Пользователи закончились")
       }
-
     }
   }
 

@@ -33,8 +33,10 @@
         <div class="mt-5">
             <h3 class="mx-auto text-xl font-semibold text-[#000000] text-center">Ваши соседи:</h3>
             <div class="flex flex-row gap-2.5 justify-center mt-2.5">
+              @if (cardOfUser$ | async; as card) {
                 <img class="rounded-full w-20 h-20 object-cover object-center" src="../assets/sigma-2.jpg">
-                <img class="rounded-full w-20 h-20 object-cover object-center" src="../assets/sigma.jpg">
+                <!-- <img class="rounded-full w-20 h-20 object-cover object-center" src="../assets/sigma.jpg"> -->
+              }
             </div>
             <a class="mt-5 text-center leading-6 mx-auto w-full text-[#FFFFFF] cursor-pointer
             bg-gradient-to-r from-[#8567FA] to-[#4FACE2] py-3.5 rounded-3xl font-semibold flex flex-row justify-center" href="https://t.me/child_p01"><img src="../assets/tg.svg"><a class="pt-1 pl-2.5">Перейти в общий чат</a></a>
