@@ -24,7 +24,7 @@ export class SuggestionPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.cardOfUser$ = this.postService.getSuitableRoom().pipe(
-      map((res:SuggestionRoom)=> res?.item1)
+      map((res:SuggestionRoom)=> res?.roomEntity)
     )
     this.postService.getSuitableRoom().subscribe()
   }

@@ -10,7 +10,7 @@
     </div>
   </header>
   @if (usersForMatching$ | async; as user){
-    <div class="mt-5 container h-full mx-auto px-5 md:px-33 flex flex-col xl:px-96 xl:object-fit xl:object-center"
+    <div *ngIf="this.index != this.length; else noUsers" class="mt-5 container h-full mx-auto px-5 md:px-33 flex flex-col xl:px-96 xl:object-fit xl:object-center"
 
     [@cardAnimator]="animationState"
     (@cardAnimator.done)="resetAnimationState()"
@@ -30,5 +30,11 @@
     <div class="w-full fixed px-5 md:px-40 xl:px-96  bottom-0 left-0 mt-2.5">
       <app-next-btn  [routerLink]="['/suggestion']" buttonText="Далее"></app-next-btn>
     </div>
+    <ng-template #noUsers>
+      <div class="mt-5 container h-full mx-auto px-5 md:px-33 flex flex-col items-center justify-center xl:px-96">
+          <h2 class="text-2xl font-semibold text-[#020202]">Пользователи закончились(</h2>
+          <h3 class="text-[#000000] w-full mb-5 text-center">Зайдите позже или вернитесь к выбору комнат</h3>
+      </div>
+  </ng-template>
   }
 </div>

@@ -11,7 +11,6 @@ import {RoomEditComponent} from "./room-edit/room-edit.component";
 import {PostApartmentComponent} from "./post-apartment/post-apartment.component";
 import {SuccessfulPostComponent} from "./successful-post/successful-post.component";
 import { ImageScrollerComponent } from './app-image-scroller';
-import {ErrorPageComponent} from "./error-page/error-page.component";
 
 
 export const routes: Routes = [
@@ -20,6 +19,7 @@ export const routes: Routes = [
   {path:'profile', component: AboutUserComponent, canActivate:[authGuardFn] },
   {path:'match', component: MatchPageComponent, canActivate:[authGuardFn]},
   {path:'suggestion', component: SuggestionPageComponent, canActivate: [authGuardFn]},
+  {path:'apartment-edit/:id', component: ApartmentEditComponent, canActivate:[authGuardFn]},
   {path:'apartment-edit', component: ApartmentEditComponent, canActivate:[authGuardFn]},
   {path:'room-edit', component: RoomEditComponent, canActivate:[authGuardFn]},
   {path:'post-apartment', component: PostApartmentComponent, canActivate:[authGuardFn]},
@@ -28,7 +28,6 @@ export const routes: Routes = [
   {path:'apartment-info', component: ApartmentInfoComponent, canActivate:[authGuardFn]},
   {path:'test/:id', component: TestDetailComponent, canActivate:[authGuardFn]},
   {path:'app-image-scroller', component:ImageScrollerComponent},
-  {path:'error', component: ErrorPageComponent},
   {path:'', redirectTo: "/login", pathMatch: 'full'},
   {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule)},
   {path:'**', component: NotFoundPageComponent},
