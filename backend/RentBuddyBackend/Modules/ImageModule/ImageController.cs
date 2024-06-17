@@ -37,20 +37,21 @@ public class ImageController(IWebHostEnvironment webHostEnvironment) : Controlle
         {
             if (image.files.Length > 0)
             {
-                var path = webHostEnvironment.WebRootPath + "\\Image\\";
+                var path = Path.Combine(webHostEnvironment.WebRootPath, "Image");
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
 
-                using (var fileStream = System.IO.File.Create(path + image.files.FileName))
+                var filePath = Path.Combine(path, image.files.FileName);
+                using (var fileStream = System.IO.File.Create(filePath))
                 {
                     image.files.CopyTo(fileStream);
                     fileStream.Flush();
                     return Ok("Upload done");
                 }
             }
-            
+
             return Ok("Failed");
         }
         catch (Exception ex)

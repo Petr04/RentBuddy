@@ -27,6 +27,7 @@ public class UserEntity : IEntity
     public DateTime SleepTime { get; set; }
     public TimeSpentAtHome TimeSpentAtHome { get; set; }
     public string AboutMe { get; set; }
+    public string Image { get; set; }
 
     [JsonIgnore]
     public Guid BlacklistId { get; set; } 
