@@ -237,6 +237,21 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             return NoContent();
         }
 
+        public async Task<ActionResult<IEnumerable<ApartmentEntity>>> GetHostsApartment(Guid id)
+        {
+            var data = await userRepository.FindHostsApartments(id);
+
+            var result = new HostsApartment
+            {
+                HostsApartments = data
+            };
+
+            if (result.HostsApartments.Count == 0)
+                return NoContent();
+
+            return Ok(result);
+        }
+
         private UserEntity GetResultUser(List<UserEntity> users, Random rnd, ref List<UserEntity> result, ref List<List<UserEntity>> listsUsers )
         {
             var user = users[rnd.Next(0, users.Count-1)];
