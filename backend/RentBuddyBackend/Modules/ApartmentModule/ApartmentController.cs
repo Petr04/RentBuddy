@@ -72,7 +72,9 @@ public class ApartmentController(ApplicationDbContext context, IMapper mapper) :
     [HttpDelete("{id:Guid}")]
     public async Task<ActionResult> DeleteApartment([FromRoute] Guid id)
     {
-        var data = await context.Apartments.FindAsync(id);
+        var data = await context.Apartments
+            .Include(a => a.Rooms)
+            .FirstOrDefaultAsync(a => a.Id == id);
 
         if (data == null)
             return Ok("Current apartment doesn't exist");
@@ -81,28 +83,5 @@ public class ApartmentController(ApplicationDbContext context, IMapper mapper) :
         await context.SaveChangesAsync();
 
         return NoContent();
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    [HttpGet("{id:guid}/gethostsapatment")]
-    public async Task<ActionResult<ApartmentEntity>> GetHostsApartments([FromRoute] Guid id)
-    {
-        var data = await context.Apartments
-            .Where(a => a.OwnerId == id)
-            .ToListAsync();
-
-        var result = new HostsApartment
-        {
-            HostsApartments = data
-        };
-
-        if (result.HostsApartments.Count == 0)
-            return NoContent();
-
-        return Ok(result);
     }
 }

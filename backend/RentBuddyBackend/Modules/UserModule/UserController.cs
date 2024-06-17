@@ -83,4 +83,14 @@ public class UsersController(IUserService usersService) : ControllerBase
     [HttpGet("GetSuitableRoom/{id:guid}")]
     public Task<ActionResult<SuitableRoom>> GetSuitableRoom(Guid id)
         => usersService.GetSuitableRoom(id);
+    
+    
+    /// <summary>
+    /// Вывод квартир хозяина
+    /// </summary>
+    /// <param name="id"> Id Юзера, хозяина квартира</param>
+    /// <returns></returns>
+    [HttpGet("{id:guid}/GetHostsApartment")]
+    public Task<ActionResult<IEnumerable<ApartmentEntity>>> GetHostsApartments([FromRoute] Guid id)
+        => usersService.GetHostsApartment(id);
 }

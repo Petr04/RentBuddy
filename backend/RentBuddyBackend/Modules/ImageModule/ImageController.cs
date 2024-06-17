@@ -7,6 +7,11 @@ namespace RentBuddyBackend.Modules.ImageModule;
 [Route("api/[controller]")]
 public class ImageController(IWebHostEnvironment webHostEnvironment) : ControllerBase
 {
+    /// <summary>
+    /// Получить изображение по имени (без расширения)
+    /// </summary>
+    /// <param name="id"> Имя изображения</param>
+    /// <returns></returns>
     [HttpGet("{imageName}")]
     public async Task<ActionResult> GetImage([FromRoute] string imageName)
     {
@@ -20,6 +25,11 @@ public class ImageController(IWebHostEnvironment webHostEnvironment) : Controlle
         return File(imageData, "image/jpeg");
     }
     
+    /// <summary>
+    /// Загрузить картинку из ОС
+    /// </summary>
+    /// <param name="image"> Изображение</param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<ActionResult> Post([FromForm] ImageEntity image)
     {
