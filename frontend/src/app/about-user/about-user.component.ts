@@ -100,7 +100,7 @@ export class AboutUserComponent implements OnInit {
     //   image: formData
     // })
 
-    this.profileForm.value.id = localStorage?.getItem('userId')
+    this.profileForm.value.id = this.postService.getUserId()
     this.profileForm.value.gender = this.gender
     this.profileForm.value.isSmoke = this.isSmoke
     this.profileForm.value.hasPet = this.hasPet

@@ -21,20 +21,28 @@ export class AuthService {
       .pipe(
         tap(
           ({token, userId}) => {
-            localStorage.setItem('auth-token', token)
-            localStorage.setItem('userId', userId)
+            if (typeof window !== 'undefined') {
+              localStorage.setItem('auth-token', token)
+              localStorage.setItem('userId', userId)
+            }
           }
         )
       )
   }
 
   logout(): void {
-    localStorage.removeItem('auth-token');
-    localStorage.removeItem('userId');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('auth-token');
+      localStorage.removeItem('userId');
+    }
   }
 
   getToken(): string | null{
-    return localStorage?.getItem('auth-token');
+    let token = null
+    if (typeof window !== 'undefined') {
+      token = localStorage?.getItem('auth-token')
+    }
+    return token;
   }
 
   isAuthenticated(): boolean {
@@ -43,7 +51,11 @@ export class AuthService {
   }
 
   getUserId(): string | null{
-    return localStorage?.getItem("userId")
+    let id = null
+    if (typeof window !== 'undefined') {
+      id = localStorage?.getItem("userId")
+    }
+    return id
   }
 
 }

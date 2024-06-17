@@ -51,7 +51,7 @@ export class RoomEditComponent {
     // this.roomForm.value.furnitureTypes = this.furnitureForm.value
     this.roomForm.disable()
     this.roomForm.patchValue({
-      apartmentId:localStorage.getItem('apartmentId')
+      apartmentId: this._postService.getApartmentId()
     })
     this._postService.postRoom(this.roomForm.value).subscribe()
     this.roomForm.enable()
