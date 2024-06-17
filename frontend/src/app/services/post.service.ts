@@ -13,7 +13,18 @@ export class PostService {
 
   }
   public getUserId(){
-    return localStorage?.getItem('userId')
+    let id = null
+    if (typeof window !== 'undefined') {
+      id = localStorage?.getItem('userId')
+    }
+    return id
+  }
+  public getApartmentId(){
+    let apartmentId = null
+    if (typeof window !== 'undefined') {
+      apartmentId = localStorage?.getItem('apartmentId')
+    }
+    return apartmentId
   }
 
   public getRooms(): Observable<Post[]>{
@@ -61,7 +72,9 @@ export class PostService {
     pipe(
       tap(
         ({id}) => {
-          localStorage.setItem('apartmentId', id)
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('apartmentId', id)
+          }
         }
       )
     )

@@ -40,9 +40,5 @@ export class ImageScrollerComponent {
   }
 
   scrollImages() {
-    if (this.images) {
-      const imageArray = this.images.toArray();
-      this.currentIndex = (this.currentIndex+1) % imageArray.length;
-    }
   }
 }
