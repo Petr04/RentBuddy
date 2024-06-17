@@ -71,10 +71,10 @@ export class AboutUserComponent implements OnInit {
         timeSpentAtHome: +res.timeSpentAtHome,
         aboutMe: res.aboutMe
       });
-      // this.postService.getHostsApartment().subscribe(res => console.log(res))
-      // this.hostApartment$ = this.postService?.getHostsApartment().pipe(
-      //   map((data: any)=> data.hostsApartments )
-      // )
+      this.postService.getHostsApartment().subscribe()
+      this.hostApartment$ = this.postService?.getHostsApartment().pipe(
+        map((data: any)=> data.hostsApartments )
+      )
       // this.postService.getApartmentById("2712b130-f61f-49a6-bd7f-d8dd4497f352").subscribe(r=> console.log(r))
     });
 

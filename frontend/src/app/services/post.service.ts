@@ -72,7 +72,7 @@ export class PostService {
   }
 
   public getHostsApartment(): Observable<any>{
-    return this._httpCLient.get<any>(`api/Apartment/${this.getUserId()}/gethostsapatment`)
+    return this._httpCLient.get<any>(`api/Users/${this.getUserId()}/GetHostsApartment`)
   }
 
 }
