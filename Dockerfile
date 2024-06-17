@@ -26,4 +26,5 @@ FROM base AS final
 WORKDIR /app
 ENV ASPNETCORE_ENVIRONMENT=Development
 COPY --from=publish /app/publish .
+COPY backend/RentBuddyBackend/wwwroot ./wwwroot
 ENTRYPOINT ["dotnet", "RentBuddyBackend.dll"]
