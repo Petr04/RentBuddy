@@ -182,6 +182,8 @@ namespace RentBuddyBackend.Modules.UserModule.Service
 
             for (var i = 0; i < userFavoriteRooms.Count; i++)
             {
+                if (dict.ContainsKey(userFavoriteRooms[i]))
+                    continue;
                 dict.Add(userFavoriteRooms[i], new List<List<UserEntity>>()); //заполняем словарь избранными комнатами и пустыми списками юзеров
             }
 
