@@ -33,6 +33,7 @@ export class AboutUserComponent implements OnInit {
   isSmoke:boolean = false;
   hasPet:boolean = false;
   buttonText:string = "Сохранить и продолжить";
+  file:any;
 
   constructor(private postService: PostService, private datePipe:DatePipe, private auth: AuthService){
     this.profileForm = new FormGroup({
@@ -48,7 +49,8 @@ export class AboutUserComponent implements OnInit {
       sleepTime: new FormControl('', Validators.required),
       timeSpentAtHome: new FormControl(''),
       partyFrequency: new FormControl('', Validators.required),
-      aboutMe: new FormControl('', Validators.required)
+      aboutMe: new FormControl('', Validators.required),
+      image: new FormControl('')
     })
   }
 
@@ -73,7 +75,7 @@ export class AboutUserComponent implements OnInit {
       });
       this.postService.getHostsApartment().subscribe()
       this.hostApartment$ = this.postService?.getHostsApartment().pipe(
-        map((data: any)=> data.hostsApartments )
+        map((data: any)=> data?.hostsApartments )
       )
       // this.postService.getApartmentById("2712b130-f61f-49a6-bd7f-d8dd4497f352").subscribe(r=> console.log(r))
     });
@@ -85,7 +87,19 @@ export class AboutUserComponent implements OnInit {
     this.auth.logout()
   }
 
+
+  uploadImage(event:any){
+    this.file = event.target.files[0];
+    console.log(this.file);
+  }
+
   saveAndContinue(){
+    // const formData = new FormData();
+    // formData.append("image", this.file, this.file.name);
+    // this.profileForm.patchValue({
+    //   image: formData
+    // })
+
     this.profileForm.value.id = localStorage?.getItem('userId')
     this.profileForm.value.gender = this.gender
     this.profileForm.value.isSmoke = this.isSmoke
