@@ -80,8 +80,8 @@ export interface Apartment {
 }
 
 export interface SuggestionRoom {
-  item1: Room;
-  item2: Item2;
+  roomEntity: Room;
+  users: Item2;
 }
 
 export interface Item2 {
@@ -104,3 +104,4 @@ export interface Item2 {
   email: string;
   passwordHash: string;
 }
+

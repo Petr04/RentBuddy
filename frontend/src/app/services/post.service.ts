@@ -52,6 +52,10 @@ export class PostService {
     return this._httpCLient.get<SuggestionRoom>(`api/Users/GetSuitableRoom/${this.getUserId()}`)
   }
 
+  public getApartmentById(id: string):Observable<any>{
+    return this._httpCLient.get<any>(`api/Apartment/${id}`)
+  }
+
   public postApartment(obj: any):Observable<any>{
     return this._httpCLient.post<any>('api/Apartment', obj).
     pipe(
@@ -66,4 +70,9 @@ export class PostService {
   public postRoom(obj: any):Observable<any>{
     return this._httpCLient.post<any>('api/Room', obj)
   }
+
+  public getHostsApartment(): Observable<any>{
+    return this._httpCLient.get<any>(`api/Users/${this.getUserId()}/GetHostsApartment`)
+  }
+
 }

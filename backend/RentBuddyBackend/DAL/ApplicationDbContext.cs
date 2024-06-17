@@ -35,4 +35,13 @@ public class ApplicationDbContext : DbContext
                     EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null); });
         base.OnConfiguring(optionsBuilder);
     }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<RoomEntity>()
+            .HasOne(r => r.Apartment)
+            .WithMany(a => a.Rooms)
+            .HasForeignKey(r => r.ApartmentId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
 }

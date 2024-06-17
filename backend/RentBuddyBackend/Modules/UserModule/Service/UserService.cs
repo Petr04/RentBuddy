@@ -120,7 +120,8 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 PureLevel = 0,
                 RiseTime = DateTime.Today,
                 SleepTime = DateTime.Today,
-                AboutMe = ""
+                AboutMe = "",
+                Image = ""
             };
 
             var newUser = await CreateOrUpdateUser(user);
@@ -159,19 +160,19 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         {
             var currentUser = await userRepository.FindAsync(id);
             var idFavoriteUsers = await favoriteUsersRepository.FindAsync(currentUser.FavoriteUsersId);
-            var selectedFavoriteUsers = idFavoriteUsers.UsersId.Select(u => userRepository.FindAsync(u).Result);
-            var filteredFavoriteUsers = selectedFavoriteUsers
+            var selectedFavoriteUsers = idFavoriteUsers.UsersId.Select(u => userRepository.FindAsync(u).Result); // userId -> UserEntity
+            var filteredFavoriteUsers = selectedFavoriteUsers // Только тех, кто в избранном у текущего
                     .Where(u => favoriteUsersRepository
                     .FindAsync(u.FavoriteUsersId).Result.UsersId
                     .Contains(currentUser.Id) && u.Id != currentUser.Id)
-                    .ToList();
+                    .ToList(); 
 
             if (filteredFavoriteUsers.Count == 0)
                 return NoContent();
 
             var dict = new Dictionary<RoomEntity, List<List<UserEntity>>>();
 
-            var userFavoriteRooms = favoriteRoomsRepository
+            var userFavoriteRooms = favoriteRoomsRepository // roomId -> RoomEntity
                 .FindAsync(currentUser.FavoriteRoomsId).Result.RoomsId
                 .Select(id => roomRepository.FindAsync(id).Result)
                 .ToList();
@@ -180,15 +181,17 @@ namespace RentBuddyBackend.Modules.UserModule.Service
 
             for (var i = 0; i < userFavoriteRooms.Count; i++)
             {
-                dict.Add(userFavoriteRooms[i], new List<List<UserEntity>>());
+                if (dict.ContainsKey(userFavoriteRooms[i]))
+                    continue;
+                dict.Add(userFavoriteRooms[i], new List<List<UserEntity>>()); //заполняем словарь избранными комнатами и пустыми списками юзеров
             }
 
-            foreach (var kvp in dict)
+            foreach (var kvp in dict) //Проходимся по избранным румам и заполняем списки потенциальными соседями
             {
                 var apartment = kvp.Key.Apartment;
                 for (int i = 0; i < apartment.Rooms.Count; i++)
                 {
-                    if (apartment.Rooms[i].Id == kvp.Key.Id)
+                    if (apartment.Rooms[i].Id == kvp.Key.Id) //Тут ошибка, надо проверять существует ли apartment.Rooms[i].Id в словаре dict 
                         continue;
                     else
                     {
@@ -231,6 +234,21 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             }
 
             return NoContent();
+        }
+
+        public async Task<ActionResult<IEnumerable<ApartmentEntity>>> GetHostsApartment(Guid id)
+        {
+            var data = await userRepository.FindHostsApartments(id);
+
+            var result = new HostsApartment
+            {
+                HostsApartments = data
+            };
+
+            if (result.HostsApartments.Count == 0)
+                return NoContent();
+
+            return Ok(result);
         }
 
         private UserEntity GetResultUser(List<UserEntity> users, Random rnd, ref List<UserEntity> result, ref List<List<UserEntity>> listsUsers )

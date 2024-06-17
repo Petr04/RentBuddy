@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RentBuddyBackend.Infrastructure;
+using RentBuddyBackend.ShemaFilters;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = new Config(builder.Environment.IsDevelopment());
@@ -15,6 +16,8 @@ builder.Services.AddSwaggerGen(op =>
     var basePath = Environment.CurrentDirectory;
     var xmlPath = Path.Combine(basePath, "XMLFile.xml");
     op.IncludeXmlComments(xmlPath);
+
+    op.SchemaFilter<EnumTypesSchemaFilter>(xmlPath);
 });
 builder.Services.AddSingleton(config);
 builder.Services.RegisterModules();

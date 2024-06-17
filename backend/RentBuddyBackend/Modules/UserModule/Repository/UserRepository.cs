@@ -30,9 +30,9 @@ namespace RentBuddyBackend.Modules.UserModule.Repository
 
         public async Task<bool> UserExists(string email)
             => await context.Users.AnyAsync(u => u.Email == email);
-
+        
         public async Task<List<ApartmentEntity>> FindHostsApartments(Guid id)
-        => await context.Apartments
+            => await context.Apartments
                 .Where(a => a.OwnerId == id)
                 .ToListAsync();
     }

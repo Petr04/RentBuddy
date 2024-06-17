@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
-export class LoginPageComponent implements OnDestroy {
+export class LoginPageComponent implements OnDestroy, OnInit {
 
   aSub!: Subscription
   public authorizationForm!: FormGroup
@@ -23,6 +23,11 @@ export class LoginPageComponent implements OnDestroy {
       email: new FormControl("", [Validators.required ,Validators.email]),
       password: new FormControl("")
     })
+  }
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()){
+       this.router.navigate(['/profile'])
+    }
   }
 
   ngOnDestroy() {

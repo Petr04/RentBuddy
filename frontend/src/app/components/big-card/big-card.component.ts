@@ -5,9 +5,6 @@ import { FilterRent, Post } from '../../interfaces/interface';
 import { SelectCardDirective } from '../../directives/select-card.directive'
 import { SetService } from '../../services/set.service';
 
-
-
-
 @Component({
   selector: 'app-big-card',
   standalone: true,
@@ -50,12 +47,7 @@ export class BigCardComponent {
   }
 
   scrollImages() {
-    if (this.images) {
-      const imageArray = this.images.toArray();
-      this.currentIndex = (this.currentIndex+1) % imageArray.length;
-      const currentImage = imageArray[this.currentIndex].nativeElement;
-      currentImage.scrollIntoView({ behavior: 'smooth', inline: 'start', block: "center" });
-    }
+ 
   }
 }
 

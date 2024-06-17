@@ -7,6 +7,11 @@ namespace RentBuddyBackend.Modules.ImageModule;
 [Route("api/[controller]")]
 public class ImageController(IWebHostEnvironment webHostEnvironment) : ControllerBase
 {
+    /// <summary>
+    /// Получить изображение по имени (без расширения)
+    /// </summary>
+    /// <param name="id"> Имя изображения</param>
+    /// <returns></returns>
     [HttpGet("{imageName}")]
     public async Task<ActionResult> GetImage([FromRoute] string imageName)
     {
@@ -20,6 +25,11 @@ public class ImageController(IWebHostEnvironment webHostEnvironment) : Controlle
         return File(imageData, "image/jpeg");
     }
     
+    /// <summary>
+    /// Загрузить картинку из ОС
+    /// </summary>
+    /// <param name="image"> Изображение</param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<ActionResult> Post([FromForm] ImageEntity image)
     {
@@ -27,20 +37,21 @@ public class ImageController(IWebHostEnvironment webHostEnvironment) : Controlle
         {
             if (image.files.Length > 0)
             {
-                var path = webHostEnvironment.WebRootPath + "\\Image\\";
+                var path = Path.Combine(webHostEnvironment.WebRootPath, "Image");
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
 
-                using (var fileStream = System.IO.File.Create(path + image.files.FileName))
+                var filePath = Path.Combine(path, image.files.FileName);
+                using (var fileStream = System.IO.File.Create(filePath))
                 {
                     image.files.CopyTo(fileStream);
                     fileStream.Flush();
                     return Ok("Upload done");
                 }
             }
-            
+
             return Ok("Failed");
         }
         catch (Exception ex)

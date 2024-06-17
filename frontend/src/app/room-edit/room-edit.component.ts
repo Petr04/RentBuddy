@@ -22,7 +22,7 @@ export class RoomEditComponent {
 
   constructor(private _postService: PostService ){
     this.roomForm = new FormGroup({
-      apartmentId: new FormControl(localStorage.getItem('apartmentId')),
+      apartmentId: new FormControl(''),
       square: new FormControl('', Validators.required),
       inhabitantsCount: new FormControl('', Validators.required),
       imageLink: new FormControl(''),
@@ -49,8 +49,11 @@ export class RoomEditComponent {
   next(){
     // this.roomForm.value.technicTypes = this.techniqueForm.value
     // this.roomForm.value.furnitureTypes = this.furnitureForm.value
-
-    console.log(this.roomForm.value)
+    this.roomForm.disable()
+    this.roomForm.patchValue({
+      apartmentId:localStorage.getItem('apartmentId')
+    })
     this._postService.postRoom(this.roomForm.value).subscribe()
+    this.roomForm.enable()
   }
 }
