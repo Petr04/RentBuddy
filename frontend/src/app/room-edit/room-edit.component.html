@@ -93,8 +93,7 @@
         <input formControlName="price" type="text" placeholder="₽" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
       </div>
       <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
-        <app-next-btn buttonText="Сохранить и продолжить"  (click)="next()"></app-next-btn>
-        <!-- [routerLink]='["/apartment-edit"]'  -->
+        <app-next-btn buttonText="Сохранить и продолжить" [routerLink]='["/profile"]' (click)="next()"></app-next-btn>
       </div>
     </div>
 
