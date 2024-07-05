@@ -16,16 +16,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegistrationPageComponent implements OnDestroy{
 
-  open = false;
-
-  toggle(open: boolean): void {
-    this.open = open;
-  }
-
-  aSub!: Subscription
+  public aSub!: Subscription
   public registrationForm!: FormGroup
+  public open = false;
+  public visible:boolean = true;
+  public changetype:boolean =true;
 
-  constructor(private auth: AuthService, private router: Router){
+
+
+  constructor(private auth: AuthService, private router: Router) {
     this.registrationForm = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -42,6 +41,10 @@ export class RegistrationPageComponent implements OnDestroy{
     }
   }
 
+  public toggle(open: boolean): void {
+    this.open = open;
+  }
+
   public onSubmit(){
     if (this.registrationForm.invalid || this.registrationForm.disabled){
       this.registrationForm.markAllAsTouched()
@@ -50,18 +53,19 @@ export class RegistrationPageComponent implements OnDestroy{
     else{
       this.registrationForm.disable()
       this.aSub = this.auth.register(this.registrationForm.value).subscribe({
-        next: () => setTimeout(()=>this.router.navigate(['/login']),2000),
+        next: () => {
+          setTimeout(()=>this.router.navigate(['/login']),2000)
+        },
         error: (err) => {
           this.registrationForm.enable()
         }
       })
-    this.toggle(true)
+      this.toggle(true)
     }
   }
-  visible:boolean = true;
-  changetype:boolean =true;
 
-  viewpass(){
+
+  public viewpass(){
     this.visible = !this.visible;
     this.changetype = !this.changetype;
   }
