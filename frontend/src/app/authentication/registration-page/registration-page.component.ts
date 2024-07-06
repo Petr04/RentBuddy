@@ -49,7 +49,7 @@ export class RegistrationPageComponent implements OnDestroy{
   public notification(prop: string): void {
     this.alert
         .open(prop,{
-          
+          status: (prop === "Успешная регистрация") ? 'success': 'error'
 
      }).subscribe();
 
@@ -65,7 +65,7 @@ export class RegistrationPageComponent implements OnDestroy{
       this.aSub = this.auth.register(this.registrationForm.value).subscribe({
         next: () => {
           this.notification("Успешная регистрация")
-          // setTimeout(()=>this.router.navigate(['/login']),2000);
+          setTimeout(()=>this.router.navigate(['/login']),2000);
         },
         error: (err) => {
           this.notification("Ошибка регистрации")

@@ -27,12 +27,3 @@ input.ng-touched.ng-valid{
   background-image: url('/assets/eyes-close.svg');
 }
 
-tui-push{
-  text-align: center;
-  justify-items: center;
-  width: 11rem;
-  height: 7.5rem;
-  font-weight: 500;
-  font-size: 1.2rem;
-  font-family: 'Montserrat', serif;
-}
