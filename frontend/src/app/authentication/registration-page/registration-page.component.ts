@@ -1,9 +1,11 @@
-import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { conformPassword } from '../../custom-validator/custom-validator.component';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { TuiAlertService } from '@taiga-ui/core';
+import { TuiPushService } from '@taiga-ui/kit';
 
 
 
@@ -18,13 +20,15 @@ export class RegistrationPageComponent implements OnDestroy{
 
   public aSub!: Subscription
   public registrationForm!: FormGroup
-  public open = false;
   public visible:boolean = true;
   public changetype:boolean =true;
 
 
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private auth: AuthService, private router: Router,
+    @Inject(TuiPushService) protected readonly push: TuiPushService,
+    @Inject(TuiAlertService) protected readonly alert: TuiAlertService
+  ) {
     this.registrationForm = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -41,8 +45,14 @@ export class RegistrationPageComponent implements OnDestroy{
     }
   }
 
-  public toggle(open: boolean): void {
-    this.open = open;
+
+  public notification(prop: string): void {
+    this.alert
+        .open(prop,{
+          
+
+     }).subscribe();
+
   }
 
   public onSubmit(){
@@ -54,13 +64,15 @@ export class RegistrationPageComponent implements OnDestroy{
       this.registrationForm.disable()
       this.aSub = this.auth.register(this.registrationForm.value).subscribe({
         next: () => {
-          setTimeout(()=>this.router.navigate(['/login']),2000)
+          this.notification("Успешная регистрация")
+          // setTimeout(()=>this.router.navigate(['/login']),2000);
         },
         error: (err) => {
+          this.notification("Ошибка регистрации")
+          console.log(err)
           this.registrationForm.enable()
         }
       })
-      this.toggle(true)
     }
   }
 

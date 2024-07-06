@@ -1,4 +1,4 @@
-import { Injectable, InjectionToken, Provider, inject } from '@angular/core';
+import {  InjectionToken, Provider, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { PostService } from './post.service';

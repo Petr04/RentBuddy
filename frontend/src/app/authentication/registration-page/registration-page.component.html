@@ -28,17 +28,17 @@
             </div>
           }
         </div>
-        <div class="flex flex-row justify-evenly">
+        <div class="flex flex-row mt-4">
           @if (registrationForm.valid) {
             <img class="pr-2 sticky" src="../assets/green-cross.svg">
-            <h4 class="text-[#8e8e8e] text-sm mt-4">
+            <h4 class="text-[#8e8e8e] text-sm">
               Пароль должен состоять как минимум из 8 символов, состоять из прописных и строчных букв и содержать уникальный код, например #%!
             </h4>
           }
           @else {
             <img class="pr-2 sticky" src="../assets/red-cross.svg">
-            <h4 class="text-[#8e8e8e] text-sm mt-4">Надежный пароль должен содержать как минимум восемь знаков,
-              среди которых есть как прописные, так и строчные буквы, а также специальные символы</h4>
+            <h4 class="text-[#8e8e8e] text-sm">Надежный пароль должен содержать как минимум 8 символов,
+              среди которых есть как прописные, так и строчные буквы, а также цифры</h4>
           }
 
         </div>
@@ -50,8 +50,6 @@
       Условиями использования</span> и подтверждаете
       <span class="bg-gradient-to-r from-[#8567FA] to-[#4FACE2] inline-block text-transparent bg-clip-text">Политику
       конфиденциальности и Политику конфиденциальности</span></h4>
-    <tui-root>
-
       <button
         tuiButton
         type="button"
@@ -62,14 +60,13 @@
           Далее
       </button>
 
+    <!-- <tui-root>
       <tui-push
-        *tuiPush="open"
+        *tuiPush="toggle()"
         heading="Успешная Регистрация"
         (close)="toggle(false)"
       >
-
       </tui-push>
-
-    </tui-root>
+    </tui-root> -->
   </div>
 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Post } from '../interfaces/interface';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { FLAT_PROVIDER, FLAT_TOKEN } from '../services/getCard.service';
+import { FLAT_PROVIDER, FLAT_TOKEN } from '../services/get-сard.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
