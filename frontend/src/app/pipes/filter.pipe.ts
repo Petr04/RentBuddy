@@ -17,9 +17,8 @@ export class FilterPipe implements PipeTransform {
       const matchesMinPrice = !filters.minPrice || card.price >= filters.minPrice;
       const matchesMaxPrice = !filters.maxPrice || card.price <= filters.maxPrice
       const hasCity = !filters.city || card.apartment.address.includes(filters.city || "");
-
+      
       return matchesInhabitants && matchesSquare && matchesMinPrice && matchesMaxPrice && hasCity;
-
     });
     return arr
   }

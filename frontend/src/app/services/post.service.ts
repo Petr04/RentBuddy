@@ -9,9 +9,10 @@ import { AuthService } from './auth.service';
 })
 export class PostService {
 
-  constructor(private _httpCLient: HttpClient) {
+  constructor(private readonly _httpCLient: HttpClient) {
 
   }
+
   public getUserId(){
     let id = null
     if (typeof window !== 'undefined') {
@@ -19,6 +20,7 @@ export class PostService {
     }
     return id
   }
+
   public getApartmentId(){
     let apartmentId = null
     if (typeof window !== 'undefined') {

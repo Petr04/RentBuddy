@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { CodeInputModule } from 'angular-code-input';
 
 
 @Component({
@@ -14,7 +12,6 @@ export class VerificationPageComponent {
   onCodeChanged( ) {
   }
 
-  // this called only if user entered full code
   onCodeCompleted() {
   }
 }

@@ -11,11 +11,11 @@ import { SetService } from '../../services/set.service';
   styleUrl: './select-rent.component.css'
 })
 
-export class SelectRentComponent implements OnInit{
-  protected Cards$?: Observable<Post[]>
+export class SelectRentComponent implements OnInit {
   public setId = inject(SetService)
+  public buttonText:string = 'Далее'
+  protected Cards$?: Observable<Post[]>
   protected testObj?: Post[]
-
 
   filterData:FilterRent = {
     city: '',
@@ -25,12 +25,7 @@ export class SelectRentComponent implements OnInit{
     maxPrice: 0
   }
 
-  public handleFilterChange(filterData: FilterRent){
-    this.filterData = filterData
-  }
-
-
-  constructor(private postService:PostService){
+  constructor(private readonly postService:PostService){
 
   }
 
@@ -39,11 +34,14 @@ export class SelectRentComponent implements OnInit{
     this.postService.getRooms().subscribe()
   }
 
-  printId(){
+  public handleFilterChange(filterData: FilterRent){
+    this.filterData = filterData
+  }
+
+  public printId(){
     const arrayId: string[] = Array.from(this.setId)
     this.postService.postFavoriteRooms(arrayId).subscribe()
   }
 
-  buttonText:string ='Далее'
 }
 

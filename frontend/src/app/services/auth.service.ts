@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router){
+  constructor(private readonly http: HttpClient, private readonly router: Router){
   }
 
-  register(user: User): Observable<User> {
+  public register(user: User): Observable<User> {
     return this.http.post<User>('api/Users/register', user)
   }
 
-  login(user: User): Observable<{token: string, userId: string}>{
+  public login(user: User): Observable<{token: string, userId: string}>{
 
     return this.http.post<{token: string, userId: string}>('api/Users/login', user)
       .pipe(
@@ -30,14 +30,14 @@ export class AuthService {
       )
   }
 
-  logout(): void {
+  public logout(): void {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('auth-token');
       localStorage.removeItem('userId');
     }
   }
 
-  getToken(): string | null{
+  public getToken(): string | null{
     let token = null
     if (typeof window !== 'undefined') {
       token = localStorage?.getItem('auth-token')
@@ -45,17 +45,16 @@ export class AuthService {
     return token;
   }
 
-  isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     const token = this.getToken();
     return !!token;
   }
 
-  getUserId(): string | null{
+  public getUserId(): string | null{
     let id = null
     if (typeof window !== 'undefined') {
       id = localStorage?.getItem("userId")
     }
     return id
   }
-
 }

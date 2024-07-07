@@ -26,16 +26,16 @@ import { Observable, map } from 'rxjs';
   styleUrl: './about-user.component.css'
 })
 export class AboutUserComponent implements OnInit {
-  profileSavedInfo!: UserProfile
-  profileForm!: FormGroup
-  hostApartment$?: Observable<Apartment[]>
-  gender:boolean = false;
-  isSmoke:boolean = false;
-  hasPet:boolean = false;
-  buttonText:string = "Сохранить и продолжить";
-  file:any;
+  public profileSavedInfo!: UserProfile
+  public profileForm!: FormGroup
+  protected hostApartment$?: Observable<Apartment[]>
+  public gender:boolean = false;
+  public isSmoke:boolean = false;
+  public hasPet:boolean = false;
+  public buttonText:string = "Сохранить и продолжить";
+  public file:any;
 
-  constructor(private postService: PostService, private datePipe:DatePipe, private auth: AuthService){
+  constructor(private readonly postService: PostService, private readonly datePipe:DatePipe, private readonly auth: AuthService) {
     this.profileForm = new FormGroup({
       name: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
@@ -61,17 +61,17 @@ export class AboutUserComponent implements OnInit {
       this.hasPet = res.hasPet
       this.gender = Boolean(res.gender)
 
-      this.profileForm.patchValue({
-        id: res.id,
-        name: res.name,
-        lastname: res.lastname,
-        birthDate: this.datePipe.transform(res.birthDate, 'yyyy-MM-dd'),
-        communicationLevel: +res.communicationLevel,
-        pureLevel: +res.pureLevel,
-        riseTime: this.datePipe.transform(res.riseTime, 'HH:mm'),
-        sleepTime: this.datePipe.transform(res.sleepTime, 'HH:mm'),
-        timeSpentAtHome: +res.timeSpentAtHome,
-        aboutMe: res.aboutMe
+    this.profileForm.patchValue({
+      id: res.id,
+      name: res.name,
+      lastname: res.lastname,
+      birthDate: this.datePipe.transform(res.birthDate, 'yyyy-MM-dd'),
+      communicationLevel: +res.communicationLevel,
+      pureLevel: +res.pureLevel,
+      riseTime: this.datePipe.transform(res.riseTime, 'HH:mm'),
+      sleepTime: this.datePipe.transform(res.sleepTime, 'HH:mm'),
+      timeSpentAtHome: +res.timeSpentAtHome,
+      aboutMe: res.aboutMe
       });
       this.postService.getHostsApartment().subscribe()
       this.hostApartment$ = this.postService?.getHostsApartment().pipe(
@@ -79,27 +79,23 @@ export class AboutUserComponent implements OnInit {
       )
       // this.postService.getApartmentById("2712b130-f61f-49a6-bd7f-d8dd4497f352").subscribe(r=> console.log(r))
     });
-
-
   }
 
-  logout(){
+  public logout(){
     this.auth.logout()
   }
 
-
-  uploadImage(event:any){
+  public uploadImage(event:any){
     this.file = event.target.files[0];
     console.log(this.file);
   }
 
-  saveAndContinue(){
+  public saveAndContinue(){
     // const formData = new FormData();
     // formData.append("image", this.file, this.file.name);
     // this.profileForm.patchValue({
     //   image: formData
     // })
-
     this.profileForm.value.id = this.postService.getUserId()
     this.profileForm.value.gender = this.gender
     this.profileForm.value.isSmoke = this.isSmoke

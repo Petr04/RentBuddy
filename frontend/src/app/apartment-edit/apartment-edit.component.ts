@@ -17,17 +17,17 @@ import { PostService } from '../services/post.service';
 })
 
 export class ApartmentEditComponent {
-  apartmentForm!: FormGroup
-  techniqueForm!: FormGroup
-  bathroomBool = false
-  wifiBool = false
-  passengerElevatorBool = false
-  serviceElevatorBool = false
-  sportsGroundBool = false
-  petAllowedBool = false
-  smokingAllowedBool = false
+  public apartmentForm!: FormGroup
+  public techniqueForm!: FormGroup
+  public bathroomBool = false
+  public wifiBool = false
+  public passengerElevatorBool = false
+  public serviceElevatorBool = false
+  public sportsGroundBool = false
+  public petAllowedBool = false
+  public smokingAllowedBool = false
 
-  constructor(private _postService: PostService){
+  constructor(private readonly _postService: PostService) {
     this.apartmentForm = new FormGroup({
       ownerId: new FormControl(_postService.getUserId()),
       address: new FormControl(''),
@@ -37,7 +37,6 @@ export class ApartmentEditComponent {
       bathroomCount: new FormControl(),
       technicType: new FormControl([]), //  нужно переделать из массива буллов в массив number
       hasWifi: new FormControl(),
-
       maxFloor: new FormControl(),
       hasPassengerElevator: new FormControl(),
       hasFreightElevator: new FormControl(),
@@ -91,7 +90,6 @@ export class ApartmentEditComponent {
     this.apartmentForm.value.hasPet = this.petAllowedBool
     this.apartmentForm.value.canUserSmoke = this.smokingAllowedBool
     //this.apartmentForm.value.technique = this.techniqueForm.value
-
     this.apartmentForm.value.parkingType = +this.apartmentForm.value.parkingType
     this.apartmentForm.value.yardType = +this.apartmentForm.value.yardType
     this.apartmentForm.value.currentFloor = +this.apartmentForm.value.currentFloor
