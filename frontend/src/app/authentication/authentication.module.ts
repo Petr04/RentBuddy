@@ -13,7 +13,7 @@ import {TuiRootModule} from "@taiga-ui/core";
 
 const routes:Routes = [
   {path: 'login', component: LoginPageComponent },
-  {path:'registration', component: RegistrationPageComponent},
+  {path:'registration', component: RegistrationPageComponent, data: {header: "d111111" }},
   {path:'verification', component: VerificationPageComponent}
 ]
 
