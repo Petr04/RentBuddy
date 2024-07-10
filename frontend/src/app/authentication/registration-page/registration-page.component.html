@@ -1,13 +1,14 @@
 <div [formGroup]="registrationForm"  class="w-full mx-auto flex flex-col h-dvh bg-[#FFFFFF] overflow-auto">
-  <header class="mt-10">
-    <div class="bg-[#FFFFFF] flex gap-2.5 p-5 flex-col items-center justify-evenly  w-full text-[#000000] rounded-b-2xl py-5 z-50">
-      <div class="flex flex-row justify-start w-full ">
-        <button [routerLink]="['/login']" class="justify-start"><img src="../assets/down.svg"></button>
-        <h2 class="mx-auto text-xl font-semibold">Регистрация</h2>
+
+  <header class="mt-10 xl:mt-28 xl:px-120">
+    <div class="bg-[#FFFFFF] flex p-5 flex-col items-center justify-evenly  w-full text-[#000000] rounded-b-2xl py-5">
+      <div class="flex flex-row w-full xl:pl-16">
+        <button [routerLink]="['/login']"><img src="../assets/down.svg"></button>
+        <h2 class="mx-auto text-xl text-center font-semibold xl:pr-14">Регистрация</h2>
       </div>
     </div>
   </header>
-  <div class="mt-7 container mx-auto px-5 md:px-40 xl:px-80 flex  flex-col mb-20">
+  <div class="mt-7 container mx-auto px-5 md:px-40 xl:px-120 flex flex-col mb-20">
       <div class="mt-2.5 w-full">
         <div class="relative flex flex-row justify-between border border-[#8e8e8e] rounded-2xl">
           <input formControlName="email" type="mail" placeholder="Почта" class="p-2.5 bg-[#FFFFFF] rounded-2xl text-[#8e8e8e] w-full outline-none">
@@ -44,7 +45,7 @@
         </div>
       </div>
   </div>
-  <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
+  <div class="w-full fixed px-5 md:px-40 xl:px-120 bottom-0 left-0">
     <h4 class="text-[#8e8e8e] text-sm mb-4">Нажимая кнопку «Согласиться и продолжить»,
       вы соглашаетесь с <span class="bg-gradient-to-r from-[#8567FA] to-[#4FACE2] inline-block text-transparent bg-clip-text">
       Условиями использования</span> и подтверждаете
