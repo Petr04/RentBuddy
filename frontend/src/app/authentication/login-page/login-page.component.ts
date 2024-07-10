@@ -13,12 +13,12 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginPageComponent implements OnDestroy, OnInit {
 
-  aSub!: Subscription
+  private aSub!: Subscription
   public authorizationForm!: FormGroup
-  visible:boolean = true;
-  changetype:boolean =true;
+  public visible:boolean = true;
+  public changetype:boolean =true;
 
-  constructor(private authService: AuthService , private router: Router){
+  constructor(private readonly authService: AuthService , private readonly router: Router){
     this.authorizationForm = new FormGroup({
       email: new FormControl("", [Validators.required ,Validators.email]),
       password: new FormControl("")

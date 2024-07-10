@@ -1,6 +1,6 @@
 import { TuiRootModule, TuiDialogModule, TuiAlertModule } from "@taiga-ui/core";
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AboutUserComponent } from './about-user/about-user.component';
 import { MatchPageComponent } from './match-page/match-page.component';
@@ -20,6 +20,7 @@ import { ImageScrollerComponent } from "./app-image-scroller";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+
 
 }
 

@@ -23,9 +23,7 @@ export class RegistrationPageComponent implements OnDestroy{
   public visible:boolean = true;
   public changetype:boolean =true;
 
-
-
-  constructor(private auth: AuthService, private router: Router,
+  constructor(private readonly auth: AuthService, private readonly router: Router,
     @Inject(TuiPushService) protected readonly push: TuiPushService,
     @Inject(TuiAlertService) protected readonly alert: TuiAlertService
   ) {
@@ -49,10 +47,9 @@ export class RegistrationPageComponent implements OnDestroy{
   public notification(prop: string): void {
     this.alert
         .open(prop,{
-          
+          status: (prop === "Успешная регистрация") ? 'success': 'error'
 
      }).subscribe();
-
   }
 
   public onSubmit(){
@@ -65,7 +62,7 @@ export class RegistrationPageComponent implements OnDestroy{
       this.aSub = this.auth.register(this.registrationForm.value).subscribe({
         next: () => {
           this.notification("Успешная регистрация")
-          // setTimeout(()=>this.router.navigate(['/login']),2000);
+          setTimeout(()=>this.router.navigate(['/login']),2000);
         },
         error: (err) => {
           this.notification("Ошибка регистрации")

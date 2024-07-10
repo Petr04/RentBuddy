@@ -18,9 +18,9 @@ import { LetDirective } from '../directives/struct.directive';
 export class SuggestionPageComponent implements OnInit{
   public cardOfUser$?: Observable<Post>
 
-   constructor(private postService: PostService){
+  constructor(private postService: PostService){
 
-   }
+  }
 
   ngOnInit(): void {
     this.cardOfUser$ = this.postService.getSuitableRoom().pipe(

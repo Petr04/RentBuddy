@@ -25,20 +25,19 @@ import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 export class MatchPageComponent {
   protected usersForMatching$?: Observable<UserProfile[]>
   protected userList?: UserProfile[]
-  parentSubject:Subject<string> = new Subject();
+  public parentSubject:Subject<string> = new Subject();
   public length: number = 0
   public index: number = 0;
-  animationState!: string;
+  public animationState!: string;
 
-  constructor(private postService: PostService) {
+  constructor(private readonly postService: PostService) {
+
   }
-
 
   ngOnInit() {
     this.usersForMatching$ =  this.postService.getUsersMatches()
     this.postService.getUsersMatches().subscribe(res => this.length = res.length)
   }
-
 
   public startAnimation(state: string, matchId: string) {
     if (!this.animationState) {
@@ -56,9 +55,7 @@ export class MatchPageComponent {
   public resetAnimationState() {
     this.animationState = '';
     // this.index++;
-
   }
-
 
   public toblackList(){
 
@@ -67,8 +64,5 @@ export class MatchPageComponent {
   ngOnDestroy() {
     this.parentSubject.unsubscribe();
   }
-
-
-
 
 }

@@ -1,9 +1,9 @@
-<div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly  fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
-  <div class="flex flex-row  items-center justify-between w-full ">
+<!-- <div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly  fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50"> -->
+  <!-- <div class="flex flex-row  items-center justify-between w-full ">
     <button class=""><img src="../assets/arrow.png" [routerLink]="['/profile']"></button>
     <h2 class="self-center text-xl font-semibold">Выберите от 4-х комнат</h2>
     <button id="filters" class="" (click)="isOpen=!isOpen"><img src="../assets/hamburger.png"></button>
-  </div>
+  </div> -->
   <ng-container *ngIf="isOpen">
     <div class="bg-[#9A81FF] rounded-xl w-full px-2.5 ">
       <ul class="flex  flex-col my-1.5">
@@ -23,4 +23,4 @@
     </div>
     <button (click)="fitlerEvent()"  type="button" class="bg-[#4F4948] w-full rounded-2xl py-2">Поиск</button>
   </ng-container>
-</div>
+<!-- </div> -->

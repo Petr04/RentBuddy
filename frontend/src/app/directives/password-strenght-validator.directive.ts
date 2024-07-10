@@ -16,5 +16,4 @@ export class PasswordStrengthDirective implements Validator {
   public validate(control: AbstractControl): ValidationErrors | null {
     return customValidator()(control)
   }
-
 }

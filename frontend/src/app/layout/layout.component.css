@@ -1,0 +1,6 @@
+.rounded-50{
+  width: 52px;
+  height: 52px;
+  overflow: hidden;
+  border-radius: 50%;
+}

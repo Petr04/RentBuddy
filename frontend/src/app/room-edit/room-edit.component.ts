@@ -16,11 +16,11 @@ import { PostService } from '../services/post.service';
   styleUrl: './room-edit.component.css'
 })
 export class RoomEditComponent {
-  roomForm!: FormGroup
-  techniqueForm!: FormGroup
-  furnitureForm!: FormGroup
+  public roomForm!: FormGroup
+  public techniqueForm!: FormGroup
+  public furnitureForm!: FormGroup
 
-  constructor(private _postService: PostService ){
+  constructor(private readonly _postService: PostService ){
     this.roomForm = new FormGroup({
       apartmentId: new FormControl(''),
       square: new FormControl('', Validators.required),
