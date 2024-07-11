@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AboutUserComponent } from './about-user/about-user.component';
+import { RenterProfileComponent } from './renter-profile/renter-profile.component';
 import { MatchPageComponent } from './match-page/match-page.component';
 import { SuggestionPageComponent } from './suggestion-page/suggestion-page.component'; ;
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
@@ -19,7 +19,7 @@ export const routes: Routes = [
   {path:'', redirectTo: "/login", pathMatch: 'full'},
   {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule) },
   {path:'', component: LayoutComponent, children: [
-    {path:'profile', component: AboutUserComponent},
+    {path:'profile', component: RenterProfileComponent},
     {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule), canActivate:[authGuardFn]},
     {path:'match', component: MatchPageComponent},
     {path:'image', component: ImageScrollerComponent},

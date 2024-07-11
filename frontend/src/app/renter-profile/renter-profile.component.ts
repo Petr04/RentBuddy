@@ -16,16 +16,16 @@ import { Observable, map } from 'rxjs';
 
 
 @Component({
-  selector: 'app-about-user',
+  selector: 'app-renter-profile',
   standalone: true,
   imports: [RouterLink ,NextBtnComponent, CommonModule,
   BaseInputComponent, BirthdaySelectComponent, BiSelectComponent,
   RangeInputComponent, TimeSelectComponent, RadioSelectComponent, ReactiveFormsModule ],
   providers: [DatePipe],
-  templateUrl: './about-user.component.html',
-  styleUrl: './about-user.component.css'
+  templateUrl: './renter-profile.component.html',
+  styleUrl: './renter-profile.component.css'
 })
-export class AboutUserComponent implements OnInit {
+export class RenterProfileComponent implements OnInit {
   public profileSavedInfo!: UserProfile
   public profileForm!: FormGroup
   protected hostApartment$?: Observable<Apartment[]>
