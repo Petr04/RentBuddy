@@ -1,16 +1,21 @@
-<app-sort-bar (filterChange)="handleFilterChange($event)"></app-sort-bar>
-<div class="w-full relative flex justify-center h-dvh bg-[#EBEBEB] overflow-auto">
-
-  <div class="xl:max-w-screen-lg">
-    <div class="container gap-5 flex justify-center flex-wrap">
-      @if (Cards$ | async; as cards){
-        @for (card of (cards | filter:filterData); track card.id ){
-          <app-big-card [card] = 'card' ></app-big-card>
+<div class="h-dvh">
+  <app-sort-bar (filterChange)="handleFilterChange($event)"></app-sort-bar>
+  <div class="w-full relative flex justify-center bg-[#EBEBEB] p-5 md:p-10 overflow-hidden">
+    <div class=" flex justify-center gap-10">
+      <div class="hidden md:flex flex-col gap-5">
+        <app-filter-rents (filterChange)="handleFilterChange($event)"></app-filter-rents>
+        <app-next-btn  [routerLink]="['/match']" (click)="printId()" [buttonText]="buttonText">  </app-next-btn>
+      </div>
+      <div class="gap-5 flex flex-wrap justify-center ">
+        @if (Cards$ | async; as cards){
+          @for (card of (cards | filter:filterData); track card.id ){
+            <app-big-card [card] = 'card'></app-big-card>
+          }
         }
-      }
-    </div>
-    <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
-      <app-next-btn  [routerLink]="['/match']" (click)="printId()" [buttonText]="buttonText">  </app-next-btn>
+      </div>
+      <div class="md:hidden w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
+        <app-next-btn  [routerLink]="['/match']" (click)="printId()" [buttonText]="buttonText">  </app-next-btn>
+      </div>
     </div>
   </div>
 </div>

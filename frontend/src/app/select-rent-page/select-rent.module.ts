@@ -8,6 +8,7 @@ import { NextBtnComponent } from '../components/next-btn/next-btn.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { ImageScrollerComponent } from '../app-image-scroller';
+import { FilterRentsComponent } from '../filter-rents/filter-rents.component';
 
 const routes:Routes = [
   {path: '', component: SelectRentComponent}
@@ -23,7 +24,8 @@ const routes:Routes = [
     ReactiveFormsModule,
     FormsModule,
     ImageScrollerComponent,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+    FilterRentsComponent
+  ],
 })
 export class SelectRentModule { }

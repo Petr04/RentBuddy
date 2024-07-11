@@ -16,6 +16,8 @@ import { LayoutComponent } from './layout/layout.component';
 
 export const routes: Routes = [
 
+  {path:'', redirectTo: "/login", pathMatch: 'full'},
+  {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule) },
   {path:'', component: LayoutComponent, children: [
     {path:'profile', component: AboutUserComponent},
     {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule), canActivate:[authGuardFn]},
@@ -31,8 +33,6 @@ export const routes: Routes = [
     {path:'test/:id', component: TestDetailComponent},
     {path:'app-image-scroller', component:ImageScrollerComponent},
   ], canActivate: [authGuardFn]},
-  {path:'', redirectTo: "/login", pathMatch: 'full'},
-  {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule) },
   {path:'**', component: NotFoundPageComponent},
 ];
 

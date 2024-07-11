@@ -1,12 +1,14 @@
  <div SelectCard (click)="getIdCard()" class="flex flex-col items-center justify-center w-84 bg-[#FFFFFF] rounded-2xl  relative">
-        <div class="image-container rounded-t-2xl object-contain object-center w-full">
-          <img  #image *ngFor="let image of imageList" [src]="image" class="image-item object-centern w-full h-48">
-        </div>
-        <div class="flex flex-row w-full justify-between p-4 h-full">
+      <div class="image-container rounded-t-2xl object-contain object-center w-full">
+          <img  #image *ngFor="let image of imageList" [src]="image" class="image-item object-center w-full h-48">
+      </div>
+      <div class="flex flex-row w-full justify-between p-4 ">
             <div class="flex flex-col w-full">
               <div class="flex items-center justify-between">
                 <h3 class="font-semibold text-xl">{{card.price}} ₽/мес.</h3>
-                <div class="text-xs text-[#8567FA] font-semibold"><h4 class="border-[#8567FA] rounded-3xl border px-2">для {{card.inhabitantsCount}} чел.</h4></div>
+                <div class="text-xs text-[#8567FA] font-semibold">
+                  <h4 class="border-[#8567FA] rounded-3xl border px-2">для {{card.inhabitantsCount}} чел.</h4>
+                </div>
               </div>
                 <h4 class="text-sm">Комната {{card.square}} м² в {{card.apartment.roomsCount}}-к, {{card.apartment.currentFloor}}/{{card.apartment.maxFloor}} эт.</h4>
                 <h4 class="text-xs text-[#00000080]">{{card.apartment.address}}</h4>
@@ -17,6 +19,6 @@
                 <path d="M8 14.5988L12.5988 19.1975L17.2056 14.5988L21.8125 10" stroke="white" stroke-opacity="0.3" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-        </div>
-  </div>
+      </div>
+</div>
 
