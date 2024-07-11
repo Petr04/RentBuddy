@@ -38,7 +38,8 @@ export class SelectRentComponent implements OnInit {
     this.filterData = filterData
   }
 
-  public printId(){
+  public sendId(){
+    
     const arrayId: string[] = Array.from(this.setId)
     this.postService.postFavoriteRooms(arrayId).subscribe()
   }

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { RenterProfileComponent } from './renter-profile/renter-profile.component';
 import { MatchPageComponent } from './match-page/match-page.component';
 import { SuggestionPageComponent } from './suggestion-page/suggestion-page.component'; ;
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
@@ -12,6 +11,8 @@ import {PostApartmentComponent} from "./post-apartment/post-apartment.component"
 import {SuccessfulPostComponent} from "./successful-post/successful-post.component";
 import { ImageScrollerComponent } from './app-image-scroller';
 import { LayoutComponent } from './layout/layout.component';
+import { OwnerProfileComponent } from './owner-profile/owner-profile.component';
+import { RenterProfileComponent } from './renter-profile/renter-profile.component';
 
 
 export const routes: Routes = [
@@ -20,10 +21,11 @@ export const routes: Routes = [
   {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule) },
   {path:'', component: LayoutComponent, children: [
     {path:'profile', component: RenterProfileComponent},
-    {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule), canActivate:[authGuardFn]},
+    {path:'select-rent', loadChildren:() => import('./select-rent-page/select-rent.module').then (m => m.SelectRentModule)},
     {path:'match', component: MatchPageComponent},
-    {path:'image', component: ImageScrollerComponent},
     {path:'suggestion', component: SuggestionPageComponent},
+    {path:'image', component: ImageScrollerComponent},
+    {path:'owner', component: OwnerProfileComponent},
     {path:'apartment-edit/:id', component: ApartmentEditComponent},
     {path:'apartment-edit', component: ApartmentEditComponent},
     {path:'room-edit', component: RoomEditComponent},

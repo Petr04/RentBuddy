@@ -28,7 +28,6 @@ import { Observable, map } from 'rxjs';
 export class RenterProfileComponent implements OnInit {
   public profileSavedInfo!: UserProfile
   public profileForm!: FormGroup
-  protected hostApartment$?: Observable<Apartment[]>
   public gender:boolean = false;
   public isSmoke:boolean = false;
   public hasPet:boolean = false;
@@ -73,11 +72,6 @@ export class RenterProfileComponent implements OnInit {
       timeSpentAtHome: +res.timeSpentAtHome,
       aboutMe: res.aboutMe
       });
-      this.postService.getHostsApartment().subscribe()
-      this.hostApartment$ = this.postService?.getHostsApartment().pipe(
-        map((data: any)=> data?.hostsApartments )
-      )
-      // this.postService.getApartmentById("2712b130-f61f-49a6-bd7f-d8dd4497f352").subscribe(r=> console.log(r))
     });
   }
 
@@ -96,12 +90,14 @@ export class RenterProfileComponent implements OnInit {
     // this.profileForm.patchValue({
     //   image: formData
     // })
+    this.profileForm.disable
     this.profileForm.value.id = this.postService.getUserId()
     this.profileForm.value.gender = this.gender
     this.profileForm.value.isSmoke = this.isSmoke
     this.profileForm.value.hasPet = this.hasPet
     this.profileForm.value.timeSpentAtHome = +this.profileForm.value.timeSpentAtHome
     this.postService.postUser(this.profileForm.value).subscribe()
+
   }
 
   public male(){

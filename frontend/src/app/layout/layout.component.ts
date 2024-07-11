@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,11 +10,12 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './layout.component.css'
 })
 export class LayoutComponent {
-  constructor(private readonly auth: AuthService){
+  constructor(private readonly auth: AuthService, private readonly route: Router){
 
   }
 
   public logout(){
     this.auth.logout()
+    this.route.navigate([''])
   }
 }

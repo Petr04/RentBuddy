@@ -1,40 +1,38 @@
-
-
-<div class="w-full mx-auto flex flex-col h-dvh bg-[#FFFFFF] overflow-hidden">
-  <header class="mb-16 md:hidden">
-    <div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly  fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
-      <div class="flex flex-row justify-start w-full ">
-        <button class="justify-start" [routerLink]="['/select-rent']"><img src="../assets/arrow.png"></button>
-        <h2 class="mx-auto text-xl font-semibold">Подбор соседа</h2>
+<div class="w-full md:pt-12 flex flex-col  bg-[#FFFFFF] overflow-hidden">
+    <header class="w-full md:max-w-84 self-center py-5 px-3 md:py-2 bg-[#8567FA] rounded-b-2xl md:rounded-2xl">
+      <div class=" flex gap-2.5 relative flex text-[#FEFEFE]">
+        <div class="flex absolute self-center">
+          <button class="justify-start" [routerLink]="['/select-rent']"><img src="../assets/arrow.png"></button>
+        </div>
+        <h2 class="mx-auto text-xl font-normal">Подбор соседа</h2>
       </div>
-    </div>
-  </header>
+    </header>
   @if (usersForMatching$ | async; as user){
-    <div *ngIf="this.index != this.length; else noUsers" class="mt-5 container h-full mx-auto px-5 md:px-33 flex flex-col xl:px-96 xl:object-fit xl:object-center"
-
-    [@cardAnimator]="animationState"
-    (@cardAnimator.done)="resetAnimationState()"
-    (swipeleft)='startAnimation("swipeleft", user[index].id)'
-    (swiperight)='startAnimation("swiperight", user[index].id)'>
-        <img class="rounded-2xl h-5/6 w-auto object-cover object-center" src="../assets/nikita.png">
-        <div class="absolute bottom-0 px-5 pb-40 mx-auto self-center ml-5 xl:ml-40">
-            <h2 class="text-2xl font-semibold text-[#FEFEFE]">{{user[index].name}}</h2>
-            <h3 class="text-[#FEFEFE] w-full mb-5">{{user[index].aboutMe}}</h3>
-            <div class="flex flex-row justify-evenly  pr-7 gap-4">
-                <button class="" (click)="toblackList()" (click)='startAnimation("swipeleft", user[index].id)'><img src="../assets/dis.svg"></button>
-                <button class=""><img src="../assets/info.svg"></button>
-                <button class="" (click)='startAnimation("swiperight", user[index].id)'><img src="../assets/like.svg"></button>
-            </div>
+    <div class="flex items-center pt-5 flex-col gap-3">
+      <div *ngIf="this.index != this.length; else noUsers" class="min-h-120 w-84 relative"
+      [@cardAnimator]="animationState"
+      (@cardAnimator.done)="resetAnimationState()"
+      (swipeleft)='startAnimation("swipeleft", user[index].id)'
+      (swiperight)='startAnimation("swiperight", user[index].id)'>
+          <img class="rounded-2xl w-full h-full object-cover absolute object-center" src="../assets/nikita.png">
+          <div class=" absolute bottom-0 flex flex-col pb-7 px-5 w-full gap-5">
+              <div class="flex flex-col gap-1">
+                <h2 class="text-2xl font-semibold text-[#FEFEFE]">{{user[index].name}}</h2>
+                <h3 class="text-[#FEFEFE]">{{user[index].aboutMe}} lorem</h3>
+              </div>
+              <div class="flex gap-4 self-center">
+                  <button class="" (click)="toblackList()" (click)='startAnimation("swipeleft", user[index].id)'><img src="../assets/dis.svg"></button>
+                  <button class=""><img src="../assets/info.svg"></button>
+                  <button class="" (click)='startAnimation("swiperight", user[index].id)'><img src="../assets/like.svg"></button>
+              </div>
+          </div>
+        </div>
+        <div class="w-84">
+          <app-next-btn class="w-full" [routerLink]="['/suggestion']" buttonText="Далее"></app-next-btn>
         </div>
     </div>
-    <div class="w-full fixed px-5 md:px-40 xl:px-96  bottom-0 left-0 mt-2.5">
-      <app-next-btn  [routerLink]="['/suggestion']" buttonText="Далее"></app-next-btn>
-    </div>
+
     <ng-template #noUsers>
-      <!-- <div class="mt-5 container h-full mx-auto px-5 md:px-33 flex flex-col items-center justify-center xl:px-96">
-          <h2 class="text-2xl font-semibold text-[#020202]">Пользователи закончились(</h2>
-          <h3 class="text-[#000000] w-full mb-5 text-center">Зайдите позже или вернитесь к выбору комнат</h3>
-      </div> -->
       <div class="mt-7 container mx-auto px-5 md:px-40 xl:px-96 flex flex-col">
         <h3 class="font-semibold text-2xl w-full text-center mt-52">Пользователи закончились(</h3>
         <h2 class="text-xl w-full text-center mt-2.5">Зайдите позже или вернитесь к выбору комнат</h2>
