@@ -1,31 +1,32 @@
-<div class="w-full   mx-auto flex flex-col h-dvh bg-[#EBEBEB] overflow-auto">
-    <header class="mb-16 md:hidden">
-        <div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly  fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
-            <div class="flex flex-row justify-start w-full ">
-              <button class="justify-start" [routerLink]="['/match']"><img src="../assets/arrow.png"></button>
-              <h2 class="mx-auto text-xl font-semibold">Мы подобрали вам жилье</h2>
-            </div>
-          </div>
-    </header>
+<div class="w-full md:pt-12  mx-auto flex flex-col bg-[#fff] overflow-auto">
+  <header class="w-full md:max-w-96 self-center py-5 px-3 md:py-2 bg-[#8567FA] rounded-b-2xl md:rounded-3xl">
+    <div class=" flex gap-2.5 relative flex text-[#FEFEFE]">
+      <h2 class="mx-auto text-xl font-medium">Мы подобрали вам жильё</h2>
+    </div>
+  </header>
 
-    <div *ngIf="cardOfUser$| async; else NoData" class="container mx-auto px-5 md:px-40 xl:px-96 mb-40">
+    <div *ngIf="cardOfUser$| async; else NoData" class="container mx-auto px-5 text-[#ffffff]">
       @if (cardOfUser$ | async; as card){
-        <div  class="flex flex-col items-center w-full mt-5 bg-[#FFFFFF] rounded-2xl mb-5 relative">
-          <img class="w-full h-48 min-h-48 rounded-t-2xl lg:h-96 object-cover object-center" src="../assets/room.png">
+        <div  class="flex flex-col items-center w-full mx-auto max-w-96 mt-5  bg-gradient-to-r from-[#8567FA] to-[#4FACE2] rounded-2xl mb-5 relative">
+          <img class="w-full h-48 min-h-48 rounded-t-2xl  object-cover object-center" src="../assets/room.png">
           <div class="flex flex-row w-full justify-between p-4">
-              <div class="flex flex-col w-full">
+              <div class="flex flex-col w-full ">
                 <div class="flex items-center justify-between">
                   <h3 class="font-semibold text-xl">{{card.price}} ₽/мес.</h3>
-                  <div class="text-xs text-[#8567FA] font-semibold"><h4 class="border-[#8567FA] rounded-3xl border px-2">для {{card.inhabitantsCount}} чел.</h4></div>
+                  <div class=" text-[#fff] font-semibold text-sm px-2 py-1">
+                    <h4 class="border-[#fff] rounded-3xl border px-2 text-xs font-light">для {{card.inhabitantsCount}} чел.</h4>
+                  </div>
                 </div>
-                  <h4 class="text-sm">Комната {{card.square}} м² в {{card.apartment.roomsCount}}-к, {{card.apartment.currentFloor}}/{{card.apartment.maxFloor}} эт.</h4>
-                  <h4 class="text-xs text-[#00000080]">{{card.apartment.address}}</h4>
+                <div class="text-sm">
+                  <h4>Комната {{card.square}} м² в {{card.apartment.roomsCount}}-к, {{card.apartment.currentFloor}}/{{card.apartment.maxFloor}} эт.</h4>
+                  <h4 class="opacity-50">{{card.apartment.address}}</h4>
+                </div>
               </div>
             </div>
           </div>
         }
 
-        <div class="mt-5">
+        <div class="mt-5 flex flex-col items-center">
             <h3 class="mx-auto text-xl font-semibold text-[#000000] text-center">Ваши соседи:</h3>
             <div class="flex flex-row gap-2.5 justify-center mt-2.5">
               @if (cardOfUser$ | async; as card) {
@@ -33,11 +34,20 @@
                 <!-- <img class="rounded-full w-20 h-20 object-cover object-center" src="../assets/sigma.jpg"> -->
               }
             </div>
-            <a class="mt-5 text-center leading-6 mx-auto w-full text-[#FFFFFF] cursor-pointer
-            bg-gradient-to-r from-[#8567FA] to-[#4FACE2] py-3.5 rounded-3xl font-semibold flex flex-row justify-center" href="https://t.me/child_p01"><img src="../assets/tg.svg"><a class="pt-1 pl-2.5">Перейти в общий чат</a></a>
-            <a class="flex flex-row justify-center mt-2.5 text-center leading-6 bg-[#FFFFFF] border-[#8567FA] border py-3.5 px-4 rounded-3xl font-semibold w-full cursor-pointer" href="https://t.me/piotr_makarov"><img src="../assets/tg-gradient.svg"><a class="bg-gradient-to-r from-[#8567FA] to-[#4FACE2] text-transparent
-                bg-clip-text pt-1 pl-2.5">Связаться с владельцем</a></a>
+            <a class="mt-5 text-center leading-6 w-full max-w-96 text-[#FFFFFF] cursor-pointer
+            bg-gradient-to-r from-[#8567FA] to-[#4FACE2] py-3.5 rounded-3xl font-semibold flex flex-row justify-center" href="https://t.me/child_p01">
+              <img src="../assets/tg.svg">
+              <a class="pt-1 pl-2.5">Перейти в общий чат</a>
+            </a>
+            <a class="flex flex-row justify-center w-full max-w-96 mt-2.5 text-center leading-6 bg-[#FFFFFF] border-[#8567FA] border py-3.5 px-4 rounded-3xl" href="https://t.me/piotr_makarov">
+              <img src="../assets/tg-gradient.svg">
+              <a class="bg-gradient-to-r from-[#8567FA] to-[#4FACE2] text-transparent bg-clip-text pt-1 pl-2.5 font-semibold">Связаться с владельцем</a>
+            </a>
          </div>
+    </div>
+    <div class="w-full max-w-96 mx-auto">
+        <h4 class="mx-auto font-semibold text-[#000000] text-center mb-2.5">Не договорились об аренде?</h4>
+        <app-next-btn class="" [routerLink]="['/match']" buttonText="Продолжить поиск"></app-next-btn>
     </div>
 
     <ng-template #NoData>
@@ -47,8 +57,4 @@
         <h2 class="font-semibold text-6xl w-full text-center mt-2.5">😢</h2>
       </div>
     </ng-template>
-    <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
-        <h4 class="mx-auto font-semibold text-[#000000] text-center mb-2.5 bg-[#EBEBEB]">Не договорились об аренде?</h4>
-        <app-next-btn  [routerLink]="['/match']" buttonText="Продолжить поиск"></app-next-btn>
-    </div>
   </div>

@@ -1,4 +1,4 @@
-<div class="w-full md:pt-12 flex flex-col  bg-[#FFFFFF] overflow-hidden">
+<div class="w-full md:py-10 flex flex-col  bg-[#FFFFFF] overflow-hidden">
     <header class="w-full md:max-w-84 self-center py-5 px-3 md:py-2 bg-[#8567FA] rounded-b-2xl md:rounded-2xl">
       <div class=" flex gap-2.5 relative flex text-[#FEFEFE]">
         <div class="flex absolute self-center">
@@ -9,7 +9,7 @@
     </header>
   @if (usersForMatching$ | async; as user){
     <div class="flex items-center pt-5 flex-col gap-3">
-      <div *ngIf="this.index != this.length; else noUsers" class="min-h-120 w-84 relative"
+      <div *ngIf="this.index != this.length; else noUsers" class="min-h-100 w-84 relative"
       [@cardAnimator]="animationState"
       (@cardAnimator.done)="resetAnimationState()"
       (swipeleft)='startAnimation("swipeleft", user[index].id)'
@@ -33,10 +33,12 @@
     </div>
 
     <ng-template #noUsers>
-      <div class="mt-7 container mx-auto px-5 md:px-40 xl:px-96 flex flex-col">
-        <h3 class="font-semibold text-2xl w-full text-center mt-52">Пользователи закончились(</h3>
-        <h2 class="text-xl w-full text-center mt-2.5">Зайдите позже или вернитесь к выбору комнат</h2>
-        <h2 class="font-semibold text-6xl w-full text-center mt-2.5">😢</h2>
+      <div class="min-h-120 w-84 flex items-center">
+        <div class="">
+          <h3 class="font-semibold text-2xl w-full text-center">Пользователи закончились(</h3>
+          <h2 class="text-xl w-full text-center mt-2.5">Зайдите позже или вернитесь к выбору комнат</h2>
+          <h2 class="font-semibold text-6xl w-full text-center mt-2.5">😢</h2>
+        </div>
       </div>
   </ng-template>
   }
