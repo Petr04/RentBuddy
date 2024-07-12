@@ -10,8 +10,8 @@ module.exports = {
       spacing: {
         84: '21rem',
         100: '33.5rem',
-        120: '36rem'
-
+        120: '36rem',
+        98: '31.25rem'
       },
       fontFamily: {
         style: ['Montserrat !important']
