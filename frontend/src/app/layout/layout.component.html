@@ -14,9 +14,11 @@
         </defs>
       </svg>
       <div class="flex gap-5 items-center">
-        <h1 class="text-xl text-center font-semibold text-[#FFFFFF]">
-          Мой профиль
-        </h1>
+        <button [routerLink]="['/profile']" >
+          <h1 class="text-xl text-center font-semibold text-[#FFFFFF]">
+            Мой профиль
+          </h1>
+        </button>
         <img src="../../assets/layout-img.svg" class="rounded-50" alt="">
         <button (click)="logout()" routerLink="/login" class="justify-end w-6 h-6"><img src="../assets/logout.svg"></button>
       </div>

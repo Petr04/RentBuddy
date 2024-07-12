@@ -1,40 +1,40 @@
-<div class="w-full mx-auto flex flex-col h-dvh bg-[#FFFFFF] overflow-auto">
+<div class="w-full mx-auto flex flex-col h-dvh bg-[#FFFFFF]">
   <header class="mb-16 md:hidden">
     <div class="bg-[#8567FA] flex gap-2.5 p-5 flex-col  items-center justify-evenly
     fixed w-full text-[#FEFEFE] rounded-b-2xl py-5 z-50">
       <div class="flex flex-row justify-start w-full ">
-        <button class="justify-start"><img src="../assets/arrow.png"></button>
+        <!-- <button class="justify-start"><img src="../assets/arrow.png"></button> -->
         <h2 class="mx-auto text-xl font-semibold">Профиль</h2>
         <button (click)="logout()" routerLink="/login" class="justify-end"><img src="../assets/logout.svg"></button>
       </div>
     </div>
   </header>
   <div [formGroup]="profileForm">
-    <div class="mt-7 container mx-auto px-5 md:px-40 xl:px-96 flex  flex-col mb-20">
+    <div class="p-12 container mx-auto px-5 md:px-40 xl:px-96 flex gap-4 flex-col">
       <h3 class="font-semibold text-xl ml-2">Заполни информацию о себе:</h3>
-      <div class="flex flex-row gap-2.5 mt-2.5 w-full">
+      <div class="flex flex-row gap-2.5 w-full">
         <div class="w-2/5">
           <label for="img-input-1">
-            <img id="blah-1" alt="" class="mt-2.5 rounded-full h-24 w-24 object-cover object-center bg-[url('assets/default.svg')] bg-center"/>
+            <img id="blah-1" alt="" class="rounded-full h-24 w-24 object-cover object-center bg-[url('assets/default.svg')] bg-center"/>
             <input formControlName="image" (change)="uploadImage($event)" type="file" id="img-input-1" class="hidden"
                    onchange="document.getElementById('blah-1').src = window.URL.createObjectURL(this.files[0])">
           </label>
         </div>
         <div class="flex flex-col w-full">
-          <div class="mt-2.5 w-full">
+          <div class="w-full">
             <input formControlName="name" type="text" placeholder="Ваше имя" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
           </div>
-          <div class="mt-2.5 w-full">
+          <div class="w-full mt-4">
             <input formControlName="lastname" type="text" placeholder="Ваша фамилия" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
           </div>
         </div>
       </div>
-      <h4 class="mt-3.5 ml-2 font-medium">Дата рождения</h4>
-      <div class="mt-2.5 w-full">
+      <div class="w-full">
+        <h4 class=" ml-2 font-medium">Дата рождения</h4>
         <input formControlName="birthDate" type="date" placeholder="мм/дд/гггг" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
       </div>
 
-      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
+      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row  justify-between">
         <h4 class="ml-2 font-medium">Ваш пол</h4>
         <div class="flex justify-evenly gap-2.5">
           <button  [ngClass]="{isSelect: gender}" (click)="male()" class= "opacity-40 bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">м</button>
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
+      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row  justify-between">
         <h4 class="ml-2 font-medium">Вы курите?</h4>
         <div class="flex justify-evenly gap-2.5">
           <button  [ngClass]="{isSelect: isSmoke}" (click)="smoke()" class="opacity-40  bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">да</button>
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row mt-3.5 justify-between">
+      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-row  justify-between">
         <h4 class="ml-2 font-medium">Есть питомец?</h4>
         <div class="flex justify-evenly gap-2.5">
           <button [ngClass]="{isSelect: hasPet}" (click)="pet()" class="opacity-40  bg-[#8567FA] text-[#FEFEFE] px-2.5 pb-1 font-semibold rounded-xl text-sm">да</button>
@@ -58,72 +58,73 @@
         </div>
       </div>
 
-      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col mt-3.5">
+      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col ">
         <h4 class="ml-2 font-medium">Насколько вы настроены на общение с соседом?</h4>
         <input formControlName="communicationLevel" type="range" class="mt-3 accent-[#8567FA]" min="0" max="10" />
       </div>
-      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col mt-3.5">
+      <div class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col ">
         <h4 class="ml-2 font-medium">Насколько вы чистоплотны?</h4>
         <input formControlName="pureLevel" type="range" class="mt-3 accent-[#8567FA]" min="0" max="10" />
       </div>
 
-      <h4 class="mt-3.5 ml-2 font-medium">Во сколько вы встаёте?</h4>
-      <div class="mt-2.5 w-full">
+      <div class="w-full">
+        <h4 class=" ml-2 font-medium">Во сколько вы встаёте?</h4>
         <input formControlName="riseTime" type="time" placeholder="чч/мм" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
       </div>
-      <h4 class="mt-3.5 ml-2 font-medium">Во сколько вы ложитесь?</h4>
-      <div class="mt-2.5 w-full">
+      <div class="w-full">
+        <h4 class=" ml-2 font-medium">Во сколько вы ложитесь?</h4>
         <input formControlName="sleepTime" type="time" placeholder="чч/мм" lang="ru" class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full">
       </div>
 
-      <h4 class="mt-3.5 ml-2 font-medium">Сколько времени вы дома в течение дня?</h4>
-      <div class="bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col mt-1 color-[#00000080]">
-        <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
-          <input formControlName="timeSpentAtHome" class=" accent-[#8567FA] h-5 w-5" type="radio" name="timeSpentAtHome" value=4/>
-          <label class=" pl-2 text-center" for="checkbox">до 5 часов</label>
-        </div>
-        <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
-          <input formControlName="timeSpentAtHome" class=" accent-[#8567FA] h-5 w-5" type="radio" name="timeSpentAtHome" value=7/>
-          <label class=" pl-2" for="checkbox">от 5 до 10 часов</label>
-        </div>
-        <div class="pl-3 p-2.5 items-center flex flex-row">
-          <input formControlName="timeSpentAtHome" class="accent-[#8567FA] h-5 w-5" type="radio"  name="timeSpentAtHome" value=12 />
-          <label class="pl-2" for="checkbox">больше 10 часов</label>
-        </div>
-      </div>
-
-      <h4 class="mt-3.5 ml-2 font-medium">Насколько часто устраиваете вечеринки?</h4>
-      <div class="bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col mt-1 color-[#00000080]">
-        <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
-          <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="раз в неделю"/>
-          <label class="pl-2 text-center" for="checkbox">раз в неделю</label>
-        </div>
-        <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
-          <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="раз в месяц"/>
-          <label class="pl-2" for="checkbox">раз в месяц</label>
-        </div>
-        <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
-          <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="несколько раз в год"/>
-          <label class="pl-2" for="checkbox">несколько раз в год</label>
-        </div>
-        <div class="pl-3 p-2.5 items-center flex flex-row">
-          <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="не устраиваю вечеринки"/>
-          <label class="pl-2" for="checkbox">не устраиваю вечеринки</label>
+      <div>
+        <h4 class=" ml-2 font-medium">Сколько времени вы дома в течение дня?</h4>
+        <div class="bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col  color-[#00000080]">
+          <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
+            <input formControlName="timeSpentAtHome" class=" accent-[#8567FA] h-5 w-5" type="radio" name="timeSpentAtHome" value=4/>
+            <label class=" pl-2 text-center" for="checkbox">до 5 часов</label>
+          </div>
+          <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
+            <input formControlName="timeSpentAtHome" class=" accent-[#8567FA] h-5 w-5" type="radio" name="timeSpentAtHome" value=7/>
+            <label class=" pl-2" for="checkbox">от 5 до 10 часов</label>
+          </div>
+          <div class="pl-3 p-2.5 items-center flex flex-row">
+            <input formControlName="timeSpentAtHome" class="accent-[#8567FA] h-5 w-5" type="radio"  name="timeSpentAtHome" value=12 />
+            <label class="pl-2" for="checkbox">больше 10 часов</label>
+          </div>
         </div>
       </div>
 
-      <h4 class="mt-3.5 ml-2 font-medium">Расскажи о себе</h4>
-      <div class="mt-1 w-full">
+      <div>
+        <h4 class=" ml-2 font-medium">Насколько часто устраиваете вечеринки?</h4>
+        <div class="bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full flex flex-col  color-[#00000080]">
+          <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
+            <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="раз в неделю"/>
+            <label class="pl-2 text-center" for="checkbox">раз в неделю</label>
+          </div>
+          <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
+            <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="раз в месяц"/>
+            <label class="pl-2" for="checkbox">раз в месяц</label>
+          </div>
+          <div class="border-b border-[#8e8e8e] pl-3 p-2.5 items-center flex flex-row">
+            <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="несколько раз в год"/>
+            <label class="pl-2" for="checkbox">несколько раз в год</label>
+          </div>
+          <div class="pl-3 p-2.5 items-center flex flex-row">
+            <input formControlName="partyFrequency" class="accent-[#8567FA] h-5 w-5" type="radio" name="partyFrequency" value="не устраиваю вечеринки"/>
+            <label class="pl-2" for="checkbox">не устраиваю вечеринки</label>
+          </div>
+        </div>
+      </div>
+
+      <div class=" w-full">
+        <h4 class=" ml-2 font-medium">Расскажи о себе</h4>
         <textarea formControlName="aboutMe" type="text" rows="4"
                   placeholder=""
                   class="p-2.5 bg-[#FFFFFF] border border-[#8e8e8e] rounded-2xl w-full resize-none outline-none"></textarea>
       </div>
+      <app-next-btn [routerLink]="['/select-rent']" (click)="saveAndContinue()" [buttonText]="buttonText"></app-next-btn>
+    </div>
 
-    </div>
-    <div class="w-full fixed px-5 md:px-40 xl:px-96 bottom-0 left-0">
-      <app-next-btn [routerLink]="['/select-rent']" (click)="saveAndContinue()" [buttonText]="buttonText">
-      </app-next-btn>
-    </div>
   </div>
 </div>
 
