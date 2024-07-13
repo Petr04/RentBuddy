@@ -1,8 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { FilterRent, Post } from '../../interfaces/interface';
 import { SetService } from '../../services/set.service';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-select-rent',
@@ -15,33 +16,21 @@ export class SelectRentComponent implements OnInit {
   public setId = inject(SetService)
   public buttonText:string = 'Далее'
   protected Cards$?: Observable<Post[]>
-  protected testObj?: Post[]
 
-  filterData:FilterRent = {
-    city: '',
-    inhabitantsCount: 0,
-    square: 0,
-    minPrice: 0,
-    maxPrice: 0
-  }
 
-  constructor(private readonly postService:PostService){
+  constructor(private readonly _postService:PostService, protected _filter: FilterService){
 
   }
-
   ngOnInit() {
-    this.Cards$ = this.postService.getRooms()
-    this.postService.getRooms().subscribe()
+    this.Cards$ = this._postService.getRooms()
+    this._postService.getRooms().subscribe()
   }
 
-  public handleFilterChange(filterData: FilterRent){
-    this.filterData = filterData
-  }
 
   public sendId(){
-    
+
     const arrayId: string[] = Array.from(this.setId)
-    this.postService.postFavoriteRooms(arrayId).subscribe()
+    this._postService.postFavoriteRooms(arrayId).subscribe()
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterRent } from '../interfaces/interface';
 import { NextBtnComponent } from '../components/next-btn/next-btn.component';
+import { FilterService } from '../services/filter.service';
 
 @Component({
   selector: 'app-filter-rents',
@@ -17,6 +18,10 @@ export class FilterRentsComponent {
   minPrice:FormControl<number> = new FormControl()
   maxPrice:FormControl<number> = new FormControl()
 
+  constructor (private _filter: FilterService) {
+
+  }
+
   filterObj: FilterRent = {
     city: '',
     inhabitantsCount: 0,
@@ -25,15 +30,13 @@ export class FilterRentsComponent {
     maxPrice:0
   }
 
-  @Output() filterChange  = new EventEmitter<FilterRent>();
-
   fitlerEvent(){
     this.filterObj.city = this.city.value
     this.filterObj.inhabitantsCount = this.inhabitantsCount.value ? +this.inhabitantsCount.value : this.inhabitantsCount.value
     this.filterObj.square = this.square.value ? +this.square.value:this.square.value
     this.filterObj.minPrice = this.minPrice.value ? +this.minPrice.value:this.minPrice.value
     this.filterObj.maxPrice = this.maxPrice.value ? +this.maxPrice.value:this.maxPrice.value
-    this.filterChange.emit(this.filterObj)
-    console.log(this.filterObj)
+
+    this._filter.updateFilter(this.filterObj)
   }
 }
