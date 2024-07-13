@@ -15,7 +15,11 @@ module.exports = {
       },
       fontFamily: {
         style: ['Montserrat !important']
+      },
+      maxWidth: {
+        'l': '37.5rem',
       }
+
     },
 
   },

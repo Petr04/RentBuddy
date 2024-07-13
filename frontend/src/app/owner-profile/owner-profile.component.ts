@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 import { Apartment } from '../interfaces/interface';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -21,6 +21,10 @@ export class OwnerProfileComponent implements OnInit {
 
   constructor(private readonly postService: PostService, private readonly auth: AuthService){
     this.profileForm = new FormGroup({
+      image: new FormControl(),
+      lastname: new FormControl(),
+      name: new FormControl(),
+      birthDate: new FormControl()
 
     })
   }

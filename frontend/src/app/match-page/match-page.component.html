@@ -10,10 +10,45 @@
   @if (usersForMatching$ | async; as user){
     <div class="flex items-center pt-5 flex-col gap-3">
       <div *ngIf="this.index != this.length; else noUsers" class="min-h-100 w-84 relative"
-      [@cardAnimator]="animationState"
-      (@cardAnimator.done)="resetAnimationState()"
-      (swipeleft)='startAnimation("swipeleft", user[index].id)'
-      (swiperight)='startAnimation("swiperight", user[index].id)'>
+      [@cardAnimator]="animationState" (@cardAnimator.done)="resetAnimationState()"
+      (swipeleft)='startAnimation("swipeleft", user[index].id)' (swiperight)='startAnimation("swiperight", user[index].id)'>
+
+          <div class="absolute z-50 w-full h-full pt-6 rounded-2xl bg-[#000000B2]">
+            <div class="flex flex-col gap-2 text-white max-w-[200px] mx-auto text-[10px] font-normal">
+              <div class="w-full">
+                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].isSmoke) ? "Я курю" : "Я не курю"}} </p>
+              </div>
+              <div class="w-full">
+
+                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].hasPet) ? "У меня есть питомец" : "У меня нет питомца"}} </p>
+              </div>
+              <div class="w-full">
+
+                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].communicationLevel) }} </p>
+              </div>
+              <div class="w-full">
+
+                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].pureLevel) }} </p>
+              </div>
+              <div class="w-full">
+
+                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].riseTime) | date:'HH:mm' }} </p>
+              </div>
+              <div class="w-full">
+
+                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].sleepTime) | date:'HH:mm' }} </p>
+              </div>
+              <div class="w-full">
+
+                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ user[index].timeSpentAtHome }} </p>
+              </div>
+              <div class="w-full">
+
+                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].aboutMe) }} </p>
+              </div>
+            </div>
+          </div>
+
           <img class="rounded-2xl w-full h-full object-cover absolute object-center" src="../assets/nikita.png">
           <div class=" absolute bottom-0 flex flex-col pb-7 px-5 w-full gap-5">
               <div class="flex flex-col gap-1">
@@ -30,6 +65,7 @@
         <div class="w-84">
           <app-next-btn class="w-full" [routerLink]="['/suggestion']" buttonText="Далее"></app-next-btn>
         </div>
+
     </div>
 
     <ng-template #noUsers>
