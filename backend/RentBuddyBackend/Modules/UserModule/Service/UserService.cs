@@ -281,20 +281,5 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             user = currentUsers [rnd.Next(0, currentUsers.Count-1)];
             return user;
         }
-
-        public async Task<ActionResult<IEnumerable<ApartmentEntity>>> GetHostsApartment(Guid id)
-        {
-            var data = await userRepository.FindHostsApartments(id);
-
-            var result = new HostsApartment
-            {
-                HostsApartments = data
-            };
-
-            if (result.HostsApartments.Count == 0)
-                return NoContent();
-
-            return Ok(result);
-        }
     }
 }   
