@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, signal, Signal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { User, UserProfile } from '../interfaces/interface';
 import { animate, keyframes, transition, trigger } from '@angular/animations';
@@ -29,6 +29,7 @@ export class MatchPageComponent {
   public length: number = 0
   public index: number = 0;
   public animationState!: string;
+  public showInfo = signal(false)
 
   constructor(private readonly postService: PostService) {
 

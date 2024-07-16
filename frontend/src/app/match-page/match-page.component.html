@@ -12,42 +12,45 @@
       <div *ngIf="this.index != this.length; else noUsers" class="min-h-100 w-84 relative"
       [@cardAnimator]="animationState" (@cardAnimator.done)="resetAnimationState()"
       (swipeleft)='startAnimation("swipeleft", user[index].id)' (swiperight)='startAnimation("swiperight", user[index].id)'>
+      
+          @if (showInfo()) {
+            <div (click)="showInfo.set(false)" class="absolute z-50 w-full h-full pt-6 rounded-2xl bg-[#000000B2]">
+              <div class="flex flex-col gap-2 text-white max-w-[200px] mx-auto text-[9px] font-normal">
+                <div class="w-full">
+                  <p class="p-0.5 px-3 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].isSmoke) ? "Я курю" : "Я не курю"}} </p>
+                </div>
+                <div class="w-full">
 
-          <div class="absolute z-50 w-full h-full pt-6 rounded-2xl bg-[#000000B2]">
-            <div class="flex flex-col gap-2 text-white max-w-[200px] mx-auto text-[10px] font-normal">
-              <div class="w-full">
-                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].isSmoke) ? "Я курю" : "Я не курю"}} </p>
-              </div>
-              <div class="w-full">
+                  <p class="p-0.5 px-3 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].hasPet) ? "У меня есть питомец" : "У меня нет питомца"}} </p>
+                </div>
+                <div class="w-full p-0.5 px-3 border border-[#FFFFFF80] rounded-xl">
+                  <p class="">Мой настрой на общение с соседом</p>
+                  <input disabled  type="range" class="w-full accent-[#8567FA]" min="0" max="10" [value]="user[index].communicationLevel"/>
+                </div>
+                <div class="w-full p-0.5 px-3 border border-[#FFFFFF80] rounded-xl">
+                  <p class="">Мой уровень чистоплотности</p>
+                  <input disabled type="range" class="w-full accent-[#8567FA]" min="0" max="10" [value]="user[index].pureLevel" />
+                </div>
+                <div class="w-full">
 
-                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].hasPet) ? "У меня есть питомец" : "У меня нет питомца"}} </p>
-              </div>
-              <div class="w-full">
+                  <p class="p-0.5 px-3 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].riseTime) | date:'HH:mm' }} </p>
+                </div>
+                <div class="w-full">
 
-                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].communicationLevel) }} </p>
-              </div>
-              <div class="w-full">
+                  <p class="p-0.5 px-3 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].sleepTime) | date:'HH:mm' }} </p>
+                </div>
+                <div class="w-full">
 
-                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].pureLevel) }} </p>
-              </div>
-              <div class="w-full">
+                  <p class="p-0.5 px-3 border border-[#FFFFFF80] rounded-xl"> {{ user[index].timeSpentAtHome }} </p>
+                </div>
+                <div class="w-full">
 
-                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].riseTime) | date:'HH:mm' }} </p>
-              </div>
-              <div class="w-full">
-
-                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].sleepTime) | date:'HH:mm' }} </p>
-              </div>
-              <div class="w-full">
-
-                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ user[index].timeSpentAtHome }} </p>
-              </div>
-              <div class="w-full">
-
-                <p class="p-0.5 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].aboutMe) }} </p>
+                  <p class="p-0.5 px-3 border border-[#FFFFFF80] rounded-xl"> {{ (user[index].aboutMe) }} </p>
+                </div>
               </div>
             </div>
-          </div>
+          }
+
 
           <img class="rounded-2xl w-full h-full object-cover absolute object-center" src="../assets/nikita.png">
           <div class=" absolute bottom-0 flex flex-col pb-7 px-5 w-full gap-5">
@@ -57,7 +60,7 @@
               </div>
               <div class="flex gap-4 self-center">
                   <button class="" (click)="toblackList()" (click)='startAnimation("swipeleft", user[index].id)'><img src="../assets/dis.svg"></button>
-                  <button class=""><img src="../assets/info.svg"></button>
+                  <button class="" (click)="showInfo.set(true)" ><img src="../assets/info.svg"></button>
                   <button class="" (click)='startAnimation("swiperight", user[index].id)'><img src="../assets/like.svg"></button>
               </div>
           </div>
@@ -77,5 +80,6 @@
         </div>
       </div>
   </ng-template>
+
   }
 </div>

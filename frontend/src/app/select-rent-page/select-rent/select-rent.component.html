@@ -1,14 +1,14 @@
 <div class="h-dvh">
-  <app-sort-bar (filterChange)="handleFilterChange($event)"></app-sort-bar>
+  <app-sort-bar></app-sort-bar>
   <div class="w-full relative flex justify-center bg-[#EBEBEB] p-5 md:p-10 overflow-hidden">
     <div class=" flex justify-center gap-10">
       <div class="hidden md:flex flex-col gap-5">
-        <app-filter-rents (filterChange)="handleFilterChange($event)"></app-filter-rents>
+        <app-filter-rents></app-filter-rents>
         <app-next-btn  [routerLink]="['/match']" (click)="sendId()" [buttonText]="buttonText">  </app-next-btn>
       </div>
       <div class="gap-5 flex flex-wrap justify-center ">
         @if (Cards$ | async; as cards){
-          @for (card of (cards | filter:filterData); track card.id ){
+          @for (card of (cards | filter:_filter.getFilter()); track card.id ){
             <app-big-card [card] = 'card'></app-big-card>
           }
         }
