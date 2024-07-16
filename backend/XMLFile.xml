@@ -53,6 +53,18 @@
         <member name="M:RentBuddyBackend.Migrations.DeletedRoomsCount.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:RentBuddyBackend.Migrations.AddUserImage">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.AddUserImage.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.AddUserImage.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.AddUserImage.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.GetApartment">
             <summary>
             Получить все квартиры
@@ -78,13 +90,6 @@
             Удалить квартиру по id
             </summary>
             <param name="id">id квартиры</param>
-            <returns></returns>
-        </member>
-        <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.GetHostsApartments(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:RentBuddyBackend.Modules.BlacklistModule.BlacklistController.GetBlacklist(System.Guid)">
@@ -146,6 +151,20 @@
             </summary>
             <param name="currentUserId">Id текущего юзера</param>
             <param name="targetUserId">Id юзера, которого убираем из списка избранного</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.ImageModule.ImageController.GetImage(System.String)">
+            <summary>
+            Получить изображение по имени (без расширения)
+            </summary>
+            <param name="id"> Имя изображения</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.ImageModule.ImageController.Post(RentBuddyBackend.DAL.Entities.ImageEntity)">
+            <summary>
+            Загрузить картинку из ОС
+            </summary>
+            <param name="image"> Изображение</param>
             <returns></returns>
         </member>
         <member name="M:RentBuddyBackend.Modules.RoomModule.RoomController.GetRooms">
@@ -240,6 +259,13 @@
             2. У текущего и остальных должны быть выбраны комнаты в одной и той же квартире
             </remarks>
             <param name="id"> Id Юзера</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.GetHostsApartments(System.Guid)">
+            <summary>
+            Вывод квартир хозяина
+            </summary>
+            <param name="id"> Id Юзера, хозяина квартира</param>
             <returns></returns>
         </member>
     </members>

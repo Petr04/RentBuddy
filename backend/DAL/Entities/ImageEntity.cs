@@ -2,5 +2,5 @@ namespace RentBuddyBackend.DAL.Entities;
 
 public class ImageEntity
 {
-    public IFormFile files { get; set; }
+    public required IFormFile files { get; set; }
 }

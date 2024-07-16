@@ -11,7 +11,7 @@ EXPOSE 443
 FROM ${DOTNET_SDK} AS build
 WORKDIR /src
 ENV ASPNETCORE_ENVIRONMENT=Development
-COPY backend/RentBuddyBackend/RentBuddyBackend.csproj RentBuddyBackend.csproj
+COPY backend/RentBuddyBackend.csproj RentBuddyBackend.csproj
 RUN dotnet restore RentBuddyBackend.csproj
 RUN dotnet tool install --global dotnet-ef
 ENTRYPOINT ["/root/.dotnet/tools/dotnet-ef", "database", "update"]
@@ -26,5 +26,5 @@ FROM base AS final
 WORKDIR /app
 ENV ASPNETCORE_ENVIRONMENT=Development
 COPY --from=publish /app/publish .
-COPY backend/RentBuddyBackend/wwwroot ./wwwroot
+COPY backend/wwwroot ./wwwroot
 ENTRYPOINT ["dotnet", "RentBuddyBackend.dll"]

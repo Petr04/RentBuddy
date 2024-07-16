@@ -6,7 +6,7 @@ namespace RentBuddyBackend.ShemaFilters
 {
     public class EnumTypesSchemaFilter : ISchemaFilter
     {
-        private readonly XDocument _xmlComments;
+        private readonly XDocument? _xmlComments;
 
         public EnumTypesSchemaFilter(string xmlPath)
         {

@@ -13,9 +13,9 @@ public class RoomEntity : IEntity
     public int InhabitantsCount { get; set; }
     public string ImageLink { get; set; } = "Images/1.png";
     public Guid? ApartmentId { get; set; }  = Guid.Empty;
-    public List<Technic.TechnicType> TechnicTypes { get; set;}
-    public List<Furniture.FurnitureType> FurnitureTypes { get; set; }
-    public string AboutRoom { get; set; }
+    public List<Technic.TechnicType>? TechnicTypes { get; set;}
+    public List<Furniture.FurnitureType>? FurnitureTypes { get; set; }
+    public required string AboutRoom { get; set; }
     public bool IsPublished { get; set; }
 
     [Ignore, JsonIgnore]

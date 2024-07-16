@@ -8,8 +8,8 @@ namespace RentBuddyBackend.DAL.Entities;
 public class UserEntity : IEntity
 {
     public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Lastname { get; set; }
+    public required string Name { get; set; }
+    public required string Lastname { get; set; }
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime BirthDate { get; set; }
@@ -26,8 +26,8 @@ public class UserEntity : IEntity
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
     public DateTime SleepTime { get; set; }
     public TimeSpentAtHome TimeSpentAtHome { get; set; }
-    public string AboutMe { get; set; }
-    public string Image { get; set; }
+    public required string AboutMe { get; set; }
+    public string? Image { get; set; }
 
     [JsonIgnore]
     public Guid BlacklistId { get; set; } 

@@ -28,9 +28,9 @@ services:
     networks:
       - rb-network
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1
-      POSTGRES_DB: RentBuddyDB
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
