@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using System;
 
 namespace RentBuddyBackend.Infrastructure;
 
@@ -21,7 +20,7 @@ public class Config(bool isDev)
         ?? throw new ArgumentNullException("DB_PASSWORD environment variable is not set");
 
     public string DbConnectionString { get; } =
-        $"Server=${DbHost};Database=${DbName};Port=5432;User Id=${DbUsername};Password=${DbPassword}";
+        $"Server={DbHost};Database={DbName};Port=5432;User Id={DbUsername};Password={DbPassword}";
     // Чтобы сделать миграцию - хост менять на localhost
     // Для работы в контейнере - rb-postgresdb
 

@@ -1,10 +1,13 @@
 using System.Text;
+using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RentBuddyBackend.Infrastructure;
 using RentBuddyBackend.ShemaFilters;
+
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 var config = new Config(builder.Environment.IsDevelopment());

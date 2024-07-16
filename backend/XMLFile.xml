@@ -65,6 +65,30 @@
         <member name="M:RentBuddyBackend.Migrations.AddUserImage.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:RentBuddyBackend.Migrations.AddIsOwnerField">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.AddIsOwnerField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.AddIsOwnerField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.AddIsOwnerField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RentBuddyBackend.Migrations.UnrequireField">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.UnrequireField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.UnrequireField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.UnrequireField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.GetApartment">
             <summary>
             Получить все квартиры
