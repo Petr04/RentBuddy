@@ -93,7 +93,10 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             var user = await userRepository.FindAsync(id);
             var userBlackList = await blacklistRepository.FindAsync(user.BlacklistId);
             var users = await userRepository.ToListAsync();
-            var resultUsers = users.Where(u => !userBlackList.UsersId.Any(ub => u.Id == ub));
+            var resultUsers = users.Where(u =>
+                !userBlackList.UsersId.Any(ub => u.Id == ub)
+                && !u.IsOwner
+            );
             var matches = matchingService.Match(user, resultUsers);
             var matchedUsers = matches.Keys.ToList();
             
