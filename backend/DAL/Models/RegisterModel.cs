@@ -18,7 +18,5 @@ public class RegisterModel
     [StringLength(32, MinimumLength = 8,  ErrorMessage = "Длина пароля: 8-32")]
     [DataType(DataType.Password)]
     public required string PasswordConfirm { get; set; }
-
-    public bool IsOwner { get; set; } = false;
     
 }

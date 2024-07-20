@@ -33,6 +33,7 @@ export interface UserProfile {
   name: string,
   lastname: string,
   birthDate: string,
+  telegramUsername: string,
   gender: number,
   isSmoke: true,
   hasPet: true,

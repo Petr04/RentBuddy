@@ -115,6 +115,8 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 PasswordHash = authService.HashPassword(regModel.Password),
                 Name = "",
                 Lastname = "",
+                IsOwner = false,
+                TelegramUsername = "",
                 BirthDate = DateTime.Today,
                 Gender = GenderType.Male,
                 IsSmoke = false,

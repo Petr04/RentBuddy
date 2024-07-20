@@ -89,6 +89,18 @@
         <member name="M:RentBuddyBackend.Migrations.UnrequireField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:RentBuddyBackend.Migrations.AddTelegramUsername">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.AddTelegramUsername.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.AddTelegramUsername.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.AddTelegramUsername.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.GetApartment">
             <summary>
             Получить все квартиры

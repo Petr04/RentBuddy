@@ -39,6 +39,7 @@ export class RenterProfileComponent implements OnInit {
       name: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
       birthDate: new FormControl('', Validators.required),
+      telegramUsername: new FormControl('', Validators.required),
       gender: new FormControl(''),
       isSmoke:new FormControl(''),
       hasPet:new FormControl(''),
@@ -60,17 +61,18 @@ export class RenterProfileComponent implements OnInit {
       this.hasPet = res.hasPet
       this.gender = Boolean(res.gender)
 
-    this.profileForm.patchValue({
-      id: res.id,
-      name: res.name,
-      lastname: res.lastname,
-      birthDate: this.datePipe.transform(res.birthDate, 'yyyy-MM-dd'),
-      communicationLevel: +res.communicationLevel,
-      pureLevel: +res.pureLevel,
-      riseTime: this.datePipe.transform(res.riseTime, 'HH:mm'),
-      sleepTime: this.datePipe.transform(res.sleepTime, 'HH:mm'),
-      timeSpentAtHome: +res.timeSpentAtHome,
-      aboutMe: res.aboutMe
+      this.profileForm.patchValue({
+        id: res.id,
+        name: res.name,
+        lastname: res.lastname,
+        birthDate: this.datePipe.transform(res.birthDate, 'yyyy-MM-dd'),
+        telegramUsername: res.telegramUsername,
+        communicationLevel: +res.communicationLevel,
+        pureLevel: +res.pureLevel,
+        riseTime: this.datePipe.transform(res.riseTime, 'HH:mm'),
+        sleepTime: this.datePipe.transform(res.sleepTime, 'HH:mm'),
+        timeSpentAtHome: +res.timeSpentAtHome,
+        aboutMe: res.aboutMe
       });
     });
   }
