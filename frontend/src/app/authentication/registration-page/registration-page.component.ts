@@ -61,8 +61,8 @@ export class RegistrationPageComponent implements OnDestroy{
       this.registrationForm.disable()
       this.aSub = this.auth.register(this.registrationForm.value).subscribe({
         next: () => {
-          this.notification("Успешная регистрация")
-          setTimeout(()=>this.router.navigate(['/login']),2000);
+          this.router.navigate(['/login'])
+          setTimeout(()=>this.notification("Успешная регистрация"),100);
         },
         error: (err) => {
           this.notification("Ошибка регистрации")
