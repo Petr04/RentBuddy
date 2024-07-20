@@ -21,6 +21,7 @@ services:
       - ./web:/usr/share/nginx/html
     depends_on:
       - rb-postgresdb
+    env_file: backend/.env
 
   rb-postgresdb:
     container_name: rb-postgresdb
