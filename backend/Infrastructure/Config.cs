@@ -10,14 +10,14 @@ public class Config(bool isDev)
     public byte[] PasswordSalt { get; } = new HMACSHA512(
         Encoding.ASCII.GetBytes(PasswordSaltString)).Key;
 
-    private static string DbName = Environment.GetEnvironmentVariable("DB_NAME")
-        ?? throw new ArgumentNullException("DB_NAME environment variable is not set");
+    private static string DbName = Environment.GetEnvironmentVariable("POSTGRES_DB")
+        ?? throw new ArgumentNullException("POSTGRES_DB environment variable is not set");
     private static string DbHost = Environment.GetEnvironmentVariable("DB_HOST")
         ?? throw new ArgumentNullException("DB_HOST environment variable is not set");
-    private static string DbUsername = Environment.GetEnvironmentVariable("DB_USERNAME")
-        ?? throw new ArgumentNullException("DB_USERNAME environment variable is not set");
-    private static string DbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD")
-        ?? throw new ArgumentNullException("DB_PASSWORD environment variable is not set");
+    private static string DbUsername = Environment.GetEnvironmentVariable("POSTGRES_USER")
+        ?? throw new ArgumentNullException("POSTGRES_USER environment variable is not set");
+    private static string DbPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")
+        ?? throw new ArgumentNullException("POSTGRES_PASSWORD environment variable is not set");
 
     public string DbConnectionString { get; } =
         $"Server={DbHost};Database={DbName};Port=5432;User Id={DbUsername};Password={DbPassword}";
