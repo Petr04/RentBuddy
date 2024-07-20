@@ -6,7 +6,7 @@
         <app-filter-rents></app-filter-rents>
         <app-next-btn  [routerLink]="['/match']" (click)="sendId()" [buttonText]="buttonText">  </app-next-btn>
       </div>
-      <div class="gap-5 flex flex-wrap justify-center ">
+      <div class="gap-5 max-w-4xl flex flex-wrap justify-left ">
         @if (Cards$ | async; as cards){
           @for (card of (cards | filter:_filter.getFilter()); track card.id ){
             <app-big-card [card] = 'card'></app-big-card>

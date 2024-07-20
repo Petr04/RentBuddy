@@ -81,7 +81,7 @@ export class ApartmentEditComponent {
     bool? this.smokingAllowedBool = true : this.smokingAllowedBool = false
   }
 
-  next(){
+  save(){
     this.apartmentForm.value.isCombinedBathroom = this.bathroomBool
     this.apartmentForm.value.hasWifi = this.wifiBool
     this.apartmentForm.value.hasPassengerElevator = this.passengerElevatorBool
