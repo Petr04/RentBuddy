@@ -284,6 +284,13 @@
             <param name="model">login</param>
             <returns></returns>
         </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.LoginWithGoogle(System.String)">
+            <summary>
+            Вход в личный кабинет
+            </summary>
+            <param name="model">login</param>
+            <returns></returns>
+        </member>
         <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.GetSuitableRoom(System.Guid)">
             <summary>
             Подбор подходящей комнаты

@@ -24,6 +24,9 @@ public class Config(bool isDev)
     // Чтобы сделать миграцию - хост менять на localhost
     // Для работы в контейнере - rb-postgresdb
 
+    public string GoogleAuthClientId = Environment.GetEnvironmentVariable("GOOGLE_AUTH_CLIENT_ID")
+        ?? throw new ArgumentNullException("GOOGLE_AUTH_CLIENT_ID environment variable is not set");
+
     public string JwtIssuer { get; } = "RentBuddyApp";
 
     public string JwtAudience { get; } = "RentBuddyUsers";

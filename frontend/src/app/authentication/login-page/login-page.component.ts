@@ -1,15 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
-  standalone: false,
   templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.css'
+  styleUrl: './login-page.component.css',
 })
 export class LoginPageComponent implements OnDestroy, OnInit {
 
@@ -50,6 +48,14 @@ export class LoginPageComponent implements OnDestroy, OnInit {
         }
       })
     }
+  }
+
+  public onGoogleAuthSuccess(): void {
+    this.router.navigate(['/profile']);
+  }
+
+  public onGoogleAuthError(): void {
+    console.log('error logging using google');
   }
 
   public viewpass(){

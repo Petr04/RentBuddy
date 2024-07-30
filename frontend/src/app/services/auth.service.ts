@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { User } from '../interfaces/interface';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -56,5 +58,28 @@ export class AuthService {
       id = localStorage?.getItem("userId")
     }
     return id
+  }
+
+  public googleSignOutExternal = () => {
+    localStorage.removeItem('google-auth-token');
+    console.log('token deleted');
+  }
+
+  public loginWithGoogle(credentials: string): Observable<{token: string, userId: string}> {
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.post<{token: string, userId: string}>(
+      'api/Users/loginWithGoogle',
+      JSON.stringify(credentials),
+      { headers: header },
+    ).pipe(
+      tap(
+        ({token, userId}) => {
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('auth-token', token)
+            localStorage.setItem('userId', userId)
+          }
+        }
+      )
+    );
   }
 }

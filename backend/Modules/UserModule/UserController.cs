@@ -68,6 +68,15 @@ public class UsersController(IUserService usersService) : ControllerBase
     [HttpPost("login")]
     public Task<ActionResult<Guid>> Login([FromBody] AuthModel model)
         => usersService.AuthUser(model);
+    
+    /// <summary>
+    /// Вход в личный кабинет
+    /// </summary>
+    /// <param name="model">login</param>
+    /// <returns></returns>
+    [HttpPost("loginWithGoogle")]
+    public Task<ActionResult> LoginWithGoogle([FromBody] string credential)
+        => usersService.AuthUserWithGoogle(credential);
 
     /// <summary>
     /// Подбор подходящей комнаты
