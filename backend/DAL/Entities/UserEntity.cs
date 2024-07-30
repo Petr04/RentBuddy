@@ -10,7 +10,7 @@ public class UserEntity : IEntity
     public Guid Id { get; set; }
     public required string Name { get; set; }
     public required string Lastname { get; set; }
-    public bool IsOwner { get; set; }
+    public bool? IsOwner { get; set; }
     public string? TelegramUsername { get; set; }
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

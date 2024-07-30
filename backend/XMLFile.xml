@@ -101,6 +101,18 @@
         <member name="M:RentBuddyBackend.Migrations.AddTelegramUsername.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:RentBuddyBackend.Migrations.MadeIsOwnerNullable">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.MadeIsOwnerNullable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.MadeIsOwnerNullable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RentBuddyBackend.Migrations.MadeIsOwnerNullable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.GetApartment">
             <summary>
             Получить все квартиры

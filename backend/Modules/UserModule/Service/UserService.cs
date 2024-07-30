@@ -97,7 +97,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             var users = await userRepository.ToListAsync();
             var resultUsers = users.Where(u =>
                 !userBlackList.UsersId.Any(ub => u.Id == ub)
-                && !u.IsOwner
+                && u.IsOwner == false
             );
             var matches = matchingService.Match(user, resultUsers);
             var matchedUsers = matches.Keys.ToList();
@@ -117,7 +117,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 PasswordHash = authService.HashPassword(regModel.Password),
                 Name = "",
                 Lastname = "",
-                IsOwner = false,
+                IsOwner = null,
                 TelegramUsername = "",
                 BirthDate = DateTime.Today,
                 Gender = GenderType.Male,
@@ -173,7 +173,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                     PasswordHash = null,
                     Name = payload.GivenName,
                     Lastname = payload.FamilyName,
-                    IsOwner = false,
+                    IsOwner = null,
                     TelegramUsername = "",
                     BirthDate = DateTime.Today,
                     Gender = GenderType.Male,
