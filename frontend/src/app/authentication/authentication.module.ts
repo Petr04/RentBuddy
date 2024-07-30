@@ -10,6 +10,7 @@ import { CodeInputModule } from 'angular-code-input';
 import { VerificationPageComponent } from './verification-page/verification-page.component';
 import {TuiPushModule} from "@taiga-ui/kit";
 import {TuiRootModule} from "@taiga-ui/core";
+import { GoogleLoginComponent } from '../components/google-login/google-login.component';
 
 const routes:Routes = [
   {path: 'login', component: LoginPageComponent },
@@ -29,7 +30,8 @@ const routes:Routes = [
     CodeInputModule,
     RouterModule.forChild(routes),
     TuiPushModule,
-    TuiRootModule
+    TuiRootModule,
+    GoogleLoginComponent
   ],
   exports: [LoginPageComponent, RegistrationPageComponent],
 })

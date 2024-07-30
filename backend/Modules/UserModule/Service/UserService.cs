@@ -13,10 +13,12 @@ using RentBuddyBackend.Modules.FavoriteUsersModule.Repository;
 using RentBuddyBackend.Modules.FavoriteUsersModule.Service;
 using RentBuddyBackend.Modules.RoomModule.Repository;
 using RentBuddyBackend.Modules.UserModule.Repository;
+using Google.Apis.Auth;
+using System.Text.Json;
 
 namespace RentBuddyBackend.Modules.UserModule.Service
 {
-    public class UserService(IUserRepository userRepository,
+    public class UserService(Config config, IUserRepository userRepository,
             IApartmentRepository apparmentRepostory,
             IMapper mapper,
             IBlacklistRepository blacklistRepository,
@@ -151,6 +153,61 @@ namespace RentBuddyBackend.Modules.UserModule.Service
                 Token = token,
                 UserId = user.Id
             });
+        }
+
+        public async Task<ActionResult> AuthUserWithGoogle(string credential)
+        {
+            var settings = new GoogleJsonWebSignature.ValidationSettings()
+            {
+                Audience = new List<string> { config.GoogleAuthClientId }
+            };
+
+            var payload = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
+            var user = await userRepository.FindByEmailAsync(payload.Email);
+
+            if (user == null) {
+                var newUserData = new UserEntity
+                {
+                    Id = Guid.Empty,
+                    Email = payload.Email,
+                    PasswordHash = null,
+                    Name = payload.GivenName,
+                    Lastname = payload.FamilyName,
+                    IsOwner = false,
+                    TelegramUsername = "",
+                    BirthDate = DateTime.Today,
+                    Gender = GenderType.Male,
+                    IsSmoke = false,
+                    HasPet = false,
+                    CommunicationLevel = 0,
+                    PureLevel = 0,
+                    RiseTime = DateTime.Today,
+                    SleepTime = DateTime.Today,
+                    AboutMe = "",
+                    Image = ""
+                };
+
+                var newUser = await CreateOrUpdateUser(newUserData);
+
+                var token = authService.GenerateJwtToken(newUserData);
+                return Ok(new AuthReturnModel
+                {
+                    Token = token,
+                    UserId = newUserData.Id
+                });
+            }
+
+            if (user != null)
+            {
+                var token = authService.GenerateJwtToken(user);
+                return Ok(new AuthReturnModel
+                {
+                    Token = token,
+                    UserId = user.Id
+                });
+            }
+
+            return Unauthorized();
         }
 
         public async Task<ActionResult<UserEntity>> GetCurrentUser()
