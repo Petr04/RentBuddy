@@ -8,14 +8,14 @@ namespace RentBuddyBackend.Modules.ImageModule;
 public class ImageController(IWebHostEnvironment webHostEnvironment) : ControllerBase
 {
     /// <summary>
-    /// Получить изображение по имени (без расширения)
+    /// Получить изображение по имени
     /// </summary>
-    /// <param name="id"> Имя изображения</param>
+    /// <param name="id">Имя изображения</param>
     /// <returns></returns>
     [HttpGet("{imageName}")]
     public async Task<ActionResult> GetImage([FromRoute] string imageName)
     {
-        var imagePath = Path.Combine(webHostEnvironment.WebRootPath, "Image", imageName + ".jpg");
+        var imagePath = Path.Combine(webHostEnvironment.WebRootPath, "Image", imageName);
 
         if (!System.IO.File.Exists(imagePath))
             return NotFound();

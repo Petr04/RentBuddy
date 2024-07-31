@@ -87,11 +87,8 @@ export class RenterProfileComponent implements OnInit {
   }
 
   public saveAndContinue(){
-    // const formData = new FormData();
-    // formData.append("image", this.file, this.file.name);
-    // this.profileForm.patchValue({
-    //   image: formData
-    // })
+    const formData = new FormData();
+    formData.append("file", this.file, this.file.name);
     this.profileForm.disable
     this.profileForm.value.id = this.postService.getUserId()
     this.profileForm.value.gender = this.gender
@@ -99,7 +96,9 @@ export class RenterProfileComponent implements OnInit {
     this.profileForm.value.hasPet = this.hasPet
     this.profileForm.value.timeSpentAtHome = +this.profileForm.value.timeSpentAtHome
     this.postService.postUser(this.profileForm.value).subscribe()
-
+    this.postService.uploadAvatar(formData).subscribe(response => {
+      console.log(response);
+    });
   }
 
   public male(){

@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 })
 export class PostService {
 
-  constructor(private readonly _httpCLient: HttpClient) {
+  constructor(private readonly _httpClient: HttpClient) {
 
   }
 
@@ -30,47 +30,51 @@ export class PostService {
   }
 
   public getRooms(): Observable<Post[]>{
-    return this._httpCLient.get<Post[]>('api/Room')
+    return this._httpClient.get<Post[]>('api/Room')
   }
 
   public getRoomByID(id: string): Observable<Post>{
-    return this._httpCLient.get<Post>(`api/Room/${id}`)
+    return this._httpClient.get<Post>(`api/Room/${id}`)
   }
 
   public getUsers(): Observable<User>{
-    return this._httpCLient.get<User>('api/Users')
+    return this._httpClient.get<User>('api/Users')
   }
 
   public getUserById():Observable<UserProfile>{
-    return this._httpCLient.get<UserProfile>(`api/Users/${this.getUserId()}`)
+    return this._httpClient.get<UserProfile>(`api/Users/${this.getUserId()}`)
   }
 
   public postUser(obj: UserProfile){
-    return this._httpCLient.post('api/Users', obj)
+    return this._httpClient.post('api/Users', obj)
+  }
+
+  public uploadAvatar(formData: FormData){
+    return this._httpClient.post(`api/Users/${this.getUserId()}/avatar`, formData)
   }
 
   public postFavoriteRooms(arr: Array<string>){
-    return this._httpCLient.post(`api/FavoriteRooms/${this.getUserId()}/AddRoomToFavorites`, arr)
+    return this._httpClient.post(`api/FavoriteRooms/${this.getUserId()}/AddRoomToFavorites`, arr)
   }
 
   public getUsersMatches():Observable<UserProfile[]>{
-    return this._httpCLient.get<UserProfile[]>(`api/Users/${this.getUserId()}/matches`)
+    return this._httpClient.get<UserProfile[]>(`api/Users/${this.getUserId()}/matches`)
   }
 
   public like(targetId: string):Observable<{}>{
-    return this._httpCLient.post(`api/FavoriteUsers/${this.getUserId()}/AddUserToFavourities/${targetId}`, {"currentUserId":this.getUserId(), "targetUserId": targetId })
+    return this._httpClient.post(`api/FavoriteUsers/${this.getUserId()}/AddUserToFavourities/${targetId}`, {"currentUserId":this.getUserId(), "targetUserId": targetId })
   }
 
   public getSuitableRoom():Observable<SuggestionRoom>{
-    return this._httpCLient.get<SuggestionRoom>(`api/Users/GetSuitableRoom/${this.getUserId()}`)
+    return this._httpClient.get<SuggestionRoom>(`api/Users/GetSuitableRoom/${this.getUserId()}`)
   }
 
   public getApartmentById(id: string):Observable<any>{
-    return this._httpCLient.get<any>(`api/Apartment/${id}`)
+    return this._httpClient.get<any>(`api/Apartment/${id}`)
   }
 
   public postApartment(obj: any):Observable<any>{
-    return this._httpCLient.post<any>('api/Apartment', obj).
+    return this._httpClient.post<any>('api/Apartment', obj).
     pipe(
       tap(
         ({id}) => {
@@ -83,11 +87,11 @@ export class PostService {
   }
 
   public postRoom(obj: any):Observable<any>{
-    return this._httpCLient.post<any>('api/Room', obj)
+    return this._httpClient.post<any>('api/Room', obj)
   }
 
   public getHostsApartment(): Observable<any>{
-    return this._httpCLient.get<any>(`api/Users/${this.getUserId()}/GetHostsApartment`)
+    return this._httpClient.get<any>(`api/Users/${this.getUserId()}/GetHostsApartment`)
   }
 
 }

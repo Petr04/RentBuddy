@@ -313,6 +313,56 @@ namespace RentBuddyBackend.Modules.UserModule.Service
             return Ok(result);
         }
 
+        public async Task<ActionResult> GetAvatar(Guid id, string rootPath)
+        {
+            var dirPath = rootPath + "/Uploads/Avatars/" + id;
+            var dir = new System.IO.DirectoryInfo(dirPath);
+
+            if (!dir.Exists)
+                return Ok(new FilePathModel { isEmpty = true });
+
+            var file = dir.GetFiles().FirstOrDefault();
+            if (file == null)
+                return Ok(new FilePathModel { isEmpty = true });
+            
+            var relativeFilePath = "/Uploads/Avatars/" + id + "/" + file.Name;
+            return Ok(new FilePathModel
+            {
+                isEmpty = false,
+                path = relativeFilePath
+            });
+        }
+
+        public async Task<ActionResult> UploadAvatar(Guid id, IFormFile file, string rootPath)
+        {
+            string dirPath = rootPath + "/Uploads/Avatars/" + id;
+            if (!System.IO.Directory.Exists(dirPath))
+            {
+                System.IO.Directory.CreateDirectory(dirPath);
+            }
+            else
+            {
+                var dir = new System.IO.DirectoryInfo(dirPath);
+                foreach (FileInfo oldImage in dir.GetFiles())
+                {
+                    oldImage.Delete();
+                }
+            }
+
+            string filePath = dirPath + "/" + file.FileName;
+            using (FileStream stream = System.IO.File.Create(filePath))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            var relativeFilePath = "/Uploads/Avatars/" + id + "/" + file.FileName;
+            return Ok(new FilePathModel
+            {
+                isEmpty = false,
+                path = relativeFilePath
+            });
+        }
+
         private UserEntity GetResultUser(List<UserEntity> users, Random rnd, ref List<UserEntity> result, ref List<List<UserEntity>> listsUsers )
         {
             var user = users[rnd.Next(0, users.Count - 1)];

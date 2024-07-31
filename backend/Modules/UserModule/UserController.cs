@@ -9,9 +9,8 @@ namespace RentBuddyBackend.Modules.UserModule;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UsersController(IUserService usersService) : ControllerBase
+public class UsersController(IUserService usersService, IWebHostEnvironment environment) : ControllerBase
 {
-    
     /// <summary>
     /// Получить всех пользователей
     /// </summary>
@@ -70,13 +69,33 @@ public class UsersController(IUserService usersService) : ControllerBase
         => usersService.AuthUser(model);
     
     /// <summary>
-    /// Вход в личный кабинет
+    /// Вход в личный кабинет через Google
     /// </summary>
     /// <param name="model">login</param>
     /// <returns></returns>
     [HttpPost("loginWithGoogle")]
     public Task<ActionResult> LoginWithGoogle([FromBody] string credential)
         => usersService.AuthUserWithGoogle(credential);
+
+    /// <summary>
+    /// Получение аватара пользователя по id пользователя
+    /// </summary>
+    /// <param name="id">id пользователя</param>
+    /// <returns></returns>
+    [HttpGet("{id:guid}/avatar")]
+    public Task<ActionResult> GetAvatar([FromRoute] Guid id) {
+        return usersService.GetAvatar(id, environment.WebRootPath);
+    }
+
+    /// <summary>
+    /// Загрузка аватара пользователя по id пользователя
+    /// </summary>
+    /// <param name="id">id пользователя</param>
+    /// <param name="file">файл</param>
+    /// <returns></returns>
+    [HttpPost("{id:guid}/avatar")]
+    public Task<ActionResult> UploadAvatar([FromRoute] Guid id, [FromForm] IFormFile file)
+        => usersService.UploadAvatar(id, file, environment.WebRootPath);
 
     /// <summary>
     /// Подбор подходящей комнаты

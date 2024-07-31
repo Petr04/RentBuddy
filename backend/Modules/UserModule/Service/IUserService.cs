@@ -16,5 +16,7 @@ namespace RentBuddyBackend.Modules.UserModule.Service
         Task<ActionResult> AuthUserWithGoogle(string credential);
         Task<ActionResult<SuitableRoom>> GetSuitableRoom(Guid id);
         Task<ActionResult<IEnumerable<ApartmentEntity>>> GetHostsApartment(Guid id);
+        Task<ActionResult> GetAvatar(Guid id, string rootPath);
+        Task<ActionResult> UploadAvatar(Guid id, IFormFile file, string rootPath);
     }
 }

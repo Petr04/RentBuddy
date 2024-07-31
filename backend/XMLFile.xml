@@ -203,9 +203,9 @@
         </member>
         <member name="M:RentBuddyBackend.Modules.ImageModule.ImageController.GetImage(System.String)">
             <summary>
-            Получить изображение по имени (без расширения)
+            Получить изображение по имени
             </summary>
-            <param name="id"> Имя изображения</param>
+            <param name="id">Имя изображения</param>
             <returns></returns>
         </member>
         <member name="M:RentBuddyBackend.Modules.ImageModule.ImageController.Post(RentBuddyBackend.DAL.Entities.ImageEntity)">
@@ -298,9 +298,24 @@
         </member>
         <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.LoginWithGoogle(System.String)">
             <summary>
-            Вход в личный кабинет
+            Вход в личный кабинет через Google
             </summary>
             <param name="model">login</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.GetAvatar(System.Guid)">
+            <summary>
+            Получение аватара пользователя по id пользователя
+            </summary>
+            <param name="id">id пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.UploadAvatar(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Загрузка аватара пользователя по id пользователя
+            </summary>
+            <param name="id">id пользователя</param>
+            <param name="file">файл</param>
             <returns></returns>
         </member>
         <member name="M:RentBuddyBackend.Modules.UserModule.UsersController.GetSuitableRoom(System.Guid)">
