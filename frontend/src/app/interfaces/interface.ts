@@ -41,8 +41,9 @@ export interface UserProfile {
   pureLevel: number,
   riseTime: string,
   sleepTime: string,
-  timeSpentAtHome: number,
-  aboutMe: string
+  timeSpentAtHome: string,
+  aboutMe: string,
+  partyFrequency: string
 }
 
 export interface Room {

@@ -47,8 +47,8 @@ export class RenterProfileComponent implements OnInit {
       pureLevel: new FormControl(5),
       riseTime: new FormControl('', Validators.required),
       sleepTime: new FormControl('', Validators.required),
-      timeSpentAtHome: new FormControl(''),
-      partyFrequency: new FormControl('', Validators.required),
+      timeSpentAtHome: new FormControl('4'),
+      partyFrequency: new FormControl('раз в неделю', Validators.required),
       aboutMe: new FormControl('', Validators.required),
       image: new FormControl('')
     })
@@ -71,7 +71,8 @@ export class RenterProfileComponent implements OnInit {
         pureLevel: +res.pureLevel,
         riseTime: this.datePipe.transform(res.riseTime, 'HH:mm'),
         sleepTime: this.datePipe.transform(res.sleepTime, 'HH:mm'),
-        timeSpentAtHome: +res.timeSpentAtHome,
+        timeSpentAtHome: String(res.timeSpentAtHome),
+        partyFrequency: String(res.partyFrequency),
         aboutMe: res.aboutMe
       });
     });
@@ -87,8 +88,6 @@ export class RenterProfileComponent implements OnInit {
   }
 
   public saveAndContinue(){
-    const formData = new FormData();
-    formData.append("file", this.file, this.file.name);
     this.profileForm.disable
     this.profileForm.value.id = this.postService.getUserId()
     this.profileForm.value.gender = this.gender
@@ -96,6 +95,8 @@ export class RenterProfileComponent implements OnInit {
     this.profileForm.value.hasPet = this.hasPet
     this.profileForm.value.timeSpentAtHome = +this.profileForm.value.timeSpentAtHome
     this.postService.postUser(this.profileForm.value).subscribe()
+    const formData = new FormData();
+    formData.append("file", this.file, this.file.name);
     this.postService.uploadAvatar(formData).subscribe(response => {
       console.log(response);
     });
