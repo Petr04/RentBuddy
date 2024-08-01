@@ -100,6 +100,3 @@ export class ApartmentEditComponent {
     this._postService.postApartment(this.apartmentForm.value).subscribe()
   }
 }
-
-
-

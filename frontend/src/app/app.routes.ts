@@ -13,10 +13,11 @@ import { ImageScrollerComponent } from './app-image-scroller';
 import { LayoutComponent } from './layout/layout.component';
 import { OwnerProfileComponent } from './owner-profile/owner-profile.component';
 import { RenterProfileComponent } from './renter-profile/renter-profile.component';
+import {SelectModeComponent} from "./select-mode/select-mode.component";
 
 
 export const routes: Routes = [
-
+  {path:'select-mode', component: SelectModeComponent},
   {path:'', redirectTo: "/login", pathMatch: 'full'},
   {path:'', loadChildren:() => import('./authentication/authentication.module').then (m => m.AuthenticationModule) },
   {path:'', component: LayoutComponent, children: [
