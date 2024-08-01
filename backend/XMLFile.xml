@@ -140,6 +140,21 @@
             <param name="id">id квартиры</param>
             <returns></returns>
         </member>
+        <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.UploadImages(System.Guid,Microsoft.AspNetCore.Http.IFormFileCollection)">
+            <summary>
+            Загрузить изображения квартиры
+            </summary>
+            <param name="id">id квартиры</param>
+            <param name="files">Изображения</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.ApartmentModule.ApartmentController.GetImages(System.Guid)">
+            <summary>
+            Получить изображения квартиры
+            </summary>
+            <param name="id">id квартиры</param>
+            <returns></returns>
+        </member>
         <member name="M:RentBuddyBackend.Modules.BlacklistModule.BlacklistController.GetBlacklist(System.Guid)">
             <summary>
             Получить черный список по id
@@ -251,6 +266,21 @@
         <member name="M:RentBuddyBackend.Modules.RoomModule.RoomController.GetRoomImage(System.Guid)">
             <summary>
             Получить изображение комнаты
+            </summary>
+            <param name="id">id комнаты</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.RoomModule.RoomController.UploadImages(System.Guid,Microsoft.AspNetCore.Http.IFormFileCollection)">
+            <summary>
+            Загрузить изображения комнаты
+            </summary>
+            <param name="id">id комнаты</param>
+            <param name="files">Изображения</param>
+            <returns></returns>
+        </member>
+        <member name="M:RentBuddyBackend.Modules.RoomModule.RoomController.GetImages(System.Guid)">
+            <summary>
+            Получить изображения комнаты
             </summary>
             <param name="id">id комнаты</param>
             <returns></returns>

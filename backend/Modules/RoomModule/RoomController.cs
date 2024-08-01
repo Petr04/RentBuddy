@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentBuddyBackend.DAL;
 using RentBuddyBackend.DAL.Entities;
+using RentBuddyBackend.DAL.Models;
 
 namespace RentBuddyBackend.Modules.RoomModule;
 
@@ -10,7 +11,7 @@ namespace RentBuddyBackend.Modules.RoomModule;
 [Route("api/[controller]")]
 public class RoomController(
     ApplicationDbContext context,
-    IWebHostEnvironment webHostEnvironment,
+    IWebHostEnvironment environment,
     IMapper mapper) : ControllerBase
 {   
     
@@ -111,12 +112,84 @@ public class RoomController(
         if (data == null)
             return NoContent();
         
-        var imagePath = Path.Combine(webHostEnvironment.WebRootPath, "Image", data.ImageLink.TrimStart('/'));
+        var imagePath = Path.Combine(environment.WebRootPath, "Image", data.ImageLink.TrimStart('/'));
         
         var imageData = await System.IO.File.ReadAllBytesAsync(imagePath);
         return File(imageData, "image/jpeg");
     }
     
-
+    /// <summary>
+    /// Загрузить изображения комнаты
+    /// </summary>
+    /// <param name="id">id комнаты</param>
+    /// <param name="files">Изображения</param>
+    /// <returns></returns>
+    [HttpPost("{id:guid}/images")]
+    public async Task<ActionResult> UploadImages([FromRoute] Guid id, [FromForm] IFormFileCollection files)
+    {
+        var rootPath = environment.WebRootPath;
     
+        var dirPath = rootPath + "/Uploads/RoomImages/" + id;
+        if (!System.IO.Directory.Exists(dirPath))
+        {
+            System.IO.Directory.CreateDirectory(dirPath);
+        }
+        else
+        {
+            var dir = new System.IO.DirectoryInfo(dirPath);
+            foreach (FileInfo oldImage in dir.GetFiles())
+            {
+                oldImage.Delete();
+            }
+        }
+
+        var relativeFilePaths = new List<string>();
+        foreach (var file in files)
+        {
+            var filePath = dirPath + "/" + file.FileName;
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            var relativeFilePath = "/Uploads/RoomImages/" + id + "/" + file.FileName;
+            relativeFilePaths.Add(relativeFilePath);
+        }
+
+        return Ok(new MultipleFilePathsModel
+        {
+            paths = relativeFilePaths
+        });
+    }
+
+    /// <summary>
+    /// Получить изображения комнаты
+    /// </summary>
+    /// <param name="id">id комнаты</param>
+    /// <returns></returns>
+    [HttpGet("{id:guid}/images")]
+    public async Task<ActionResult> GetImages([FromRoute] Guid id)
+    {
+        var rootPath = environment.WebRootPath;
+        var dirPath = rootPath + "/Uploads/RoomImages/" + id;
+        if (!System.IO.Directory.Exists(dirPath))
+        {
+            return Ok(new MultipleFilePathsModel
+            {
+                paths = new List<string>()
+            });
+        }
+
+        var relativeFilePaths = new List<string>();
+        var dir = new System.IO.DirectoryInfo(dirPath);
+        foreach (FileInfo file in dir.GetFiles())
+        {
+            var relativeFilePath = "/Uploads/RoomImages/" + id + "/" + file.Name;
+            relativeFilePaths.Add(relativeFilePath);
+        }
+
+        return Ok(new MultipleFilePathsModel
+        {
+            paths = relativeFilePaths
+        });
+    }
 }
